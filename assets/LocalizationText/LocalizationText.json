@@ -1,0 +1,1251 @@
+{
+  "TXT_ALERT": {
+    "en_us": "ALERT",
+    "hi_id": "चेतावनी"
+  },
+  "TXT_USE_WEB_TO_PLAY": {
+    "en_us": "Kindly use the website to play the game.",
+    "hi_id": "गेम खेलने के लिए कृपया वेबसाइट\nका उपयोग करें।"
+  },
+  "TXT_TAKE_ME_THERE": {
+    "en_us": "Take Me There",
+    "hi_id": "मुझे वहां ले चलो"
+  },
+  "TXT_LOGIN": {
+    "en_us": "Login",
+    "hi_id": "लॉग-इन करें"
+  },
+  "TXT_SIGN_UP": {
+    "en_us": "Sign Up",
+    "hi_id": "साइन-अप करें"
+  },
+  "TXT_FORGET_PASSWORD": {
+    "en_us": "Forget Password?",
+    "hi_id": "पासवर्ड याद नहीं?"
+  },
+  "TXT_REMEMBER_ME": {
+    "en_us": "Remember Me",
+    "hi_id": "यह याद रखें"
+  },
+  "TXT_FILL_ALL_FIELDS": {
+    "en_us": "Please fill all the fields",
+    "hi_id": "कृपया सभी फ़ील्ड्स भरें"
+  },
+  "TXT_ID_ERROR": {
+    "en_us": "ID Not available",
+    "hi_id": "आईडी मान्य नहीं"
+  },
+  "TXT_PASSWORD_ERROR": {
+    "en_us": "Password is incorrect",
+    "hi_id": "गलत पासवर्ड"
+  },
+  "TXT_HEADING": {
+    "en_us": "Create Account",
+    "hi_id": "अकाउंट बनाएं"
+  },
+  "TXT_INVALID_USERNAME": {
+    "en_us": "Invalid User name",
+    "hi_id": "यूजर नाम मान्य नहीं"
+  },
+  "TXT_MUST_CAPITAL_LETTER": {
+    "en_us": "It must have a Capital Letter and a Number",
+    "hi_id": "कैपिटल अक्षर और अंक होना अनिवार्य"
+  },
+  "TXT_INVALID_EMAIL": {
+    "en_us": "Email id not valid",
+    "hi_id": "ईमेल-आईडी मान्य नहीं"
+  },
+  "TXT_FILL_ALL_FIELDS_ABOVE": {
+    "en_us": "Please fill all the fields above",
+    "hi_id": "कृपया सभी फ़ील्ड्स भरें"
+  },
+  "TXT_AFFILATE_ID_INVALID": {
+    "en_us": "Affilate Id not correct",
+    "hi_id": "एफिलिएट-आईडी मान्य नहीं"
+  },
+  "TXT_SEND_OTP": {
+    "en_us": "SEND OTP",
+    "hi_id": "ओटीपी भेजें"
+  },
+  "TXT_OTP_SEND_SUCESS": {
+    "en_us": "OTP Sent Successfully",
+    "hi_id": "ओटीपी भेज दिया गया"
+  },
+  "TXT_OTP_RESEND": {
+    "en_us": "Resend",
+    "hi_id": "दोबारा भेजें"
+  },
+  "TXT_HINT_OTP_RESEND": {
+    "en_us": "If you do not receive OTP , click on \"Resend\"",
+    "hi_id": "ओटीपी न मिलने पर 'रीसेंड' दबाएं"
+  },
+  "TXT_I_AGREE_TnC": {
+    "en_us": "I agree with all Terms of Use and I am above 18 years!",
+    "hi_id": "मैं सभी शर्तों से सहमत हूं और मेरी उम्र 18 साल से अधिक है"
+  },
+  "TXT_CANCEL": {
+    "en_us": "Cancel",
+    "hi_id": "कैंसिल"
+  },
+  "TXT_FORGOT_PASSWORD": {
+    "en_us": "FORGOT PASSWORD?",
+    "hi_id": "पासवर्ड याद नहीं?"
+  },
+  "TXT_SEND_RESET_EMAIL": {
+    "en_us": "We just need your registered email address to send you password reset link",
+    "hi_id": "पासवर्ड रिसेट लिंक"
+  },
+  "TXT_SUBMIT": {
+    "en_us": "Submit",
+    "hi_id": "जमा करें"
+  },
+  "TXT_EMAIL_SENT": {
+    "en_us": "Email has been Sent Successfully",
+    "hi_id": "ईमेल भेज दिया गया"
+  },
+  "TXT_AVG_POT": {
+    "en_us": "Avg Pot",
+    "hi_id": "औसत पॉट"
+  },
+  "TXT_WAITTING": {
+    "en_us": "Waiting",
+    "hi_id": "वेटिंग"
+  },
+  "TXT_CHIPS": {
+    "en_us": "Chips",
+    "hi_id": "चिप्स"
+  },
+  "TXT_JOIN_TABLE": {
+    "en_us": "JOIN TABLE",
+    "hi_id": "टेबल जॉइन करें"
+  },
+  "TXT_OPEN_TABLE": {
+    "en_us": "OPEN TABLE",
+    "hi_id": "ओपन टेबल"
+  },
+  "TXT_JOIN_WAITTING": {
+    "en_us": "Join Wait List",
+    "hi_id": "वेटिंग लिस्ट जॉइन करें"
+  },
+  "TXT_SHOW_GAME": {
+    "en_us": "SHOW GAME",
+    "hi_id": "गेम दिखाएं/ शो करें"
+  },
+  "TXT_NO_MATCHING_TABLE": {
+    "en_us": "No Table Found Matching The Criteria",
+    "hi_id": "क्राइटेरिया के तहत कोई टेबल नहीं मिली"
+  },
+  "TXT_SET_FAVOUR_TABLE": {
+    "en_us": "You haven't set any table as your favourite. Click the star to make that table your favourite.",
+    "hi_id": "इस टेबल को फेवरट बनाएं"
+  },
+  "TXT_COMING_SOON": {
+    "en_us": "Coming Soon! Stay Tuned.",
+    "hi_id": "जल्द आ रहा है। बने रहिए।"
+  },
+  "TXT_CASH_GAMES": {
+    "en_us": "Cash Games",
+    "hi_id": "कैश गेम"
+  },
+  "TXT_SITnGO": {
+    "en_us": "Sit'n'Go",
+    "hi_id": "सिट 'न' गो"
+  },
+  "TXT_TOURNAMENT": {
+    "en_us": "Tournament",
+    "hi_id": "टूर्नामेंट"
+  },
+  "TXT_CASHIER": {
+    "en_us": "Cashier",
+    "hi_id": "केशियर"
+  },
+  "TXT_LEAVE": {
+    "en_us": "Leave",
+    "hi_id": "बाहर निकलें"
+  },
+  "TXT_LOBBY": {
+    "en_us": "Lobby",
+    "hi_id": "लॉबी"
+  },
+  "TXT_WATCH": {
+    "en_us": "Watch",
+    "hi_id": "देखें"
+  },
+  "TXT_HAND_STRENGTH": {
+    "en_us": "Hand Strength",
+    "hi_id": "हैंड स्ट्रेंथ"
+  },
+  "TXT_SIT_IN": {
+    "en_us": "SIT IN",
+    "hi_id": "सिट इन"
+  },
+  "TXT_SIT_IN_ALL": {
+    "en_us": "SIT IN ALL",
+    "hi_id": "सिट इन ऑल"
+  },
+  "TXT_TOTAL_POT": {
+    "en_us": "Total Pot",
+    "hi_id": "कुल पॉट"
+  },
+  "TXT_DO_NOT_SHOW": {
+    "en_us": "You Won!\nDon't Show",
+    "hi_id": "कार्ड्स मत\nदिखाओ"
+  },
+  "TXT_SHOW_CARDS": {
+    "en_us": "Show Cards",
+    "hi_id": "कार्ड्स दिखाएं"
+  },
+  "TXT_FOLD": {
+    "en_us": "FOLD",
+    "hi_id": "फोल्ड"
+  },
+  "TXT_CALL": {
+    "en_us": "CALL",
+    "hi_id": "कॉल"
+  },
+  "TXT_ALL_IN": {
+    "en_us": "ALL IN",
+    "hi_id": "ऑल इन"
+  },
+  "TXT_CHECK": {
+    "en_us": "CHECK",
+    "hi_id": "चेक"
+  },
+  "TXT_MAX": {
+    "en_us": "Max",
+    "hi_id": "अधिक"
+  },
+  "TXT_CHECK_LC": {
+    "en_us": "Check",
+    "hi_id": "चेक"
+  },
+  "TXT_CALL_ANY": {
+    "en_us": "Call Any",
+    "hi_id": "काल एनी"
+  },
+  "TXT_CHECK_PER_FOLD": {
+    "en_us": "Check/Fold",
+    "hi_id": "चेक/ फोल्ड"
+  },
+  "TXT_CALL_LC": {
+    "en_us": "Call",
+    "hi_id": "कॉल"
+  },
+  "TXT_FOLD_LC": {
+    "en_us": "Fold",
+    "hi_id": "फोल्ड"
+  },
+  "TXT_RAISE": {
+    "en_us": "RAISE",
+    "hi_id": "रेज"
+  },
+  "TXT_BET": {
+    "en_us": "BET",
+    "hi_id": "बेट"
+  },
+  "TXT_3BB": {
+    "en_us": "3 BB",
+    "hi_id": "3 बीबी"
+  },
+  "TXT_MIN": {
+    "en_us": "MIN",
+    "hi_id": "न्यूनतम"
+  },
+  "TXT_HALF_POT": {
+    "en_us": "1/2 Pot",
+    "hi_id": "1/2 पॉट"
+  },
+  "TXT_THREE_FOUTH_POT": {
+    "en_us": "3/4 Pot",
+    "hi_id": "3/4 पॉट"
+  },
+  "TXT_POT": {
+    "en_us": "Pot",
+    "hi_id": "पॉट"
+  },
+  "TXT_2X_LC": {
+    "en_us": "2x",
+    "hi_id": "2x"
+  },
+  "TXT_3X_LC": {
+    "en_us": "3x",
+    "hi_id": "3x"
+  },
+  "TXT_5X_LC": {
+    "en_us": "5x",
+    "hi_id": "5x"
+  },
+  "TXT_RUN_TWICE": {
+    "en_us": "Run it Twice",
+    "hi_id": "दो बार चलाएं"
+  },
+  "TXT_AUTO_MUCK": {
+    "en_us": "Auto Muck",
+    "hi_id": "ऑटो मक"
+  },
+  "TXT_SIT_OUT_NEXT_HAND": {
+    "en_us": "Sit Out Next Hand",
+    "hi_id": "अगले हाथ के बाद बाहर बैठें"
+  },
+  "TXT_AUTO_STRADDLE": {
+    "en_us": "Auto Straddle",
+    "hi_id": "ऑटो स्ट्रैडल"
+  },
+  "TXT_SIT_OUT_NEXT_BIG": {
+    "en_us": "Sit Out Next Big Blind",
+    "hi_id": "अगले बिग ब्लाइंड के बाद बाहर बैठे"
+  },
+  "TXT_AUTO_POST_BLINDS": {
+    "en_us": "Auto Post Blinds",
+    "hi_id": "ऑटो पोस्ट ब्लाइंड्स"
+  },
+  "TXT_AUTO_REBUY": {
+    "en_us": "Auto ReBuy",
+    "hi_id": "ऑटो रीबाए"
+  },
+  "TXT_AUTO_ADD_ON": {
+    "en_us": "Auto Add On",
+    "hi_id": "ऑटो ऐड-ऑन"
+  },
+  "TXT_ADD_CHIPS": {
+    "en_us": "Add Chips",
+    "hi_id": "चिप्स ऐड करें"
+  },
+  "TXT_DEALER_CHAT": {
+    "en_us": "Dealer Chat",
+    "hi_id": "डीलर चैट"
+  },
+  "TXT_CHAT": {
+    "en_us": "Chat",
+    "hi_id": "चैट"
+  },
+  "TXT_HAND": {
+    "en_us": "Hand",
+    "hi_id": "हैंड"
+  },
+  "TXT_NODE": {
+    "en_us": "Note",
+    "hi_id": "नोट"
+  },
+  "TXT_HISTORY": {
+    "en_us": "History",
+    "hi_id": "हिस्ट्री"
+  },
+  "TXT_INFO_LC": {
+    "en_us": "Info",
+    "hi_id": "जानकारी"
+  },
+  "TXT_FEEDBACK": {
+    "en_us": "Feedback",
+    "hi_id": "फीडबैक"
+  },
+  "TXT_SEND": {
+    "en_us": "SEND",
+    "hi_id": "सेंड"
+  },
+  "TXT_MY_CARD": {
+    "en_us": "My Card",
+    "hi_id": "मेरा कार्ड"
+  },
+  "TXT_LI": {
+    "en_us": "LI",
+    "hi_id": "LI"
+  },
+  "TXT_TEST_RELATED": {
+    "en_us": "Test related to PlayerName will be here.",
+    "hi_id": "खिलाड़ी से जुड़ी जानकारी"
+  },
+  "TXT_CURRENT_NL": {
+    "en_us": "Current NL Hold'em Game :",
+    "hi_id": "HI_ Current NL Hold'em Game :"
+  },
+  "TXT_HANDS_DEALTS_532": {
+    "en_us": "Hands Dealt : 5 VPP Earned : 3 Pots Won : 2",
+    "hi_id": "HI_ Hands Dealt : 5 VPP Earned : 3 Pots Won : 2"
+  },
+  "TXT_SIMPLE_TEXT": {
+    "en_us": "This is simple text",
+    "hi_id": "सरल भाषा का प्रयोग"
+  },
+  "TXT_REPORT_GAMEPLAY": {
+    "en_us": "Anyone want to report anything related to game play, players, game rules, etc of any kind.",
+    "hi_id": "खेल के नियम आदि / खेल, नियम, खिलाड़ी को रिपोर्ट करें"
+  },
+  "TXT_BUY_IN": {
+    "en_us": "Buy In",
+    "hi_id": "बाए-इन"
+  },
+  "TXT_AVAILABLE_CHIPS": {
+    "en_us": "Available Chips",
+    "hi_id": "चिप्स उपलब्ध"
+  },
+  "TXT_AUTO_BUY_IN": {
+    "en_us": "Auto Buy-In Option",
+    "hi_id": "ऑटो बाए-इन ऑप्शन"
+  },
+  "TXT_CONFIRM": {
+    "en_us": "Confirm",
+    "hi_id": "कन्फर्म"
+  },
+  "TXT_INFO": {
+    "en_us": "INFO",
+    "hi_id": "जानकारी"
+  },
+  "TXT_HAND_HISTORY": {
+    "en_us": "Hand History",
+    "hi_id": "खेले हुए दांव की हिस्ट्री"
+  },
+  "TXT_COMMUNITY": {
+    "en_us": "Community",
+    "hi_id": "कम्युनिटी"
+  },
+  "TXT_HAND_ID": {
+    "en_us": "Hand Id#",
+    "hi_id": "हैंड ID#"
+  },
+  "TXT_SETTING": {
+    "en_us": "Settings",
+    "hi_id": "सेटिंग"
+  },
+  "TXT_SOUND": {
+    "en_us": "Sound",
+    "hi_id": "साउंड"
+  },
+  "TXT_PLAYER_CHAT": {
+    "en_us": "Player Chat",
+    "hi_id": "खिलाड़ी चैट"
+  },
+  "TXT_FOUR_COLOR_DESK": {
+    "en_us": "4 Color Deck",
+    "hi_id": "4 कलर डेक"
+  },
+  "TXT_AVATAR": {
+    "en_us": "Avatar",
+    "hi_id": "अवतार"
+  },
+  "TXT_SELECT": {
+    "en_us": "SELECT",
+    "hi_id": "सलेक्ट"
+  },
+  "TXT_LOG_OUT": {
+    "en_us": "Log Out",
+    "hi_id": "लॉग आउट करें"
+  },
+  "TXT_JOIN_SIMILAR_TABLE": {
+    "en_us": "Join Similar Table",
+    "hi_id": "दूसरी टेबल जॉइन करें"
+  },
+  "TXT_LEAVE_TABLE": {
+    "en_us": "LEAVE TABLE",
+    "hi_id": "टेबल छोड़ें"
+  },
+  "TXT_WANT_TO_LEAVE_TABLE": {
+    "en_us": "Are you sure you want to leave table?",
+    "hi_id": "क्या आपको टेबल छोड़नी है?"
+  },
+  "TXT_WANT_TO_FOLD": {
+    "en_us": "Check is free! Are you sure you want to fold?",
+    "hi_id": "फ्री में चेक करें या फोल्ड करदें?"
+  },
+  "TXT_INFORMATION": {
+    "en_us": "INFORMATION",
+    "hi_id": "जानकारी"
+  },
+  "TXT_CHECK_YOUR_INTERNET": {
+    "en_us": "You have been disconnected from the server! Please check your internet connection.",
+    "hi_id": "कृपया अपना इंटरनेट कनेक्शन चेक करें"
+  },
+  "TXT_MESSAGE": {
+    "en_us": "Message",
+    "hi_id": "मैसेज"
+  },
+  "TXT_LEAVE_TOURNAMENT": {
+    "en_us": "Leave Tournament",
+    "hi_id": "खेल छोड़ें"
+  },
+  "TXT_REBUY": {
+    "en_us": "Rebuy",
+    "hi_id": "रीबाए"
+  },
+  "TXT_SIT_HERE": {
+    "en_us": "Sit Here",
+    "hi_id": "यहाँ बैठें"
+  },
+  "TXT_REVERSED": {
+    "en_us": "RESERVED",
+    "hi_id": "रिजर्व्ड"
+  },
+  "TXT_EMPTY_SEAT": {
+    "en_us": "Empty Seat",
+    "hi_id": "खाली सीट"
+  },
+  "TXT_WINNER": {
+    "en_us": "Winner!",
+    "hi_id": "विजेता"
+  },
+  "TXT_1X": {
+    "en_us": "1X",
+    "hi_id": "1X"
+  },
+  "TXT_2X": {
+    "en_us": "2X",
+    "hi_id": "2X"
+  },
+  "TXT_3X": {
+    "en_us": "3X",
+    "hi_id": "3X"
+  },
+  "TXT_SELECT_AVATAR": {
+    "en_us": "Select Avatar",
+    "hi_id": "अवतार सलेक्ट करें"
+  },
+  "TXT_CUSTOM": {
+    "en_us": "Custom",
+    "hi_id": "कस्टम"
+  },
+  "TXT_BROWSE": {
+    "en_us": "Browse",
+    "hi_id": "ब्राउज"
+  },
+  "TXT_PLAYER_NAME": {
+    "en_us": "Player Name",
+    "hi_id": "खिलाडी नाम"
+  },
+  "TXT_VIP_POINTS": {
+    "en_us": "VIP POINTS",
+    "hi_id": "वीआईपी पॉइंट्स"
+  },
+  "TXT_REAL_MONEYS": {
+    "en_us": "Real Money",
+    "hi_id": "असली पैसा"
+  },
+  "TXT_PLAY_MONEY": {
+    "en_us": "Play Money",
+    "hi_id": "प्ले मनी"
+  },
+  "TXT_REAL_CASH_BONUS": {
+    "en_us": "Real Cash Bonus",
+    "hi_id": "असली कैश बोनस"
+  },
+  "TXT_UNCLAIMED_BONUS": {
+    "en_us": "Unclaimed Bonus",
+    "hi_id": "अनक्लेम्ड बोनस"
+  },
+  "TXT_CLAIM": {
+    "en_us": "CLAIM",
+    "hi_id": "क्लेम"
+  },
+  "TXT_MY_TRANSACTIONS": {
+    "en_us": "My Transactions",
+    "hi_id": "मेरे ट्रांसक्शन्स"
+  },
+  "TXT_MY_PROFILE": {
+    "en_us": "My Profile",
+    "hi_id": "मेरी प्रोफाइल"
+  },
+  "TXT_TOURNAMENT_EARNING": {
+    "en_us": "Tournament Earning",
+    "hi_id": "टूर्नामेंट से कमाई"
+  },
+  "TXT_MAINTENANCE": {
+    "en_us": "MAINTENANCE",
+    "hi_id": "मेंटेनेंस"
+  },
+  "TXT_SERVER_MAINTENANCE": {
+    "en_us": "Our servers are under maintenance. Please come back later.",
+    "hi_id": "सर्वर मेंटेनेंस चल रहा है कृपया थोड़ी देर बाद कोशिश करें"
+  },
+  "TXT_OK": {
+    "en_us": "OK",
+    "hi_id": "ओके"
+  },
+  "TXT_MAXIMUM_TABLES_JOINED": {
+    "en_us": "MAXIMUM TABLES JOINED",
+    "hi_id": "अधिकतम टेबल्स सीमा पहुँच गईं"
+  },
+  "TXT_JOINED_MAXIMUM_TABLE": {
+    "en_us": "You have already joined maximum number of tables. Please leave some to join more.",
+    "hi_id": "आगे जुड़ने के लिए ये छोड़ें"
+  },
+  "TXT_WANT_TO_QUIT": {
+    "en_us": "Are you sure you want to Quit?",
+    "hi_id": "क्या आपको टेबल छोड़नी है?"
+  },
+  "TXT_PRIVATE_TABLE": {
+    "en_us": "PRIVATE TABLE",
+    "hi_id": "प्राइवेट टेबल"
+  },
+  "TXT_ENTER_YOUR_PASSWORD": {
+    "en_us": "Enter Your Password",
+    "hi_id": "अपना पासवर्ड डालें"
+  },
+  "TXT_QUIT": {
+    "en_us": "Quit",
+    "hi_id": "छोड़ें"
+  },
+  "TXT_UPDATE_REQUIRED": {
+    "en_us": "UPDATE REQUIRED!",
+    "hi_id": "अपडेट की आवश्यकता"
+  },
+  "TEXT_NEW_UPDATE_AVAILABLE": {
+    "en_us": "New Update is available!\nPlease update the game to\nContinue playing.",
+    "hi_id": "नया अपडेट उपलब्ध है!\nकृपया गेम को अपडेट करें\nखेलना जारी रखें।"
+  },
+  "TXT_MULTIPLIE_LOGIN": {
+    "en_us": "MULTIPLE LOGIN",
+    "hi_id": "मल्टीपल लॉग इन हुए"
+  },
+  "TXT_ALREADY_LOGGED": {
+    "en_us": "You are already logged in other device.",
+    "hi_id": "आपने किसी अन्य डिवाइस से लॉग इन किया है"
+  },
+  "TXT_LOG_OUT_ALL_DEVICE": {
+    "en_us": "Logout From All Devices",
+    "hi_id": "सारे डिवाइस से लॉग आउट करें"
+  },
+  "TXT_TABLE_READY": {
+    "en_us": "TABLE READY",
+    "hi_id": "टेबल रेडी"
+  },
+  "TXT_JOIN": {
+    "en_us": "JOIN",
+    "hi_id": "जॉइन करें"
+  },
+  "TXT_ADD_ON": {
+    "en_us": "Add On",
+    "hi_id": "जोड़ें"
+  },
+  "TXT_LOYALITY": {
+    "en_us": "Loyality",
+    "hi_id": "लॉयल्टी"
+  },
+  "TXT_CONTACT_US": {
+    "en_us": "Contact Us",
+    "hi_id": "संपर्क करें"
+  },
+  "TXT_CUSTOMER_CARE": {
+    "en_us": "Customer Care",
+    "hi_id": "ग्राहक सेवा"
+  },
+  "TXT_HIDE_FILL_TABLES": {
+    "en_us": "Hide Full Tables",
+    "hi_id": "पूर्ण टेबल छुपाएं"
+  },
+  "TXT_FAVOURITE": {
+    "en_us": "Favourite",
+    "hi_id": "पसंदीदा"
+  },
+  "TXT_STAKES": {
+    "en_us": "Stakes",
+    "hi_id": "दांव"
+  },
+  "TXT_PLAYERS": {
+    "en_us": "Players",
+    "hi_id": "खिलाड़ी"
+  },
+  "TXT_TABLE_NAME": {
+    "en_us": "Table Name",
+    "hi_id": "टेबल नाम"
+  },
+  "TXT_BLINDS": {
+    "en_us": "Blinds",
+    "hi_id": "ब्लाइंड"
+  },
+  "TXT_MIN_BUY_IN": {
+    "en_us": "Min Buy-In",
+    "hi_id": "न्यूनतम दांव"
+  },
+  "TXT_MAX_BUY_IN": {
+    "en_us": "Max Buy-In",
+    "hi_id": "अधिकतम दांव"
+  },
+  "TXT_PLAYER_PER_FLOP": {
+    "en_us": "Players/Flop",
+    "hi_id": "खिलाड़ी/फ्लॉप"
+  },
+  "TXT_LOCKED_BONUS": {
+    "en_us": "Locked Bonus",
+    "hi_id": "लॉक्ड बोनस"
+  },
+  "TXT_LOYALITY_POINTS": {
+    "en_us": "Loyality Points",
+    "hi_id": "लॉयल्टी अंक"
+  },
+  "TXT_LOYALITY_LEVELS": {
+    "en_us": "Loyality Levels",
+    "hi_id": "लॉयल्टी स्तर"
+  },
+  "TXT_FAV": {
+    "en_us": "Fav",
+    "hi_id": "पसंदीदा टेबल"
+  },
+  "TXT_POKER_WALLET": {
+    "en_us": "Poker Wallet",
+    "hi_id": "पोकर वॉलेट"
+  },
+  "TXT_SITTING_OUT": {
+    "en_us": "Sitting Out",
+    "hi_id": "बाहर निकलें"
+  },
+  "TXT_DISCONECTED": {
+    "en_us": "Disconnected",
+    "hi_id": "संपर्क टूट गया"
+  },
+  "TXT_ENTER_10_NUMBER": {
+    "en_us": "Enter your 10 digit mobile number",
+    "hi_id": "अपना 10 अंक का मोबाइल नंबर डालें"
+  },
+  "TXT_PLS_ENTER_EMAIL_ID": {
+    "en_us": "Please enter a Email Id!",
+    "hi_id": "अपनी ईमेल-आईडी डालें"
+  },
+  "TXT_PASSWORD_MUST_LONG": {
+    "en_us": "Password Must be 6-24 characters long",
+    "hi_id": "पासवर्ड 6-24 कैरक्टर्स जितना लम्बा होना आवश्यक"
+  },
+  "TXT_CHECK_YOUR_CONNECTION": {
+    "en_us": "Please check your internet connection!",
+    "hi_id": "कृपया अपना इंटरनेट कनेक्शन चेक करें"
+  },
+  "TXT_CONNECTION_LOST": {
+    "en_us": "Connection lost! Please login again.",
+    "hi_id": "संपर्क टूटा! दोबारा लॉग-इन करें"
+  },
+  "TXT_RETRY": {
+    "en_us": "Retry",
+    "hi_id": "दोबारा प्रयास करें"
+  },
+  "TEXT_ENTER_MOBILE": {
+    "en_us": "Enter your mobile number",
+    "hi_id": "अपना मोबाइल नंबर डालें"
+  },
+  "TXT_ENTER_OTP": {
+    "en_us": "Enter OTP",
+    "hi_id": "ओटीपी डालें"
+  },
+  "TXT_AGREE_TnC": {
+    "en_us": "Agree to the terms and Conditions",
+    "hi_id": "नियम और शर्तों से सहमत"
+  },
+  "TXT_EMAIL_REGISTERED": {
+    "en_us": "EmailId already registered",
+    "hi_id": "ईमेल-आईडी पहले से दर्ज कराई हुई"
+  },
+  "TEXT_CANNOT_MORE_CHIPS": {
+    "en_us": "You cannot add more than maximum allowed chips",
+    "hi_id": "आप अधिकतम अनुमत चिप्स से अधिक नहीं जोड़ सकते"
+  },
+  "TXT_CANNOT_LESS_CHIPS": {
+    "en_us": "You cannot add less than minimum allowed chips",
+    "hi_id": "आप न्यूनतम अनुमत चिप्स से कम नहीं जोड़ सकते"
+  },
+  "TXT_ENTER_VALID_CHIPS": {
+    "en_us": "Please enter valid amount of chips",
+    "hi_id": "कृपया चिप्स की वैध राशि दर्ज करें"
+  },
+  "TXT_ALREADY_MAXIMUM_CHIP": {
+    "en_us": "You already have the maximum allowed chips",
+    "hi_id": "आपके पास पहले से ही अधिकतम अनुमत चिप्स हैं"
+  },
+  "TXT_FUNDS_INSUFFICIENT": {
+    "en_us": "Your current available funds are insufficient.",
+    "hi_id": "आपके वर्तमान उपलब्ध फंड अपर्याप्त हैं"
+  },
+  "TXT_CHECK_CONNECTION_N": {
+    "en_us": "Please check your\\n Internet Connection.",
+    "hi_id": "कृपया अपना इंटरनेट कनेक्शन चेक करें"
+  },
+  "TXT_SLOW_NETWORK": {
+    "en_us": "Too Slow!! Please check your\\n Internet Connection.",
+    "hi_id": "कृपया अपना इंटरनेट कनेक्शन चेक करें"
+  },
+  "TXT_LOGGED_OTHER_DEVICE_WEB": {
+    "en_us": "You have been logged in from another device (Web Browser).",
+    "hi_id": "किसी अन्य डिवाइस (वेब ब्राउज़र)\nसे लॉग इन किया गया है"
+  },
+  "TXT_LOGGED_IN_ANDROID": {
+    "en_us": "You have logged in from an Android device.",
+    "hi_id": "आपने एंड्राइड डिवाइस से लॉग इन किया है"
+  },
+  "TXT_LOGGED_IN_IOS": {
+    "en_us": "You have logged in from an IOS device.",
+    "hi_id": "आपने IOS डिवाइस से लॉग इन किया है"
+  },
+  "TXT_LOGGED_PC": {
+    "en_us": "You have logged in from an Windows PC.",
+    "hi_id": "आपने विंडोज पीसी से लॉग इन किया है"
+  },
+  "TXT_LOGGED_IN_OTHER_DEVICE": {
+    "en_us": "You have logged in from another device.",
+    "hi_id": "आपने किसी अन्य डिवाइस से लॉग इन किया है"
+  },
+  "TXT_LOGOUT_SERVER_MAINTENANCE": {
+    "en_us": "You have been logged out due to server going into Maintenance, please try later!",
+    "hi_id": "सर्वर मेंटेनेंस में जाने के कारण आपको लॉग आउट किया गया है, कृपया बाद में प्रयास करें!"
+  },
+  "TXT_HINT_BACK_LOBBY": {
+    "en_us": "Please click on Lobby Button to go back to Lobby",
+    "hi_id": "कृपया लॉबी पर वापस जाने के लिए लॉबी\nबटन पर क्लिक करें"
+  },
+  "TXT_SERVER_DOWN": {
+    "en_us": "Server is down Please come back later.",
+    "hi_id": "सर्वर डाउन है। कृपया बाद में वापस आएं!"
+  },
+  "TXT_FREE_CHIPS": {
+    "en_us": "Free Chips !!",
+    "hi_id": "फ्री चिप्स !!"
+  },
+  "TXT_RECEIVED_FREE_CHIPS": {
+    "en_us": "Congrats! You have received 10,000 free Play money chips.",
+    "hi_id": "बधाई! आपको 10,000 फ्री प्ले मनी चिप्स प्राप्त हुए हैं।"
+  },
+  "TXT_PLS_UPDATE_GAME": {
+    "en_us": "Please update the game.",
+    "hi_id": "कृपया खेल को अपडेट करें।"
+  },
+  "TXT_FEATURE_COMING_SOON": {
+    "en_us": "Feature Coming Soon!!!",
+    "hi_id": "जल्द ही आ रहा है नया फीचर !!!"
+  },
+  "TXT_ALL": {
+    "en_us": "All",
+    "hi_id": "सभी"
+  },
+  "TXT_STANDARD_30S": {
+    "en_us": "Standard (30s)",
+    "hi_id": "स्टेंडर्ड (30s)"
+  },
+  "TXT_TURBO_20S": {
+    "en_us": "Turbo (20s)",
+    "hi_id": "टर्बो (20s)"
+  },
+  "TXT_HYPER_TURBO_10S": {
+    "en_us": "Hyper-Turbo (10s)",
+    "hi_id": "हाइपर-टर्बो (10s)"
+  },
+  "TXT_LOW": {
+    "en_us": "Low",
+    "hi_id": "कम"
+  },
+  "TXT_MID": {
+    "en_us": "Mid",
+    "hi_id": "मध्य"
+  },
+  "TXT_HIGH": {
+    "en_us": "High",
+    "hi_id": "उच्च"
+  },
+  "TXT_GAME_TYPE": {
+    "en_us": "Game Type",
+    "hi_id": "खेल का प्रकार"
+  },
+  "TXT_CASH_AMOUNT": {
+    "en_us": "Cash Amount",
+    "hi_id": "नकद राशि"
+  },
+  "TXT_CASH_OUT": {
+    "en_us": "Cash Out",
+    "hi_id": "पैसा निकालें"
+  },
+  "TXT_USER_NAME": {
+    "en_us": "Username",
+    "hi_id": "यूजर नाम"
+  },
+  "TXT_PASSWORD": {
+    "en_us": "Password",
+    "hi_id": "पासवर्ड"
+  },
+  "TXT_EMAIL_ID": {
+    "en_us": "Email Id",
+    "hi_id": "ईमेल ID"
+  },
+  "TXT_MOBILE_NUMBER": {
+    "en_us": "Mobile Number",
+    "hi_id": "मोबाइल नंबर"
+  },
+  "TXT_FORGET_PASSWORD_NON_Q": {
+    "en_us": "Forget Password",
+    "hi_id": "पासवर्ड याद नहीं"
+  },
+  "TXT_ENTER_YOUR_REGISTERED_EMAIL": {
+    "en_us": "Enter your registered email id with us",
+    "hi_id": "हमारे साथ अपनी पंजीकृत ईमेल आईडी दर्ज करें"
+  },
+  "TXT_ENTER_EMAIL_ID": {
+    "en_us": "Enter Email Id",
+    "hi_id": "ईमेल आईडी दर्ज करें"
+  },
+  "TXT_HIDE_EMPTY_TABLES": {
+    "en_us": "Hide Empty Tables",
+    "hi_id": "खाली टेबल्स छिपाएँ"
+  },
+  "TXT_NL_HOLDEM": {
+    "en_us": "NL Hold'em",
+    "hi_id": "एनएल होल्डम"
+  },
+  "TXT_HOLDEM": {
+    "en_us": "Hold'em",
+    "hi_id": "होल्डम"
+  },
+  "TXT_PL_OMAHA": {
+    "en_us": "PL Omaha",
+    "hi_id": "पीएल ओमाहा"
+  },
+  "TXT_NARCOS": {
+    "en_us": "Narcos",
+    "hi_id": "HI_ Narcos"
+  },
+  "TXT_HAFT_HYPER_TURBO": {
+    "en_us": "25/50, Hyper Turbo",
+    "hi_id": "25/50, हाइपर-टर्बो"
+  },
+  "TXT_CHENNAI_ROLLERS": {
+    "en_us": "Chennai Rollers",
+    "hi_id": "HI_ Chennai Rollers"
+  },
+  "TXT_DELHI_RICHERS": {
+    "en_us": "Delhi Richers",
+    "hi_id": "HI_ Delhi Richers"
+  },
+  "TXT_ON": {
+    "en_us": "ON",
+    "hi_id": "ऑन"
+  },
+  "TXT_OFF": {
+    "en_us": "OFF",
+    "hi_id": "ऑफ"
+  },
+  "TXT_BRONZE": {
+    "en_us": "Bronze",
+    "hi_id": "Bronze"
+  },
+  "TXT_WITHDRAWABLE_CHIP": {
+    "en_us": "Withdrawable Chips",
+    "hi_id": "वापस लेने योग्य चिप्स"
+  },
+  "TXT_REAL_CHIP": {
+    "en_us": "Real Chips",
+    "hi_id": "रियल चिप्स"
+  },
+  "TXT_PLAYER_CHIPS": {
+    "en_us": "Play Chips",
+    "hi_id": "प्ले चिप्स"
+  },
+  "TXT_INSTANT_BONUS_CHIPS": {
+    "en_us": "Instant Bonus Chips",
+    "hi_id": "तत्काल बोनस चिप्स"
+  },
+  "TXT_AGENT_SUB_AGENT_ID": {
+    "en_us": "Agent/Sub-Agent Id",
+    "hi_id": "एजेंट /सब-एजेंट ID"
+  },
+  "TXT_WRONG_PASS_TRYAGAIN": {
+    "en_us": "Wrong Password. Try Again.",
+    "hi_id": "गलत पासवर्ड। पुनः प्रयास करें।"
+  },
+  "TXT_EXIT": {
+    "en_us": "Exit",
+    "hi_id": "बाहर जाएं"
+  },
+  "TXT_COMMUNITY_CARD": {
+    "en_us": "Community Cards",
+    "hi_id": "कम्युनिटी कार्ड्स"
+  },
+  "TXT_PLAYER_2": {
+    "en_us": "Players:",
+    "hi_id": "प्लेयर्स"
+  },
+  "TXT_COLOR_2": {
+    "en_us": "Colors:",
+    "hi_id": "रंग:"
+  },
+  "TXT_DELETE_NOTE": {
+    "en_us": "Delete Note",
+    "hi_id": "नोट हटाएँ"
+  },
+  "TXT_HANDS": {
+    "en_us": "Hands",
+    "hi_id": "हैंड्स"
+  },
+  "TXT_HIGHLIGHT": {
+    "en_us": "Highlight",
+    "hi_id": "हाइलाइट"
+  },
+  "TXT_STAND_UP": {
+    "en_us": "Stand Up",
+    "hi_id": "खड़े हो जाये"
+  },
+  "TXT_TYPE_HERE": {
+    "en_us": "Type Here…",
+    "hi_id": "यहाँ टाइप करें…"
+  },
+  "TXT_GAME_OPTIONS": {
+    "en_us": "Game Options",
+    "hi_id": "गेम विकल्प"
+  },
+  "TXT_YES": {
+    "en_us": "YES",
+    "hi_id": "हाँ"
+  },
+  "TXT_NO": {
+    "en_us": "NO",
+    "hi_id": "नहीं"
+  },
+  "TXT_TABLE_COLOR": {
+    "en_us": "Table Color",
+    "hi_id": "टेबल का रंग"
+  },
+  "TXT_SEAT_PREFERENCE": {
+    "en_us": "Seat Preference",
+    "hi_id": "पसंदीदा सीट"
+  },
+  "TXT_MUCK_WINNING_HAND": {
+    "en_us": "Muck Winning Hand",
+    "hi_id": "मक विनिंग हैंड"
+  },
+  "TXT_TABLE_LAYOUT": {
+    "en_us": "Table Layout",
+    "hi_id": "टेबल ख़ाका"
+  },
+  "TXT_TILE_VIEW": {
+    "en_us": "Tile View",
+    "hi_id": "टाइल में देखे"
+  },
+  "TXT_UNTILE_VIEW": {
+    "en_us": "Untile View",
+    "hi_id": "बिना टाइल के देखे"
+  },
+  "TXT_LEARN_PLAY_POKER": {
+    "en_us": "Learn How to Play Poker",
+    "hi_id": "पोकर खेलना सीखें"
+  },
+  "TXT_POKER_OVERVIEW": {
+    "en_us": "Poker Overview",
+    "hi_id": "पोकर समीक्षा"
+  },
+  "TXT_CLOSE": {
+    "en_us": "Close",
+    "hi_id": "बंद करे"
+  },
+  "TXT_STICKERS": {
+    "en_us": "STICKERS",
+    "hi_id": "स्टिकर"
+  },
+  "TXT_BUDDIES": {
+    "en_us": "BUDDIES",
+    "hi_id": "मित्र"
+  },
+  "TXT_EXTRA_TIME": {
+    "en_us": "Extra Time",
+    "hi_id": "अतिरिक्त समय"
+  },
+  "TXT_PROMO_CODE_OPTIONAL": {
+    "en_us": "Promo Code (Optional)",
+    "hi_id": "प्रोमो कोड (वैकल्पिक)"
+  },
+  "TXT_PROMO_CODE_INCORRECT": {
+    "en_us": "Promo code is not correct.",
+    "hi_id": "प्रोमो कोड सही नहीं है।"
+  },
+  "TXT_DOWNLOADING": {
+    "en_us": "Downloading...",
+    "hi_id": "डाउनलोड हो रहा है ..."
+  },
+  "TXT_DOWNLOAD_COMPLETE": {
+    "en_us": "Download Complete",
+    "hi_id": "डाउनलोड हो गया"
+  },
+  "TXT_UPDATE_READY_INSTALL": {
+    "en_us": "Update is ready to be installed.",
+    "hi_id": "अपडेट इनस्टॉल के लिए तैयार है |"
+  },
+  "TXT_INSTALL": {
+    "en_us": "Install",
+    "hi_id": "इनस्टॉल"
+  },
+  "TXT_RAISE_TEXT": {
+    "en_us": "Raise",
+    "hi_id": "रेज"
+  },
+  "TXT_UNJOIN_WAITTING": {
+    "en_us": "Unjoin Wait List",
+    "hi_id": "प्रतीक्षा सूची छोड़ें"
+  },
+  "TXT_BUILD_VERSION": {
+    "en_us": "Build Version",
+    "hi_id": "बिल्ड Version"
+  },
+  "TXT_VERSION": {
+    "en_us": "Version",
+    "hi_id": "Version"
+  },
+  "TXT_ONLY_IN_AFFFILATE": {
+    "en_us": "Only A-Z a-z 0-9 and _ are allowed in Affiliate Id",
+    "hi_id": "एफिलिएट ID में केवल A-Z a-z 0-9 और _ मान्य है ।"
+  },
+  "TXT_ONLY_IN_USER": {
+    "en_us": "Only A-Z a-z 0-9 and _ are allowed in username",
+    "hi_id": "यूजरनाम ID में केवल A-Z a-z 0-9 और _ मान्य है ।"
+  },
+  "TXT_ENTER_TEXT_HERE": {
+    "en_us": "Enter text here...",
+    "hi_id": "यहॉं लिखें"
+  },
+  "TXT_USER_ID_EMAIL": {
+    "en_us": "User ID/E-mail",
+    "hi_id": "यूजर ID /इ-मेल"
+  },
+  "TXT_USER_ID": {
+    "en_us": "User ID",
+    "hi_id": "यूजर ID"
+  },
+  "TXT_ID": {
+    "en_us": "ID",
+    "hi_id": "ID"
+  },
+  "TXT_REGISTER": {
+    "en_us": "Register",
+    "hi_id": "रजिस्टर करें"
+  },
+  "TXT_ALREADY_USER": {
+    "en_us": "Already a User. Click here to login",
+    "hi_id": "पहले से ही एक यूजर । लॉग इन करने के लिए यहां क्लिक करें"
+  },
+  "TXT_EMAIL": {
+    "en_us": "E-mail",
+    "hi_id": "इ-मेल"
+  },
+  "TXT_GAME_VARIATION": {
+    "en_us": "Game Variation",
+    "hi_id": "खेल विविधता"
+  },
+  "TXT_TOTAL_CHIPS": {
+    "en_us": "Total Chips",
+    "hi_id": "कुल चिप्स"
+  },
+  "TXT_REGISTERED_EMAIL": {
+    "en_us": "Registered E-mail ID:",
+    "hi_id": "पंजीकृत ई-मेल ID:"
+  },
+  "TXT_CHOOSE_VARIATION": {
+    "en_us": "Choose Variation",
+    "hi_id": "विविधता चुनें"
+  },
+  "TXT_SELECT_VARITATION": {
+    "en_us": "Please select a game varitaion.",
+    "hi_id": "कृपया एक गेम विविधता चुनें।"
+  },
+  "TXT_OMAHA": {
+    "en_us": "OMAHA",
+    "hi_id": "ओमाहा"
+  },
+  "TXT_OMAHA_HI_LO": {
+    "en_us": "Omaha Hi-Lo",
+    "hi_id": "ओमाहा हाई-लो"
+  },
+  "TXT_FILL_ALL_DETAILS": {
+    "en_us": "Please fill all the details!",
+    "hi_id": "कृपया सभी विवरण भरें!"
+  },
+  "TXT_GET_FREE_CHIP": {
+    "en_us": "Congrats! You have received\n10,000 free Play money chips.",
+    "hi_id": "बधाई! आपको प्राप्त हुआ है\n10,000 फ्री प्ले मनी चिप्स।"
+  },
+  "TXT_YOU_WILL_BE_DEAL": {
+    "en_us": "You will be dealt, once the dealer button passes you.",
+    "hi_id": "एक बार जब डीलर बटन आपको पास कर देगा,\nतो आपको डील किया जायेगा"
+  },
+  "TXT_ACCEPT": {
+    "en_us": "Accept",
+    "hi_id": "स्वीकार करें"
+  },
+  "TXT_INVITE": {
+    "en_us": "Invite",
+    "hi_id": "आमंत्रित करें"
+  },
+  "TXT_REJECT": {
+    "en_us": "Reject",
+    "hi_id": "अस्वीकार करें"
+  },
+  "TXT_MY_BUDDIES": {
+    "en_us": "My Buddies",
+    "hi_id": "मेरे मित्र"
+  },
+  "TXT_INVITES": {
+    "en_us": "Invites",
+    "hi_id": "आमंत्रण"
+  },
+  "TXT_ENTER_PLAYERNAME": {
+    "en_us": "Enter Player's name",
+    "hi_id": "खिलाड़ी का नाम दर्ज करें"
+  },
+  "TXT_REMOVE": {
+    "en_us": "Remove",
+    "hi_id": "हटाएँ"
+  },
+  "TXT_LIST_BUDDIES": {
+    "en_us": "List Buddies",
+    "hi_id": "मित्रों की सूची"
+  },
+  "TXT_NO_BUDDIES_AVAILABLE": {
+    "en_us": "No Buddies Available",
+    "hi_id": "कोई मित्र उपलब्ध नहीं है।"
+  },
+  "TXT_NO_FRIEND_INVITE_AVAILABLE": {
+    "en_us": "No Friend Invite Available",
+    "hi_id": "कोई मित्र आमंत्रण उपलब्ध नहीं हैं।"
+  },
+  "TXT_USERNAME_NOT_EXIST": {
+    "en_us": "Username doesn't exist",
+    "hi_id": "खिलाडी का नाम मौजूद नहीं हैं।"
+  },
+  "TXT_FIND": {
+    "en_us": "Find",
+    "hi_id": "खोजें"
+  },
+  "TXT_ADD_FRIEND": {
+    "en_us": "ADD FRIEND",
+    "hi_id": "मित्र जोड़ें"
+  },
+  "TXT_INVITED": {
+    "en_us": "INVITED",
+    "hi_id": "आमंत्रित"
+  },
+  "TXT_HAS_INVITED_YOU": {
+    "en_us": "XXX has invited you to join\nYYY",
+    "hi_id": "XXX ने आपको YYY\nटेबल में शामिल होने के लिए आमंत्रित किया है ।"
+  },
+  "TXT_SENT": {
+    "en_us": "SENT",
+    "hi_id": "भेज दिया"
+  },
+  "TXT_SEND_INVITE_TO_ALL": {
+    "en_us": "SEND INVITE TO ALL",
+    "hi_id": "सभी को आमंत्रित करें"
+  },
+  "TXT_PLAY": {
+    "en_us": "PLAY",
+    "hi_id": "खेलो"
+  },
+  "TXT_TUTORIAL": {
+    "en_us": "Tutorial",
+    "hi_id": "ट्यूटोरियल"
+  },
+  "TXT_NEXT": {
+    "en_us": "NEXT",
+    "hi_id": "अगला"
+  },
+  "TXT_SKIP": {
+    "en_us": "SKIP",
+    "hi_id": "छोड़ें"
+  },
+  "TXT_GOT_IT": {
+    "en_us": "GOT IT",
+    "hi_id": "जान लिया"
+  },
+  "TXT_GAME_TUTORIAL": {
+    "en_us": "GAME TUTORIAL",
+    "hi_id": "गेम ट्यूटोरियल"
+  }
+  
+}

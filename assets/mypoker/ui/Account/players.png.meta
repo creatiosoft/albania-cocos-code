@@ -1,0 +1,47 @@
+{
+  "ver": "2.3.7",
+  "uuid": "395d8e70-3e1e-4931-ad12-beda73db1628",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 56,
+  "height": 57,
+  "platformSettings": {
+    "android": {
+      "formats": [
+        {
+          "name": "etc2",
+          "quality": "fast"
+        }
+      ]
+    }
+  },
+  "subMetas": {
+    "players": {
+      "ver": "1.0.6",
+      "uuid": "6d168bc2-2aa2-415d-9fe7-bacf2fb2ffe5",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "395d8e70-3e1e-4931-ad12-beda73db1628",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 12,
+      "trimY": 10,
+      "width": 32,
+      "height": 36,
+      "rawWidth": 56,
+      "rawHeight": 57,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "ver": "2.3.7",
+  "uuid": "4d45ba18-7255-4130-b9c0-b80522b040b1",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 968,
+  "height": 1155,
+  "platformSettings": {
+    "android": {
+      "formats": [
+        {
+          "name": "etc2",
+          "quality": "fast"
+        }
+      ]
+    }
+  },
+  "subMetas": {
+    "MGameplay4": {
+      "ver": "1.0.6",
+      "uuid": "67ad31d4-f7c1-4be4-97cf-ca834969fee7",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "4d45ba18-7255-4130-b9c0-b80522b040b1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 103,
+      "trimX": 4,
+      "trimY": 4,
+      "width": 960,
+      "height": 941,
+      "rawWidth": 968,
+      "rawHeight": 1155,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

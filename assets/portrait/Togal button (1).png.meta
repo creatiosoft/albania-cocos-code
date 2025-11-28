@@ -1,0 +1,47 @@
+{
+  "ver": "2.3.7",
+  "uuid": "562ee9a4-b623-4c5c-995f-af972f84d712",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 226,
+  "height": 126,
+  "platformSettings": {
+    "android": {
+      "formats": [
+        {
+          "name": "etc2",
+          "quality": "fast"
+        }
+      ]
+    }
+  },
+  "subMetas": {
+    "Togal button (1)": {
+      "ver": "1.0.6",
+      "uuid": "96ae85ed-fe7c-408e-9395-e1d9cc42130d",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "562ee9a4-b623-4c5c-995f-af972f84d712",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -1,
+      "trimX": 1,
+      "trimY": 3,
+      "width": 224,
+      "height": 122,
+      "rawWidth": 226,
+      "rawHeight": 126,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

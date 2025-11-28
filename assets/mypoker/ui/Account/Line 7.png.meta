@@ -1,0 +1,47 @@
+{
+  "ver": "2.3.7",
+  "uuid": "be5c059e-6f27-4388-b5b0-f6f4a5fd0906",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 392,
+  "height": 21,
+  "platformSettings": {
+    "android": {
+      "formats": [
+        {
+          "name": "etc2",
+          "quality": "fast"
+        }
+      ]
+    }
+  },
+  "subMetas": {
+    "Line 7": {
+      "ver": "1.0.6",
+      "uuid": "62bd98fa-7642-4e97-a08b-1a0af8c34efd",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "be5c059e-6f27-4388-b5b0-f6f4a5fd0906",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 392,
+      "height": 20,
+      "rawWidth": 392,
+      "rawHeight": 21,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

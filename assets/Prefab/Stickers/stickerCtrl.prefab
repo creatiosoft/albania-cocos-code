@@ -1,0 +1,133 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false,
+    "readonly": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "stickerCtrl",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 127,
+      "height": 143
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        118,
+        117,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "382acKrbPVAVKoQrlH+tUys",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "stickerList": [
+      {
+        "__uuid__": "eb59a562-38e8-4b06-aa88-5f3b01064b5a"
+      },
+      {
+        "__uuid__": "6e4cf635-4c3b-4248-b288-c117e30cd646"
+      },
+      {
+        "__uuid__": "56b10534-51c6-4e39-b041-1d3512f73313"
+      },
+      {
+        "__uuid__": "21f50602-2b54-4a27-bcd8-fe63f95dc3d5"
+      },
+      {
+        "__uuid__": "86a8aba5-06d0-4f3b-89b2-9591f940dae9"
+      },
+      {
+        "__uuid__": "449c168a-1f0a-41c8-a3ae-5a846faf00d3"
+      },
+      {
+        "__uuid__": "a57cc8ab-6555-4c9e-ab73-bb83e32648d4"
+      },
+      {
+        "__uuid__": "b3df1bff-d12a-4b32-822e-0bb27e9c5334"
+      },
+      {
+        "__uuid__": "9037e603-359e-463e-b213-d25a9aaafcff"
+      },
+      {
+        "__uuid__": "8d128370-5eda-43cc-96fd-def2a9046ad8"
+      },
+      {
+        "__uuid__": "f6ecbdae-b56e-4d13-b6be-7207c31c88b3"
+      }
+    ],
+    "stickerSprite": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "a5124b6a-60a7-40a5-b67d-e0feb193c23b"
+    },
+    "fileId": "",
+    "sync": false
+  }
+]

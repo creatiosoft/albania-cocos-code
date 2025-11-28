@@ -1,0 +1,47 @@
+{
+  "ver": "2.3.7",
+  "uuid": "6e92cc2c-f647-4462-a227-31dd8205998c",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 177,
+  "height": 34,
+  "platformSettings": {
+    "android": {
+      "formats": [
+        {
+          "name": "etc2",
+          "quality": "fast"
+        }
+      ]
+    }
+  },
+  "subMetas": {
+    "logo-mondogaming-redWhite-nobg 2": {
+      "ver": "1.0.6",
+      "uuid": "455b830c-fa8a-4b0a-a2b9-d139c4b77111",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "6e92cc2c-f647-4462-a227-31dd8205998c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 177,
+      "height": 34,
+      "rawWidth": 177,
+      "rawHeight": 34,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
