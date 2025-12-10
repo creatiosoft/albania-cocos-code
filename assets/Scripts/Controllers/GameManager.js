@@ -482,6 +482,7 @@ cc.Class({
         ServerCom.pomeloBroadcast("connector.entryHandler.inviteBuddy:receive", this.inviteBuddyReceive.bind(this));
         ServerCom.pomeloBroadcast("updatePlayerImageInTable", this.updatePlayerImageInTable.bind(this));
         ServerCom.pomeloBroadcast("notice", this.onAdminNotice.bind(this));
+        ServerCom.pomeloBroadcast("adminBroadcast", this.onAdminNotice.bind(this));
         cc.systemEvent.on("buddyResponseEvent", this.buddyResponseEvent.bind(this));
         ServerCom.pomeloBroadcast(K.PlayerBroadcastRoute.connectionAck2, function (response) {
 

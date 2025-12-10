@@ -397,8 +397,20 @@ cc.Class({
         this.balance.string = GameManager.convertChips(this.balance.string);
         this.playerName.string = GameManager.user.userName;
         this.playerId.string = "Player ID : " + GameManager.user.playerId;
-        this.agentId.string = "Agent ID : " + GameManager.user.isParentUserName;
+        if (GameManager.user.isParentUserName) {
+            if (GameManager.user.isParentUserName == "") {
+                this.agentId.string = "Agent ID : N/A";
+            }
+            else {
+                this.agentId.string = "Agent ID : " + GameManager.user.isParentUserName;
+            }
+        }
+        else {
+            this.agentId.string = "Agent ID : N/A";
+        }
         this.agentId2.string = GameManager.user.isParentUserName;
+        this.vpGiftBalance.string = Number((GameManager.user.category == "GOLD" ? GameManager.user.freeChips : GameManager.user.realChips).toFixed(2));
+        this.vpGiftBalance.string = GameManager.convertChips(this.vpGiftBalance.string);
 
         // if (GameScreen.isMobile == false) {
         //     if (this.gameScreen.viewType) {
@@ -931,6 +943,7 @@ cc.Class({
     },
 
     onWidthdrawlSubmit: function() {
+        this.vpWithdrawSubmit.interactable = false;
         this.loginHandler.vpWithdrawChips(
             parseInt(this.vpWithdrawAmount.string), (data) => {
             console.log("vpWithdrawChips", JSON.stringify(data));
