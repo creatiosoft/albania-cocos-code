@@ -914,7 +914,9 @@ cc.Class({
         });
         socketIO.socket.on('connect_error', (error) => {
             console.log("ios connect_error1");
+            console.log("Connect error:", error);
             console.log(JSON.stringify(error));
+            console.log(JSON.stringify(error,null));
             GameManager.isSocketIOConnected = false;
             ServerCom.socketConnected = false;
             this.preLogin.active = false;

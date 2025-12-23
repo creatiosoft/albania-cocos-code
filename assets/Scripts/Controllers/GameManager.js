@@ -2176,6 +2176,14 @@ cc.Class({
                 GameManager.needResetUser = true;
                 ServerCom.clearConnectCB();
 
+                // Clear all active tables and game data
+                GameManager.reset();
+
+                // Disconnect socket to prevent stale connections
+                if (typeof socketIO !== 'undefined' && socketIO && socketIO.socket) {
+                    socketIO.socket.disconnect();
+                }
+
                 let lobbyPresenter = ScreenManager.screens[K.ScreenEnum.LobbyScreen];
                 if (lobbyPresenter) {
                     lobbyPresenter.resetPrivateTable();
@@ -2198,6 +2206,14 @@ cc.Class({
                 this.popUpManager.hideAllPopUps();
 
                 cc.systemEvent.emit( "leaveLobby");
+
+                // Clear all active tables and game data
+                GameManager.reset();
+
+                // Disconnect socket to prevent stale connections
+                if (typeof socketIO !== 'undefined' && socketIO && socketIO.socket) {
+                    socketIO.socket.disconnect();
+                }
 
                 if (ScreenManager.currentScreen != K.ScreenEnum.LoginScreen) {
                     ScreenManager.showScreen(K.ScreenEnum.LoginScreen, true, function () {

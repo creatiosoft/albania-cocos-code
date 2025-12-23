@@ -37,7 +37,7 @@ cc.Class({
             this.head.string = 'Quit';
             this.title.string = 'Are you sure you want to quit?';
         }
-        else { 
+        else {
             this.head.string = 'Logout';
             this.title.string = 'Are you sure you want to logout?';
         }
@@ -62,7 +62,7 @@ cc.Class({
                 jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "exitGame", "()V");
             }
             else {
-                cc.game.end();    
+                cc.game.end();
             }
         } else {
             GameManager.logout();

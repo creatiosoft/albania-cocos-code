@@ -1020,8 +1020,9 @@ cc.Class({
 
                     console.log("currentActiveIds", currentActiveIds);
 
+                    // Clear previous session data before joining new tables
+                    GameManager.reset();
 
-                    // GameManager.reset();
                     // AutoJoin last logged in tables
                     // cc.eventManager.removeListener(inst.enterListener);
                     if (!!response.joinChannels && response.joinChannels.length > 0) {

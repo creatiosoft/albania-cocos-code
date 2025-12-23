@@ -1,0 +1,81 @@
+{
+    "paths": {},
+    "uuids": [
+        "14LImUCgRAPYzq6FPVQcUZ",
+        "1aZuwRLANBRavwjf+CnUxz",
+        "29FYIk+N1GYaeWH/q1NxQO",
+        "3ae7efMv1CLq2ilvUY/tQi",
+        "42IuIuNz5G3qgn2j8kQUpU",
+        "5a4mQLrwxEV5bleb/DZ4M0",
+        "5bA1pir4VGlah07DaBbsCh",
+        "6dM+TEqT1I7JLynT9j7E21",
+        "70d2c4IbBApL/OlFBfTfhI",
+        "75q81j4NVBBK6UAs9LwB3u",
+        "9c/oRA7CZIq4+HBukJ+8fu",
+        "a0U2UrOjVCwKEn6uoZlT/+",
+        "a2MjXRFdtLlYQ5ouAFv/+R",
+        "bdHNAmDm9B2KNWNg3KNjCC",
+        "c74HQzDEVIQIGiKXertchu",
+        "d2mQoh45VC5JxU7Zo4I13b",
+        "e3fIqm91ZGbIiCFOzlaRn6",
+        "ecpdLyjvZBwrvm+cedCcQy",
+        "ffDpHHVcZAhqOfy25Fe4w7",
+        "ffitOyyoZEOZXe9OajrjTR"
+    ],
+    "scenes": {
+        "db://assets/BINGO/Launch.fire": "1aZuwRLANBRavwjf+CnUxz"
+    },
+    "redirect": [
+        "14LImUCgRAPYzq6FPVQcUZ",
+        0,
+        "29FYIk+N1GYaeWH/q1NxQO",
+        0,
+        "3ae7efMv1CLq2ilvUY/tQi",
+        1,
+        "5a4mQLrwxEV5bleb/DZ4M0",
+        0,
+        "6dM+TEqT1I7JLynT9j7E21",
+        0,
+        "70d2c4IbBApL/OlFBfTfhI",
+        0,
+        "a0U2UrOjVCwKEn6uoZlT/+",
+        0,
+        "a2MjXRFdtLlYQ5ouAFv/+R",
+        0,
+        "bdHNAmDm9B2KNWNg3KNjCC",
+        0,
+        "c74HQzDEVIQIGiKXertchu",
+        0,
+        "d2mQoh45VC5JxU7Zo4I13b",
+        0,
+        "e3fIqm91ZGbIiCFOzlaRn6",
+        0,
+        "ecpdLyjvZBwrvm+cedCcQy",
+        1,
+        "ffDpHHVcZAhqOfy25Fe4w7",
+        0,
+        "ffitOyyoZEOZXe9OajrjTR",
+        0
+    ],
+    "deps": [
+        "resources",
+        "internal"
+    ],
+    "packs": {
+        "08891cb21": [
+            "1aZuwRLANBRavwjf+CnUxz",
+            "5bA1pir4VGlah07DaBbsCh",
+            "9c/oRA7CZIq4+HBukJ+8fu"
+        ],
+        "0d5d3bb54": [
+            "42IuIuNz5G3qgn2j8kQUpU",
+            "75q81j4NVBBK6UAs9LwB3u"
+        ]
+    },
+    "name": "main",
+    "importBase": "import",
+    "nativeBase": "native",
+    "debug": true,
+    "isZip": false,
+    "encrypted": false
+}
