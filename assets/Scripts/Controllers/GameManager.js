@@ -857,7 +857,60 @@ cc.Class({
             }
         }
 
+        // Browser-specific handlers for back/forward navigation
+        if (cc.sys.isBrowser) {
+            // Handle browser back/forward navigation (bfcache)
+            window.addEventListener('pageshow', function(event) {
+                console.log("Browser pageshow event, persisted:", event.persisted);
+
+                // If page was restored from bfcache, force reconnect socket
+                // even if socket.connected is true (WebSocket may be stale)
+                if (event.persisted) {
+                    GameManager.checkAndReconnectSocket(true); // Force reconnect
+                }
+            });
+        }
+
         this.registerImageUploadEvents();
+    },
+
+    // Check socket connection and reconnect if needed (for browser)
+    checkAndReconnectSocket: function(forceReconnect) {
+        console.log("checkAndReconnectSocket called, forceReconnect:", forceReconnect);
+
+        // Skip if on login/signup screen
+        if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen ||
+            ScreenManager.currentScreen == K.ScreenEnum.SignupScreen) {
+            console.log("checkAndReconnectSocket: on login/signup screen, skipping");
+            return;
+        }
+
+        // Skip if not logged in
+        if (!GameManager.isConnected) {
+            console.log("checkAndReconnectSocket: not connected, skipping");
+            return;
+        }
+
+        // Check if socket exists
+        if (typeof socketIO !== 'undefined' && socketIO && socketIO.socket) {
+            // For bfcache restoration, force reconnect even if socket.connected is true
+            // because the WebSocket transport may be stale
+            if (forceReconnect || !socketIO.socket.connected) {
+                console.log("checkAndReconnectSocket: forcing socket reconnection...");
+
+                // Show loading indicator
+                if (LoginScreen && LoginScreen.preLogin) {
+                    LoginScreen.preLogin.active = true;
+                    LoginScreen.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
+                }
+
+                // Force disconnect first to clear stale connection, then reconnect
+                socketIO.socket.disconnect();
+                socketIO.socket.connect();
+            } else {
+                console.log("checkAndReconnectSocket: socket already connected");
+            }
+        }
     },
 
     onEnablePageView: function () {
