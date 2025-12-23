@@ -1023,6 +1023,10 @@ cc.Class({
                     // Clear previous session data before joining new tables
                     // GameManager.reset();
 
+                    if (GameManager.activeTableCount > 0 && response.joinChannels.length == 0) {
+                        GameManager.reset();
+                    }
+
                     // AutoJoin last logged in tables
                     // cc.eventManager.removeListener(inst.enterListener);
                     if (!!response.joinChannels && response.joinChannels.length > 0) {
