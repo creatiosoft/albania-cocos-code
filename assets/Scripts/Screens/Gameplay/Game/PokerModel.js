@@ -390,6 +390,9 @@ var PokerModel = cc.Class({
                 }
                 this.sitOutValue = SitOutMode.None;
             }
+            else {
+                GameManager.popUpManager.show(PopUpType.NotificationPopup, response.info, function () { });
+            }
         }.bind(this), null, 5000, false);
     },
 

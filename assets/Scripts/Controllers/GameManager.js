@@ -2958,29 +2958,30 @@ cc.Class({
 
     convertChips: function (num) {
         num = Number(num);
-        if (num < 1000) {
-            let value = num;
-            return value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-        }
-        if (num < 1000000) {
-            if (num == 1000) {
-                return '1K';
-            }
-            let value = num / 1000;
-            let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-            return formatted + 'K';
-        }
-        if (num < 1000000000) {
-            if (num == 1000000) {
-                return '1M';
-            }
-            let value = num / 1000000;
-            let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-            return formatted + 'M';
-        }
-        let value = num / 1000000000;
-        let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-        return formatted + 'B';
+        return num.toFixed(2);
+        // if (num < 1000) {
+        //     let value = num;
+        //     return value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
+        // }
+        // if (num < 1000000) {
+        //     if (num == 1000) {
+        //         return '1K';
+        //     }
+        //     let value = num / 1000;
+        //     let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
+        //     return formatted + 'K';
+        // }
+        // if (num < 1000000000) {
+        //     if (num == 1000000) {
+        //         return '1M';
+        //     }
+        //     let value = num / 1000000;
+        //     let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
+        //     return formatted + 'M';
+        // }
+        // let value = num / 1000000000;
+        // let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
+        // return formatted + 'B';
     },
 });
 
