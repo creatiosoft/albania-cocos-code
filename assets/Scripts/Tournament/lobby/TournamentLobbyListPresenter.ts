@@ -195,6 +195,7 @@ export class TournamentLobbyListPresenter extends cc.Component {
         }        
         globals.TournamentLobbyListPresenter = this;
         window['TournamentLobbyListPresenter'] = this;
+        return;
 
         // this.contentHolderAll.active = true;
         // this.contentHolderKCoin.active = false;

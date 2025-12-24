@@ -346,10 +346,10 @@ cc.Class({
             }
             else {
                 cc.find('Container/header/r1/vari', this.node).getComponent(cc.Label).string = data.config.channelName;
-                cc.find('Container/header/r2/blind', this.node).getComponent(cc.Label).string = GameManager.convertChips(data.config.smallBlind) + "/" + GameManager.convertChips(data.config.bigBlind);
+                cc.find('Container/header/r2/blind', this.node).getComponent(cc.Label).string = (data.config.smallBlind) + "/" + (data.config.bigBlind);
             }
-            cc.find('Container/min/realMoney', this.node).getComponent(cc.Label).string = GameManager.convertChips(data.minValue);
-            cc.find('Container/max/realMoney', this.node).getComponent(cc.Label).string = GameManager.convertChips(data.maxValue);
+            cc.find('Container/min/realMoney', this.node).getComponent(cc.Label).string = (data.minValue);
+            cc.find('Container/max/realMoney', this.node).getComponent(cc.Label).string = (data.maxValue);
 
             this.sound = data.playSound;
             // this.dialogHeadingText.string = data.dialogHeadingText;
@@ -372,8 +372,8 @@ cc.Class({
             data.maxValue = Math.floor(data.maxValue);
 
             this.editBox.string = data.minValue.toString();
-            this.minLbl.string = GameManager.convertChips(data.minValue.toString());
-            this.maxLbl.string = GameManager.convertChips(data.maxValue.toString());
+            this.minLbl.string = (data.minValue.toString());
+            this.maxLbl.string = (data.maxValue.toString());
             this.minAmount = data.minValue;
             this.maxAmount = data.maxValue;
             var midVal = (this.minAmount + this.maxAmount) / 2;

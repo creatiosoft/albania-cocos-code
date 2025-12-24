@@ -204,7 +204,7 @@ var Table = cc.Class({
     statics: {
         filter: 0, // 0 low 1 mid 2 high
 
-        low: false,
+        low: true,
         mid: false,
         high: false,
     },

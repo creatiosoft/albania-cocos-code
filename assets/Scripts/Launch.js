@@ -66,78 +66,14 @@ cc.Class({
             this.node.scale = 0.6;
         }
 
-        if (this.node.getChildByName("Editable") && this.node.getChildByName("Editable").active) {
-            if (cc.sys.localStorage.getItem("EditablegameServer")) {
-                K.ServerAddress.gameServer = this.node.getChildByName("Editable").getChildByName("gameServer").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("EditablegameServer");
-            }
-            else {
-                K.ServerAddress.gameServer = this.node.getChildByName("Editable").getChildByName("gameServer").getChildByName("EditBox").getComponent(cc.EditBox).string;    
-            }
+        // this.schedule(this.updateProgress);
+        // this.node.getComponent(cc.Button).interactable = false;
+        // this.timer = 0;
+        // cc.director.preloadScene("Portrait", () => {
+        //     this.finished();
+        // });
 
-            if (cc.sys.localStorage.getItem("EditablegamePort")) {
-                K.ServerAddress.gamePort = this.node.getChildByName("Editable").getChildByName("gamePort").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("EditablegamePort");
-            }
-            else {
-                K.ServerAddress.gamePort = this.node.getChildByName("Editable").getChildByName("gamePort").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }
-
-            if (cc.sys.localStorage.getItem("EditableipAddress")) {
-                K.ServerAddress.ipAddress = this.node.getChildByName("Editable").getChildByName("ipAddress").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("EditableipAddress");
-            }
-            else {
-                K.ServerAddress.ipAddress = this.node.getChildByName("Editable").getChildByName("ipAddress").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }
-
-            if (cc.sys.localStorage.getItem("Editableport")) {
-                K.ServerAddress.port = this.node.getChildByName("Editable").getChildByName("port").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("Editableport");
-            }
-            else {
-                K.ServerAddress.port = this.node.getChildByName("Editable").getChildByName("port").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }
-
-            if (cc.sys.localStorage.getItem("Editableassets_server")) {
-                K.ServerAddress.assets_server = this.node.getChildByName("Editable").getChildByName("assets_server").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("Editableassets_server");
-            }
-            else {
-                K.ServerAddress.assets_server = this.node.getChildByName("Editable").getChildByName("assets_server").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }
-
-            if (cc.sys.localStorage.getItem("Editableotp_server")) {
-                K.ServerAddress.otp_server = this.node.getChildByName("Editable").getChildByName("otp_server").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("Editableotp_server");
-            }
-            else {
-                K.ServerAddress.otp_server = this.node.getChildByName("Editable").getChildByName("otp_server").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }
-
-            if (cc.sys.localStorage.getItem("Editableads_server")) {
-                K.ServerAddress.otp_server = this.node.getChildByName("Editable").getChildByName("ads_server").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("Editableads_server");
-            }
-            else {
-                K.ServerAddress.otp_server = this.node.getChildByName("Editable").getChildByName("ads_server").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }   
-
-            if (cc.sys.localStorage.getItem("Editableauth_server")) {
-                K.Token.auth_server = this.node.getChildByName("Editable").getChildByName("auth_server").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("Editableauth_server");
-            }
-            else {
-                K.Token.auth_server = this.node.getChildByName("Editable").getChildByName("auth_server").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }
-
-            if (cc.sys.localStorage.getItem("Editableauth_refresh_server")) {
-                K.Token.auth_refresh_server = this.node.getChildByName("Editable").getChildByName("auth_refresh_server").getChildByName("EditBox").getComponent(cc.EditBox).string = cc.sys.localStorage.getItem("Editableauth_refresh_server");
-            }
-            else {
-                K.Token.auth_refresh_server = this.node.getChildByName("Editable").getChildByName("auth_refresh_server").getChildByName("EditBox").getComponent(cc.EditBox).string;
-            }
-        }
-        else {
-            this.schedule(this.updateProgress);
-        }
-        this.node.getComponent(cc.Button).interactable = false;
-        this.timer = 0;
-        cc.director.preloadScene("Portrait", () => {
-            this.finished();
-        });
+        this.toGame();
     },
 
     updateProgress(dt) {

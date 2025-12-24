@@ -1787,6 +1787,9 @@ var PokerModel = cc.Class({
      * @memberof Screens.Gameplay.Game.PokerModel#
      */
     onPlayerCoins: function (data) {
+        if (data.channelId != this.gameData.channelId) {
+            return;
+        }
         var index = this.getPlayerById(data.playerId);
         this.gameData.tableDetails.players[index].chips = data.amount;
         this.emit(K.PokerEvents.onPlayerCoins, this.gameData.tableDetails.players[index]);

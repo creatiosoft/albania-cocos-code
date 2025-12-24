@@ -94,6 +94,7 @@ cc.Class({
      * @memberof Utilities.ServerCom#
      */
     httpPostRequest: function (address, data, callback, error, timeout) {
+        console.log(ServerCom.getFormattedTime(), "Network [REQ] httpPostRequest", address, data);
         var inst = this;
         var xhr = new XMLHttpRequest();
         xhr.timeout = 5000;
@@ -133,6 +134,7 @@ cc.Class({
                 var response = xhr.responseText;
                 if (callback !== null && callback !== undefined) {
                     var data = JSON.parse(response);
+                    console.log(ServerCom.getFormattedTime(), "Network [RES] httpPostRequest", address, data);
                     if (!data.success && (!data.status || data.status != "success")) {
                         var param = {
                             code: K.Error.SuccessFalseError,
@@ -312,6 +314,7 @@ cc.Class({
     },
 
     httpGetRequest: function (address, data, callback, error, timeout) {
+        console.log(ServerCom.getFormattedTime(), "Network [REQ] httpGetRequest", address, data);
         var inst = this;
         var xhr = new XMLHttpRequest();
         xhr.timeout = 5000;
@@ -339,6 +342,7 @@ cc.Class({
                 var response = xhr.responseText;
                 if (callback !== null && callback !== undefined) {
                     var data = JSON.parse(response);
+                    console.log(ServerCom.getFormattedTime(), "Network [RES] httpGetRequest", address, data);
                     if (!data.success && (!data.status || data.status != "success")) {
                         var param = {
                             code: K.Error.SuccessFalseError,
@@ -629,196 +633,6 @@ cc.Class({
         if (!ServerCom.preLogin.active) {
             // this.loading.active = true;
         }
-        // ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-        // this.isLoading = true;
-        // this.cconnectCB = cb;
-
-        // console.log(ServerCom.socketConnected);
-        // console.log(this.cconnectCB);
-
-        // var root = window;
-        // // var socketIO = io("https://pokertournamenttwo.pokermoogley.com", {
-        // // var socketIO = io("https://hellotournament.pokermoogley.com:4001", {
-        // var socketIO = new window.SocketService();
-        // socketIO.io(host, {
-        //     reconnection: false,
-        //     pingTimeout: 5000, 
-        //     pingInterval: 1000,
-        //     auth: {
-        //         access_token: channelid + ":channelId:" + accesstoken,
-        //     }
-        // });
-        // root.socketIO = socketIO;
-        // //
-        // socketIO.socket.on("connect", (arg) => {
-        //     console.log("connect");
-        //     GameManager.isSocketIOConnected = true;
-        //     ServerCom.socketConnected = true;
-        //     clearTimeout(this.reconncetTimer);
-        //     GameManager.popUpManager.hideAllPopUps();
-        //     // this.loading.active = false;
-        //     // this.isLoading = false;
-
-        //     console.log(ServerCom.socketConnected);
-        //     console.log(this.cconnectCB);
-            
-        //     if (this.cconnectCB) {
-        //         if (this.socketReconnectedCount > 0) {
-        //             if (!cc.sys.isNative) {
-        //                 ServerCom.pomeloConnected = false;
-        //                 // pomelo.disconnect();
-        //                 this.scheduleOnce(function () {
-        //                     this.cconnectCB();
-        //                 }, 2);
-        //             }
-        //             else {
-        //                 ServerCom.reconnecting.active = false;
-        //                 this.preLogin.active = true;
-        //                 ServerCom.loading.active = false;
-        //                 GameManager.isConnected = false;
-        //                 this.scheduleOnce(function () {
-        //                     LoginScreen.clientInit(true);
-        //                 }, 2);
-        //             }
-        //         }
-        //         else {
-        //             this.cconnectCB();
-        //         }
-        //     }
-        //     this.socketReconnectedCount = 0;
-        // });
-        // socketIO.socket.on("disconnect", (reason) => {
-        //     console.log("disconnect", reason);
-        //     GameManager.isSocketIOConnected = false;
-        //     ServerCom.socketConnected = false;
-        //     K.disconnectRequestedByPlayer = false;
-
-        //     if (GameManager.isConnected && this.socketReconnectedCount < this.reconnectMaxAttempts && !this.sessionExpired) {
-        //         this.socketReconnectedCount += 1;
-        //         ServerCom.reconnecting.active = true;
-        //         ServerCom.reconnecting.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-        //         this.reconncetTimer = setTimeout(function () {
-        //             console.log("socket retry: ", this.socketReconnectedCount);
-        //             socketIO.socket.disconnect();
-        //             socketIO.socket.connect();
-        //         }.bind(this), this.reconnectionDelay);
-        //     }
-        //     else {
-        //         ServerCom.reconnecting.active = false;
-        //         clearTimeout(this.reconncetTimer);
-        //         this.socketReconnectedCount = 0;
-        //         this.preLogin.active = false;
-        //         console.log("socket retry over");
-        //     }
-        // });
-        // socketIO.socket.on('connect_error', (error) => {
-        //     console.log("connect_error");
-        //     console.log(JSON.stringify(error));
-        //     GameManager.isSocketIOConnected = false;
-        //     ServerCom.socketConnected = false;
-            
-        //     if (error.message == "jwt expired" || error.message == "Invalid Session") {
-
-        //         this.sessionExpired = true;
-        //         GameManager.popUpManager.hideAllPopUps();
-        //         var param = {
-        //             code: K.Error.SessionError,
-        //             response: "Session error, please reload the game."
-        //         };
-        //         GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
-        //     }
-        //     else {
-        //         if (LoginHandler.isLoading) {
-        //             GameManager.popUpManager.hide(PopUpType.NotificationPopup, function () {});
-
-        //             // if (!!GameScreen && GameScreen.tabRetrying) {
-        //             //     return;
-        //             // }
-
-        //             // console.error("GAME CONNECTED EXCEPTION WHILE LOADING", K.disconnectRequestedByPlayer);
-        //             if (K.disconnectRequestedByPlayer) {
-        //                 K.disconnectRequestedByPlayer = false;
-        //             } else {
-
-        //                 GameManager.popUpManager.show(PopUpType.NotificationPopup, "Please check your\n Internet Connection.", function () {});
-        //                 LoginHandler.isLoading = false;
-        //             }
-        //             // console.error("DISCONNECTION RESOLVED AND BOOL IS IS_LOADING", K.disconnectRequestedByPlayer);
-        //         }
-        //         ServerCom.loading.active = false;
-        //         // console.log(GameManager.isConnected)
-        //         if (GameManager.isConnected && !GameManager.isSocketIOConnected && this.socketReconnectedCount >= this.reconnectMaxAttempts) {
-        //             ServerCom.reconnecting.active = false;
-        //             // console.log("uno 1")
-        //             GameManager.isConnected = false;
-        //             var param = {
-        //                 code: K.Error.ConnectionError,
-        //                 response: "Connection error",
-        //             };
-        //             GameManager.popUpManager.hideAllPopUps();
-        //             // if (!!GameScreen && GameScreen.tabRetrying) {
-        //             //     return;
-        //             // }
-        //             // console.error("GAME CONNECTED EXCEPTION", K.disconnectRequestedByPlayer);
-        //             if (K.disconnectRequestedByPlayer) {
-        //                 K.disconnectRequestedByPlayer = false;
-        //             } else {
-        //                 if ((ScreenManager.currentScreen === K.ScreenEnum.LoginScreen || ScreenManager.currentScreen === K.ScreenEnum.SignupScreen)) {} else {
-        //                     GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
-        //                 }
-        //             }
-        //             // console.error("DISCONNECTION RESOLVED AND BOOL IS IS_CONNECTED", K.disconnectRequestedByPlayer);
-        //         }
-        //         else {
-        //             if (GameManager.isConnected && this.socketReconnectedCount < this.reconnectMaxAttempts && !this.sessionExpired) {
-        //                 this.socketReconnectedCount += 1;
-        //                 ServerCom.reconnecting.active = true;
-        //                 ServerCom.reconnecting.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-        //                 this.reconncetTimer = setTimeout(function () {
-        //                     console.log("socket retry: ", this.socketReconnectedCount);
-        //                     socketIO.socket.disconnect();
-        //                     socketIO.socket.connect();
-        //                 }.bind(this), this.reconnectionDelay);
-        //             }
-        //             else {
-        //                 ServerCom.reconnecting.active = false;
-        //                 clearTimeout(this.reconncetTimer);
-        //                 this.socketReconnectedCount = 0;
-        //                 this.preLogin.active = false;
-        //                 console.log("socket retry over");
-        //             }
-        //         }
-        //         if (!GameManager.isConnected && !LoginHandler.isLoading && K.disconnectRequestedByPlayer) {
-        //             K.disconnectRequestedByPlayer = false;
-        //             // console.error("DISCONNECTION RESOLVED AND BOOL IS IS_LOADING", K.disconnectRequestedByPlayer);
-        //         }
-        //     }    
-        // });
-        // socketIO.onAny((event, ...args) => {
-        //     // if (event != "Tournament:Refresh") {
-        //     console.log("%c[socketIO/onAny] %s\n%o", 'color: Tomato;', event, args);
-        //     // }
-
-        //     if (event == "commonEventResponse" && args[0].eventOrigin) {
-        //         // if (args[0].eventOrigin == K.PomeloAPI.gateLogin) {
-        //         //     console.log("K.PomeloAPI.gateLogin");
-                    
-        //         //     cc.systemEvent.emit(K.PomeloAPI.gateLogin, args[0].data);
-        //         // }
-        //         cc.systemEvent.emit(args[0].eventOrigin, args[0].data);
-        //     }
-        //     else {
-        //         if (args[0].channelId) {
-        //             cc.systemEvent.emit(args[0].eventName, args[0].data);
-        //         }
-        //         else if (args[0].data && args[0].data.channelId) {
-        //             cc.systemEvent.emit(args[0].route, args[0].data);
-        //         }
-        //         else if (args[0].data && !args[0].data.eventName && event.indexOf('Tournament') != -1) {
-        //             cc.systemEvent.emit(args[0].eventName, args[0].data);
-        //         }
-        //     }
-        // });
     },
 
     clearConnectCB() {
@@ -858,8 +672,9 @@ cc.Class({
         }
         root.socketIO = socketIO;
         //
+        console.log(ServerCom.getFormattedTime(), "Network [connect] Socket", host);
         socketIO.socket.on("connect", (arg) => {
-            console.log("connect");
+            console.log(ServerCom.getFormattedTime(), "Network [connected] Socket", host);
             GameManager.isSocketIOConnected = true;
             ServerCom.socketConnected = true;
             clearTimeout(this.reconncetTimer);
@@ -913,7 +728,6 @@ cc.Class({
             }
         });
         socketIO.socket.on('connect_error', (error) => {
-            console.log("ios connect_error1");
             console.log("Connect error:", error);
             console.log(JSON.stringify(error));
             console.log(JSON.stringify(error,null));
@@ -933,7 +747,6 @@ cc.Class({
             cc.sys.localStorage.setItem("auto_login_username", null);
             
             if (error.message == "jwt expired" || error.message == "Invalid Session") {
-                console.log("ios connect_error2");
                 // this.sessionExpired = true;
                 // GameManager.popUpManager.hideAllPopUps();
                 // var param = {
@@ -943,9 +756,7 @@ cc.Class({
                 // GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
             }
             else {
-                console.log("ios connect_error3");
                 if (LoginHandler.isLoading) {
-                    console.log("ios connect_error4");
                     GameManager.popUpManager.hide(PopUpType.NotificationPopup, function () {});
 
                     // if (!!GameScreen && GameScreen.tabRetrying) {
@@ -962,12 +773,10 @@ cc.Class({
                     }
                     // console.error("DISCONNECTION RESOLVED AND BOOL IS IS_LOADING", K.disconnectRequestedByPlayer);
                 }
-                console.log("ios connect_error5");
                 console.log(this.socketReconnectedCount, this.reconnectMaxAttempts);
                 ServerCom.loading.active = false;
                 // console.log(GameManager.isConnected)
                 if (GameManager.isConnected && !GameManager.isSocketIOConnected && this.socketReconnectedCount >= this.reconnectMaxAttempts) {
-                    console.log("ios connect_error6");
                     ServerCom.reconnecting.active = false;
                     // console.log("uno 1")
                     GameManager.isConnected = false;
@@ -981,24 +790,19 @@ cc.Class({
                     // }
                     // console.error("GAME CONNECTED EXCEPTION", K.disconnectRequestedByPlayer);
                     if (K.disconnectRequestedByPlayer) {
-                        console.log("ios connect_error7");
                         ServerCom.launch.active = false;
                         K.disconnectRequestedByPlayer = false;
                     } else {
-                        console.log("ios connect_error8");
                         ServerCom.launch.active = false;
                         if ((ScreenManager.currentScreen === K.ScreenEnum.LoginScreen || ScreenManager.currentScreen === K.ScreenEnum.SignupScreen)) {
-                            console.log("ios connect_error9");
 
                         } else {
-                            console.log("ios connect_error10");
                             GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
                         }
                     }
                     // console.error("DISCONNECTION RESOLVED AND BOOL IS IS_CONNECTED", K.disconnectRequestedByPlayer);
                 }
                 else {
-                    console.log("ios connect_error11");
                     console.log(this.socketReconnectedCount, this.reconnectMaxAttempts);
                     console.log("GameManager.isConnected", GameManager.isConnected);
                     console.log("this.sessionExpired", this.sessionExpired);
@@ -1006,16 +810,13 @@ cc.Class({
                         this.socketReconnectedCount += 1;
                         ServerCom.reconnecting.active = true;
                         ServerCom.reconnecting.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-                        console.log("ios connect_error12");
                         this.reconncetTimer = setTimeout(function () {
-                            console.log("ios connect_error13");
                             console.log("socket retry: ", this.socketReconnectedCount);
                             socketIO.socket.disconnect();
                             socketIO.socket.connect();
                         }.bind(this), this.reconnectionDelay);
                     }
                     else {
-                        console.log("ios connect_error14");
                         ServerCom.reconnecting.active = false;
                         clearTimeout(this.reconncetTimer);
                         this.socketReconnectedCount = 0;
@@ -1032,14 +833,10 @@ cc.Class({
                         // }
                         // console.error("GAME CONNECTED EXCEPTION", K.disconnectRequestedByPlayer);
                         if (K.disconnectRequestedByPlayer) {
-                            console.log("ios connect_error15");
                             K.disconnectRequestedByPlayer = false;
                         } else {
-                            console.log("ios connect_error16");
                             if ((ScreenManager.currentScreen === K.ScreenEnum.LoginScreen || ScreenManager.currentScreen === K.ScreenEnum.SignupScreen)) {
-                                console.log("ios connect_error17");
                             } else {
-                                console.log("ios connect_error18");
                                 GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
                             }
                         }
@@ -1053,13 +850,18 @@ cc.Class({
         });
         socketIO.onAny((event, ...args) => {
             // if (event != "Tournament:Refresh") {
-            console.log("%c[socketIO/onAny] %s\n%o", 'color: Tomato;', event, args);
+            // console.log("%c[socketIO/onAny] %s\n%o", 'color: Tomato;', event, args);
             // }
 
             if (event == "commonEventResponse" && args[0].eventOrigin) {
                 cc.systemEvent.emit(args[0].eventOrigin, args[0].data);
+
+                console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", args[0].eventOrigin, args[0].data);
             }
             else {
+
+                console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", event, args);
+
                 if (args[0].channelId) {
                     // console.log("!!!!!!!!", args, args[0].channelId);
                     // 668bf41ed55da2200ae8c90e
@@ -1068,7 +870,14 @@ cc.Class({
                         console.log("!!!!!!!! filter");
                     }
                     else {
-                        cc.systemEvent.emit(args[0].eventName, args[0].data);
+                        if (!args[0].eventName) {
+                            if (args[0].route && args[0].route == "playerCoins") {
+                                cc.systemEvent.emit(args[0].route, args[0].data);
+                            }
+                        }
+                        else {
+                            cc.systemEvent.emit(args[0].eventName, args[0].data);
+                        }
                     }
                 }
                 else if (args[0].data && args[0].data.channelId) {
@@ -1094,7 +903,6 @@ cc.Class({
 
     socketIORequest: function(address, data, callback, error, timeout, showLoading = true, showError = true, showLabel = "", callback2) {
         var inst = this;
-        console.log("socketIORequest1");
         if (typeof data != 'object') {
             let dat = {};
             dat.data = data;
@@ -1109,7 +917,6 @@ cc.Class({
             if (data.isLoggedIn == null || data.isLoggedIn == undefined)
                 data.isLoggedIn = true;
             if (data.isLoggedIn) {
-                console.log("socketIORequest2");
                 if (!GameManager.isConnected) {
                     inst.emit('error', {
                         code: K.Error.ConnectionError,
@@ -1120,7 +927,6 @@ cc.Class({
             }
         } else {
             if (!GameManager.isConnected) {
-                console.log("socketIORequest3");
                 inst.emit('error', {
                     code: K.Error.ConnectionError,
                     response: "You are not logged in !!",
@@ -1135,7 +941,6 @@ cc.Class({
                 code: K.Error.ConnectionError,
                 response: "socket.io connection error",
             });
-            console.log("socketIORequest4");
             
             ServerCom.loading.active = false;
             ServerCom.preLogin.active = false;
@@ -1154,7 +959,7 @@ cc.Class({
             key = data.tableId || "";
         }
         key = key + address;
-        console.log("%c[R]Request Key: %s", 'color: Purple;', key);
+        // console.log("%c[R]Request Key: %s", 'color: Purple;', key);
         if (this.tracker[key] !== undefined) {
             if (this.tracker[key]) {
                 console.log("false " + key);
@@ -1193,10 +998,10 @@ cc.Class({
 
         delete data.isLoggedIn;
 
-        console.log("%c[REQ] %s\n%o", 'color: Purple;', address, data);
+        console.log(ServerCom.getFormattedTime(), "Network [REQ] Socket", address, data);
         socketIO.emit(address.split("|")[0], { eventName: address.split("|")[1], data: data},
             function(response) {
-                console.log("%c[RES] %s\n%o", 'color: Purple;', address, response);
+                console.log(ServerCom.getFormattedTime(), "Network [RES] Socket", address, response);
                 // console.log(JSON.stringify(response));
                 // 
                 // clearTimeout(timer);
@@ -1206,7 +1011,7 @@ cc.Class({
                     respKey = response.tableId || "";
                 }
                 respKey = respKey + address;
-                console.log("%c[R/CB] Key: %s", 'color: Purple;', respKey);
+                // console.log("Network  %c[R/CB] Key: %s", 'color: Purple;', respKey);
                 inst.updateTracker(false, respKey, showLoading, showLabel);
                 var isDisplay = (response.isDisplay !== undefined && response.isDisplay !== null) ? response.isDisplay : !response.success;
                 var param = {
@@ -1254,16 +1059,26 @@ cc.Class({
     },
 
     socketIOBroadcast: function(address, callback) {
-        console.log("%c[B/ON] %s", 'color: green;', address);
+        // console.log("Network [B/ON] Socket", address);
         socketIO.socket.on(address, function(data) {
             if (address != "Tournament:Refresh") {
-                console.log("%c[B/REV] %s\n%o", 'color: blue;', address, data);
+                console.log(ServerCom.getFormattedTime(), "Network [B/REV] Socket", address, data);
             }
             if (callback !== null && callback !== undefined) {
                 callback(data);
             }
         });
     },
+
+    getFormattedTime: function() {
+        const now = new Date();
+        const now2 = Date.now();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+        return `[${hours}:${minutes}:${seconds}.${milliseconds}/${now2}]`;
+    }
 
 });
 
