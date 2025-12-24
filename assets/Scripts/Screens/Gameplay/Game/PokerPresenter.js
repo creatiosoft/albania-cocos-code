@@ -38,14 +38,6 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
-        tourStartNode: {
-            default: null,
-            type: cc.Node,
-        },
-        tourStartLabel: {
-            default: null,
-            type: cc.Label,
-        },
         realBetBtn: {
             default: null,
             type: cc.Node,
@@ -623,11 +615,11 @@ cc.Class({
             this.straddleCheckBox.node.parent.active = false;
             this.addChipsButton.active = false;
         }
-        this.unTiledView.getChildByName('ReplayButton').active = val;
-        if (!GameScreen.isMobile)
-            this.tiledView.getChildByName('ReplayButton').active = val;
-        else
-            this.unTiledView.getChildByName('ReplayButton').active = false;
+        // this.unTiledView.getChildByName('ReplayButton').active = val;
+        // if (!GameScreen.isMobile)
+        //     this.tiledView.getChildByName('ReplayButton').active = val;
+        // else
+        //     this.unTiledView.getChildByName('ReplayButton').active = false;
 
         this.isStraddleAllowed();
         this.checkInBetweenBlinds();
@@ -641,12 +633,12 @@ cc.Class({
             this.addChipsButton.active = false;
         }
 
-        if (!GameManager.isMobile && !GameManager.isWindows) {
-            if (this.tiledView.getChildByName('TopLeft'))
-                if (!this.model.roomConfig.isAllInAndFold) {
-                    this.addChipsButton.active = val;
-                }
-        }
+        // if (!GameManager.isMobile && !GameManager.isWindows) {
+        //     if (this.tiledView.getChildByName('TopLeft'))
+        //         if (!this.model.roomConfig.isAllInAndFold) {
+        //             this.addChipsButton.active = val;
+        //         }
+        // }
         // this.tiledView.getChildByName('TopLeft').getChildByName('AddChipsButton').active = val;
 
         // this.muckHandCheckbox.node.parent.active = val;
@@ -1306,65 +1298,11 @@ cc.Class({
         }
     },
 
-    updateTourStartTimer:function() {
-        console.log("tourStartTimer");
-        this.unschedule(this.tourStartTimer);
-        this.tourStartTimer();
-        this.schedule(this.tourStartTimer, 1);
-    },
-
-    tourStartTimer() {
-        console.log("tourStartTimer");
-        var now = new Date().getTime();
-        console.log("tourStartTimer", GameManager.tableStartTime, now, GameManager.tableStartTime - now);
-        if (GameManager.tableStartTime - now < 0) {
-            console.log("tourStartTimer2");
-            this.unschedule(this.tourStartTimer);
-            this.tourStartLabel.node.parent.parent.active = false;
-            return;
-        }
-        console.log("tourStartTimer3");
-        let timeRemaining = GameManager.getMTimeDurationEx(GameManager.tableStartTime);
-        this.tourStartLabel.string = timeRemaining;
-    },
-
-    updateBlindTimer:function() {
-        // this.unschedule(this.blindTimer);
-        // this.blindTimer();
-        // this.schedule(this.blindTimer, 1);
-    },
-
-    blindTimer() {
-        // let timeRemaining = GameManager.getMTimeDuration(Number(this.model.gameData.raw.tourData.raw.currentBlindLevel.nextBlindLevelTime) * 1000);
-        // this.blindLabel2.string = "Next Blind:" + timeRemaining;
-    },
 
     imageLoaded: function (user) {
         if (this.model.gameData.playerId == user.playerId) {
             // this.image.spriteFrame = user.urlImg;
         }
-    },
-
-    updateBlind: function() {
-        // this.blindLabel.string = "";
-        // this.blindLabel2.string = "";
-
-        // this.blindLabel.string  = "Current Blind:" + this.model.gameData.raw.tourData.raw.currentBlindLevel.smallBlind + "/" + this.model.gameData.raw.tourData.raw.currentBlindLevel.bigBlind;
-
-        // let nextBlindLevel = null;
-        // for(let i = 0; i < this.model.gameData.raw.tourData.raw.blindRule.blindRuleArr.length; i ++) {
-        //     let blindRule = this.model.gameData.raw.tourData.raw.blindRule.blindRuleArr[i];
-        //     if (blindRule.level == this.model.gameData.raw.tourData.raw.currentBlindLevel.level) {
-        //         if (i == this.model.gameData.raw.tourData.raw.blindRule.blindRuleArr.length - 1) {
-        //             nextBlindLevel = this.model.gameData.raw.tourData.raw.blindRule.blindRuleArr[i];
-        //         }
-        //         else {
-        //             nextBlindLevel = this.model.gameData.raw.tourData.raw.blindRule.blindRuleArr[i + 1];
-        //         }
-        //         break;
-        //     }
-        // }
-        // this.blindLabel2.string = "Next Blind:" + nextBlindLevel.smallBlind + "/" + nextBlindLevel.bigBlind;
     },
 
     getWorldPos: function(node) {
@@ -2910,7 +2848,6 @@ cc.Class({
     clearTable: function () {
         this.node.stopAllActions();
         this.unscheduleAllCallbacks();
-        this.tourStartLabel.node.parent.parent.active = false;
         this.clearHoleCards();
         this.clearPots();
         this.killTimers();
