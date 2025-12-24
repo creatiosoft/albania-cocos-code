@@ -1245,10 +1245,10 @@ cc.Class({
             this.setActiveButton(this.tabButtons2[0], this.tabButtons2[0]);
             this.setInActiveButton(this.tabButtons2[1], this.tabButtons2[1]);
             this.setInActiveButton(this.tabButtons2[2], this.tabButtons2[2]);
-            this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
-            this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
-            this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
-            this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
+            // this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
+            // this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
+            // this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
+            // this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
             // this.roomTable.getComponent('CashRoom').onEnable();
 
             // this.onGetTableData((data) => {
@@ -1304,10 +1304,10 @@ cc.Class({
             this.setInActiveButton(this.tabButtons2[0], this.tabButtons2[0]);
             this.setInActiveButton(this.tabButtons2[1], this.tabButtons2[1]);
             this.setInActiveButton(this.tabButtons2[2], this.tabButtons2[2]);
-            this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
-            this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
-            this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
-            this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
+            // this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
+            // this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
+            // this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
+            // this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
             // if (CashRoom.isShowHoldem) {
             //     CashRoom.isShowHoldem = false;
             //     this.setInActiveButton(this.tabButtons2[1], this.tabButtons2[1]);
@@ -1411,10 +1411,10 @@ cc.Class({
             this.setInActiveButton(this.tabButtons2[0], this.tabButtons2[0]);
             this.setInActiveButton(this.tabButtons2[1], this.tabButtons2[1]);
             this.setInActiveButton(this.tabButtons2[2], this.tabButtons2[2]);
-            this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
-            this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
-            this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
-            this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
+            // this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
+            // this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
+            // this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
+            // this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
             // if (CashRoom.isShowPLO) {
             //     CashRoom.isShowPLO = false;
             //     this.setInActiveButton(this.tabButtons2[2], this.tabButtons2[2]);
@@ -1478,13 +1478,13 @@ cc.Class({
             this.setInActiveButton(this.tabButtons2[0], this.tabButtons2[0]);
             this.setInActiveButton(this.tabButtons2[1], this.tabButtons2[1]);
             this.setInActiveButton(this.tabButtons2[2], this.tabButtons2[2]);
-            this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
-            this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
-            this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
-            this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
+            // this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
+            // this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
+            // this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
+            // this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
             if (this.roomTable.getComponent('CashRoom').isShowMega) {
                 this.roomTable.getComponent('CashRoom').isShowMega = false;
-                this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
+                // this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
 
                 if (!this.roomTable.getComponent('CashRoom').isShowHoldem &&
                     !this.roomTable.getComponent('CashRoom').isShowPLO &&
@@ -1537,9 +1537,9 @@ cc.Class({
             this.setInActiveButton(this.tabButtons2[1], this.tabButtons2[1]);
             this.setInActiveButton(this.tabButtons2[2], this.tabButtons2[2]);
             this.setInActiveButton(this.tabButtons2[3], this.tabButtons2[3]);
-            this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
-            this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
-            this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
+            // this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);
+            // this.setInActiveButton(this.tabButtons2[5], this.tabButtons2[5]);
+            // this.setInActiveButton(this.tabButtons2[6], this.tabButtons2[6]);
             if (this.roomTable.getComponent('CashRoom').isShowFast) {
                 this.roomTable.getComponent('CashRoom').isShowFast = false;
                 this.setInActiveButton(this.tabButtons2[4], this.tabButtons2[4]);

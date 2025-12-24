@@ -1,0 +1,47 @@
+{
+  "ver": "2.3.7",
+  "uuid": "3e34d2db-cdfc-4d3f-ad8a-a4c6d8273fee",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 117,
+  "height": 125,
+  "platformSettings": {
+    "android": {
+      "formats": [
+        {
+          "name": "etc2",
+          "quality": "fast"
+        }
+      ]
+    }
+  },
+  "subMetas": {
+    "Vector24": {
+      "ver": "1.0.6",
+      "uuid": "2147dfc4-f787-42e0-85b8-343c84257480",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "3e34d2db-cdfc-4d3f-ad8a-a4c6d8273fee",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 1,
+      "offsetY": -1,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 115,
+      "height": 123,
+      "rawWidth": 117,
+      "rawHeight": 125,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
