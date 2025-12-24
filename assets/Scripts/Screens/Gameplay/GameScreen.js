@@ -121,6 +121,7 @@ cc.Class({
      * @memberof Screens.Gameplay.GameScreen#
      */
     onLoad: function () {
+        ServerCom.inGame = true;
         this.checkForWindowScene = false;
         if (cc.sys.os === cc.sys.OS_WINDOWS && !cc.sys.isBrowser) {
             this.checkForWindowScene = true;

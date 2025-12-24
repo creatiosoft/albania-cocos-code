@@ -9,7 +9,8 @@ SocketService.prototype.io = function(host, options) {
     this.socket = io(host, options);
     var self = this;
     this.socket.onAny((event, data) => {
-        console.log(event, data. eventOrigin, data);
+        // console.log(event, data. eventOrigin, data);
+        console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", event, data);
         if (event === 'commonEventResponse' && data.eventOrigin == "room.channelHandler.joinChannel") {
             if (self.promiseData[data.eventOrigin + '|' + data.data.channelId].resolve) {
                 self.promiseData[data.eventOrigin + '|' + data.data.channelId].resolve(data);

@@ -251,8 +251,8 @@ var CashTablePresenter = cc.Class({
             // else
             var content = [
                 data.channelName, 
-                "" + GameManager.convertChips(data.smallBlind) + "/" + "" + GameManager.convertChips(data.bigBlind), 
-                "" + GameManager.convertChips(data.minBuyIn), 
+                "" + (data.smallBlind) + "/" + "" + (data.bigBlind), 
+                "" + (data.minBuyIn), 
                 "",
                 "",
                 data.playingPlayers + "/" + data.maxPlayers

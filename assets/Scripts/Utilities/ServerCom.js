@@ -698,7 +698,7 @@ cc.Class({
             // }); 
         });
         socketIO.socket.on("disconnect", (reason) => {
-            console.log("disconnect", reason);
+            console.log(ServerCom.getFormattedTime(), "Network [disconnected] Socket", reason);
             GameManager.isSocketIOConnected = false;
             ServerCom.socketConnected = false;
             ServerCom.socketReconnected = false;
@@ -728,7 +728,7 @@ cc.Class({
             }
         });
         socketIO.socket.on('connect_error', (error) => {
-            console.log("Connect error:", error);
+            console.log(ServerCom.getFormattedTime(), "Network [Error] Socket", error);
             console.log(JSON.stringify(error));
             console.log(JSON.stringify(error,null));
             GameManager.isSocketIOConnected = false;
@@ -856,11 +856,11 @@ cc.Class({
             if (event == "commonEventResponse" && args[0].eventOrigin) {
                 cc.systemEvent.emit(args[0].eventOrigin, args[0].data);
 
-                console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", args[0].eventOrigin, args[0].data);
+                // console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", args[0].eventOrigin, args[0].data);
             }
             else {
 
-                console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", event, args);
+                // console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", event, args);
 
                 if (args[0].channelId) {
                     // console.log("!!!!!!!!", args, args[0].channelId);

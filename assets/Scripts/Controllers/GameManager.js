@@ -716,7 +716,9 @@ cc.Class({
                         isLoggedIn: false
                     });
 
+                    console.log(ServerCom.getFormattedTime(), "Network [disconnect] Socket");
                     socketIO.socket.disconnect();
+                    console.log(ServerCom.getFormattedTime(), "Network [connect] Socket");
                     socketIO.socket.connect();
                     LoginScreen.preLogin.active = true;
                     if (ifSettingPopupOpening) {
