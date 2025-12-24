@@ -468,7 +468,6 @@ cc.Class({
         // cc.systemEvent.on(K.PomeloAPI.joinChannel, this.onJoinSuccess, this);
         // ServerCom.pomeloBroadcast('room.channelHandler.joinChannelByInvitecode', this.onJoinSuccess.bind(this));
 
-        GameManager.on("onDashboardAddCash", this.onDashboardAddCash.bind(this));
         GameManager.on("enablePageView", this.onEnablePageView.bind(this));
         GameManager.on("disablePageView", this.onDisablePageView.bind(this));
         cc.systemEvent.on("forcedisconnect", this.onForcedisconnect.bind(this));
@@ -476,14 +475,9 @@ cc.Class({
         ServerCom.pomeloBroadcast("updatePlayerCategory", this.onUpdatePlayerCategory.bind(this));
         ServerCom.pomeloBroadcast(K.PlayerBroadcastRoute.playerInfo, this.onPlayerInfo.bind(this));
         ServerCom.pomeloBroadcast(K.BroadcastRoute.onOnlinePlayers, this.saveOnlinePlayers.bind(this));
-        ServerCom.pomeloBroadcast("connector.entryHandler.sendBuddyRequest:receive", this.sendBuddyRequestReceive.bind(this));
-        ServerCom.pomeloBroadcast("connector.entryHandler.handleBuddyRequest:receive", this.handleBuddyRequestReceive.bind(this));
-        ServerCom.pomeloBroadcast("connector.entryHandler.removeBuddy:receive", this.removeBuddyReceive.bind(this));
-        ServerCom.pomeloBroadcast("connector.entryHandler.inviteBuddy:receive", this.inviteBuddyReceive.bind(this));
         ServerCom.pomeloBroadcast("updatePlayerImageInTable", this.updatePlayerImageInTable.bind(this));
         ServerCom.pomeloBroadcast("notice", this.onAdminNotice.bind(this));
         ServerCom.pomeloBroadcast("adminBroadcast", this.onAdminNotice.bind(this));
-        cc.systemEvent.on("buddyResponseEvent", this.buddyResponseEvent.bind(this));
         ServerCom.pomeloBroadcast(K.PlayerBroadcastRoute.connectionAck2, function (response) {
 
             // console.log("ISCONNECTED ACK DATA ", response);
@@ -753,34 +747,7 @@ cc.Class({
                             //     return;
                             // }
 
-                            if (lobbyPresenter.webViewContainer.x != -10000) {
-                                lobbyPresenter.onClose();
-                            }
-                            else if (lobbyPresenter.lbNode.active) {
-                                lobbyPresenter.hideLB();
-                            }
-                            // else if (lobbyPresenter.privateNode.active) {
-                            //     lobbyPresenter.onHidePrivate();
-                            //     lobbyPresenter.onHome();
-                            // }
-                            else if (!lobbyPresenter.scrollViewNode.active && lobbyPresenter.roomTable.scale != 0) {
-                                lobbyPresenter.onBackLobby();
-                            }
-                            else if (lobbyPresenter.cashierTable.active) {
-                                lobbyPresenter.onBackLobby2();
-                            }
-                            else if (lobbyPresenter.tournamentLobbyDetail.active) {
-                                // lobbyPresenter.node.parent.getChildByName('Tournament').getChildByName('TournamentBuyin').active = false;
-                                lobbyPresenter.tournamentLobbyDetail.active = false;
-                            }
-                            // else if (lobbyPresenter.tournamentTable.active) {
-                            //     // lobbyPresenter.node.parent.getChildByName('Tournament').getChildByName('TournamentBuyin').active = false;
-                            //     lobbyPresenter.onBackLobby();
-                            // }
-                            else {
-                                console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!! BackPressed33", param);
-                                GameManager.popUpManager.show(PopUpType.OnLogOutPopup, false, function () { });
-                            }
+                            GameManager.popUpManager.show(PopUpType.OnLogOutPopup, false, function () { });
                         } 
                         else if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen) {
                             GameManager.popUpManager.show(PopUpType.OnLogOutPopup, true, function () { });
@@ -811,37 +778,7 @@ cc.Class({
                                 let lobbyPresenter = ScreenManager.screens[ScreenManager.currentScreen];
                                 console.log(lobbyPresenter);
 
-                                // if (lobbyPresenter.loadingDash.active) {
-                                //     return;
-                                // }
-
-                                if (lobbyPresenter.webViewContainer.x != -10000) {
-                                    lobbyPresenter.onClose();
-                                }
-                                else if (lobbyPresenter.lbNode.active) {
-                                    lobbyPresenter.hideLB();
-                                }
-                                // else if (lobbyPresenter.privateNode.active) {
-                                //     lobbyPresenter.onHidePrivate();
-                                //     lobbyPresenter.onHome();
-                                // }
-                                // else if (!lobbyPresenter.scrollViewNode.active && lobbyPresenter.roomTable.scale != 0) {
-                                //     lobbyPresenter.onBackLobby();
-                                // }
-                                else if (lobbyPresenter.cashierTable.active) {
-                                    lobbyPresenter.onBackLobby2();
-                                }
-                                else if (lobbyPresenter.tournamentLobbyDetail.active) {
-                                    // lobbyPresenter.node.parent.getChildByName('Tournament').getChildByName('TournamentBuyin').active = false;
-                                    lobbyPresenter.tournamentLobbyDetail.active = false;
-                                }
-                                // else if (lobbyPresenter.tournamentTable.active) {
-                                //     // lobbyPresenter.node.parent.getChildByName('Tournament').getChildByName('TournamentBuyin').active = false;
-                                //     lobbyPresenter.onBackLobby();
-                                // }
-                                else {
-                                    GameManager.popUpManager.show(PopUpType.OnLogOutPopup, false, function () { });
-                                }
+                                GameManager.popUpManager.show(PopUpType.OnLogOutPopup, false, function () { });
                             } 
                             else if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen) {
                                 GameManager.popUpManager.show(PopUpType.OnLogOutPopup, true, function () { });
@@ -2239,15 +2176,6 @@ cc.Class({
                     socketIO.socket.disconnect();
                 }
 
-                let lobbyPresenter = ScreenManager.screens[K.ScreenEnum.LobbyScreen];
-                if (lobbyPresenter) {
-                    lobbyPresenter.resetPrivateTable();
-                    lobbyPresenter.onHidePrivate();
-                    lobbyPresenter.friendsNode.active = false;
-                    lobbyPresenter.onHome();
-                    lobbyPresenter.onCashierGame2();
-                }
-                
                 ScreenManager.showScreen(K.ScreenEnum.LoginScreen, false, function () {
                     if (((!(cc.sys.os === cc.sys.OS_WINDOWS)) || cc.sys.isBrowser) && !!self) {
                         // ServerCom.inGame = false;
@@ -2300,15 +2228,6 @@ cc.Class({
         cc.sys.localStorage.setItem("auto_login_access_token_expire_at", null);
         cc.sys.localStorage.setItem("auto_login_refresh_token_expire_at", null);
         cc.sys.localStorage.setItem("auto_login_username", null);
-
-        let lobbyPresenter = ScreenManager.screens[K.ScreenEnum.LobbyScreen];
-        if (lobbyPresenter) {
-            lobbyPresenter.resetPrivateTable();
-            lobbyPresenter.onHidePrivate();
-            lobbyPresenter.friendsNode.active = false;
-            lobbyPresenter.onHome();
-            lobbyPresenter.onCashierGame2();
-        }
 
         GameManager.needResetUser = true;
 
@@ -2534,51 +2453,6 @@ cc.Class({
         //     //     "url": K.ServerAddress.dashboard_server + 'profile?accessToken=' + K.Token.access_token + '&playerId=' + GameManager.user.playerId,
         //     //     "dashboard": true
         //     // })
-        // }
-    },
-
-    onDashboardAddCash: function() {
-        let lobbyPresenter = ScreenManager.screens[K.ScreenEnum.LobbyScreen];
-        if (lobbyPresenter) {
-            lobbyPresenter.onDashboardAddCash();
-        }
-        // this.loadingDash.active = true;
-        // this.loadingDash.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-        // if (GameManager.isMobile) {
-        //     console.log("onDashboardAddCash1");
-        //     this.webViewContainer.active = true;
-        //     this.webViewContainer.x = -10000;
-        //     // this.webView.url = K.ServerAddress.dashboard_server + 'transactions/:deposit?accessToken=' + K.Token.access_token + '&playerId=' + GameManager.user.playerId;
-        //     // cc.sys.localStorage.setItem("last", this.webView.url);
-
-        //     this.webView.evaluateJS("window.setAccessToken(\"" + K.Token.access_token + "\");");
-        //     this.webView.evaluateJS("window.goToCash();");
-
-
-        //     this.webView.setJavascriptInterfaceScheme("mypoker");
-        //     this.webView.setOnJSCallback((target, url) => {
-        //         this.webViewContainer.x = -10000;
-        //         // this.webViewContainer.active = false;
-        //         // this.webView.url = "about:blank";
-        //     });
-
-        //     // this.scheduleOnce(() => {
-        //     //     this.loadingDash.active = false;
-        //     //     this.webViewContainer.x = 0;
-        //     // }, 1);
-
-        //     this.scheduleOnce(() => {
-        //         console.log("onDashboardAddCash2");
-        //         this.loadingDash.active = false;
-        //         this.webViewContainer.x = 0;
-        //     }, 0.5);
-        // }
-        // else {
-        //     window.versions.new({
-        //         "name": "dashboard",
-        //         "url": K.ServerAddress.dashboard_server + 'transactions/:deposit?accessToken=' + K.Token.access_token + '&playerId=' + GameManager.user.playerId,
-        //         "dashboard": true
-        //     })
         // }
     },
 
@@ -3030,29 +2904,6 @@ cc.Class({
     convertChips: function (num) {
         num = Number(num);
         return num.toFixed(2);
-        // if (num < 1000) {
-        //     let value = num;
-        //     return value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-        // }
-        // if (num < 1000000) {
-        //     if (num == 1000) {
-        //         return '1K';
-        //     }
-        //     let value = num / 1000;
-        //     let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-        //     return formatted + 'K';
-        // }
-        // if (num < 1000000000) {
-        //     if (num == 1000000) {
-        //         return '1M';
-        //     }
-        //     let value = num / 1000000;
-        //     let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-        //     return formatted + 'M';
-        // }
-        // let value = num / 1000000000;
-        // let formatted = value % 1 === 0 ? value.toString() : value.toFixed(2).replace(/\.?0+$/, '');
-        // return formatted + 'B';
     },
 });
 
