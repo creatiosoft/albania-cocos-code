@@ -1607,12 +1607,12 @@ cc.Class({
                 if (receiverId == senderId) {
                     receiverWPos = this.getWorldPos(receiver.stickerNodeSelf);
                     // senderWPos = this.getWorldPos(sender.stickerNodeSelf);
-                    this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, stickerId, senderWPos, receiverWPos, 0.15);
+                    // this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, stickerId, senderWPos, receiverWPos, 0.15);
                 }
                 else {
                     receiverWPos = this.getWorldPos(receiver.stickerNode);
                     // senderWPos = this.getWorldPos(sender.stickerNode);
-                    this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, stickerId, senderWPos, receiverWPos);
+                    // this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, stickerId, senderWPos, receiverWPos);
                 }
             }   
         }
@@ -1649,7 +1649,7 @@ cc.Class({
                     // senderWPos = this.getWorldPos(sender.stickerNodeSelf);
                 }
                 
-                this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, ccc, null, receiverWPos);
+                // this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, ccc, null, receiverWPos);
             }  
 
         } 
@@ -5928,4 +5928,6 @@ cc.Class({
         // }.bind(this), function (error) { });
     },
 });
+
+
 

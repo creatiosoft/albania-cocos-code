@@ -59,22 +59,6 @@ var PlayerPresenter = cc.Class({
             default: null,
             type: cc.Node,
         },
-        stickerNode: {
-            default: null,
-            type: cc.Node,
-        },
-        stickerNodeSelf: {
-            default: null,
-            type: cc.Node,
-        },
-        stickerNodeMy: {
-            default: null,
-            type: cc.Node,
-        },
-        stickerNodeMyOther: {
-            default: null,
-            type: cc.Node,
-        },
         seatIndex: {
             default: -1,
         },
@@ -168,14 +152,6 @@ var PlayerPresenter = cc.Class({
             type: cc.Node,
         },
         avatarBtn: {
-            default: null,
-            type: cc.Button,
-        },
-        addFriendBtn: {
-            default: null,
-            type: cc.Button,
-        },
-        emojiBtn: {
             default: null,
             type: cc.Button,
         },
@@ -493,7 +469,7 @@ var PlayerPresenter = cc.Class({
             }
             else {
                 this.image.spriteFrame = user.urlImg;
-                cc.find('PlayerImageMask/New Node/PlayerImage', this.inviteNode).getComponent(cc.Sprite).spriteFrame = user.urlImg;
+                // cc.find('PlayerImageMask/New Node/PlayerImage', this.inviteNode).getComponent(cc.Sprite).spriteFrame = user.urlImg;
             }
             // this.image.node.parent.parent.getChildByName("Profile_frame").getComponent(cc.Sprite).enabled = true;
             // if (this.image.node.parent.parent.getChildByName("Profile_frame_Glow")) {
@@ -660,15 +636,15 @@ var PlayerPresenter = cc.Class({
         var self = (selfPlayerId === this.playerData.playerId);
         if (self) {
             this.avatarBtn.interactable = false;
-            this.emojiBtn.node.active = true;
-            this.addFriendBtn.node.active = false;
+            // this.emojiBtn.node.active = true;
+            // this.addFriendBtn.node.active = false;
 
             this.updateTimeBank2(this.playerData.timeBankSec);
         } else {
-            this.avatarBtn.interactable = true;
-            this.emojiBtn.node.active = true && !this.reservedPanel.active;
+            // this.avatarBtn.interactable = true;
+            // this.emojiBtn.node.active = true && !this.reservedPanel.active;
             console.log('set EMOJIN ENABLE enablePlayerView')
-            this.addFriendBtn.node.active = false;            
+            // this.addFriendBtn.node.active = false;            
         }
         this.setSelfPlayerView(self, revealForSelfAtStartGame);
         this.resetLblColor();
@@ -1053,7 +1029,7 @@ var PlayerPresenter = cc.Class({
         this.noteColorBase.active = false;
         this.noteButton.active = false;
         this.noteButton.children[0].active = false;
-        this.emojiBtn.node.active = false;
+        // this.emojiBtn.node.active = false;
         this.avatarBtn.node.active = false;
         console.log('RESEETTTT WWHEN LEAVEEEEEE disablePlayerView');
         this.playerData = null;
@@ -1084,7 +1060,7 @@ var PlayerPresenter = cc.Class({
         this.noteColorBase.active = false;
         this.noteButton.active = false;
         this.noteButton.children[0].active = false;
-        this.emojiBtn.node.active = false;
+        // this.emojiBtn.node.active = false;
         this.avatarBtn.node.active = false;
         this.setDealer(false);
         console.log('RESEETTTT WWHEN LEAVEEEEEE disableView');
@@ -1632,7 +1608,7 @@ var PlayerPresenter = cc.Class({
      */
     enableReservedView: function () {
         this.reservedPanel.active = true;
-        this.emojiBtn.node.active = false;
+        // this.emojiBtn.node.active = false;
         console.log('set EMOJIN ENABLE  OFF enableReservedView')
         this.addFriendBtn.node.active = false;
     },
@@ -3663,7 +3639,7 @@ var PlayerPresenter = cc.Class({
                     anim.play("showPopUp", function () {});
                 }
 
-                inst.inviteNode.active = false;
+                // inst.inviteNode.active = false;
                 inst.pokerPresenter.playerInfoPopup.getComponent("NewPlayerInfoPopup").onShow(inst.playerData, inst.pokerPresenter.model.gameData, response.data);
                 let flag = !!inst.playerData.noteColor;
                 inst.pokerPresenter.playerInfoPopup.getComponent("MobileNotePopup").init(flag, inst.playerData.noteColor, inst.playerData.noteText, inst.playerData.playerId, inst.pokerPresenter);
@@ -3743,30 +3719,6 @@ var PlayerPresenter = cc.Class({
 
     showInvite() {
         return;
-        if (this.playerData && this.playerData.playerId != GameManager.user.playerId) {
-            this.inviteNode.active = true;
-            console.log("GameManager.buddies", GameManager.buddies);
-            console.log("GameManager.buddies", this.playerData.playerId);
-            cc.find('PlayerImageMask/name', this.inviteNode).getComponent(cc.Label).string = this.playerData.playerName;
-            cc.find('PlayerImageMask/New Node/PlayerImage', this.inviteNode).getComponent(cc.Sprite).spriteFrame = this.playerData.urlImg;
-
-            cc.find('mute', this.inviteNode).getComponent(cc.Toggle).isChecked = GameManager.isPlayerMute(this.playerData.playerId);
-
-            if (GameManager.isMyFriend(this.playerData.playerId)) {
-                cc.find('invite', this.inviteNode).getComponent(cc.Toggle).enabled = false;
-                cc.find('invite', this.inviteNode).getComponent(cc.Toggle).isChecked = true;
-            }
-            else {
-                if (GameManager.isFriendRequestPending(this.playerData.playerId)) {
-                    cc.find('invite', this.inviteNode).getComponent(cc.Toggle).enabled = false;
-                    cc.find('invite', this.inviteNode).getComponent(cc.Toggle).isChecked = true;
-                }
-                else {
-                    cc.find('invite', this.inviteNode).getComponent(cc.Toggle).enabled = true;
-                    cc.find('invite', this.inviteNode).getComponent(cc.Toggle).isChecked = false;
-                }
-            }
-        }
     },
 
     showInviteList() {
@@ -3871,5 +3823,3 @@ var PlayerPresenter = cc.Class({
         this.grayScale = grayScale;
     }
 });
-
-
