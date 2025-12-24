@@ -5414,6 +5414,3 @@ cc.Class({
         // }.bind(this), function (error) { });
     },
 });
-
-
-

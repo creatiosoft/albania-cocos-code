@@ -353,22 +353,22 @@ cc.Class({
     onShow: function (data) {
         this.lockClick = false;
         
-        if (GameManager.user.category == "GOLD") {
-            this.goldIcon.active = true;
-            this.diamondIcon.active = false;
-        }
-        else {
-            this.goldIcon.active = false;
-            this.diamondIcon.active = true;   
-        }
+        // if (GameManager.user.category == "GOLD") {
+        //     this.goldIcon.active = true;
+        //     this.diamondIcon.active = false;
+        // }
+        // else {
+        //     this.goldIcon.active = false;
+        //     this.diamondIcon.active = true;   
+        // }
 
-        this.chips.string = Number((GameManager.user.category == "GOLD" ? GameManager.user.freeChips : GameManager.user.realChips).toFixed(2));
+        // this.chips.string = Number((GameManager.user.category == "GOLD" ? GameManager.user.freeChips : GameManager.user.realChips).toFixed(2));
         this.version.string = "Albania Poker: v" + K.ServerAddress.clientVer;
         // console.log(GameManager.user.profileImage, GameManager.user.urlImg);
         this.playerImg.spriteFrame = GameManager.user.urlImg;
 
-        this.gameVersionString.string = "<color=#00ff00>Build Version:   " + K.ServerAddress.clientVer + "</color>"; //</c><color=#0fffff>
-        this.pokerVersionString.string = "<color=#00ff00>Poker Version:   " + K.ServerAddress.pokerVer + "</color>";
+        // this.gameVersionString.string = "<color=#00ff00>Build Version:   " + K.ServerAddress.clientVer + "</color>"; //</c><color=#0fffff>
+        // this.pokerVersionString.string = "<color=#00ff00>Poker Version:   " + K.ServerAddress.pokerVer + "</color>";
         // if (GameManager.isP) {
         //     this.gameVersionString.string = "<color=#00ff00>Build Version:   " + K.ServerAddress.clientVer + "</color>"; //</c><color=#0fffff>
         //     this.pokerVersionString.string = "<color=#00ff00>PLA-IEW POKER Version: " + K.ServerAddress.pokerVer + "</color>";
@@ -376,22 +376,22 @@ cc.Class({
         //     this.gameVersionString.string = "<color=#00ff00>" + LocalizedManager.t('TXT_BUILD_VERSION') + ":   " + K.ServerAddress.clientVer + "</color>"; //</c><color=#0fffff>
         //     this.pokerVersionString.string = "<color=#00ff00>POKER " + LocalizedManager.t('TXT_VERSION') + ":      " + K.ServerAddress.pokerVer + "</color>";
         // }
-        if (this.dealerChat.state !== GameManager.user.dealerChat) {
-            this.dealerChat.onToggle();
-        }
-        if (GameManager.user.playerChat !== this.Chat.state) {
-            this.Chat.onToggle();
-        }
-
-        if (GameManager.user.muteGameSound == this.soundToggle.state) {
-            this.soundToggle.onToggle();
-        }
-        // if (GameManager.user.isMuckHand !== this.muckHandToggle.state) {
-        //     this.muckHandToggle.onToggle();
+        // if (this.dealerChat.state !== GameManager.user.dealerChat) {
+        //     this.dealerChat.onToggle();
         // }
-        if (GameManager.user.cardColor !== this.coloredCardToggle.state) {
-            this.coloredCardToggle.onToggle();
-        }
+        // if (GameManager.user.playerChat !== this.Chat.state) {
+        //     this.Chat.onToggle();
+        // }
+
+        // if (GameManager.user.muteGameSound == this.soundToggle.state) {
+        //     this.soundToggle.onToggle();
+        // }
+        // // if (GameManager.user.isMuckHand !== this.muckHandToggle.state) {
+        // //     this.muckHandToggle.onToggle();
+        // // }
+        // if (GameManager.user.cardColor !== this.coloredCardToggle.state) {
+        //     this.coloredCardToggle.onToggle();
+        // }
 
         this.balance.string = Number((GameManager.user.category == "GOLD" ? GameManager.user.freeChips : GameManager.user.realChips).toFixed(2));
         this.balance.string = GameManager.convertChips(this.balance.string);
@@ -409,8 +409,8 @@ cc.Class({
             this.agentId.string = "Agent ID : N/A";
         }
         this.agentId2.string = GameManager.user.isParentUserName;
-        this.vpGiftBalance.string = Number((GameManager.user.category == "GOLD" ? GameManager.user.freeChips : GameManager.user.realChips).toFixed(2));
-        this.vpGiftBalance.string = GameManager.convertChips(this.vpGiftBalance.string);
+        // this.vpGiftBalance.string = Number((GameManager.user.category == "GOLD" ? GameManager.user.freeChips : GameManager.user.realChips).toFixed(2));
+        // this.vpGiftBalance.string = GameManager.convertChips(this.vpGiftBalance.string);
 
         // if (GameScreen.isMobile == false) {
         //     if (this.gameScreen.viewType) {
