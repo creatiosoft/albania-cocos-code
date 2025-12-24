@@ -62,7 +62,7 @@ cc.Class({
      * @method onLoad
      * @memberof Controllers.Gameplay.OptionalPlayerInput#
      */
-    onLoad: function () {
+    onLoad: function() {
         this.callVal = 0;
         // this.enableTempPlayerInput(false);
         this.optionGrid = [this.set1, this.set2, this.set3];
@@ -86,14 +86,14 @@ cc.Class({
      * @param {Number} callVal -
      * @memberof Controllers.Gameplay.OptionalPlayerInput#
      */
-    enableTempPlayerInput: function (enable, set, callVal = -1, selectedPreCheckValue, calledFromResponse) {
+    enableTempPlayerInput: function(enable, set, callVal = -1, selectedPreCheckValue, calledFromResponse) {
         // console.log(" linkin park precheck called -with enable= ", enable, "calledFromResponse ", calledFromResponse)
         // this.selectedValue = enable ? this.selectedValue : null;
 
         this.pokerPresenterInstance = this.node.parent.getChildByName("PokerPresenter").getComponent('PokerPresenter');
-        if (this.pokerPresenterInstance && 
-            this.pokerPresenterInstance.model && 
-            this.pokerPresenterInstance.model.roomConfig && 
+        if (this.pokerPresenterInstance &&
+            this.pokerPresenterInstance.model &&
+            this.pokerPresenterInstance.model.roomConfig &&
             this.pokerPresenterInstance.model.roomConfig.isAllInAndFold) {
             return;
         }
@@ -158,7 +158,7 @@ cc.Class({
      * @param {Number} callVal -
      * @memberof Controllers.Gameplay.OptionalPlayerInput#
      */
-    enableSet: function (index, active, callVal, selectedPreCheckValue) {
+    enableSet: function(index, active, callVal, selectedPreCheckValue) {
         //  console.log("inside enableSet");
         //  console.log(active);
         // if (this.selectedValue != null && this.selectedValue != "NONE" && selectedPreCheckValue == "NONE") {
@@ -175,12 +175,11 @@ cc.Class({
             if (this.optionGrid[index][i].name == "Call" && (callVal > 0)) {
                 if ((callVal > 0)) {
                     this.callVal = callVal;
-                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL') + " "+ Math.floor(callVal);
+                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL') + " " + Math.floor(callVal);
                     this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).__string = Math.floor(callVal);
-                }
-                else {
+                } else {
                     this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL');
-            }
+                }
             }
 
             if (this.optionGrid[index][i].name == selectedPreCheckValue) {
@@ -198,17 +197,16 @@ cc.Class({
 
         this.updateBB();
     },
-    tempTestFunction: function (callVal) {
+    tempTestFunction: function(callVal) {
         console.log(">>>>>> tempTestFunction");
         console.log("callVal", callVal);
 
         // console.log("TEMP Test function", callVal)
         // LocalizedManager.t('TXT_CALL') + " "+ callVal
         if (callVal == 0 || callVal == "0" || callVal == "-0") {
-            this.callLbl.string =  LocalizedManager.t('TXT_CALL');
-        }
-        else {
-        this.callLbl.string =  LocalizedManager.t('TXT_CALL') + " "+ Math.floor(callVal);
+            this.callLbl.string = LocalizedManager.t('TXT_CALL');
+        } else {
+            this.callLbl.string = LocalizedManager.t('TXT_CALL') + " " + Math.floor(callVal);
         }
 
     },
@@ -219,7 +217,7 @@ cc.Class({
      * @param {Object} data
      * @memberof Controllers.Gameplay.OptionalPlayerInput#
      */
-    saveMoveFor: function (data) {
+    saveMoveFor: function(data) {
         // let pokerPresenterInstance = this.node.parent.getChildByName("PokerPresenter").getComponent('PokerPresenter');
         if (this.pokerPresenterInstance) {
             this.pokerPresenterInstance.playAudio(K.Sounds.click);
@@ -260,10 +258,10 @@ cc.Class({
         let callValue = -1;
         if (this.optionGrid[i][j].name == "Call") {
             let tmp = this.optionGrid[i][j].getChildByName('Label').getComponent(cc.Label).string;
-            callValue = tmp.match(/\d+/g);//.map(Number);
-            if(callValue.length > 1) {
+            callValue = tmp.match(/\d+/g); //.map(Number);
+            if (callValue.length > 1) {
                 callValue = Number(callValue[0] + "." + callValue[1]);
-            }else{
+            } else {
                 callValue = Number(callValue[0]);
             }
         }
@@ -272,14 +270,14 @@ cc.Class({
         // }
     },
 
-    togglePreCheckOnServer: function (precheck, set, callVal = -1) {
+    togglePreCheckOnServer: function(precheck, set, callVal = -1) {
         var data = {};
         data.playerId = GameManager.user.playerId;
         data.channelId = this.node.parent.getComponent('PokerModel').gameData.channelId;
         data.precheckValue = (precheck == null) ? 'NONE' : precheck;
         data.set = set;
         data.isRequested = true;
-        data.callPCAmount = callVal;//callVal[0];
+        data.callPCAmount = callVal; //callVal[0];
         // console.log("linkin park request sent to server ", data.precheckValue);
 
         //trying
@@ -289,57 +287,32 @@ cc.Class({
         this.requestMappings[requestId] = this.pokerPresenterInstance.preCheckCounter;
         console.log('pre check reaquest', data);
 
-        if (this.pokerPresenterInstance.isTournament()) {
-            ServerCom.socketIORequest(
-                K.SocketIOAPI.Game.TournamentPreAction, 
-                data, 
-                function (response) {
-                    if (response.success) {
-                        // console.log("resp aya")
-                        console.log("linkin park response of PRECHECK ACKNOWLEGED n culprit", data);
+        {
+            ServerCom.pomeloRequest(K.PomeloAPI.updatePreCheckOnServer, data, function(data) {
+                if (data.success) {
+                    // console.log("resp aya")
+                    console.log("linkin park response of PRECHECK ACKNOWLEGED n culprit", data);
 
-                        if (this.requestMappings[requestId] < this.pokerPresenterInstance.preCheckCounter) {
-                            console.log("AVOIDED NEW FAILURE CASE")
-                        } else {
-                            this.selectedValue = (data.precheckValue == 'NONE') ? null : data.precheckValue;
-                            this.enableTempPlayerInput(true, data.set, data.callPCAmount, data.precheckValue, true);
-                        }
-                        // console.error("linkin park server response and selectedValue=", data.precheckValue, data.precheckValue == "NONE")
+                    if (this.requestMappings[requestId] < this.pokerPresenterInstance.preCheckCounter) {
+                        console.log("AVOIDED NEW FAILURE CASE")
                     } else {
-                        console.error("PRECHECK FUCKED UP");
+                        this.selectedValue = (data.precheckValue == 'NONE') ? null : data.precheckValue;
+                        this.enableTempPlayerInput(true, data.set, data.callPCAmount, data.precheckValue, true);
                     }
-                }.bind(this), 
-                null, 
-                5000, 
-                false
-            );
-        }
-        else {
-        ServerCom.pomeloRequest(K.PomeloAPI.updatePreCheckOnServer, data, function (data) {
-            if (data.success) {
-                // console.log("resp aya")
-                console.log("linkin park response of PRECHECK ACKNOWLEGED n culprit", data);
-
-                if (this.requestMappings[requestId] < this.pokerPresenterInstance.preCheckCounter) {
-                    console.log("AVOIDED NEW FAILURE CASE")
+                    // console.error("linkin park server response and selectedValue=", data.precheckValue, data.precheckValue == "NONE")
                 } else {
-                    this.selectedValue = (data.precheckValue == 'NONE') ? null : data.precheckValue;
-                    this.enableTempPlayerInput(true, data.set, data.callPCAmount, data.precheckValue, true);
+                    console.error("PRECHECK FUCKED UP");
                 }
-                // console.error("linkin park server response and selectedValue=", data.precheckValue, data.precheckValue == "NONE")
-            } else {
-                console.error("PRECHECK FUCKED UP");
-            }
-        }.bind(this), null, 5000, false);
+            }.bind(this), null, 5000, false);
         }
-        
-    },
-
-    resetAll: function () {
 
     },
 
-    makeId: function () {
+    resetAll: function() {
+
+    },
+
+    makeId: function() {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         for (var i = 0; i < 20; i++)
@@ -347,18 +320,17 @@ cc.Class({
         return text;
     },
 
-    updateBB:function() {
+    updateBB: function() {
         if (!this.pokerPresenter || !this.pokerPresenter.model || !this.pokerPresenter.model.gameData) {
             return;
         }
 
-        this.callBBLbl.string = LocalizedManager.t('TXT_CALL') + " "+ (Number(this.callLbl.__string) / this.pokerPresenter.model.gameData.tableDetails.bigBlind).toFixed(1) + 'BB';
+        this.callBBLbl.string = LocalizedManager.t('TXT_CALL') + " " + (Number(this.callLbl.__string) / this.pokerPresenter.model.gameData.tableDetails.bigBlind).toFixed(1) + 'BB';
 
         if (GameManager.isBB && GameManager.user.settings.stackInBB) {
             this.callLbl.node.active = false;
             this.callBBLbl.node.active = true;
-        }
-        else {
+        } else {
             this.callLbl.node.active = true;
             this.callBBLbl.node.active = false;
         }
@@ -369,3 +341,4 @@ cc.Class({
     },
 
 });
+

@@ -125,12 +125,7 @@ cc.Class({
             var myCardParent = instance.getChildByName('MyCardContainer');
             var boardCardParent = instance.getChildByName('BoardCardContainer');
             var cardsArr = null;
-            if (!this.pokerGame.presenter.isTournament()) {
-                cardsArr = handTabContent[i].hands;
-            }
-            else {
-                cardsArr = handTabContent[i].value.hands;
-            }
+            cardsArr = handTabContent[i].hands;
             // console.log("board CARD DATA ", cardsArr);
             if (!!cardsArr) {
                 let numCards = this.countCards(cardsArr);

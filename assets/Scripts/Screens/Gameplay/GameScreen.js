@@ -3,8 +3,6 @@ var pokerPresenterType = require("PokerPresenter");
 var popUpManagerType = require("PopUpManager").PopUpManager;
 var abstractScreen = require('AbstractScreen');
 var tableTab = require('TableTab');
-var SitNGoModelHandler = require('SitNGoModelHandler').SitNGoModelHandler;
-var TournamentModelHandler = require('TournamentModelHandler').TournamentModelHandler;
 var PopUpType = require('PopUpManager').PopUpType;
 
 var root = window;
@@ -54,11 +52,6 @@ cc.Class({
         popUpManager: {
             default: null,
             type: popUpManagerType,
-        },
-
-        sitNGoModelHandler: {
-            default: null,
-            type: SitNGoModelHandler,
         },
 
         texasHoldemPrefab: {
@@ -151,10 +144,8 @@ cc.Class({
                 for (var index = 0; index < this.gameModel.activePokerModels.length; index++) {
                     var presenter = this.gameModel.activePokerModels[index].node.children[0].getComponent('PokerPresenter');
                     presenter.gameOptionButton.active = true;
-                    if (!presenter.isTournament2) {
-                        presenter.gameResultButton.active = true;
-                        presenter.gameLeaveButton.active = true;
-                    }
+                    presenter.gameResultButton.active = true;
+                    presenter.gameLeaveButton.active = true;
                 }
             }, this);
 
@@ -263,14 +254,6 @@ cc.Class({
         } 
         else {
             model.dummyCardsCount = 2;
-        }
-        presenter.isTournament2 = false;
-        if (data.roomConfig.channelType == K.ChannelType.Tournament) {
-            this.tournamentModelHandler = new TournamentModelHandler();
-            this.tournamentModelHandler.setModel(model);
-            this.tournamentModelHandler.setPresenter(presenter);
-
-            presenter.isTournament2 = true;
         }
 
 
@@ -1068,21 +1051,9 @@ cc.Class({
                             }
                         }
 
-                        let popups2 = this.gameModel.activePokerModels[i].node.getChildByName("Tournament").children;
-                        console.log(popups2);
-
-                        let popupOn2 = false;
-                        for (var z = 0; z < popups2.length; z++) {
-                            if (popups2[z].active) {
-                                popupOn2 = true;
-                                break;
-                            }
-                        }
-
                         if (!this.gameModel.activePokerModels[i].presenter.mobileGamePlayOptionsVisible &&
                             !this.gameModel.activePokerModels[i].presenter.mobileSliderChatSection.active &&
-                            !popupOn &&
-                            !popupOn2) {
+                            !popupOn) {
                             this.unTiledView.getChildByName('TableTabs2').getChildByName('TabsContainer').getChildByName('AddButton').active = true;
                         }
                     }
@@ -1407,18 +1378,7 @@ cc.Class({
         for (var z = 0; z < this.gameModel.activePokerModels.length; z++) {
             if (z == this.prevSelection) {
                 var presenter = this.gameModel.activePokerModels[z].node.children[0].getComponent('PokerPresenter');
-                if (presenter.isTournament2) {
-                    for (var i = 0; i < GameManager.tableBgImagesTour.length; i++) {
-                        let stickerImages = GameManager.tableBgImagesTour[i];
-                        if (GameManager.user.defaultTourGameBackground != "" && GameManager.user.defaultTourGameBackground._id) {
-                            console.log("!!!!!! onUpdateTableBgImage", GameManager.user.defaultTourGameBackground._id);
-                            if (stickerImages.___data._id == GameManager.user.defaultTourGameBackground._id) {
-                                this.node.getChildByName('Bg').getComponent(cc.Sprite).spriteFrame = GameManager.tableBgImagesTour[i];
-                            };
-                        }
-                    }
-                }
-                else {
+                {
                     for (var i = 0; i < GameManager.tableBgImages.length; i++) {
                         let stickerImages = GameManager.tableBgImages[i];
                         if (GameManager.user.defaultGameBackground != "" && GameManager.user.defaultGameBackground._id) {
@@ -1470,22 +1430,9 @@ cc.Class({
                             }
                         }
 
-                        let popups2 = this.gameModel.activePokerModels[i].node.getChildByName("Tournament").children;
-                        console.log(popups2);
-
-                        let popupOn2 = false;
-                        for (var z = 0; z < popups2.length; z++) {
-                            if (popups2[z].active) {
-                                popupOn2 = true;
-                                // console.trace("!!!!!!!!!!!!!!showJoinSimlar4");
-                                break;
-                            }
-                        }
-
                         if (!this.gameModel.activePokerModels[i].presenter.mobileGamePlayOptionsVisible &&
                             !this.gameModel.activePokerModels[i].presenter.mobileSliderChatSection.active &&
-                            !popupOn &&
-                            !popupOn2) {
+                            !popupOn) {
                             // console.trace("!!!!!!!!!!!!!!showJoinSimlar5");
                             this.unTiledView.getChildByName('TableTabs2').getChildByName('TabsContainer').getChildByName('AddButton').active = true;
                         }
@@ -1524,17 +1471,9 @@ cc.Class({
             //     break;
             // }
 
-            if (isTournament) {
-                if (presenter.isTournament2) {
+            {
                     this.tableTabs[index].getChildByName("Active").getChildByName("Base").getComponent(cc.Sprite).spriteFrame = act;
                     this.tableTabs[index].getChildByName("Deactive").getChildByName("Base").getComponent(cc.Sprite).spriteFrame = deact;
-                }
-            }
-            else {
-                if (!presenter.isTournament2) {
-                    this.tableTabs[index].getChildByName("Active").getChildByName("Base").getComponent(cc.Sprite).spriteFrame = act;
-                    this.tableTabs[index].getChildByName("Deactive").getChildByName("Base").getComponent(cc.Sprite).spriteFrame = deact;
-                }
             }
         }
 

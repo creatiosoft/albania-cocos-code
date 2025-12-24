@@ -344,17 +344,7 @@ cc.Class({
     onUpdateCardBackImage: function() {
         if (this.backFace) {
             if (this.model && this.model.presenter) {
-                if (this.model.presenter.isTournament2) {
-                    for (var i = 0; i < GameManager.cardBackImagesTour.length; i++) {
-                        let stickerImages = GameManager.cardBackImagesTour[i];
-                        if (GameManager.user.defaultTourCard != "" && GameManager.user.defaultTourCard._id) {
-                            if (stickerImages.___data._id == GameManager.user.defaultTourCard._id) {
-                                this.backFace.spriteFrame = GameManager.cardBackImagesTour[i];
-                            };
-                        }
-                    }
-                }
-                else {
+                {
                     for (var i = 0; i < GameManager.cardBackImages.length; i++) {
                         let stickerImages = GameManager.cardBackImages[i];
                         if (GameManager.user.defaultCard != "" && GameManager.user.defaultCard._id) {

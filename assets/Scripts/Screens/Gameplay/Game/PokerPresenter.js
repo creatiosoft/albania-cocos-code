@@ -38,14 +38,6 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
-        breakInfoNode: {
-            default: null,
-            type: cc.Node,
-        },
-        breakInfoPopupNode: {
-            default: null,
-            type: cc.Node,
-        },
         tourStartNode: {
             default: null,
             type: cc.Node,
@@ -127,10 +119,6 @@ cc.Class({
             type: cc.Label,
         },
         playerTribeName: {
-            default: null,
-            type: cc.Label,
-        },
-        tournamentTableName: {
             default: null,
             type: cc.Label,
         },
@@ -398,39 +386,6 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
-
-        tournamentInfo: {
-            default: null,
-            type: cc.Node,
-        },
-        tournamentDetailInfo: {
-            default: null,
-            type: cc.Node,
-        },
-        tournamentResultPlacement: {
-            default: null,
-            type: cc.Node,
-        },
-        tournamentResultWinner: {
-            default: null,
-            type: cc.Node,
-        },
-        tournamentBreakTime: {
-            default: null,
-            type: cc.Node,
-        },
-        tournamentBreakTimeAddon: {
-            default: null,
-            type: cc.Node,
-        },
-        tournamentKickInfo: {
-            default: null,
-            type: cc.Node,
-        },
-        tournamentPopupInfo: {
-            default: null,
-            type: cc.Node,
-        },
         bestHand: {
             default: null,
             type: cc.Label,
@@ -511,11 +466,6 @@ cc.Class({
             default: null,
             type: cc.Button,
         },
-        leaveTournamentButton: {
-            default: null,
-            type: cc.Button,
-        },
-
         fontFileName: {
             default: null,
             type: cc.Font,
@@ -600,32 +550,12 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-
-        isTournament2: false,
     },
 
     /**
      * If Mobile view then disabling chat pannel when user switches tabs.
      */
     onEnable: function () {
-        // if (GameManager.isMobile && this.chatPanel.active) {
-            // console.log("TRYING TO HIDE CHAT");
-            // this.setChatPanel(true);
-        // }
-
-        if (this.model && this.model.roomConfig) {
-            if (this.isTournament()) {
-                if (this.model.gameData.raw.tourData.raw.tournamentType != "SIT N GO") {
-
-                    if (this.model.gameData.raw.tourData.raw.isInBreak) {
-
-                    }
-                    else {
-                        this.tournamentBreakTime.active = false;
-                    }
-                }
-            }
-        }
     },
 
     /**
@@ -638,8 +568,6 @@ cc.Class({
         // if (!GameManager.isMobile) {
             this.setChatPanel(flag);
         // }
-        var isTournament = this.model.gameData.channelType == K.ChannelType.Tournament || this.model.isPlayerStandUp();
-        isTournament = this.isTournament() || this.model.isPlayerStandUp();
         this.checkSitoutStatus();
         this.unTiledView.active = !flag;
         this.tiledView.active = flag;
@@ -650,20 +578,6 @@ cc.Class({
         // } else {
         //     this.node.getChildByName('TableBg').getChildByName('DealerSprite').setScale(1.8, 1.8);
         // }
-        this.addChipsButton.active = !isTournament;
-        // if (this.tiledView.getChildByName('TopLeft'))
-        //this.tiledView.getChildByName('TopLeft').getChildByName('AddChipsButton').active = !isTournament;
-        if (!GameManager.isMobile && !GameManager.isWindows) {
-            if (!this.isTournament()) {
-                this.addChipsButton.active = !isTournament;
-            }
-        }
-        //this.straddleCheckBox.node.parent.active = isTournament ? false : this.isStraddleAllowed();
-        //this.autoAddOnCheckBox.node.parent.active = isTournament ? this.isAutoAddOnAllowed() : false;
-        //  this.autoBuyInCheckBox.node.parent.active = isTournament ? this.isAutoAddOnEnable() : false; 
-        if (this.model.gameData.channelType == K.ChannelType.Tournament) {
-            this.rebuyBtn.active = this.model.roomConfig.isRebuyOpened;
-        }
         this.onValueChange();
         this.setTableColor();
         if (this.preferencesPopUp)
@@ -671,17 +585,6 @@ cc.Class({
         this.onSettingsBtnClose();
         if (this.chatBtn) {
             this.chatBtn.active = flag;
-        }
-
-        if (flag) {
-            this.tournamentResultPlacement.parent.scale = 0.5;
-            this.tournamentResultPlacement.parent.x = this.tiledView.x;
-            this.tournamentResultPlacement.parent.y = this.tiledView.y;
-        }
-        else {
-            this.tournamentResultPlacement.parent.scale = 1;
-            this.tournamentResultPlacement.parent.x = 0;
-            this.tournamentResultPlacement.parent.y = 0;
         }
     },
 
@@ -715,8 +618,7 @@ cc.Class({
             this.sitOutNextHandCheckBox.node.parent.active = true;
             // this.sitOutNextHandCheckBox.setSelection(true);
         }
-        // if (this.model.gameData.channelType == this.K.ChannelType.Tournament) {
-        if (this.isTournament() || this.model.roomConfig.isAllInAndFold) {
+        if (this.model.roomConfig.isAllInAndFold) {
             //this.sitOutNextBBCheckBox.node.parent.active = false;
             this.straddleCheckBox.node.parent.active = false;
             this.addChipsButton.active = false;
@@ -729,7 +631,7 @@ cc.Class({
 
         this.isStraddleAllowed();
         this.checkInBetweenBlinds();
-        if (!this.isTournament() && !this.model.roomConfig.isAllInAndFold) {
+        if (!this.model.roomConfig.isAllInAndFold) {
             // this.unTiledView.getChildByName('AddChipsButton').active = val;
             console.log('this.model.gameData.tableDetails.players.length', this.model.gameData.tableDetails.players);
             this.addChipsButton.active = val && this.model.gameData.tableDetails.players.length > 1;
@@ -741,20 +643,13 @@ cc.Class({
 
         if (!GameManager.isMobile && !GameManager.isWindows) {
             if (this.tiledView.getChildByName('TopLeft'))
-                if (!this.isTournament() && !this.model.roomConfig.isAllInAndFold) {
+                if (!this.model.roomConfig.isAllInAndFold) {
                     this.addChipsButton.active = val;
                 }
         }
         // this.tiledView.getChildByName('TopLeft').getChildByName('AddChipsButton').active = val;
 
         // this.muckHandCheckbox.node.parent.active = val;
-
-        if (this.isTournament()) {
-            this.gameResultButton.active = false;
-        }
-        else {
-            this.gameResultButton.active = true;
-        }
 
         this.disableShowFoldBtn();
     },
@@ -911,8 +806,7 @@ cc.Class({
                 dealerPos = children[i].children[1];
                 var playerPresenter = seat.getComponent(presenter);
                 playerPresenter.seatIndex = seatCounter;
-                // playerPresenter.sitHerePanel.active = this.model.gameData.channelType != K.ChannelType.Tournament;
-                playerPresenter.sitHerePanel.active = !(this.isTournament());
+                playerPresenter.sitHerePanel.active = true;
                 playerPresenter.occupiedPanel.active = !playerPresenter.sitHerePanel.active;
 
                 if (!!betPos) {
@@ -1069,21 +963,6 @@ cc.Class({
         }
 
     },
-    /**
-     * @method tournamentAlreadyOver
-     * @description Display information that table has been closed
-     * @memberof Screens.Gameplay.Game.PokerPresenter#
-     */
-    tournamentAlreadyOver: function () {
-        var isTour = this.model.gameData.channelType == K.ChannelType.Tournament;
-        if (isTour && this.model.gameData.tableDetails.players.length == 0) {
-            this.tournamentInfo.parent.active = true;
-            var label = this.tournamentInfo.getComponent(cc.Label);
-            label.string = "This table has been closed.";
-        } else {
-            this.tournamentInfo.parent.active = false;
-        }
-    },
 
     /**
      * @method resetGame 
@@ -1097,7 +976,6 @@ cc.Class({
         this.clearBreakTimer();
         this.popUpManager.hide(2, function () { });
         this.checkInBetweenBlinds();
-        this.tournamentAlreadyOver();
         this.hideMoves();
         this.muckHandNode.active = false;
         this.playerHand.forEach((element, i) => {
@@ -1105,36 +983,36 @@ cc.Class({
         }, this);
 
         this.manageBtns(!this.model.isPlayerStandUp() && this.getMyPlayer().state == K.PlayerState.Playing);
-        if (this.isTournament() && this.model.gameData.tableDetails.players.length > 1) {
+        if (this.model.gameData.tableDetails.players.length > 1) {
 
             this.timersToKill.push(setTimeout(function () {
-                var ante = this.model.gameData.raw.tourData.raw.currentBlindLevel.ante;
-                var totalAnte = ante * this.model.gameData.tableDetails.players.length;
-                var players = this.model.gameData.tableDetails.players;
-                for (var index = 0; index < players.length; index++) {
-                    var presenter = this.playerHand[this.getRotatedSeatIndex(players[index].seatIndex)];
-                    if (ante > 0) {
-                        // presenter.playerData.chips -= ante;
-                        presenter.displayBlind(ante);
-                        presenter.activatePlayerBet(false, true);
-                    }
-                }
+                // var ante = this.model.gameData.raw.tourData.raw.currentBlindLevel.ante;
+                // var totalAnte = ante * this.model.gameData.tableDetails.players.length;
+                // var players = this.model.gameData.tableDetails.players;
+                // for (var index = 0; index < players.length; index++) {
+                //     var presenter = this.playerHand[this.getRotatedSeatIndex(players[index].seatIndex)];
+                //     if (ante > 0) {
+                //         // presenter.playerData.chips -= ante;
+                //         presenter.displayBlind(ante);
+                //         presenter.activatePlayerBet(false, true);
+                //     }
+                // }
 
-                if (totalAnte > 0) {
-                    this.timersToKill.push(setTimeout(function () {
-                        if (!this.totalPotLbl) {
-                            return;
-                        }
-                        this.totalPotLbl.node.parent.active = true;
-                        // this.totalPotLbl.string = totalAnte;
-                        this.totalPotLbl.string = GameManager.convertChips(totalAnte);
-                        this.totalPotLbl.__string = totalAnte;
-                        this.potAmount[0].getComponent(cc.Label).string = GameManager.convertChips(totalAnte);
-                        this.potAmount[0].getComponent(cc.Label).__string = totalAnte;
-                        this.potAmount[0].parent.active = true;
-                        this.potAmount[0].children[0].getComponent('PokerChipsView').generateChips(totalAnte);
-                    }.bind(this), 600));
-                }
+                // if (totalAnte > 0) {
+                //     this.timersToKill.push(setTimeout(function () {
+                //         if (!this.totalPotLbl) {
+                //             return;
+                //         }
+                //         this.totalPotLbl.node.parent.active = true;
+                //         // this.totalPotLbl.string = totalAnte;
+                //         this.totalPotLbl.string = GameManager.convertChips(totalAnte);
+                //         this.totalPotLbl.__string = totalAnte;
+                //         this.potAmount[0].getComponent(cc.Label).string = GameManager.convertChips(totalAnte);
+                //         this.potAmount[0].getComponent(cc.Label).__string = totalAnte;
+                //         this.potAmount[0].parent.active = true;
+                //         this.potAmount[0].children[0].getComponent('PokerChipsView').generateChips(totalAnte);
+                //     }.bind(this), 600));
+                // }
             }.bind(this), 1));
         }
 
@@ -1157,7 +1035,6 @@ cc.Class({
         this.clearBreakTimer();
         this.popUpManager.hide(2, function () { });
         this.checkInBetweenBlinds();
-        this.tournamentAlreadyOver();
         this.hideMoves();
         this.clearHoleCards();
         this.handleSitOutBtns(true);
@@ -1324,11 +1201,6 @@ cc.Class({
         GameManager.on(K.GameEvents.OnTableColorChange, this.colorChangeCb);
         // this.openAddChipsCB = this.onAddChips.bind(this);
 
-        if (this.tournamentDetailInfo) {
-            this.tournamentDetailInfo.active = false;
-            this.tournamentDetailInfo.y = 0;
-        }
-
         GameManager.on("openBuyInPopup", function (data) {
             // console.log(!!this.model && data == this.model.gameData.channelId)
             if (!!this.model && data == this.model.gameData.channelId) {
@@ -1400,71 +1272,6 @@ cc.Class({
         if (!GameManager.isMobile) {
             this.setTileUntileToggle();
         }
-
-        this.changeTableInit();
-        this.scheduleOnce(() => {
-            if (this.isTournament()) {
-                this.gameResultButton.active = false;
-            }
-            else {
-                this.gameResultButton.active = true;
-            }
-        
-            if (this.isTournament()) {
-                // if (this.model.gameData.raw.tourData.raw.lastTableId && 
-                //     this.model.gameData.raw.tourData.raw.lastTableId != "" &&
-                //     this.model.gameData.channelId == this.model.gameData.raw.tourData.raw.lastTableId) {
-                //     this.changeTableFinal();
-                // }
-
-                // this.blindLabel.string = "";
-                // this.blindLabel2.string = "";
-                // if (this.model.gameData.raw && this.model.gameData.raw.tourData.raw) {
-                //     this.blindLabel.string  = "Current Blind:" + this.model.gameData.raw.tourData.raw.currentBlindLevel.smallBlind + "/" + this.model.gameData.raw.tourData.raw.currentBlindLevel.bigBlind;
-                //     this.blindLabel2.string = "Next Blind:" + this.model.gameData.raw.tourData.raw.nextBlindLevel.smallBlind + "/" + this.model.gameData.raw.tourData.raw.nextBlindLevel.bigBlind;
-                //     // if (this.model.gameData.raw.tourData.raw.currentBlindLevel.nextBlindLevelTime > 0) {
-                //     //     // this.updateBlindTimer();
-                //     // }
-                //     // else {
-                //     //     this.blindLabel2.string = "Next Blind:00:00";
-                //     // }
-                // }
-
-                if (this.model.gameData.raw.tourData.raw.tournamentType != "SIT N GO" && this.model.gameData.raw.tourData.raw.isInBreak) {
-                    this.tournamentBreakTime.active = true;
-                    this.tournamentBreakTime.getComponent("TournamentBreakTime").setData(this.model.gameData.raw.tourData.raw);
-                }
-                else if (this.model.gameData.raw.tourData.raw.isInRebuy) {
-                    this.onRebuyActivated({
-                        "rebuyTimer": parseInt((this.model.gameData.raw.tourData.raw.currentRebuy.rebuyEndTime - Date.now()) / 1000)
-                    });
-                }
-                else if (this.model.gameData.raw.tourData.raw.isInAddonBreak) {
-                    this.tournamentBreakTimeAddon.active = true;
-                    this.tournamentBreakTimeAddon.getComponent("TournamentBreakTimeAddon").setData(
-                        {
-                            "breakTime": this.model.gameData.raw.tourData.raw.currentAddonBreak.addonBreakEndTime - Date.now()
-                        }
-                    );
-                }
-
-                GameManager.emit("showJoinSimlar");
-
-
-                
-                this.tourStartNode.active = false;
-                if (GameManager.tableStartTime != 0 && this.model.gameData.tableDetails.players.length > 1) {
-                    var now = new Date().getTime();
-                    if (GameManager.tableStartTime > now) {
-                        this.tourStartNode.active = true;
-                        this.updateTourStartTimer();
-                    }
-                }
-            }
-
-            ServerCom.forceKeepLoading = false;
-        }, 1.5);
-
 
         // this.scheduleOnce(() => {
             this.onUpdateTableImage();
@@ -1570,89 +1377,6 @@ cc.Class({
 
 
     displayStickers: function(event) {
-        console.log('@@@@ displayStickers ',event);
-        if (!this.model || (this.mode && !this.model.gameData)) {
-            return;
-        }
-
-        if (this.isTournament()) {
-            const receiverId = (event && event.toPlayerId) || '';
-            const senderId = (event && event.playerId) || '';
-            const stickerId = (event && event.emoji) || '';
-            const isCurrentChannel = (event && event.channelId || '') === this.model.gameData.channelId ;
-
-            // console.log('displayStickers receiverId ' ,receiverId)
-            // console.log('displayStickers stickerId ' ,stickerId)
-            // console.log('displayStickers senderId ' ,senderId)
-            // console.log('displayStickers isCurrentChannel ' ,isCurrentChannel )
-
-            // if (!!receiverId && !!stickerId && !!senderId && isCurrentChannel) {
-            if (!!receiverId && !!stickerId && !!senderId) {
-
-                const receiverIdx = this.model.getPlayerById(receiverId);
-                const senderIdx = this.model.getPlayerById(senderId);        
-
-                if (receiverIdx == -1 || senderIdx == -1) {
-                    return;
-                }
-
-                const receiver = this.getPlayerByIdx(receiverIdx);
-                const sender = this.getPlayerByIdx(senderIdx);
-
-                // cc.log('Receiver Info ', receiver);
-                // cc.log('Sender Info ', sender);
-                let receiverWPos = this.getWorldPos(receiver.stickerNode);
-                let senderWPos = this.getWorldPos(sender.stickerNode);
-                
-                if (receiverId == senderId) {
-                    receiverWPos = this.getWorldPos(receiver.stickerNodeSelf);
-                    // senderWPos = this.getWorldPos(sender.stickerNodeSelf);
-                    // this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, stickerId, senderWPos, receiverWPos, 0.15);
-                }
-                else {
-                    receiverWPos = this.getWorldPos(receiver.stickerNode);
-                    // senderWPos = this.getWorldPos(sender.stickerNode);
-                    // this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, stickerId, senderWPos, receiverWPos);
-                }
-            }   
-        }
-        else {
-            let aaa = (event.receiverId);
-            let bbb = (event.senderId);
-            let ccc = (event.stickerId);
-            let ddd = (event.channelId) === this.model.gameData.channelId ;
-
-            console.log('displayStickers receiverId ' ,aaa)
-            console.log('displayStickers stickerId ' ,ccc)
-            console.log('displayStickers senderId ' ,bbb)
-            console.log('displayStickers isCurrentChannel ' ,ddd )
-
-            if (!!aaa && !!ccc && !!bbb && ddd) {
-
-                let receiverIdx = this.model.getPlayerById(aaa);
-                let senderIdx = this.model.getPlayerById(bbb);
-
-                if (receiverIdx == -1 || senderIdx == -1) {
-                    return;
-                } 
-
-                let receiver = this.getPlayerByIdx(receiverIdx);
-                let sender = this.getPlayerByIdx(senderIdx);
-
-                // cc.log('Receiver Info ', receiver);
-                // cc.log('Sender Info ', sender);
-                let receiverWPos = this.getWorldPos(receiver.stickerNode);
-                // const senderWPos = this.getWorldPos(sender.stickerNode);
-                
-                if (aaa == bbb) {
-                    receiverWPos = this.getWorldPos(receiver.stickerNodeSelf);
-                    // senderWPos = this.getWorldPos(sender.stickerNodeSelf);
-                }
-                
-                // this.stickerCtrl && this.stickerCtrl.showSticker(this.stickerCtrl.node, ccc, null, receiverWPos);
-            }  
-
-        } 
     },    
 
     setTileUntileToggle: function () {
@@ -1758,11 +1482,6 @@ cc.Class({
         this.model.removeAllListeners();
         this.clearBreakTimer();
         this.killTimers();
-        if (this.isTournament()) {
-            if (this.tournamentDetailInfo) {
-                this.tournamentDetailInfo.getComponent("TournamentInGameInfo").reset();
-            }
-        }
         GameManager.off(K.GameEvents.OnTableColorChange, this.colorChangeCb);
         // For Sticker
         // cc.systemEvent.off(K.PokerEvents.onSendSticker);                
@@ -1922,9 +1641,6 @@ cc.Class({
     },
 
     isObserver: function () {
-        if (!this.isTournament()) {
-            return false;
-        }
         for (var index = 0; index < this.model.gameData.tableDetails.players.length; index++) {
             if (this.model.gameData.tableDetails.players[index].playerId === GameManager.user.playerId) {
                 return false;
@@ -2076,27 +1792,11 @@ cc.Class({
             this.playerChatNode.getComponent("ChatInfoPanel").onLoad();
         }
 
-        if (this.isTournament()) {
-            if (this.isObserver()) {
-                for (var index = 0; index < this.playerHand.length; index++) {
-                    if (this.playerHand[index].seatState === K.SeatState.Free) {
-                        this.playerHand[index].disableView();
-                    }
-                }
-                this.leaveBtn.node.active = true;
-                this.lobbyBtn.node.active = false;
-            }
-            else {
-                this.leaveBtn.node.active = false;
-                this.lobbyBtn.node.active = true;
-            }
-        }
-        else {
+        
             this.leaveBtn.node.active = true;
             this.lobbyBtn.node.active = true;
-        }
 
-        if (this.isTournament() || K.PORTRAIT) {
+        if (K.PORTRAIT) {
             cc.find("TableName", this.node).active = true;
         }
         else {
@@ -2120,7 +1820,7 @@ cc.Class({
      */
     enableJoinBtn: function () {
         // var isTour = this.model.gameData.channelType == K.ChannelType.Tournament;
-        var isTour = this.isTournament();
+        var isTour = false;
         this.joinBtn.node.parent.parent.active = !isTour && this.getMyPlayer() == null && this.model.gameData.tableDetails.players.length == this.model.roomConfig.maxPlayers;
         if (this.model.gameData.isJoinWaiting) {
             // this.joinBtn.string = LocalizedManager.t("TXT_UNJOIN_WAITTING");
@@ -2224,12 +1924,8 @@ cc.Class({
         data.isRealMoney = this.model.roomConfig.isRealMoney;
         data.isAllInAndFold = this.model.roomConfig.isAllInAndFold;
         data.config = this.model.roomConfig;
-        if (this.isTournament()) {
-            data.autoConfirm = true;
-        }
-        else {
+        
             data.autoConfirm = this.model.roomConfig.extraAntiBankCase;
-        }
         data.topHeading = LocalizedManager.t('TXT_BUY_IN');
         data.playSound = this.playAudio.bind(this);
         if (data.autoConfirm) {
@@ -2468,10 +2164,6 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
     handleRunItTwice: function (forceVal = true, forceSelection = false, showSelection = false) {
-        if (this.isTournament()) {
-            this.runItTwiceCB.node.parent.active = false;
-            return;
-        }
         var val = !!this.getMyPlayer() && this.getMyPlayer().state == K.PlayerState.Playing && this.getMyPlayer().lastMove !== K.PlayerMove.AllIn;
         val = val && !(this.model.gameData.channelType == K.ChannelType.Tournament);
 
@@ -2736,7 +2428,7 @@ cc.Class({
         }
     },
 
-    leaveTournament: function () { },
+    leaveTournament: function() {},
 
     /**
      * @method standUp
@@ -2794,17 +2486,12 @@ cc.Class({
         // console.log(this.model.roomConfig.info)
         this.mobileGamePlayOptions();
 
-        if (!this.isTournament()) {
-            var data = {};
+        var data = {};
             data.playSound = this.playAudio.bind(this);
             data.info = this.model.roomConfig.info
             // console.log("info close sound check")
             this.popUpManager.show(PopUpType.GameInfoPopup, data, function () { });
             this.playAudio(K.Sounds.click);
-        }
-        else {
-            this.tournamentDetailInfo.active = true;
-        }
     },
     /**
      * @method onSettingsBtnClose 
@@ -3274,11 +2961,6 @@ cc.Class({
         console.log("checkInBetweenBlinds 1");
 
         // if (this.model.gameData.channelType == K.ChannelType.Tournament) {
-        if (this.isTournament()) {
-            this.postBigBlindCheckBox.node.parent.active = false;
-            //this.popUpManager.hide(PopUpType.PlayerInfoPopup, function() { });
-            return;
-        }
         var data = this.getMyPlayer();
         if (this.model.gameData.tableDetails.state === K.GameState.Running && data != null && data.state == K.PlayerState.Waiting) {
             console.log("checkInBetweenBlinds 2", this.model.gameData.tableDetails.state, data.state);
@@ -3495,9 +3177,7 @@ cc.Class({
         if (this.getMyPlayer() != null && this.getMyPlayer().seatIndex == data.seatIndex) {
             if (data.state === K.PlayerState.OnBreak) {
                 this.handleSitOutBtns(false);
-                if (!this.isTournament()) {
-                this.postBigBlindCheckBox.node.parent.active = false;
-                }
+                    this.postBigBlindCheckBox.node.parent.active = false;
                 this.singleTime = false;
             } else {
                 if (this.model.sitOutValue == SitOutMode.None) {
@@ -3721,21 +3401,21 @@ cc.Class({
             }
         }
         else {
-            if (this.isTournament() && this.model.gameData.tableDetails.players.length > 1) {
-                var ante = this.model.gameData.raw.tourData.raw.currentBlindLevel.ante;
-                var totalAnte = ante * this.model.gameData.tableDetails.players.length;
-                if (totalAnte > 0) {
-                    if (!this.totalPotLbl) {
-                        return;
-                    }
-                    this.totalPotLbl.node.parent.active = true;
-                    this.totalPotLbl.string = GameManager.convertChips(totalAnte);
-                    this.totalPotLbl.__string = totalAnte;
-                    this.potAmount[0].getComponent(cc.Label).string = GameManager.convertChips(totalAnte);
-                    this.potAmount[0].getComponent(cc.Label).__string = totalAnte;
-                    this.potAmount[0].parent.active = true;
-                    this.potAmount[0].children[0].getComponent('PokerChipsView').generateChips(totalAnte);
-                }
+            if (this.model.gameData.tableDetails.players.length > 1) {
+                // var ante = this.model.gameData.raw.tourData.raw.currentBlindLevel.ante;
+                // var totalAnte = ante * this.model.gameData.tableDetails.players.length;
+                // if (totalAnte > 0) {
+                //     if (!this.totalPotLbl) {
+                //         return;
+                //     }
+                //     this.totalPotLbl.node.parent.active = true;
+                //     this.totalPotLbl.string = GameManager.convertChips(totalAnte);
+                //     this.totalPotLbl.__string = totalAnte;
+                //     this.potAmount[0].getComponent(cc.Label).string = GameManager.convertChips(totalAnte);
+                //     this.potAmount[0].getComponent(cc.Label).__string = totalAnte;
+                //     this.potAmount[0].parent.active = true;
+                //     this.potAmount[0].children[0].getComponent('PokerChipsView').generateChips(totalAnte);
+                // }
             }
         }
         // }, 1
@@ -3825,7 +3505,7 @@ cc.Class({
         for (var index = 0; index < players.length; index++) {
             // var element = array[index];
             // check for player state
-            if (players[index].state === K.PlayerState.Playing || this.isTournament()) {
+            if (players[index].state === K.PlayerState.Playing) {
                 if (players[index].state == "REBUYING") {
                     continue;
                 }
@@ -4873,9 +4553,6 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
     isStraddleAllowed: function () {
-        if (this.isTournament()) {
-            return false;
-        }
         var val = !(this.model.gameData.channelType == K.ChannelType.Tournament);
         val = val && (!!this.getMyPlayer()) && (!this.model.roomConfig.isStraddleEnable) && (this.getMyPlayer().state == K.PlayerState.Playing) && (this.getNumPlayerInTable() > 3);
         this.straddleCheckBox.node.parent.active = val;
@@ -5319,8 +4996,6 @@ cc.Class({
             // this.closeBtn.active = false;
             // this.chatCloseBtn.active = true;
         // }
-
-        this.tournamentDetailInfo.active = false;
     },
 
     onLeaderboard: function () {
@@ -5378,39 +5053,6 @@ cc.Class({
             }
         }
         // }, 100);
-    },
-
-    onTournamentResultWinner: function () {
-        this.playAudio(K.Sounds.click);
-        this.tournamentResultWinner.active = true;
-    },
-
-    onTournamentResultPlacement: function () {
-        this.playAudio(K.Sounds.click);
-        this.tournamentResultPlacement.active = true;
-    },
-
-    onHideTournamentDetail: function() {
-        this.tournamentDetailInfo.active = false;
-    },
-
-    isTournament: function() {
-        if (this.model.roomConfig.channelType == "NORMAL") {
-            return false;
-        }
-        else {
-            return true;
-        }
-    },
-
-    changeTableFinal() {
-        // this.node.getChildByName('TableBg').active = false;
-        // this.node.getChildByName('TableBg1').active = true;
-    },
-
-    changeTableInit() {
-        // this.node.getChildByName('TableBg').active = true;
-        // this.node.getChildByName('TableBg1').active = false;
     },
 
     onShowRaisePanel() {
@@ -5577,29 +5219,7 @@ cc.Class({
         //     }
         // }.bind(this));
 
-        if (this.isTournament()) {
-            ServerCom.socketIORequest(
-                'tournamentGameEvent|updateTableSettings', 
-                {
-                    channelId: this.model.gameData.channelId,
-                    playerId: GameManager.user.playerId,
-                    key: 'playerChat',
-                    value: this.ChatToggle.state
-                },
-                null,
-                function (response) {
-                    // if (response.success) {
-                    //     this.model.gameData.settings.playerChat = !this.model.gameData.settings.playerChat;
-                    // } else {
-                    //     this.ChatToggle.onToggle();
-                    // }
-                }.bind(this),
-                5000,
-                false
-            );    
-            this.model.gameData.settings.playerChat = !this.model.gameData.settings.playerChat;
-        }
-        else {
+        
             var data = {};
             data.channelId = this.model.gameData.channelId;
             data.playerId = GameManager.user.playerId;
@@ -5612,7 +5232,6 @@ cc.Class({
                     this.ChatToggle.onToggle();
                 }
             }.bind(this), null, 5000, false);
-        }
     },
 
     onToggleDealerChat: function () {
@@ -5630,43 +5249,7 @@ cc.Class({
         //     }
         // }.bind(this));
 
-        if (this.isTournament()) {
-            // var data = {};
-            // data.channelId = this.model.gameData.channelId;
-            // data.playerId = GameManager.user.playerId;
-            // data.key = 'dealerChat';
-            // data.value = this.dealerChatToggle.state;
-            // ServerCom.pomeloRequest(K.PomeloAPI.updateTableSettings, data, function (response) {
-            //     if (response.success) {
-            //         this.model.gameData.settings.dealerChat = !this.model.gameData.settings.dealerChat;
-            //     } else {
-            //         this.dealerChatToggle.onToggle();
-            //     }
-            // }.bind(this));
-
-            ServerCom.socketIORequest(
-                'tournamentGameEvent|updateTableSettings', 
-                {
-                    channelId: this.model.gameData.channelId,
-                    playerId: GameManager.user.playerId,
-                    key: 'dealerChat',
-                    value: this.dealerChatToggle.state
-                },
-                null,
-                function (response) {
-                    // if (response.success) {
-                    //     this.model.gameData.settings.dealerChat = !this.model.gameData.settings.dealerChat;
-                    // } else {
-                    //     this.dealerChatToggle.onToggle();
-                    // }
-                }.bind(this),
-                5000,
-                false
-            );
-            this.model.gameData.settings.dealerChat = !this.model.gameData.settings.dealerChat;
-
-        }
-        else {
+       
             var data = {};
             data.channelId = this.model.gameData.channelId;
             data.playerId = GameManager.user.playerId;
@@ -5679,22 +5262,10 @@ cc.Class({
                     this.dealerChatToggle.onToggle();
                 }
             }.bind(this), null, 5000, false);
-        }
     },
 
     onUpdateTableImage: function () {
-        if (this.isTournament2) {
-            for (var i = 0; i < GameManager.tableImagesTour.length; i++) {
-                let stickerImages = GameManager.tableImagesTour[i];
-                if (GameManager.user.defaultTourTheme != "" && GameManager.user.defaultTourTheme._id) {
-                    if (stickerImages.___data._id == GameManager.user.defaultTourTheme._id) {
-                        this.node.getChildByName('TableBg').getComponent(cc.Sprite).spriteFrame = GameManager.tableImagesTour[i];
-                        GameScreen.updateTabImage(this.isTournament2, GameManager.tabActImages[i], GameManager.tabDeactImages[i]);
-                    };
-                }
-            }
-        }
-        else {
+       
             // console.log("!!!!!!!!!! 1GameManager.tableImages[i]", GameManager.tableImages);
             // console.log("!!!!!!!!!! 2GameManager.tableImages[i]", GameManager.user.defaultTheme);
             for (var i = 0; i < GameManager.tableImages.length; i++) {
@@ -5710,11 +5281,10 @@ cc.Class({
                             // this.node.getChildByName('TableBg').getComponent(cc.Sprite).spriteFrame = GameManager.tableImages[i];
                         // }
 
-                        GameScreen.updateTabImage(this.isTournament2, GameManager.tabActImages[i], GameManager.tabDeactImages[i]);
+                        GameScreen.updateTabImage(false, GameManager.tabActImages[i], GameManager.tabDeactImages[i]);
                     };
                 }
             }
-        }
     },
 
     onReport: function() {
@@ -5844,27 +5414,6 @@ cc.Class({
         data.topHeading = LocalizedManager.t('TXT_BUY_IN');
         GameManager.popUpManager.show(PopUpType.BuyInPopup, data, function () { });
 
-    },
-
-    onBreakInfo: function　() {
-        this.breakInfoNode.active = true;
-    },
-
-    onBreakInfoClose: function　() {
-        this.breakInfoNode.active = false;
-    },
-
-    onBreakInfoPopupNode: function　() {
-        this.breakInfoPopupNode.active = true;
-        this.breakInfoPopupNode.opacity = 0;
-        var anim = this.breakInfoPopupNode.getComponent('AnimBase');
-        if (anim !== null) {
-            anim.play("showPopUp", function () {});
-        }
-    },
-
-    onBreakInfoPopupNodeClose: function　() {
-        this.breakInfoPopupNode.active = false;
     },
 
     onDealerChatBtn: function() {

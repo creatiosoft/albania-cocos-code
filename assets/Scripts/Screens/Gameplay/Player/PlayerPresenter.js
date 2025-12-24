@@ -350,7 +350,7 @@ var PlayerPresenter = cc.Class({
         timersToKill: []
     },
 
-    onLoad: function () {
+    onLoad: function() {
 
         this.normalScale = 1;
         this.grayScale = 1;
@@ -414,42 +414,42 @@ var PlayerPresenter = cc.Class({
      * @method registerHoverEvents
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    registerHoverEvents: function () {
-        this.node.on(cc.Node.EventType.MOUSE_ENTER, function (event) {
+    registerHoverEvents: function() {
+        this.node.on(cc.Node.EventType.MOUSE_ENTER, function(event) {
             if (cc.isValid(this.node)) {
                 this.onMouse_Enter();
             }
         }.bind(this), this);
-        this.node.on(cc.Node.EventType.MOUSE_LEAVE, function (event) {
+        this.node.on(cc.Node.EventType.MOUSE_LEAVE, function(event) {
             if (cc.isValid(this.node))
                 this.onMouse_Leave();
         }.bind(this), this);
-        this.node.on(cc.Node.EventType.TOUCH_START, function (event) {
+        this.node.on(cc.Node.EventType.TOUCH_START, function(event) {
             if (cc.isValid(this.node) && !this.pokerPresenter.isObserver()) {
                 this.onMouse_Enter();
                 // this.showMobileNotePopup();
                 // this.showStickerBuddiesPopup(false);
             }
         }.bind(this), this);
-        this.node.on(cc.Node.EventType.TOUCH_END, function (event) {
+        this.node.on(cc.Node.EventType.TOUCH_END, function(event) {
             if (cc.isValid(this.node))
                 this.onMouse_Leave();
         }.bind(this), this);
-        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_ENTER, function (event) {
+        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_ENTER, function(event) {
             this.noteButton.children[0].active = true;
         }.bind(this), this);
-        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_LEAVE, function (event) {
+        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_LEAVE, function(event) {
             this.noteButton.children[0].active = false;
         }.bind(this), this);
-        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_UP, function (event) {
+        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_UP, function(event) {
             this.onClickAvatarBtn();
         }.bind(this), this);
 
-        if(cc.sys.isMobile) {
-            this.noteButton.children[2].on(cc.Node.EventType.TOUCH_END, function (event) {
+        if (cc.sys.isMobile) {
+            this.noteButton.children[2].on(cc.Node.EventType.TOUCH_END, function(event) {
                 this.onClickAvatarBtn();
-            }.bind(this), this); 
-        }       
+            }.bind(this), this);
+        }
 
     },
 
@@ -459,15 +459,14 @@ var PlayerPresenter = cc.Class({
      * @param {user} user
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    imageLoaded: function (user) {
+    imageLoaded: function(user) {
 
 
         if (this.playerData != null && this.playerData.playerId == user.playerId) {
             if (!user.urlImg) {
                 var randomIndex = Math.round(Math.random() * GameManager.avatarImages.length - 1);
                 this.image.spriteFrame = GameManager.avatarImages[randomIndex];
-            }
-            else {
+            } else {
                 this.image.spriteFrame = user.urlImg;
                 // cc.find('PlayerImageMask/New Node/PlayerImage', this.inviteNode).getComponent(cc.Sprite).spriteFrame = user.urlImg;
             }
@@ -483,20 +482,16 @@ var PlayerPresenter = cc.Class({
      * @method gridRefreshed
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    gridRefreshed: function () {
+    gridRefreshed: function() {
         if (GameManager.activeTableCount == 1 || GameScreen.viewType == 2) {
-            if (K.PORTRAIT) {
-            }
-            else {
+            if (K.PORTRAIT) {} else {
                 this.node.scale = 1;
             }
             if (this.pokerPresenter.checkForSelfTurn(this.playerId)) {
                 GameScreen.gameModel.emit("K.PokerEvents.onTurnInOtherRoom", this.pokerPresenter.model, true);
             }
         } else {
-            if (K.PORTRAIT) {
-            }
-            else {
+            if (K.PORTRAIT) {} else {
                 // this.node.scale = 1.2;
             }
         }
@@ -507,7 +502,7 @@ var PlayerPresenter = cc.Class({
      * @method resetSeat
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    resetSeat: function () {
+    resetSeat: function() {
         if (!!this.chatHead.active) {
             this.chatHead.active = false;
         }
@@ -554,7 +549,7 @@ var PlayerPresenter = cc.Class({
      * @param {String} selfPlayerId
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enablePlayerView: function (selfPlayerId, revealForSelfAtStartGame = true) {
+    enablePlayerView: function(selfPlayerId, revealForSelfAtStartGame = true) {
         this.resetSeat();
 
         if (this.node.parent.x < 0 || this.isSelf()) {
@@ -572,8 +567,7 @@ var PlayerPresenter = cc.Class({
             // this.node.getChildByName("SB2").x = 55.751;
 
             // this.moveShower.x = -71.298;
-        }
-        else {
+        } else {
             // this.node.getChildByName("BB").x = -58.46;
             // this.node.getChildByName("SB").x = -58.46;
 
@@ -597,20 +591,17 @@ var PlayerPresenter = cc.Class({
             this.moveShower.x = this.moveShower1.x;
             this.moveShower.y = this.moveShower1.y;
             // this.moveShower.anchorX = this.moveShower1.anchorX;
-        }
-        else {
+        } else {
             if (this.node.parent.x == 0) {
                 this.moveShower.x = this.moveShower4.x;
                 this.moveShower.y = this.moveShower4.y;
                 // this.moveShower.anchorX = this.moveShower4.anchorX;
-            }
-            else {
+            } else {
                 if (this.node.parent.x < 0) {
                     this.moveShower.x = this.moveShower2.x;
                     this.moveShower.y = this.moveShower2.y;
                     // this.moveShower.anchorX = this.moveShower2.anchorX;
-                }
-                else {
+                } else {
                     this.moveShower.x = this.moveShower3.x;
                     this.moveShower.y = this.moveShower3.y;
                     // this.moveShower.anchorX = this.moveShower3.anchorX;
@@ -661,7 +652,7 @@ var PlayerPresenter = cc.Class({
      * @param {bool} state if true sets my player's view otherwise sets other player's view
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    setSelfPlayerView: function (state, revealForSelfAtStartGame) {
+    setSelfPlayerView: function(state, revealForSelfAtStartGame) {
         // console.log(GameManager.user.urlImg);
         if (this.playerData != null) {
             // console.log(this.playerData.urlImg)
@@ -681,7 +672,7 @@ var PlayerPresenter = cc.Class({
                     this.revealCards(revealForSelfAtStartGame);
                 }
                 if (this.playerData.lastMove == "FOLD") {
-                    this.scheduleOnce(function () {
+                    this.scheduleOnce(function() {
                         // this.resetCards(false);
                     }, 0.1);
                 }
@@ -703,8 +694,7 @@ var PlayerPresenter = cc.Class({
                     if (this.image2) {
                         this.image2.spriteFrame = GameManager.user.urlImg;
                     }
-                }
-                else {
+                } else {
                     this.image.spriteFrame = this.playerData.urlImg;
                     if (this.image2) {
                         this.image2.spriteFrame = this.playerData.urlImg;
@@ -720,7 +710,7 @@ var PlayerPresenter = cc.Class({
      * @param {number} bet
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    displayBet: function (bet) {
+    displayBet: function(bet) {
         // console.trace("DISPLAY BET AMUNT ", bet);
         //   console.log("DISPLAY BET AMUNT ",bet);
         if (bet < 0) {
@@ -741,7 +731,7 @@ var PlayerPresenter = cc.Class({
      * @param {Vec2} position 2D Vector
      * @memberof creens.Gameplay.Player.PlayerPresenter#
      */
-    setBetPosition: function (position) {
+    setBetPosition: function(position) {
         // console.log("PP setBetPosition called ",position);
         this.playerBetLabel.parent.setPosition(position);
     },
@@ -752,7 +742,7 @@ var PlayerPresenter = cc.Class({
      * @param {Vec2} position 2D Vector
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    setDealerPosition: function (position) {
+    setDealerPosition: function(position) {
         // if (K.PORTRAIT) {
         //     return;
         // }
@@ -764,7 +754,7 @@ var PlayerPresenter = cc.Class({
      * @method resetTimer
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    resetTimer: function () {
+    resetTimer: function() {
         // this.currentTurnDisplayTime = -1;
         this.timerSprite.fillRange = 0;
         if (K.PORTRAIT) {
@@ -803,7 +793,7 @@ var PlayerPresenter = cc.Class({
      * @param {String} playerId Player Id of the player
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    displayNote: function (playerId) {
+    displayNote: function(playerId) {
         console.log(!!this.playerData && !!this.playerData.noteColor, this.playerData)
         if (!!this.playerData && !!this.playerData.noteColor) {
             this.noteColorBase.active = true;
@@ -837,7 +827,7 @@ var PlayerPresenter = cc.Class({
      * @method resetLblColor
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    resetLblColor: function () {
+    resetLblColor: function() {
         // this.foldView.active = false;
         // this.nameLabel.node.color = this.nameLblColor;//27aug2018
         // this.amountLabel.node.color = this.amountLblColor;//27aug2018
@@ -848,7 +838,7 @@ var PlayerPresenter = cc.Class({
      * @method changeLblColor
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    changeLblColor: function () {
+    changeLblColor: function() {
         // this.foldView.active = true;
         // this.nameLabel.node.color = this.foldNameLblColor; //27aug2018
         // this.amountLabel.node.color = this.foldAmountLblColor; //27aug2018
@@ -860,7 +850,7 @@ var PlayerPresenter = cc.Class({
      * @param {bool} flag -active/deactive playerBetLabel
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    activatePlayerBet: function (flag, animateToCenter) {
+    activatePlayerBet: function(flag, animateToCenter) {
         // console.log("activate Player bet called...")
         if (animateToCenter) {
             let initPos = this.playerBetLabel.parent.getPosition();
@@ -882,7 +872,7 @@ var PlayerPresenter = cc.Class({
             this.playerBetLabel.parent.runAction(cc.sequence(moveToCenter, func));
 
 
-            this.resetBetTimer = setTimeout(function () {
+            this.resetBetTimer = setTimeout(function() {
                 if (cc.isValid(this.node)) {
                     this.playerBetLabel.parent.active = flag;
                     this.playerBetLabel.parent.stopAllActions();
@@ -907,14 +897,14 @@ var PlayerPresenter = cc.Class({
      * @method gameOver
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    gameOver: function () {
+    gameOver: function() {
         // px?
         this.amountLabel.node.stopAllActions();
         this.resetTimer();
         // this.clearPlayerCards();
         // this.revealCards();
-        this.timersToKill.push(setTimeout(function () {
-        // setTimeout(function () {
+        this.timersToKill.push(setTimeout(function() {
+            // setTimeout(function () {
             if (cc.isValid(this.node)) {
                 if (!!this.playerData && this.amountLabel !== null && this.amountLabel !== undefined) {
                     //this.setDealer(false);
@@ -942,7 +932,7 @@ var PlayerPresenter = cc.Class({
      * @param {Number} amount
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    displayBlind: function (amount) {
+    displayBlind: function(amount) {
         // update chips
         // set bet amount
         // turn on pot parent node
@@ -957,7 +947,7 @@ var PlayerPresenter = cc.Class({
      * @param {bool} state
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    setDealer: function (state) {
+    setDealer: function(state) {
         // Deactivate prev. dealerBtn
         // activate curr. dealerBtn
         // if (this.playerData) {
@@ -1008,7 +998,7 @@ var PlayerPresenter = cc.Class({
      * @method disablePlayerView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    disablePlayerView: function () {
+    disablePlayerView: function() {
         this.resetTimer();
         this.sitHerePanel.active = true;
         this.setDealer(false);
@@ -1040,7 +1030,7 @@ var PlayerPresenter = cc.Class({
      * @method disableView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    disableView: function () {
+    disableView: function() {
         this.bestHandNode.active = false;
         this.node.getChildByName("BB").active = false;
         this.node.getChildByName("SB").active = false;
@@ -1049,7 +1039,7 @@ var PlayerPresenter = cc.Class({
         this.emptyPanel.active = true;
         this.sitHerePanel.active = false;
         // if (this.pokerPresenter.isTournament()) {
-            this.emptyPanel.children[1].getComponent(cc.Label).string = "Empty";
+        this.emptyPanel.children[1].getComponent(cc.Label).string = "Empty";
         // }
         // else {
         //     this.emptyPanel.children[1].getComponent(cc.Label).string = "Invite";   
@@ -1064,7 +1054,7 @@ var PlayerPresenter = cc.Class({
         this.avatarBtn.node.active = false;
         this.setDealer(false);
         console.log('RESEETTTT WWHEN LEAVEEEEEE disableView');
-        this.playerData = null;        
+        this.playerData = null;
     },
 
     /**
@@ -1072,7 +1062,7 @@ var PlayerPresenter = cc.Class({
      * @method onNoteBtn
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    onNoteBtn: function () {
+    onNoteBtn: function() {
         // this.noteButton.children[0].active = !this.noteButton.children[0].active;
         this.showPlayerInfo();
     },
@@ -1084,7 +1074,7 @@ var PlayerPresenter = cc.Class({
      * @param {String} move Move of the player
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    disPlayMoveUtil: function (playerName, move) {
+    disPlayMoveUtil: function(playerName, move) {
         // setTimeout(function () {
         //     this.nameLabel.string = playerName + " " + move;
         // }.bind(this), 1);
@@ -1093,7 +1083,7 @@ var PlayerPresenter = cc.Class({
         this.moveShower.stopAllActions();
         this.moveShower.active = true;
         let moveText = '';
-        switch(move) {
+        switch (move) {
             case "FOLD":
                 moveText = LocalizedManager.t('TXT_FOLD');
                 break;
@@ -1108,16 +1098,16 @@ var PlayerPresenter = cc.Class({
                 break;
             case "BET":
                 moveText = LocalizedManager.t('TXT_BET');
-                break;                                                                                        
+                break;
             case "CALL":
                 moveText = LocalizedManager.t('TXT_CALL');
-                break;                                                                                        
+                break;
 
         }
 
         if (K.PORTRAIT) {
 
-            switch(move) {
+            switch (move) {
                 case "FOLD":
                     // this.moveShower.children[0].color = new cc.Color().fromHEX("#B60838");
                     break;
@@ -1132,15 +1122,15 @@ var PlayerPresenter = cc.Class({
                     break;
                 case "BET":
                     // this.moveShower.children[0].color = new cc.Color().fromHEX("#10E496");
-                    break;                                                                                        
+                    break;
                 case "CALL":
                     // this.moveShower.children[0].color = new cc.Color().fromHEX("#10E496");
-                    break;                                                                                        
+                    break;
 
             }
         }
 
-        this.moveShower.children.forEach(function (element) {
+        this.moveShower.children.forEach(function(element) {
             element.active = false;
         }, this);
 
@@ -1163,7 +1153,7 @@ var PlayerPresenter = cc.Class({
      * @param {String} move Player's Move while playing game
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    displayMove: function (move) {
+    displayMove: function(move) {
         this.amountLabel.string = GameManager.convertChips(this.playerData.chips);
         this.updateBB();
         // this.nameLabel.string = move;
@@ -1210,12 +1200,7 @@ var PlayerPresenter = cc.Class({
         if (this.playerData.totalRoundBet < 1) {
             totalRoundBet = Math.ceil(this.playerData.totalRoundBet);
         } else {
-            if (this.pokerPresenter.isTournament()) {
-            totalRoundBet = Math.floor(this.playerData.totalRoundBet);
-            }
-            else {
-            totalRoundBet = Math.floor(this.playerData.totalRoundBet);
-            }
+                totalRoundBet = Math.floor(this.playerData.totalRoundBet);
         }
 
         // if (Math.floor(this.playerData.totalRoundBet) <= 0) {
@@ -1247,12 +1232,12 @@ var PlayerPresenter = cc.Class({
      * @method enableFoldView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enableFoldView: function () {
+    enableFoldView: function() {
         //gray
         // this.grayer.active = true;
         // console.error("ENABLE FOLD CALLED ", this.nameLabel.string, this.amountLabel.string)
         if (!!this.playerData) {
-            this.nameLabel.string = LocalizedManager.t('TXT_FOLD');            
+            this.nameLabel.string = LocalizedManager.t('TXT_FOLD');
             if (this.playerData != null && this.pokerPresenter.checkForSelfTurn(this.playerData.playerId)) {
                 this.amountLabel.string = GameManager.convertChips(this.playerData.chips);
                 this.updateBB();
@@ -1262,9 +1247,9 @@ var PlayerPresenter = cc.Class({
         }
 
         this.changeLblColor();
-        
+
         if (this.playerData != null && !this.pokerPresenter.checkForSelfTurn(this.playerData.playerId)) {
-            this.cardHolder.children.forEach(function (element) {
+            this.cardHolder.children.forEach(function(element) {
                 // element.opacity = 150;
 
             }, this);
@@ -1287,12 +1272,12 @@ var PlayerPresenter = cc.Class({
             // }
         }
 
-        this.cardHolderMy.children.forEach(function (element) {
+        this.cardHolderMy.children.forEach(function(element) {
             // element.opacity = 150;
             element.getComponent("Card").gray();
         }, this);
 
-        this.cardHolder.children.forEach(function (element) {
+        this.cardHolder.children.forEach(function(element) {
             // element.opacity = 150;
             element.getComponent("Card").gray();
         }, this);
@@ -1312,10 +1297,10 @@ var PlayerPresenter = cc.Class({
      * @method displayDefault
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    displayDefault: function () {
+    displayDefault: function() {
         if (this.pokerPresenter.model.isVideo) {
             // console.log(K.moveDisplayTime / (this.pokerPresenter.model.videoSpeed))
-            this.displayDefaultTimer = setTimeout(function () {
+            this.displayDefaultTimer = setTimeout(function() {
                 if (cc.isValid(this.node)) {
 
                     if (!!this.playerData) {
@@ -1324,7 +1309,7 @@ var PlayerPresenter = cc.Class({
                 }
             }.bind(this), K.moveDisplayTime / (this.pokerPresenter.model.videoSpeed));
         } else {
-            this.displayDefaultTimer = setTimeout(function () {
+            this.displayDefaultTimer = setTimeout(function() {
                 if (cc.isValid(this.node)) {
 
                     if (!!this.playerData) {
@@ -1341,13 +1326,13 @@ var PlayerPresenter = cc.Class({
      * @method clearTimers
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    clearTimers: function () {
+    clearTimers: function() {
         // console.log("shishir kick pl presenter done");
 
         clearTimeout(this.displayDefaultTimer);
         clearTimeout(this.resetBetTimer);
 
-        this.timersToKill.forEach(function (element) {
+        this.timersToKill.forEach(function(element) {
             clearTimeout(element);
         }, this);
         this.timersToKill = [];
@@ -1357,7 +1342,7 @@ var PlayerPresenter = cc.Class({
      * @method onMouse_Enter
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    onMouse_Enter: function () {
+    onMouse_Enter: function() {
         if (this.playerData != null && this.pokerPresenter.checkForSelfTurn(this.playerData.playerId)) {
             if (this.playerData.lastMove === "FOLD" && this.playerData.state == K.PlayerState.Playing) {
                 this.resetCards(true);
@@ -1384,26 +1369,26 @@ var PlayerPresenter = cc.Class({
         cc.log('onClickAddFriendBtn')
         // this.clientSendAddFriendEvent();
         // this.addFriendBtn.node.active = false;
-    },    
+    },
 
     clientSendAddFriendEvent: function() {
         let payload = {};
         const player = this.pokerPresenter.getMyPlayer();
-        const opponent = this.playerData;        
+        const opponent = this.playerData;
 
         payload.playerId = GameManager.user.playerId;
         payload.friendId = opponent.playerId;
         console.log('clientSendAddFriendEvent ', payload);
         const _t = this;
-        ServerCom.pomeloRequest(K.BuddyAPI.sendFriendRequest, payload, function(response){
+        ServerCom.pomeloRequest(K.BuddyAPI.sendFriendRequest, payload, function(response) {
             console.log("sendFriendRequest reponse", response);
-            if(response.success) {
+            if (response.success) {
                 _t.addFriendBtn.node.children[0].active = false;
                 _t.addFriendBtn.node.children[1].active = true;
             }
-            setTimeout( () => {
+            setTimeout(() => {
                 _t.addFriendBtn.node.active = false;
-            }, 1000)            
+            }, 1000)
         }, null, 5000, false);
     },
 
@@ -1416,7 +1401,7 @@ var PlayerPresenter = cc.Class({
         // this.addFriendBtn.node.active = true;
         // this.addFriendBtn.node.children[0].active = true;
         // this.addFriendBtn.node.children[1].active = false;
-    },    
+    },
 
     showStickerBuddiesPopup(isShowSticker) {
         const isGameRunning = this.pokerPresenter.model.gameData.tableDetails.state === K.GameState.Running || this.pokerPresenter.model.gameData.tableDetails.state === K.GameState.GameOver;
@@ -1428,11 +1413,11 @@ var PlayerPresenter = cc.Class({
         //     cc.log('it me, do nothing');
         //     return;
         // }
-        const opponentIdx = opponent && this.pokerPresenter.model.getPlayerById(opponent.playerId);        
+        const opponentIdx = opponent && this.pokerPresenter.model.getPlayerById(opponent.playerId);
         // cc.log('Sticker Pop opponent ',opponent);        
         // cc.log('Sticker Pop opponentIdx ',this.pokerPresenter.model.getPlayerById(opponent.playerId));        
         // cc.log('Sticker Pop opponentIdx 2 ',opponentIdx);        
-        if( !opponent || opponentIdx == -1) {
+        if (!opponent || opponentIdx == -1) {
             // if ( this.pokerPresenter.model.isPrivateTable )
             //     return;
             // const channelId = this.pokerPresenter.model.gameData.channelId;
@@ -1440,24 +1425,24 @@ var PlayerPresenter = cc.Class({
             return;
         }
 
-        if ( !isShowSticker )  {
+        if (!isShowSticker) {
             this.showMobileNotePopup();
             return;
         }
 
-        const isOpponentPlaying = opponent && (opponent.state !== K.PlayerState.Waiting && opponent.state !== K.PlayerState.OnBreak);        
+        const isOpponentPlaying = opponent && (opponent.state !== K.PlayerState.Waiting && opponent.state !== K.PlayerState.OnBreak);
         // if (isPlayerPlaying && isOpponentPlaying && isGameRunning && !this.pokerPresenter.checkForSelfTurn(this.playerData.playerId)) {
         if (isGameRunning) {
-            this.pokerPresenter.sureToFoldNode.parent.getChildByName("StickerPopup").getComponent("StickersPopup").init(this.playerData.playerId, this.pokerPresenter);            
+            this.pokerPresenter.sureToFoldNode.parent.getChildByName("StickerPopup").getComponent("StickersPopup").init(this.playerData.playerId, this.pokerPresenter);
         }
-    },    
+    },
 
     /**
      * @description On Mouse Leave Callback
      * @method onMouse_Leave
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    onMouse_Leave: function () {
+    onMouse_Leave: function() {
         if (this.playerData != null && this.pokerPresenter.checkForSelfTurn(this.playerData.playerId)) {
             if (this.playerData.lastMove === "FOLD" && this.playerData.state == K.PlayerState.Playing) {
                 // this.resetCards(false);
@@ -1470,13 +1455,13 @@ var PlayerPresenter = cc.Class({
      * @method enableAllInView
      * @memberof PlayerPresenter#
      */
-    enableAllInView: function () {
+    enableAllInView: function() {
 
         // return;
         // this.nameLabel.string = "All in";
         this.nameLabel.string = LocalizedManager.t('TXT_ALL_IN');
-        this.timersToKill.push(setTimeout(function () {
-        // setTimeout(function () {
+        this.timersToKill.push(setTimeout(function() {
+            // setTimeout(function () {
             if (cc.isValid(this.node)) {
 
                 if (!!this.playerData) {
@@ -1497,7 +1482,7 @@ var PlayerPresenter = cc.Class({
      * @method enableWaitingView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enableWaitingView: function () {
+    enableWaitingView: function() {
         // this.amountLabel.string = "Waiting";
         // this.nameLabel.string = LocalizedManager.t('TXT_WAITTING');
         LocalizedManager.setTextKey(this.nameLabel.node, 'TXT_WAITTING');
@@ -1521,7 +1506,7 @@ var PlayerPresenter = cc.Class({
      * @method enableOnbreakView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enableOnbreakView: function () {
+    enableOnbreakView: function() {
         this.grayer.active = true;
 
         // this.nameLabel.string = LocalizedManager.t('TXT_SITTING_OUT');
@@ -1538,7 +1523,7 @@ var PlayerPresenter = cc.Class({
         this.moveShower.scale = 0;
     },
 
-    enableRebuyingView: function () {
+    enableRebuyingView: function() {
         this.nameLabel.string = "Rebuying";
         this.amountLabel.string = "0";
         this.updateBB();
@@ -1550,7 +1535,7 @@ var PlayerPresenter = cc.Class({
      * @method enableDisconnectedView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enableDisconnectedView: function () {
+    enableDisconnectedView: function() {
         this.grayer2.active = true;
         this.nameLabel.string = LocalizedManager.t('TXT_DISCONECTED');
         if (this.playerData != null && this.pokerPresenter.checkForSelfTurn(this.playerData.playerId)) {
@@ -1569,9 +1554,9 @@ var PlayerPresenter = cc.Class({
      * @method enableOutOfMoneyView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enableOutOfMoneyView: function () {
+    enableOutOfMoneyView: function() {
         // this.nameLabel.string = LocalizedManager.t('TXT_SITTING_OUT');
-        LocalizedManager.setTextKey(this.nameLabel.node, 'TXT_SITTING_OUT');        
+        LocalizedManager.setTextKey(this.nameLabel.node, 'TXT_SITTING_OUT');
         if (this.playerData != null && this.pokerPresenter.checkForSelfTurn(this.playerData.playerId)) {
             // console.log("Ac")
 
@@ -1589,7 +1574,7 @@ var PlayerPresenter = cc.Class({
      * @method enablePlayingView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enablePlayingView: function () {
+    enablePlayingView: function() {
         this.amountLabel.node.stopAllActions();
         this.resetLblColor();
         // this.grayer.active = false;
@@ -1606,7 +1591,7 @@ var PlayerPresenter = cc.Class({
      * @method enableReservedView
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enableReservedView: function () {
+    enableReservedView: function() {
         this.reservedPanel.active = true;
         // this.emojiBtn.node.active = false;
         console.log('set EMOJIN ENABLE  OFF enableReservedView')
@@ -1618,7 +1603,7 @@ var PlayerPresenter = cc.Class({
      * @method fadeOutFoldedCards
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    fadeOutFoldedCards: function () {
+    fadeOutFoldedCards: function() {
         var color = cc.Color.BLACK;
         // this.cardHolder.children.forEach(function (element) {
         //     element.color = color.fromHEX("#252020");
@@ -1631,7 +1616,7 @@ var PlayerPresenter = cc.Class({
      * @method setPlayerColor
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    setPlayerColor: function () {
+    setPlayerColor: function() {
         // this.timerSprite.node.color = this.playerColor;//27aug2018
     },
 
@@ -1640,7 +1625,7 @@ var PlayerPresenter = cc.Class({
      * @method onTurn
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    onTurn: function (turnDisplayTime) {
+    onTurn: function(turnDisplayTime) {
         // remove all other timer listeners on pokermodel
         // add listener to tick event
         // console.log("********************* on  Turn ******************************");
@@ -1653,7 +1638,7 @@ var PlayerPresenter = cc.Class({
             this.normalTimerLbl.node.parent.active = true;
         }
         this.imgHider.active = true;
-        this.pokerPresenter.model.on(K.PokerEvents.onTimerTick, function (time, elapsed) {
+        this.pokerPresenter.model.on(K.PokerEvents.onTimerTick, function(time, elapsed) {
             if (this.extra.active) {
                 this.timeBank.children[1].getComponent(cc.Label).string = Math.abs(parseInt(elapsed));
 
@@ -1687,8 +1672,8 @@ var PlayerPresenter = cc.Class({
             if (Math.floor(parseInt(elapsed)) == 5 && this.playerData.playerId == GameManager.user.playerId) {
                 if (!this.isPlaying) {
 
-                    this.timersToKill.push(setTimeout(function () {
-                    // setTimeout(function () {
+                    this.timersToKill.push(setTimeout(function() {
+                        // setTimeout(function () {
                         if (cc.isValid(this.node)) {
 
                             this.isPlaying = false
@@ -1719,12 +1704,11 @@ var PlayerPresenter = cc.Class({
      * @method enableTimeBank
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    enableTimeBank: function () {
+    enableTimeBank: function() {
         this.timeBank.active = true;
         if (this.isSelf()) {
             this.timeBank.opacity = 255;
-        }
-        else {
+        } else {
             this.timeBank.opacity = 0;
         }
         this.extra.active = true;
@@ -1749,7 +1733,7 @@ var PlayerPresenter = cc.Class({
      * @method onStateChange
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    onStateChange: function () { //console.trace("state", this.playerData.state);
+    onStateChange: function() { //console.trace("state", this.playerData.state);
         if (!!this.playerData.state) {
             this.reservedPanel.active = false;
             this.grayer.active = false;
@@ -1796,34 +1780,19 @@ var PlayerPresenter = cc.Class({
      * @method onSitHere
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    onSitHere: function () {
+    onSitHere: function() {
         this.pokerPresenter.onSitHere(this.seatIndex);
     },
 
-    onInvite: function () {
+    onInvite: function() {
         // if (this.pokerPresenter.isTournament()) {
         //     return;
         // }
         // this.pokerPresenter.onShowInviteFriendList();
     },
 
-    isLeftPlayer: function (rIndex) {
-        if (this.pokerPresenter.model.roomConfig.maxPlayers == 2) {
-        }
-        else if (this.pokerPresenter.model.roomConfig.maxPlayers == 3) {
-        }
-        else if (this.pokerPresenter.model.roomConfig.maxPlayers == 4) {
-        }
-        else if (this.pokerPresenter.model.roomConfig.maxPlayers == 5) {
-        }
-        else if (this.pokerPresenter.model.roomConfig.maxPlayers == 6) {
-        }
-        else if (this.pokerPresenter.model.roomConfig.maxPlayers == 7) {
-        }
-        else if (this.pokerPresenter.model.roomConfig.maxPlayers == 8) {
-        }
-        else if (this.pokerPresenter.model.roomConfig.maxPlayers == 9) {
-        }
+    isLeftPlayer: function(rIndex) {
+        if (this.pokerPresenter.model.roomConfig.maxPlayers == 2) {} else if (this.pokerPresenter.model.roomConfig.maxPlayers == 3) {} else if (this.pokerPresenter.model.roomConfig.maxPlayers == 4) {} else if (this.pokerPresenter.model.roomConfig.maxPlayers == 5) {} else if (this.pokerPresenter.model.roomConfig.maxPlayers == 6) {} else if (this.pokerPresenter.model.roomConfig.maxPlayers == 7) {} else if (this.pokerPresenter.model.roomConfig.maxPlayers == 8) {} else if (this.pokerPresenter.model.roomConfig.maxPlayers == 9) {}
     },
 
     /**
@@ -1832,32 +1801,32 @@ var PlayerPresenter = cc.Class({
      * @param {Card[]} card Array of cards representing player's cards
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    addPlayerCards: function (card, fromDisonnection) {
+    addPlayerCards: function(card, fromDisonnection) {
         if (card === null || card.length === 0) {
             return;
         }
 
-        this.cardHolder.children.forEach(function (e) {
+        this.cardHolder.children.forEach(function(e) {
             e.active = false;
         })
         if (K.PORTRAIT && this.cardHolderMy) {
-            this.cardHolderMy.children.forEach(function (e) {
+            this.cardHolderMy.children.forEach(function(e) {
                 e.active = false;
             })
         }
 
-        this.cardHolderShow.children.forEach(function (e) {
+        this.cardHolderShow.children.forEach(function(e) {
             e.active = false;
         })
         if (K.PORTRAIT && this.cardHolderMyShow) {
-            this.cardHolderMyShow.children.forEach(function (e) {
+            this.cardHolderMyShow.children.forEach(function(e) {
                 e.active = false;
             })
         }
 
-        card.forEach(function (element, i) {
+        card.forEach(function(element, i) {
             //  var instance = cc.instantiate(this.pokerPresenter.cardPrefab);
-            var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function () {});
+            var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function() {});
             var cardComponent = instance.getComponent('Card');
             cardComponent.init(element, this.pokerPresenter.model, true);
             cardComponent.reveal(true);
@@ -1877,14 +1846,12 @@ var PlayerPresenter = cc.Class({
                             x = this.cardHolder2My.children[1].x;
                             y = this.cardHolder2My.children[1].y;
                             instance.setRotation(this.cardHolder2My.children[1].getRotation());
-                        } 
-                        else {
+                        } else {
                             x = this.cardHolder2My.children[0].x;
                             y = this.cardHolder2My.children[0].y;
                             instance.setRotation(this.cardHolder2My.children[0].getRotation());
                         }
-                    }
-                    else {
+                    } else {
                         if (i == 1) {
                             x = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].y;
@@ -1895,205 +1862,169 @@ var PlayerPresenter = cc.Class({
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].getRotation());
                         }
                     }
-                } 
-                else if (card.length == 3) {
+                } else if (card.length == 3) {
                     if (this.isSelf()) {
                         if (i == 0) {
                             x = this.cardHolder3My.children[0].x;
                             y = this.cardHolder3My.children[0].y;
                             instance.setRotation(this.cardHolder3My.children[0].getRotation());
-                        } 
-                        else if (i == 1) {
+                        } else if (i == 1) {
                             x = this.cardHolder3My.children[1].x;
                             y = this.cardHolder3My.children[1].y;
                             instance.setRotation(this.cardHolder3My.children[1].getRotation());
-                        } 
-                        else {
+                        } else {
                             x = this.cardHolder3My.children[2].x;
                             y = this.cardHolder3My.children[2].y;
                             instance.setRotation(this.cardHolder3My.children[2].getRotation());
                         }
-                    }
-                    else {
+                    } else {
                         if (i == 0) {
                             x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].getRotation());
-                        } 
-                        else if (i == 1) {
+                        } else if (i == 1) {
                             x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].getRotation());
-                        } 
-                        else {
+                        } else {
                             x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].getRotation());
                         }
                     }
-                } 
-                else if (card.length == 4) {
+                } else if (card.length == 4) {
                     if (this.isSelf()) {
                         if (i == 1) {
                             x = this.cardHolder4My.children[1].x;
                             y = this.cardHolder4My.children[1].y;
                             instance.setRotation(this.cardHolder4My.children[1].getRotation());
-                        } 
-                        else if (i == 3) {
+                        } else if (i == 3) {
                             x = this.cardHolder4My.children[3].x;
                             y = this.cardHolder4My.children[3].y;
                             instance.setRotation(this.cardHolder4My.children[3].getRotation());
-                        }
-                        else if (i == 2) {
+                        } else if (i == 2) {
                             x = this.cardHolder4My.children[2].x;
                             y = this.cardHolder4My.children[2].y;
                             instance.setRotation(this.cardHolder4My.children[2].getRotation());
-                        }
-                        else if (i == 0) {
+                        } else if (i == 0) {
                             x = this.cardHolder4My.children[0].x;
                             y = this.cardHolder4My.children[0].y;
                             instance.setRotation(this.cardHolder4My.children[0].getRotation());
                         }
-                    }
-                    else {
+                    } else {
                         if (i == 1) {
                             x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].getRotation());
-                        } 
-                        else if (i == 3) {
+                        } else if (i == 3) {
                             x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].getRotation());
-                        }
-                        else if (i == 2) {
+                        } else if (i == 2) {
                             x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].getRotation());
-                        }
-                        else if (i == 0) {
+                        } else if (i == 0) {
                             x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].getRotation());
                         }
                     }
-                }
-                else if (card.length == 5) {
+                } else if (card.length == 5) {
                     if (this.isSelf()) {
                         if (i == 1) {
                             x = this.cardHolder5My.children[1].x;
                             y = this.cardHolder5My.children[1].y;
                             instance.setRotation(this.cardHolder5My.children[1].getRotation());
-                        } 
-                        else if (i == 3) {
+                        } else if (i == 3) {
                             x = this.cardHolder5My.children[3].x;
                             y = this.cardHolder5My.children[3].y;
                             instance.setRotation(this.cardHolder5My.children[3].getRotation());
-                        }
-                        else if (i == 2) {
+                        } else if (i == 2) {
                             x = this.cardHolder5My.children[2].x;
                             y = this.cardHolder5My.children[2].y;
                             instance.setRotation(this.cardHolder5My.children[2].getRotation());
-                        }
-                        else if (i == 0) {
+                        } else if (i == 0) {
                             x = this.cardHolder5My.children[0].x;
                             y = this.cardHolder5My.children[0].y;
                             instance.setRotation(this.cardHolder5My.children[0].getRotation());
-                        }
-                        else if (i == 4) {
+                        } else if (i == 4) {
                             x = this.cardHolder5My.children[4].x;
                             y = this.cardHolder5My.children[4].y;
                             instance.setRotation(this.cardHolder5My.children[4].getRotation());
                         }
-                    }
-                    else {
+                    } else {
                         if (i == 1) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].getRotation());
-                        } 
-                        else if (i == 3) {
+                        } else if (i == 3) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].getRotation());
-                        }
-                        else if (i == 2) {
+                        } else if (i == 2) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].getRotation());
-                        }
-                        else if (i == 0) {
+                        } else if (i == 0) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].getRotation());
-                        }
-                        else if (i == 4) {
+                        } else if (i == 4) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].getRotation());
                         }
                     }
-                }
-                else if (card.length == 6) {
+                } else if (card.length == 6) {
                     if (this.isSelf()) {
                         if (i == 1) {
                             x = this.cardHolder6My.children[1].x;
                             y = this.cardHolder6My.children[1].y;
                             instance.setRotation(this.cardHolder6My.children[1].getRotation());
-                        } 
-                        else if (i == 3) {
+                        } else if (i == 3) {
                             x = this.cardHolder6My.children[3].x;
                             y = this.cardHolder6My.children[3].y;
                             instance.setRotation(this.cardHolder6My.children[3].getRotation());
-                        }
-                        else if (i == 2) {
+                        } else if (i == 2) {
                             x = this.cardHolder6My.children[2].x;
                             y = this.cardHolder6My.children[2].y;
                             instance.setRotation(this.cardHolder6My.children[2].getRotation());
-                        }
-                        else if (i == 0) {
+                        } else if (i == 0) {
                             x = this.cardHolder6My.children[0].x;
                             y = this.cardHolder6My.children[0].y;
                             instance.setRotation(this.cardHolder6My.children[0].getRotation());
-                        }
-                        else if (i == 4) {
+                        } else if (i == 4) {
                             x = this.cardHolder6My.children[4].x;
                             y = this.cardHolder6My.children[4].y;
                             instance.setRotation(this.cardHolder6My.children[4].getRotation());
-                        }
-                        else if (i == 5) {
+                        } else if (i == 5) {
                             x = this.cardHolder6My.children[5].x;
                             y = this.cardHolder6My.children[5].y;
                             instance.setRotation(this.cardHolder6My.children[5].getRotation());
                         }
-                    }
-                    else {
+                    } else {
                         if (i == 1) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[1].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[1].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[1].getRotation());
-                        } 
-                        else if (i == 3) {
+                        } else if (i == 3) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[3].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[3].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[3].getRotation());
-                        }
-                        else if (i == 2) {
+                        } else if (i == 2) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[2].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[2].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[2].getRotation());
-                        }
-                        else if (i == 0) {
+                        } else if (i == 0) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[0].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[0].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[0].getRotation());
-                        }
-                        else if (i == 4) {
+                        } else if (i == 4) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[4].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[4].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[4].getRotation());
-                        }
-                        else if (i == 5) {
+                        } else if (i == 5) {
                             x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[5].x;
                             y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[5].y;
                             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[5].getRotation());
@@ -2105,32 +2036,32 @@ var PlayerPresenter = cc.Class({
         }, this);
     },
 
-    addWinningPlayerCards: function (card, everybodyPacked = false) {
+    addWinningPlayerCards: function(card, everybodyPacked = false) {
         if (card === null || card.length === 0) {
             return;
         }
 
-        this.cardHolder.children.forEach(function (e) {
+        this.cardHolder.children.forEach(function(e) {
             e.active = false;
         })
         if (K.PORTRAIT && this.cardHolderMy) {
-            this.cardHolderMy.children.forEach(function (e) {
+            this.cardHolderMy.children.forEach(function(e) {
                 e.active = false;
             })
         }
 
-        this.cardHolderShow.children.forEach(function (e) {
+        this.cardHolderShow.children.forEach(function(e) {
             e.active = false;
         })
         if (K.PORTRAIT && this.cardHolderMyShow) {
-            this.cardHolderMyShow.children.forEach(function (e) {
+            this.cardHolderMyShow.children.forEach(function(e) {
                 e.active = false;
             })
         }
 
-        card.forEach(function (element, i) {
+        card.forEach(function(element, i) {
             //  var instance = cc.instantiate(this.pokerPresenter.cardPrefab);
-            var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function () {});
+            var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function() {});
             var cardComponent = instance.getComponent('Card');
             cardComponent.init(element, this.pokerPresenter.model, true);
             cardComponent.reveal(true);
@@ -2142,8 +2073,7 @@ var PlayerPresenter = cc.Class({
                 if (!this.isSelf() && this.pokerPresenter.model.roomConfig.channelVariation == "Omaha") {
                     instance.scale = 0.82;
                     this.cardHolderMyShow.getComponent(cc.Layout).spacingX = -55;
-                }
-                else {
+                } else {
                     instance.scale = 1;
                     this.cardHolderMyShow.getComponent(cc.Layout).spacingX = -50;
                 }
@@ -2151,8 +2081,7 @@ var PlayerPresenter = cc.Class({
 
             if (this.playerData && this.playerData.lastMove == "FOLD") {
                 cardComponent.gray();
-            }
-            else {
+            } else {
                 // if (this.playerData.__isMuckHand == true) {
                 //     cardComponent.reveal(false);
                 //     delete this.playerData.__isMuckHand;
@@ -2177,13 +2106,13 @@ var PlayerPresenter = cc.Class({
      * @param {array} cardTypes
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    revealCards: function (fromDisonnection) {
+    revealCards: function(fromDisonnection) {
 
         // console.error("Reveal Cards");
 
         var cardType = [];
         if (this.playerData.cards !== undefined && this.playerData.cards !== null && this.playerData.cards.length > 0) {
-            this.playerData.cards.forEach(function (cardData) {
+            this.playerData.cards.forEach(function(cardData) {
 
                 var suit = this.pokerPresenter.model.getSuit(cardData.type);
                 cardType.push(new card(cardData.rank, suit));
@@ -2194,25 +2123,24 @@ var PlayerPresenter = cc.Class({
         // this.onStateChange();
     },
 
-    winningRevealCards: function (everybodyPacked = false) {
+    winningRevealCards: function(everybodyPacked = false) {
 
         // console.error("Reveal Cards");
 
         var cardType = [];
         if (this.playerData.cards !== undefined && this.playerData.cards !== null && this.playerData.cards.length > 0) {
-            this.playerData.cards.forEach(function (cardData) {
+            this.playerData.cards.forEach(function(cardData) {
                 var suit = this.pokerPresenter.model.getSuit(cardData.type);
                 cardType.push(new card(cardData.rank, suit));
             }, this);
             this.addWinningPlayerCards(cardType, everybodyPacked);
             this.playerData.cards = [];
-        }
-        else {
+        } else {
 
             this.cardHolder.children.forEach((e) => {
                 e.active = false;
 
-                var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function () {});
+                var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function() {});
                 var cardComponent = instance.getComponent('Card');
                 cardComponent.init(e.getComponent('Card').card, this.pokerPresenter.model, true);
                 cardComponent.reveal(false);
@@ -2224,7 +2152,7 @@ var PlayerPresenter = cc.Class({
                 this.cardHolderMy.children.forEach((e) => {
                     e.active = false;
 
-                    var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function () {});
+                    var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function() {});
                     var cardComponent = instance.getComponent('Card');
                     cardComponent.init(e.getComponent('Card').card, this.pokerPresenter.model, true);
                     cardComponent.reveal(false);
@@ -2276,7 +2204,7 @@ var PlayerPresenter = cc.Class({
         // this.onStateChange();
     },
 
-    winningRevealCards2: function () {
+    winningRevealCards2: function() {
 
         // console.error("Reveal Cards");
 
@@ -2296,7 +2224,7 @@ var PlayerPresenter = cc.Class({
      * @param {bool} flag
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    resetCards: function (flag, fadeView) {
+    resetCards: function(flag, fadeView) {
 
         var children = this.cardHolder.children;
         for (var index = 0; index < children.length; index++) {
@@ -2328,7 +2256,7 @@ var PlayerPresenter = cc.Class({
      * @param {String} selfPlayerId
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    displayDummyCards: function (noOfCards, selfPlayerId) {
+    displayDummyCards: function(noOfCards, selfPlayerId) {
         if (this.seatState !== K.SeatState.Occupied) {
             return;
         }
@@ -2346,8 +2274,7 @@ var PlayerPresenter = cc.Class({
         if (this.isSelf()) {
             // this.cardHolderMy.anchorX = 0;
             // this.cardHolderMy.x = 19.318;
-        }
-        else {
+        } else {
             console.log("this.playerData", this.node.x);
             console.log("this.playerData", this.node.parent.x);
             console.log("this.playerData.seatIndex", this.playerData.seatIndex);
@@ -2356,371 +2283,15 @@ var PlayerPresenter = cc.Class({
             let rIndex = this.pokerPresenter.getRotatedSeatIndex(this.playerData.seatIndex);
         }
 
-        if (this.isSelf()) {
-        }
-        else {
+        if (this.isSelf()) {} else {
             if (this.node.parent.x < 0) {
                 this.cardHolder.x = 47;
-            }
-            else {
+            } else {
                 this.cardHolder.x = -47;
             }
         }
 
-        if (this.pokerPresenter.isTournament()) {
-            if (((!!selfPlayerId && selfPlayerId !== this.playerData.playerId) || (!selfPlayerId))) {
-            // if (((!!selfPlayerId && selfPlayerId !== this.playerData.playerId) || (!selfPlayerId)) && this.playerData.state === K.PlayerState.Playing) {
-            // if (selfPlayerId !== this.playerData.playerId && this.playerData.state === K.PlayerState.Playing) {
-            // console.log("inside dummy card");
-                this.clearPlayerCards();
-
-                for (var index = 0; index < noOfCards; index++) {
-                    // var instance = cc.instantiate(this.pokerPresenter.cardPrefab);
-                    var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function () {});
-                    // this.cardHolder.addChild(instance);
-                    var cardComponent = instance.getComponent('Card');
-                    cardComponent.reveal(false);
-                    this.cardHolder.getComponent(cc.Layout).enabled = false;
-                    if (K.PORTRAIT) {
-                        instance.parent = this.isSelf() ? this.cardHolderMy : this.cardHolder;
-                    }
-                    else {
-                        instance.parent = this.cardHolder;
-                    }
-
-                    if (K.PORTRAIT) {
-                        let x = 0;
-                        let y = 0;
-
-                        if (noOfCards == 2) {
-                            if (this.isSelf()) {
-                                if (index == 1) {
-                                    x = this.cardHolder2My.children[1].x;
-                                    y = this.cardHolder2My.children[1].y;
-                                    instance.setRotation(this.cardHolder2My.children[1].getRotation());
-                                } 
-                                else {
-                                    x = this.cardHolder2My.children[0].x;
-                                    y = this.cardHolder2My.children[0].y;
-                                    instance.setRotation(this.cardHolder2My.children[0].getRotation());
-                                }
-                            }
-                            else {
-                                if (index == 1) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].getRotation());
-                                } else {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].getRotation());
-                                }
-                            }
-                        } 
-                        else if (noOfCards == 3) {
-                            if (this.isSelf()) {
-                                if (index == 0) {
-                                    x = this.cardHolder3My.children[0].x;
-                                    y = this.cardHolder3My.children[0].y;
-                                    instance.setRotation(this.cardHolder3My.children[0].getRotation());
-                                } 
-                                else if (index == 1) {
-                                    x = this.cardHolder3My.children[1].x;
-                                    y = this.cardHolder3My.children[1].y;
-                                    instance.setRotation(this.cardHolder3My.children[1].getRotation());
-                                } 
-                                else {
-                                    x = this.cardHolder3My.children[2].x;
-                                    y = this.cardHolder3My.children[2].y;
-                                    instance.setRotation(this.cardHolder3My.children[2].getRotation());
-                                }
-                            }
-                            else {
-                                if (index == 0) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].getRotation());
-                                } 
-                                else if (index == 1) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].getRotation());
-                                } 
-                                else {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].getRotation());
-                                }
-                            }
-                        } 
-                        else if (noOfCards == 4) {
-                            if (this.isSelf()) {
-                                if (index == 1) {
-                                    x = this.cardHolder4My.children[1].x;
-                                    y = this.cardHolder4My.children[1].y;
-                                    instance.setRotation(this.cardHolder4My.children[1].getRotation());
-                                } 
-                                else if (index == 3) {
-                                    x = this.cardHolder4My.children[3].x;
-                                    y = this.cardHolder4My.children[3].y;
-                                    instance.setRotation(this.cardHolder4My.children[3].getRotation());
-                                }
-                                else if (index == 2) {
-                                    x = this.cardHolder4My.children[2].x;
-                                    y = this.cardHolder4My.children[2].y;
-                                    instance.setRotation(this.cardHolder4My.children[2].getRotation());
-                                }
-                                else if (index == 0) {
-                                    x = this.cardHolder4My.children[0].x;
-                                    y = this.cardHolder4My.children[0].y;
-                                    instance.setRotation(this.cardHolder4My.children[0].getRotation());
-                                }
-                            }
-                            else {
-                                if (index == 1) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].getRotation());
-                                } 
-                                else if (index == 3) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].getRotation());
-                                }
-                                else if (index == 2) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].getRotation());
-                                }
-                                else if (index == 0) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].getRotation());
-                                }
-                            }
-                        }
-                        else if (noOfCards == 5) {
-                            if (this.isSelf()) {
-                                if (index == 1) {
-                                    x = this.cardHolder5My.children[1].x;
-                                    y = this.cardHolder5My.children[1].y;
-                                    instance.setRotation(this.cardHolder5My.children[1].getRotation());
-                                } 
-                                else if (index == 3) {
-                                    x = this.cardHolder5My.children[3].x;
-                                    y = this.cardHolder5My.children[3].y;
-                                    instance.setRotation(this.cardHolder5My.children[3].getRotation());
-                                }
-                                else if (index == 2) {
-                                    x = this.cardHolder5My.children[2].x;
-                                    y = this.cardHolder5My.children[2].y;
-                                    instance.setRotation(this.cardHolder5My.children[2].getRotation());
-                                }
-                                else if (index == 0) {
-                                    x = this.cardHolder5My.children[0].x;
-                                    y = this.cardHolder5My.children[0].y;
-                                    instance.setRotation(this.cardHolder5My.children[0].getRotation());
-                                }
-                                else if (index == 4) {
-                                    x = this.cardHolder5My.children[4].x;
-                                    y = this.cardHolder5My.children[4].y;
-                                    instance.setRotation(this.cardHolder5My.children[4].getRotation());
-                                }
-                            }
-                            else {
-                                if (index == 1) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].getRotation());
-                                } 
-                                else if (index == 3) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].getRotation());
-                                }
-                                else if (index == 2) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].getRotation());
-                                }
-                                else if (index == 0) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].getRotation());
-                                }
-                                else if (index == 4) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].getRotation());
-                                }
-                            }
-                        }
-                        else if (noOfCards == 6) {
-                            if (this.isSelf()) {
-                                if (index == 1) {
-                                    x = this.cardHolder6My.children[1].x;
-                                    y = this.cardHolder6My.children[1].y;
-                                    instance.setRotation(this.cardHolder6My.children[1].getRotation());
-                                } 
-                                else if (index == 3) {
-                                    x = this.cardHolder6My.children[3].x;
-                                    y = this.cardHolder6My.children[3].y;
-                                    instance.setRotation(this.cardHolder6My.children[3].getRotation());
-                                }
-                                else if (index == 2) {
-                                    x = this.cardHolder6My.children[2].x;
-                                    y = this.cardHolder6My.children[2].y;
-                                    instance.setRotation(this.cardHolder6My.children[2].getRotation());
-                                }
-                                else if (index == 0) {
-                                    x = this.cardHolder6My.children[0].x;
-                                    y = this.cardHolder6My.children[0].y;
-                                    instance.setRotation(this.cardHolder6My.children[0].getRotation());
-                                }
-                                else if (index == 4) {
-                                    x = this.cardHolder6My.children[4].x;
-                                    y = this.cardHolder6My.children[4].y;
-                                    instance.setRotation(this.cardHolder6My.children[4].getRotation());
-                                }
-                                else if (index == 5) {
-                                    x = this.cardHolder6My.children[5].x;
-                                    y = this.cardHolder6My.children[5].y;
-                                    instance.setRotation(this.cardHolder6My.children[5].getRotation());
-                                }
-                            }
-                            else {
-                                if (index == 1) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[1].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[1].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[1].getRotation());
-                                } 
-                                else if (index == 3) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[3].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[3].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[3].getRotation());
-                                }
-                                else if (index == 2) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[2].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[2].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[2].getRotation());
-                                }
-                                else if (index == 0) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[0].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[0].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[0].getRotation());
-                                }
-                                else if (index == 4) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[4].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[4].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[4].getRotation());
-                                }
-                                else if (index == 5) {
-                                    x = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[5].x;
-                                    y = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[5].y;
-                                    instance.setRotation((this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[5].getRotation());
-                                }
-                            }
-                        }
-
-                        // if (noOfCards == 2) {
-                        //     if (this.isSelf()) {
-                        //         if (index == 1) {
-                        //             x = this.cardHolder2My.children[1].x;
-                        //             y = this.cardHolder2My.children[1].y;
-                        //             instance.setRotation(this.cardHolder2My.children[1].getRotation());
-                        //         } 
-                        //         else {
-                        //             x = this.cardHolder2My.children[0].x;
-                        //             y = this.cardHolder2My.children[0].y;
-                        //             instance.setRotation(this.cardHolder2My.children[0].getRotation());
-                        //         }
-                        //     }
-                        //     else {
-                        //         if (index == 1) {
-                        //             x = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].x;
-                        //             y = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].y;
-                        //             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].getRotation());
-                        //         } 
-                        //         else {
-                        //             x = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].x;
-                        //             y = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].y;
-                        //             instance.setRotation((this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].getRotation());
-                        //         }
-                        //     }
-
-                        // } else {
-                        //     if (this.isSelf()) {
-                        //         if ((index % 2) == 1) {
-                        //             // odd 1, 3
-                        //             if (index < 2) {
-                        //                 // 1
-                        //                 x = this.cardHolder4My.children[1].x;
-                        //                 y = this.cardHolder4My.children[1].y;
-                        //                 instance.setRotation(this.cardHolder4My.children[1].getRotation());
-                        //             }
-                        //             else {
-                        //                 // 3
-                        //                 x = this.cardHolder4My.children[3].x;
-                        //                 y = this.cardHolder4My.children[3].y;
-                        //                 instance.setRotation(this.cardHolder4My.children[3].getRotation());
-                        //             }
-                        //         } 
-                        //         else {
-                        //             // even 0, 2
-                        //             if (index == 2) {
-                        //                 x = this.cardHolder4My.children[2].x;
-                        //                 y = this.cardHolder4My.children[2].y;
-                        //                 instance.setRotation(this.cardHolder4My.children[2].getRotation());
-                        //             }
-                        //             else {
-                        //                 x = this.cardHolder4My.children[0].x;
-                        //                 y = this.cardHolder4My.children[0].y;
-                        //                 instance.setRotation(this.cardHolder4My.children[0].getRotation());
-                        //             }
-                        //         }
-                        //     }
-                        //     else {
-                        //         if ((index % 2) == 1) {
-                        //             // odd 1, 3
-                        //             if (index < 2) {
-                        //                 // 1
-                        //                 x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].x;
-                        //                 y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].y;
-                        //                 instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].getRotation());
-                        //             }
-                        //             else {
-                        //                 // 3
-                        //                 x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].x;
-                        //                 y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].y;
-                        //                 instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].getRotation());
-                        //             }
-                        //         } 
-                        //         else {
-                        //             // even 0, 2
-                        //             if (index == 2) {
-                        //                 x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].x;
-                        //                 y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].y;
-                        //                 instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].getRotation());
-                        //             }
-                        //             else {
-                        //                 x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].x;
-                        //                 y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].y;
-                        //                 instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].getRotation());
-                        //             }
-                        //         }
-                        //     }
-                        // }
-
-
-                        instance.x = (x);
-                        instance.y = (y);
-
-                    }
-                }
-            } else {
-            }
-        }
-        else {
+        {
             if (((!!selfPlayerId && selfPlayerId !== this.playerData.playerId) || (!selfPlayerId)) && this.playerData.state === K.PlayerState.Playing) {
                 // if (selfPlayerId !== this.playerData.playerId && this.playerData.state === K.PlayerState.Playing) {
                 // console.log("inside dummy card");
@@ -2728,15 +2299,14 @@ var PlayerPresenter = cc.Class({
 
                 for (var index = 0; index < noOfCards; index++) {
                     // var instance = cc.instantiate(this.pokerPresenter.cardPrefab);
-                    var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function () {});
+                    var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function() {});
                     // this.cardHolder.addChild(instance);
                     var cardComponent = instance.getComponent('Card');
                     cardComponent.reveal(false);
                     this.cardHolder.getComponent(cc.Layout).enabled = false;
                     if (K.PORTRAIT) {
                         instance.parent = this.isSelf() ? this.cardHolderMy : this.cardHolder;
-                    }
-                    else {
+                    } else {
                         instance.parent = this.cardHolder;
                     }
                     // instance.setScale(1.2);
@@ -2751,14 +2321,12 @@ var PlayerPresenter = cc.Class({
                                     x = this.cardHolder2My.children[1].x;
                                     y = this.cardHolder2My.children[1].y;
                                     instance.setRotation(this.cardHolder2My.children[1].getRotation());
-                                } 
-                                else {
+                                } else {
                                     x = this.cardHolder2My.children[0].x;
                                     y = this.cardHolder2My.children[0].y;
                                     instance.setRotation(this.cardHolder2My.children[0].getRotation());
                                 }
-                            }
-                            else {
+                            } else {
                                 if (index == 1) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[1].y;
@@ -2769,205 +2337,169 @@ var PlayerPresenter = cc.Class({
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder2 : this.cardHolder2R).children[0].getRotation());
                                 }
                             }
-                        } 
-                        else if (noOfCards == 3) {
+                        } else if (noOfCards == 3) {
                             if (this.isSelf()) {
                                 if (index == 0) {
                                     x = this.cardHolder3My.children[0].x;
                                     y = this.cardHolder3My.children[0].y;
                                     instance.setRotation(this.cardHolder3My.children[0].getRotation());
-                                } 
-                                else if (index == 1) {
+                                } else if (index == 1) {
                                     x = this.cardHolder3My.children[1].x;
                                     y = this.cardHolder3My.children[1].y;
                                     instance.setRotation(this.cardHolder3My.children[1].getRotation());
-                                } 
-                                else {
+                                } else {
                                     x = this.cardHolder3My.children[2].x;
                                     y = this.cardHolder3My.children[2].y;
                                     instance.setRotation(this.cardHolder3My.children[2].getRotation());
                                 }
-                            }
-                            else {
+                            } else {
                                 if (index == 0) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[0].getRotation());
-                                } 
-                                else if (index == 1) {
+                                } else if (index == 1) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[1].getRotation());
-                                } 
-                                else {
+                                } else {
                                     x = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder3 : this.cardHolder3R).children[2].getRotation());
                                 }
                             }
-                        } 
-                        else if (noOfCards == 4) {
+                        } else if (noOfCards == 4) {
                             if (this.isSelf()) {
                                 if (index == 1) {
                                     x = this.cardHolder4My.children[1].x;
                                     y = this.cardHolder4My.children[1].y;
                                     instance.setRotation(this.cardHolder4My.children[1].getRotation());
-                                } 
-                                else if (index == 3) {
+                                } else if (index == 3) {
                                     x = this.cardHolder4My.children[3].x;
                                     y = this.cardHolder4My.children[3].y;
                                     instance.setRotation(this.cardHolder4My.children[3].getRotation());
-                                }
-                                else if (index == 2) {
+                                } else if (index == 2) {
                                     x = this.cardHolder4My.children[2].x;
                                     y = this.cardHolder4My.children[2].y;
                                     instance.setRotation(this.cardHolder4My.children[2].getRotation());
-                                }
-                                else if (index == 0) {
+                                } else if (index == 0) {
                                     x = this.cardHolder4My.children[0].x;
                                     y = this.cardHolder4My.children[0].y;
                                     instance.setRotation(this.cardHolder4My.children[0].getRotation());
                                 }
-                            }
-                            else {
+                            } else {
                                 if (index == 1) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[1].getRotation());
-                                } 
-                                else if (index == 3) {
+                                } else if (index == 3) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[3].getRotation());
-                                }
-                                else if (index == 2) {
+                                } else if (index == 2) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[2].getRotation());
-                                }
-                                else if (index == 0) {
+                                } else if (index == 0) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder4 : this.cardHolder4R).children[0].getRotation());
                                 }
                             }
-                        }
-                        else if (noOfCards == 5) {
+                        } else if (noOfCards == 5) {
                             if (this.isSelf()) {
                                 if (index == 1) {
                                     x = this.cardHolder5My.children[1].x;
                                     y = this.cardHolder5My.children[1].y;
                                     instance.setRotation(this.cardHolder5My.children[1].getRotation());
-                                } 
-                                else if (index == 3) {
+                                } else if (index == 3) {
                                     x = this.cardHolder5My.children[3].x;
                                     y = this.cardHolder5My.children[3].y;
                                     instance.setRotation(this.cardHolder5My.children[3].getRotation());
-                                }
-                                else if (index == 2) {
+                                } else if (index == 2) {
                                     x = this.cardHolder5My.children[2].x;
                                     y = this.cardHolder5My.children[2].y;
                                     instance.setRotation(this.cardHolder5My.children[2].getRotation());
-                                }
-                                else if (index == 0) {
+                                } else if (index == 0) {
                                     x = this.cardHolder5My.children[0].x;
                                     y = this.cardHolder5My.children[0].y;
                                     instance.setRotation(this.cardHolder5My.children[0].getRotation());
-                                }
-                                else if (index == 4) {
+                                } else if (index == 4) {
                                     x = this.cardHolder5My.children[4].x;
                                     y = this.cardHolder5My.children[4].y;
                                     instance.setRotation(this.cardHolder5My.children[4].getRotation());
                                 }
-                            }
-                            else {
+                            } else {
                                 if (index == 1) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[1].getRotation());
-                                } 
-                                else if (index == 3) {
+                                } else if (index == 3) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[3].getRotation());
-                                }
-                                else if (index == 2) {
+                                } else if (index == 2) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[2].getRotation());
-                                }
-                                else if (index == 0) {
+                                } else if (index == 0) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[0].getRotation());
-                                }
-                                else if (index == 4) {
+                                } else if (index == 4) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder5R).children[4].getRotation());
                                 }
                             }
-                        }
-                        else if (noOfCards == 6) {
+                        } else if (noOfCards == 6) {
                             if (this.isSelf()) {
                                 if (index == 1) {
                                     x = this.cardHolder6My.children[1].x;
                                     y = this.cardHolder6My.children[1].y;
                                     instance.setRotation(this.cardHolder6My.children[1].getRotation());
-                                } 
-                                else if (index == 3) {
+                                } else if (index == 3) {
                                     x = this.cardHolder6My.children[3].x;
                                     y = this.cardHolder6My.children[3].y;
                                     instance.setRotation(this.cardHolder6My.children[3].getRotation());
-                                }
-                                else if (index == 2) {
+                                } else if (index == 2) {
                                     x = this.cardHolder6My.children[2].x;
                                     y = this.cardHolder6My.children[2].y;
                                     instance.setRotation(this.cardHolder6My.children[2].getRotation());
-                                }
-                                else if (index == 0) {
+                                } else if (index == 0) {
                                     x = this.cardHolder6My.children[0].x;
                                     y = this.cardHolder6My.children[0].y;
                                     instance.setRotation(this.cardHolder6My.children[0].getRotation());
-                                }
-                                else if (index == 4) {
+                                } else if (index == 4) {
                                     x = this.cardHolder6My.children[4].x;
                                     y = this.cardHolder6My.children[4].y;
                                     instance.setRotation(this.cardHolder6My.children[4].getRotation());
-                                }
-                                else if (index == 5) {
+                                } else if (index == 5) {
                                     x = this.cardHolder6My.children[5].x;
                                     y = this.cardHolder6My.children[5].y;
                                     instance.setRotation(this.cardHolder6My.children[5].getRotation());
                                 }
-                            }
-                            else {
+                            } else {
                                 if (index == 1) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[1].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[1].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[1].getRotation());
-                                } 
-                                else if (index == 3) {
+                                } else if (index == 3) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[3].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[3].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[3].getRotation());
-                                }
-                                else if (index == 2) {
+                                } else if (index == 2) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[2].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[2].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[2].getRotation());
-                                }
-                                else if (index == 0) {
+                                } else if (index == 0) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[0].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[0].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[0].getRotation());
-                                }
-                                else if (index == 4) {
+                                } else if (index == 4) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[4].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[4].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder5 : this.cardHolder6R).children[4].getRotation());
-                                }
-                                else if (index == 5) {
+                                } else if (index == 5) {
                                     x = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[5].x;
                                     y = (this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[5].y;
                                     instance.setRotation((this.node.parent.x < 0 ? this.cardHolder6 : this.cardHolder6R).children[5].getRotation());
@@ -2978,18 +2510,17 @@ var PlayerPresenter = cc.Class({
                         instance.y = (y);
                     }
                 }
-            } else {
-            }
+            } else {}
         }
 
 
         if (this.playerData && this.playerData.lastMove == "FOLD") {
-            this.cardHolderMy.children.forEach(function (element) {
+            this.cardHolderMy.children.forEach(function(element) {
                 // element.opacity = 150;
                 element.getComponent("Card").gray();
             }, this);
 
-            this.cardHolder.children.forEach(function (element) {
+            this.cardHolder.children.forEach(function(element) {
                 // element.opacity = 150;
                 element.getComponent("Card").gray();
             }, this);
@@ -2998,35 +2529,33 @@ var PlayerPresenter = cc.Class({
 
 
 
-
-
     /**
      * @description Discard player hand on gameover
      * @method clearPlayerCards
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    clearPlayerCards: function () {
+    clearPlayerCards: function() {
         var children = this.cardHolder.children;
         while (children.length > 0) {
-            CardPool.destroyCard(children[0], function () {});
+            CardPool.destroyCard(children[0], function() {});
         }
 
         children = this.cardHolderShow.children;
         while (children.length > 0) {
-            CardPool.destroyCard(children[0], function () {});
+            CardPool.destroyCard(children[0], function() {});
         }
 
         if (K.PORTRAIT && this.cardHolderMy) {
             children = this.cardHolderMy.children;
             while (children.length > 0) {
-                CardPool.destroyCard(children[0], function () {});
+                CardPool.destroyCard(children[0], function() {});
             }
         }
 
         if (K.PORTRAIT && this.cardHolderMyShow) {
             children = this.cardHolderMyShow.children;
             while (children.length > 0) {
-                CardPool.destroyCard(children[0], function () {});
+                CardPool.destroyCard(children[0], function() {});
             }
         }
 
@@ -3038,7 +2567,7 @@ var PlayerPresenter = cc.Class({
      * @method updateCoins
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    updateCoins: function () {
+    updateCoins: function() {
         // console.log(7)
         this.amountLabel.string = GameManager.convertChips(this.playerData.chips);
         this.updateBB();
@@ -3049,14 +2578,14 @@ var PlayerPresenter = cc.Class({
      * @method onDestroy
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    onDestroy: function () {
+    onDestroy: function() {
         // this.clearPlayerCards();
         GameScreen.node.off("grid-refreshed", this.gridRefreshedRef);
         GameManager.off("image-loaded", this.imageLoadedRef);
     },
 
     //not in use
-    showChatOldie: function (message) {
+    showChatOldie: function(message) {
         this.chatHead.active = true;
         var posY = this.chatLbl.node.position.y;
         // message = message.substring(0, message.indexOf(">") + 1) + message.substring(message.indexOf(":") + 1, message.length - 1);
@@ -3175,7 +2704,7 @@ var PlayerPresenter = cc.Class({
         }
 
         this.chatLbl.string = message;
-        this.scheduleOnce(function () {
+        this.scheduleOnce(function() {
             this.chatHead.active = false;
             // this.chatLbl.node.y = posY;
             // this.chatLbl.maxWidth = 64;
@@ -3303,7 +2832,7 @@ var PlayerPresenter = cc.Class({
      * @param {String} message - message string from broadcast
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    showChat: function (message) {
+    showChat: function(message) {
         message = message.trim();
         this.chatHead.active = true;
         // this.chatLbl.maxWidth = 0;
@@ -3329,7 +2858,7 @@ var PlayerPresenter = cc.Class({
                 this.chatLbl.string = string;
             // base.width = width;
         }
-        this.scheduleOnce(function () {
+        this.scheduleOnce(function() {
             this.chatLbl.string = "";
             // base.width = 64;
             this.chatHead.active = false;
@@ -3361,7 +2890,7 @@ var PlayerPresenter = cc.Class({
      * @return {number} width of the string
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    determineWidth: function (message) {
+    determineWidth: function(message) {
         let numEmojis = 0;
         let tmpMsg = message;
         //count emojis
@@ -3403,7 +2932,7 @@ var PlayerPresenter = cc.Class({
      * @return {String} String to be displayed in chatHead
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    determineString: function (message) {
+    determineString: function(message) {
         //Emojis and text case 
         let limit = message.length > 320 ? 320 : message.length;
         let finalstr = "";
@@ -3443,7 +2972,7 @@ var PlayerPresenter = cc.Class({
      * @param {number} index - index of character '<'
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    isEmoji: function (index, message) {
+    isEmoji: function(index, message) {
         let temp = message.substring(index);
         return (temp.indexOf("<img") != -1) && (temp.indexOf("/>") != -1);
     },
@@ -3453,14 +2982,14 @@ var PlayerPresenter = cc.Class({
      * @method showWinnerBanner
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
-    showWinnerBanner: function () {
+    showWinnerBanner: function() {
         // console.log("showingwinner")
         this.winningNode.active = true;
         this.winningNode.children[1].active = true;
         this.winningNode.children[1].getComponent(cc.Animation).play();
     },
 
-    hideWinningAnim: function () {
+    hideWinningAnim: function() {
         this.winningNode.active = false;
         this.winningNode.children[1].active = this.winningNode.children[2].active = this.winningNode.children[3].active = this.winningNode.children[4].active = false;
         this.winningNode.children[3].setScale(0, 0);
@@ -3474,8 +3003,8 @@ var PlayerPresenter = cc.Class({
     showSelf: function() {
         console.log("%c[Flow/showSelf]", 'Orange: Tomato;');
         if (this.playerData && this.playerData.playerId && this.playerData.playerId == GameManager.user.playerId) {
-        //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
-        //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
+            //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
+            //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
 
             if (this.selfPlayerHand) {
                 this.selfPlayerHand.active = true;
@@ -3486,7 +3015,7 @@ var PlayerPresenter = cc.Class({
             this.occupiedPanel.getChildByName("Player").active = false;
             this.occupiedPanel.getChildByName("Timer").active = false;
 
-            this.cardHolder.children.forEach(function (element) {
+            this.cardHolder.children.forEach(function(element) {
                 cc.find('FrontFace/Gray', element).active = true;
             }, this);
 
@@ -3497,8 +3026,8 @@ var PlayerPresenter = cc.Class({
     hideSelf: function() {
         console.log("%c[Flow/hideSelf]", 'Orange: Tomato;');
         if (this.playerData && this.playerData.playerId && this.playerData.playerId == GameManager.user.playerId) {
-        //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
-        //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
+            //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
+            //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
 
             if (this.selfPlayerHand) {
                 this.selfPlayerHand.active = false;
@@ -3510,7 +3039,7 @@ var PlayerPresenter = cc.Class({
 
             this.playerBetLabel.parent.setPosition(this.oldPlayerBetLabelPosition);
 
-            this.cardHolder.children.forEach(function (element) {
+            this.cardHolder.children.forEach(function(element) {
                 cc.find('FrontFace/Gray', element).active = false;
             }, this);
         }
@@ -3519,8 +3048,8 @@ var PlayerPresenter = cc.Class({
     graySelf: function() {
         // console.log("%c[Flow/hideSelf]", 'Orange: Tomato;');
         if (this.playerData && this.playerData.playerId && this.playerData.playerId == GameManager.user.playerId) {
-        //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
-        //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
+            //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
+            //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
 
             if (this.selfPlayerHand && this.selfPlayerHand.active) {
                 // cc.find('Timer/PFPAvatar', this.selfPlayerHand).getComponent(cc.Sprite).setMaterial(0, cc.Material.getBuiltinMaterial('2d-gray-sprite'));
@@ -3530,7 +3059,7 @@ var PlayerPresenter = cc.Class({
                 //     cc.find('FrontFace/Gray', element).active = true;
                 // }, this);
 
-                this.cardHolder.children.forEach(function (element) {
+                this.cardHolder.children.forEach(function(element) {
                     element.opacity = 150;
                 }, this);
             }
@@ -3540,8 +3069,8 @@ var PlayerPresenter = cc.Class({
     graySelf2: function() {
         // console.log("%c[Flow/hideSelf]", 'Orange: Tomato;');
         if (this.playerData && this.playerData.playerId && this.playerData.playerId == GameManager.user.playerId) {
-        //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
-        //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
+            //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
+            //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
 
             if (this.selfPlayerHand && this.selfPlayerHand.active) {
                 cc.find('Timer/PFPAvatar', this.selfPlayerHand).getComponent(cc.Sprite).setMaterial(0, cc.Material.getBuiltinMaterial('2d-gray-sprite'));
@@ -3551,7 +3080,7 @@ var PlayerPresenter = cc.Class({
                 //     cc.find('FrontFace/Gray', element).active = true;
                 // }, this);
 
-                this.cardHolder.children.forEach(function (element) {
+                this.cardHolder.children.forEach(function(element) {
                     element.opacity = 150;
                 }, this);
             }
@@ -3561,21 +3090,21 @@ var PlayerPresenter = cc.Class({
     ungraySelf: function() {
         // console.log("%c[Flow/hideSelf]", 'Orange: Tomato;');
         if (this.playerData && this.playerData.playerId && this.playerData.playerId == GameManager.user.playerId) {
-        //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
-        //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
+            //     this.selfPlayerHand = this.pokerPresenter.HandOther_Left;
+            //     this.cardHolder = this.selfPlayerHand.parent.getChildByName("Cards");
 
             if (this.selfPlayerHand) {
                 cc.find('Timer/PFPAvatar', this.selfPlayerHand).getComponent(cc.Sprite).setMaterial(0, cc.Material.getBuiltinMaterial('2d-sprite'));
                 cc.find('Timer/PlayerImageMask/PlayerImage', this.selfPlayerHand).getComponent(cc.Sprite).setMaterial(0, cc.Material.getBuiltinMaterial('2d-sprite'));
 
-                this.cardHolder.children.forEach(function (element) {
+                this.cardHolder.children.forEach(function(element) {
                     element.opacity = 255;
                 }, this);
             }
         }
     },
 
-    onDisconnectTime: function (turnDisplayTime) {
+    onDisconnectTime: function(turnDisplayTime) {
         this.pokerPresenter.model.off(K.PokerEvents.onTimerTick);
         if (!this.playerData) {
             cc.error("!this.playerData");
@@ -3592,7 +3121,7 @@ var PlayerPresenter = cc.Class({
         //     this.image.node.parent.parent.getChildByName("Profile_frame_Glow").active = true;
         // }
         this.imgHider.active = true;
-        this.pokerPresenter.model.on(K.PokerEvents.onTimerTick, function (time, elapsed) {
+        this.pokerPresenter.model.on(K.PokerEvents.onTimerTick, function(time, elapsed) {
 
             this.timerSprite.fillRange = time;
             this.normalTimerLbl.node.parent.children[0].active = true;
@@ -3628,7 +3157,10 @@ var PlayerPresenter = cc.Class({
 
     showPlayerInfo() {
         let inst = this;
-        ServerCom.pomeloRequest('connector.entryHandler.getPlayerStats', {'playerId': GameManager.user.playerId, "range": 1}, function (response) {
+        ServerCom.pomeloRequest('connector.entryHandler.getPlayerStats', {
+            'playerId': GameManager.user.playerId,
+            "range": 1
+        }, function(response) {
             if (response.success) {
                 console.log(response);
 
@@ -3636,7 +3168,7 @@ var PlayerPresenter = cc.Class({
                 inst.pokerPresenter.playerInfoPopup.opacity = 0;
                 var anim = inst.pokerPresenter.playerInfoPopup.getComponent('AnimBase');
                 if (anim !== null) {
-                    anim.play("showPopUp", function () {});
+                    anim.play("showPopUp", function() {});
                 }
 
                 // inst.inviteNode.active = false;
@@ -3650,21 +3182,20 @@ var PlayerPresenter = cc.Class({
         }, null, 5000, false);
     },
 
-    switchBB () {
+    switchBB() {
         if (GameManager.isBB) {
             GameManager.isBB = false;
-        }
-        else {
+        } else {
             GameManager.isBB = true;
         }
         GameManager.emit("switchBB");
     },
 
-    updateBB () {
+    updateBB() {
         // if (!GameManager.user.settings.stackInBB) {
         //     return;
         // }
-        
+
         if (this.playerData) {
             this.amountLabel.node.parent.getChildByName("bb").getComponent(cc.Label).string = (Number(this.playerData.chips) / this.pokerPresenter.model.gameData.tableDetails.bigBlind).toFixed(1) + 'BB';
         }
@@ -3680,8 +3211,7 @@ var PlayerPresenter = cc.Class({
             this.amountLabel.node.opacity = 0;
             this.amountLabel.node.parent.getChildByName("bb").opacity = 255;
             // this.amountLabel.node.parent.getChildByName("bb").active = true;
-        }
-        else {
+        } else {
             // this.playerBetLabel.opacity = 255;
             this.playerBetLabel.active = true;
             // this.playerBetLabel.parent.getChildByName("bb").opacity = 0;
@@ -3743,16 +3273,15 @@ var PlayerPresenter = cc.Class({
             //     cc.find('invite', this.inviteNode).getComponent(cc.Toggle).check();
             //     cc.find('invite', this.inviteNode).getComponent(cc.Toggle).enabled = false;
             // }
-        });  
+        });
     },
 
     onMute() {
         const opponent = this.playerData;
 
         GameManager.changePlayerMute(
-            opponent.playerId, 
-            (data) => {
-            }
+            opponent.playerId,
+            (data) => {}
         );
 
         // this.inviteNode.active = false;
@@ -3771,9 +3300,8 @@ var PlayerPresenter = cc.Class({
         this.bestHandNode.getChildByName("bg").getChildByName("info").getComponent(cc.Label).string = bestHand;
         if (isWinner) {
             this.bestHandNode.getChildByName("bg").getComponent(cc.Sprite).spriteFrame = this.bestHands1;
-        }
-        else {
-            this.bestHandNode.getChildByName("bg").getComponent(cc.Sprite).spriteFrame = this.bestHands2;   
+        } else {
+            this.bestHandNode.getChildByName("bg").getComponent(cc.Sprite).spriteFrame = this.bestHands2;
         }
     },
 
@@ -3796,18 +3324,18 @@ var PlayerPresenter = cc.Class({
         // }
 
         function extractMiddle(str) {
-              // 1. 删除第一个冒号前的所有内容
-              let afterColon = str.includes(':') ? str.split(':')[1] : str;
-              
-              // 2. 删除最后一个逗号后的所有内容
-              const lastCommaIndex = afterColon.lastIndexOf(',');
-              let result = lastCommaIndex === -1 
-                ? afterColon 
-                : afterColon.slice(0, lastCommaIndex).trim();
-              
-              return result;
-            }
-        this.bestHandNode.getChildByName("bg").getComponent(cc.Sprite).spriteFrame = this.bestHands2;   
+            // 1. 删除第一个冒号前的所有内容
+            let afterColon = str.includes(':') ? str.split(':')[1] : str;
+
+            // 2. 删除最后一个逗号后的所有内容
+            const lastCommaIndex = afterColon.lastIndexOf(',');
+            let result = lastCommaIndex === -1 ?
+                afterColon :
+                afterColon.slice(0, lastCommaIndex).trim();
+
+            return result;
+        }
+        this.bestHandNode.getChildByName("bg").getComponent(cc.Sprite).spriteFrame = this.bestHands2;
         this.bestHandNode.getChildByName("bg").getChildByName("info").getComponent(cc.Label).string = bestHand;
 
         // this.scheduleOnce(function () {

@@ -253,14 +253,8 @@ cc.Class({
 
         this.onContent1();
 
-        if (this.activeModel.presenter.isTournament()) {
-            this.top1.active = false;
-            this.top2.active = true;
-        }
-        else {
-            this.top1.active = true;
+        this.top1.active = true;
             this.top2.active = false;
-        }
 
         GameManager.emit("disablePageView");
 

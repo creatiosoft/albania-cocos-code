@@ -92,7 +92,7 @@ cc.Class({
      * @memberof Popups.GamePreferencesPopup#
      */
     onLoad: function () {
-        this.isTournament = this.pokerPresenter.getComponent("PokerPresenter").isTournament();
+        this.isTournament = false;
 
         // this.tableLayout.active = !GameScreen.isMobile;
         this.onTableTab();
@@ -102,21 +102,7 @@ cc.Class({
         for (var i = 0; i < (this.isTournament ? GameManager.cardBackImagesTour : GameManager.cardBackImages).length; i++) {
             let stickerImages = (this.isTournament ? GameManager.cardBackImagesTour : GameManager.cardBackImages)[i];
 
-            if (this.isTournament) {
-                if (GameManager.user.defaultTourCard != "" && GameManager.user.defaultTourCard._id) {
-                    if (stickerImages.___data._id == GameManager.user.defaultTourCard._id) {
-                        this.cardBackImageSelected = i;
-                        this.cardBackImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-                else {
-                    if (i == 0) {
-                        this.cardBackImageSelected = i;
-                        this.cardBackImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-            }
-            else {
+            {
                 if (GameManager.user.defaultCard != "" && GameManager.user.defaultCard._id) {
                     if (stickerImages.___data._id == GameManager.user.defaultCard._id) {
                         this.cardBackImageSelected = i;
@@ -137,21 +123,7 @@ cc.Class({
         for (var i = 0; i < (this.isTournament ? GameManager.tableBgImagesTour : GameManager.tableBgImages).length; i++) {
             let stickerImages = (this.isTournament ? GameManager.tableBgImagesTour : GameManager.tableBgImages)[i];
 
-            if (this.isTournament) {
-                if (GameManager.user.defaultTourGameBackground != "" && GameManager.user.defaultTourGameBackground._id) {
-                    if (stickerImages.___data._id == GameManager.user.defaultTourGameBackground._id) {
-                        this.tableBgImageSelected = i;
-                        this.tableBgImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-                else {
-                    if (i == 0) {
-                        this.tableBgImageSelected = i;
-                        this.tableBgImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-            }
-            else {
+            {
                 if (GameManager.user.defaultGameBackground != "" && GameManager.user.defaultGameBackground._id) {
                     if (stickerImages.___data._id == GameManager.user.defaultGameBackground._id) {
                         this.tableBgImageSelected = i;
@@ -195,23 +167,7 @@ cc.Class({
             poolObject.getComponent(cc.Button).clickEvents[0].customEventData = stickerImages.___data;
             poolObject.parent = this.content;
 
-            if (this.isTournament) {
-                if (GameManager.user.defaultTourTheme != "" && GameManager.user.defaultTourTheme._id) {
-                    if (stickerImages.___data._id == GameManager.user.defaultTourTheme._id) {
-                        poolObject.children[2].active = true;
-                        this.tableImageSelected = i;
-                        this.tableImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-                else {
-                    if (i == 0) {
-                        poolObject.children[2].active = true;
-                        this.tableImageSelected = i;
-                        this.tableImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-            }
-            else {
+            {
                 if (GameManager.user.defaultTheme != "" && GameManager.user.defaultTheme._id) {
                     if (stickerImages.___data._id == GameManager.user.defaultTheme._id) {
                         poolObject.children[2].active = true;
@@ -255,23 +211,7 @@ cc.Class({
             poolObject.getComponent(cc.Button).clickEvents[0].customEventData = stickerImages.___data;
             poolObject.parent = this.content;
 
-            if (this.isTournament) {
-                if (GameManager.user.defaultTourGameBackground != "" && GameManager.user.defaultTourGameBackground._id) {
-                    if (stickerImages.___data._id == GameManager.user.defaultTourGameBackground._id) {
-                        poolObject.children[2].active = true;
-                        this.tableBgImageSelected = i;
-                        this.tableBgImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-                else {
-                    if (i == 0) {
-                        poolObject.children[2].active = true;
-                        this.tableBgImageSelected = i;
-                        this.tableBgImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-            }
-            else {
+            {
                 if (GameManager.user.defaultGameBackground != "" && GameManager.user.defaultGameBackground._id) {
                     if (stickerImages.___data._id == GameManager.user.defaultGameBackground._id) {
                         poolObject.children[2].active = true;
@@ -329,23 +269,7 @@ cc.Class({
             poolObject.getComponent(cc.Button).clickEvents[0].customEventData = stickerImages.___data;
             poolObject.parent = this.content;
 
-            if (this.isTournament) {
-                if (GameManager.user.defaultTourCard != "" && GameManager.user.defaultTourCard._id) {
-                    if (stickerImages.___data._id == GameManager.user.defaultTourCard._id) {
-                        poolObject.children[2].active = true;
-                        this.cardBackImageSelected = i;
-                        this.cardBackImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-                else {
-                    if (i == 0) {
-                        poolObject.children[2].active = true;
-                        this.cardBackImageSelected = i;
-                        this.cardBackImageSelectedId = stickerImages.___data._id;
-                    };
-                }
-            }
-            else {
+            {
                 if (GameManager.user.defaultCard != "" && GameManager.user.defaultCard._id) {
                     if (stickerImages.___data._id == GameManager.user.defaultCard._id) {
                         poolObject.children[2].active = true;
@@ -424,11 +348,7 @@ cc.Class({
             }, function (response) {
                 console.log("playerChangeTableTheme", response);
 
-                if (self.isTournament) {
-                    GameManager.user.defaultTourTheme = response.result;
-                    GameManager.tableImageTour = self.tableImageSelected;
-                }
-                else {
+                {
                     GameManager.user.defaultTheme = response.result;
                     GameManager.tableImageTour = GameManager.tableImage = self.tableImageSelected;
                 }
@@ -450,11 +370,7 @@ cc.Class({
             }, function (response) {
                 console.log("playerChangeGameBackground", response);
 
-                if (self.isTournament) {
-                    GameManager.user.defaultTourGameBackground = response.result;
-                    GameManager.tableBgImageTour = self.tableBgImageSelected;
-                }
-                else {
+                {
                     GameManager.user.defaultGameBackground = response.result;
                     GameManager.tableBgImage = self.tableBgImageSelected;   
                 }
@@ -476,11 +392,7 @@ cc.Class({
             }, function (response) {
                 console.log("playerChangeCard", response);
 
-                if (self.isTournament) {
-                    GameManager.user.defaultTourCard = response.result;
-                    GameManager.cardBackImageTour = self.cardBackImageSelected;
-                }
-                else {
+                {
                     GameManager.user.defaultCard = response.result;
                     GameManager.cardBackImage = self.cardBackImageSelected;   
                 }

@@ -303,20 +303,7 @@ cc.Class({
                 }, this);
             }
 
-            if (this.pokerGame.presenter.isTournament()) {
-                ServerCom.socketIORequest("tournamentGameEvent|message", {
-                    tournamentId: this.pokerGame.gameData.raw.tournamentId,
-                    tableId: this.pokerGame.gameData.tableId,
-                    messageText: chatString,
-                    playerId: GameManager.user.playerId,
-                }, function (response) {
-                    if (response.success) {
-                        // if (GameScreen.isMobile)// 
-                        //     this.enableotherPopup();
-                    }
-                }.bind(this), null, 5000, false);
-            }
-            else {
+            {
                 var data = new ChatData(GameManager.user.playerId, GameManager.user.userName, this.pokerGame.gameData.channelId, chatString);
                 ServerCom.pomeloRequest(K.PomeloAPI.chatRequest, data, function (response) {
                     if (response.success) {
