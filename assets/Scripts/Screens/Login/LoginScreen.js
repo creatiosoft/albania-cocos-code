@@ -1093,7 +1093,16 @@ cc.Class({
                                 
                                 if (!hit) {
                                     this.launch.active = false;
-                                    ScreenManager.showScreen(K.ScreenEnum.LobbyScreen, 10, function() {}, false);
+                                    if (ScreenManager.currentScreen == K.ScreenEnum.LobbyScreen) {
+                                        GameManager.emit("forceReloadTable");
+                                    }
+                                    else if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen || 
+                                             ScreenManager.currentScreen == K.ScreenEnum.SignupScreen) {
+                                        ScreenManager.showScreen(K.ScreenEnum.LobbyScreen, 10, function() {}, false);
+                                    }
+                                    else {
+
+                                    }
                                 }
                             // }
                         }

@@ -1579,12 +1579,7 @@ cc.Class({
     },
 
     isObserver: function () {
-        for (var index = 0; index < this.model.gameData.tableDetails.players.length; index++) {
-            if (this.model.gameData.tableDetails.players[index].playerId === GameManager.user.playerId) {
-                return false;
-            }
-        }
-        return true;
+        return false;
     },
 
     isObserver2: function () {

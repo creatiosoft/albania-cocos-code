@@ -328,9 +328,9 @@ var Table = cc.Class({
                     // console.log(inst.lobbyData[key]);
                     inst.applyFilter(true);
 
-                    if (inst.tables.string && inst.handler.contents) {
-                        // inst.tables.string = inst.handler.contents.length + ' tables';
-                    }
+                    // if (inst.tables.string && inst.handler.contents) {
+                    //     // inst.tables.string = inst.handler.contents.length + ' tables';
+                    // }
                 } else {
                     // handle error
                 }
