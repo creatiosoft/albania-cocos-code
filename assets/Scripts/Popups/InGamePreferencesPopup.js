@@ -190,12 +190,12 @@ cc.Class({
         //  console.error('ONSHOW', data);
         this.activeModel = data;
         // console.log("pokermodel...",this.model);
-        var isJoinSimilarAllowed = this.activeModel.isPlayerStandUp() ? (this.activeModel.roomConfig.maxPlayers == this.activeModel.gameData.tableDetails.players.length) : true;
+        // var isJoinSimilarAllowed = this.activeModel.isPlayerStandUp() ? (this.activeModel.roomConfig.maxPlayers == this.activeModel.gameData.tableDetails.players.length) : true;
 
-        this.playerImg.spriteFrame = GameManager.user.urlImg;
+        // this.playerImg.spriteFrame = GameManager.user.urlImg;
         // console.log(GameManager.user.profileImage,GameManager.user.urlImg);
-        this.gameVersionString.string = "<color=#ffffff>Build Version:  " + K.ServerAddress.clientVer + "</color>";
-        this.pokerVersionString.string = "<color=#ffffff>Poker Version:  " + K.ServerAddress.pokerVer + "</color>";
+        // this.gameVersionString.string = "<color=#ffffff>Build Version:  " + K.ServerAddress.clientVer + "</color>";
+        // this.pokerVersionString.string = "<color=#ffffff>Poker Version:  " + K.ServerAddress.pokerVer + "</color>";
 
 
         // if (GameManager.isP) {
@@ -206,14 +206,14 @@ cc.Class({
         //     this.pokerVersionString.string = "<color=#00ff00>POKER " + LocalizedManager.t('TXT_VERSION') + ":      " + K.ServerAddress.pokerVer + "</color>";            
         // }
 
-        this.joinSimilarBtn.interactable = !(this.activeModel.gameData.channelType == K.ChannelType.Tournament) && isJoinSimilarAllowed; //johnny
+        // this.joinSimilarBtn.interactable = !(this.activeModel.gameData.channelType == K.ChannelType.Tournament) && isJoinSimilarAllowed; //johnny
         // this.tableColor.active = !(this.activeModel.roomConfig.channelVariation == "Open Face Chinese Poker");//johnny
-        if (this.dealerChat.state !== GameManager.user.dealerChat) {
-            this.dealerChat.onToggle();
-        }
-        if (GameManager.user.playerChat !== this.Chat.state) {
-            this.Chat.onToggle();
-        }
+        // if (this.dealerChat.state !== GameManager.user.dealerChat) {
+        //     this.dealerChat.onToggle();
+        // }
+        // if (GameManager.user.playerChat !== this.Chat.state) {
+        //     this.Chat.onToggle();
+        // }
         if (this.activeModel.gameData.settings.muteGameSound == this.soundToggle.state) {
             this.soundToggle.onToggle();
         }
@@ -225,18 +225,18 @@ cc.Class({
         }
 
         // console.log(this.activeModel.gameData.settings.cardColor, this.coloredCardToggle.state)
-        if (this.activeModel.gameData.settings.cardColor !== this.coloredCardToggle.state) {
-            this.coloredCardToggle.onToggle();
-        }
+        // if (this.activeModel.gameData.settings.cardColor !== this.coloredCardToggle.state) {
+        //     this.coloredCardToggle.onToggle();
+        // }
 
 
         if (GameManager.user.settings.stackInBB !== this.BBToggle.state) {
             this.BBToggle.onToggle();
         }
 
-        if (GameManager.user.settings.handStrength !== this.handSToggle.state) {
-            this.handSToggle.onToggle();
-        }
+        // if (GameManager.user.settings.handStrength !== this.handSToggle.state) {
+        //     this.handSToggle.onToggle();
+        // }
        
             
         //     if(this.viewType == 1){
@@ -251,10 +251,10 @@ cc.Class({
         // console.log("########View Type",gameScreen.viewType)
 
 
-        this.onContent1();
+        // this.onContent1();
 
-        this.top1.active = true;
-            this.top2.active = false;
+        // this.top1.active = true;
+        // this.top2.active = false;
 
         GameManager.emit("disablePageView");
 
