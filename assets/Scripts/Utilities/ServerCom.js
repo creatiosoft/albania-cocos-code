@@ -711,7 +711,9 @@ cc.Class({
 
             if (GameManager.isConnected && this.socketReconnectedCount < this.reconnectMaxAttempts && !this.sessionExpired) {
                 this.socketReconnectedCount += 1;
-                ServerCom.reconnecting.active = true;
+                if (this.socketReconnectedCount > 1) {
+                    ServerCom.reconnecting.active = true;
+                }
                 ServerCom.reconnecting.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                 this.reconncetTimer = setTimeout(function () {
                     console.log("socket retry: ", this.socketReconnectedCount);

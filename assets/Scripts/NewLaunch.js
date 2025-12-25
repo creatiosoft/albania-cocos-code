@@ -19,7 +19,6 @@ cc.Class({
 
     start () {
 
-        console.log("startstartstartstartstartstartstartstartstart");
         this.timer = 0;
 
         var size = cc.size(cc.Canvas.instance.node.width, cc.Canvas.instance.node.height);
@@ -35,7 +34,7 @@ cc.Class({
     },
 
     updateProgress(dt) {
-        this.timer += dt / 4;
+        this.timer += dt / 2;
         if (this.timer >= 1) {
             this.timer = 1;
             this.unschedule(this.updateProgress);
