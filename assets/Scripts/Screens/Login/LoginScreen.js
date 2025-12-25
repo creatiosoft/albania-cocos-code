@@ -473,7 +473,6 @@ cc.Class({
 
 
         this.preLogin.active = true;
-        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         GameManager.scheduleOnce(function() {
             inst.clientInit();
         }, 2);
@@ -728,7 +727,6 @@ cc.Class({
             // K.Token.refresh_token_expire_at = Number(cc.sys.localStorage.getItem("auto_login_refresh_token_expire_at"));
 
             this.preLogin.active = true;
-            this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
 
             this.loginHandler.checkServerStatus(function(response) {
                 console.log("RETRY SERVER STATUS ", response)
@@ -774,30 +772,6 @@ cc.Class({
                                 inst.launch.active = false;
                             }
                         });
-
-                        // ServerCom.socketIOConnect(K.ServerAddress.gameServer + ":" + K.ServerAddress.gamePort, () => {
-                        //     if (!ServerCom.socketConnected) {
-                        //         inst.preLogin.active = false;
-                        //         inst.launch.active = false;
-                        //         return;
-                        //     }
-                        //     inst.preLogin.active = true;
-                        //     inst.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-                        //     setTimeout(function() {
-                        //         inst.preLogin.active = true;
-                        //         inst.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-                        //         inst.loginHandler.loginGame(cc.sys.localStorage.getItem("auto_login_username"), "", '123456', "login", "normal", (data) => {
-                        //             console.log("GoToTable5");
-                        //             inst.preLogin.active = true;
-                        //             inst.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
-                        //             GameManager.setUserData(data.user);
-                        //             inst.saveLoginData(data);
-                        //             GameManager.isConnected = true;
-                        //             inst.onSuccessfullLogin(inst);
-                        //         });
-
-                        //     }, 100);
-                        // });
                     }
                 }
                 else {
@@ -887,9 +861,7 @@ cc.Class({
      * @memberof Screens.Login.LoginScreen#
      */
     ConnectToGameSever: function(host, port, inst) {
-        this.preLogin.getChildByName("Label").getComponent(cc.Label).string = "Connecting to game server ...";
         this.preLogin.active = true;
-        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         ServerCom.loading.active = false;
         // inst.loginHandler.startPomelo(host, port, function () {
         //     inst.preLogin.active = true;
@@ -898,7 +870,6 @@ cc.Class({
         // });
 
         inst.preLogin.active = true;
-        inst.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         ServerCom.loading.active = false;
         inst.onSuccessfullLogin(inst);
     },
@@ -971,7 +942,6 @@ cc.Class({
     onSuccessfullLogin: function(inst) {
         GameManager.isConnected = false;
         this.preLogin.active = true;
-        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         console.log("onSuccessfullLogin", ServerCom.inGame);
 
         cc.sys.localStorage.setItem("auto_login_token", K.Token.access_token);
@@ -1032,7 +1002,6 @@ cc.Class({
                     if (!!response.joinChannels && response.joinChannels.length > 0) {
                         hit = true;
                         this.preLogin.active = true;
-                        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                         GameManager.scheduleOnce(function() {
                             var joinCount = response.joinChannels.length;
                             response.joinChannels.forEach(function(element, index) {
@@ -1051,7 +1020,6 @@ cc.Class({
                     if (currentActiveIds.length > 0) {
                         hit = true;
                         this.preLogin.active = true;
-                        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                         GameManager.scheduleOnce(function() {
 
                             if (!GameManager.isSocketIOConnected) {
@@ -1193,13 +1161,10 @@ cc.Class({
         this.vpUserName.node.getChildByName("red").active = false;
         this.vpPassword.node.getChildByName("red").active = false;
 
-        this.preLogin.getChildByName("Label").getComponent(cc.Label).string = "Loading, please wait ...";
         this.preLogin.active = true;
-        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         ServerCom.loading.active = false;
         // inst.loginHandler.startPomelo(K.ServerAddress.gameServer, K.ServerAddress.gamePort, function () {
         this.preLogin.active = true;
-        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         ServerCom.loading.active = false;
 
         // cc.sys.localStorage.setItem('countryCode', this.countryCode.string);
@@ -1251,10 +1216,8 @@ cc.Class({
         // });
 
         this.preLogin.active = true;
-        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         ServerCom.loading.active = false;
         this.preLogin.active = true;
-        this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         ServerCom.loading.active = false;
     },
 

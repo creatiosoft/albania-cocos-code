@@ -595,7 +595,6 @@ var PokerModel = cc.Class({
                 inst.sitOutValue = SitOutMode.None;
                 if (!leave) {
                     ServerCom.loading.active = true;
-                    ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                     inst.alreadyKickingOut = true;
                     inst.kickPlayerOutOfTheGame(inst);
                 }

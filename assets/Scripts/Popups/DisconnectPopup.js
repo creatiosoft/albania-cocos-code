@@ -328,7 +328,6 @@ cc.Class({
 
             this.popUpManager.hide(PopUpType.DisconnectDialog, function () {});
             this.preLogin.active = true;
-            this.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
             socketIO.socket.disconnect();
             socketIO.socket.connect();
         // }

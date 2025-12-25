@@ -102,7 +102,6 @@ cc.Class({
             if (!ServerCom.preLogin.active) {
                 ServerCom.loading.active = true;
             }
-            ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         }
         xhr.onreadystatechange = function () {
             K.internetAvailable = true;
@@ -212,7 +211,6 @@ cc.Class({
             if (!ServerCom.preLogin.active) {
                 ServerCom.loading.active = true;
             }
-            ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         }
         xhr.onreadystatechange = function () {
             K.internetAvailable = true;
@@ -322,7 +320,6 @@ cc.Class({
             if (!ServerCom.preLogin.active) {
                 ServerCom.loading.active = true;
             }
-            ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         }
         xhr.onreadystatechange = function () {
             K.internetAvailable = true;
@@ -606,7 +603,6 @@ cc.Class({
             if (!ServerCom.preLogin.active) {
                 this.loading.active = true;
             }
-            ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         }
         this.tracker[key] = val;
     },
@@ -643,7 +639,6 @@ cc.Class({
         if (!ServerCom.preLogin.active) {
             this.loading.active = true;
         }
-        ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         this.isLoading = true;
         this.cconnectCB = cb;
 
@@ -714,7 +709,6 @@ cc.Class({
                 if (this.socketReconnectedCount > 1) {
                     ServerCom.reconnecting.active = true;
                 }
-                ServerCom.reconnecting.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                 this.reconncetTimer = setTimeout(function () {
                     console.log("socket retry: ", this.socketReconnectedCount);
                     socketIO.socket.disconnect();
@@ -811,7 +805,6 @@ cc.Class({
                     if (GameManager.isConnected && this.socketReconnectedCount < this.reconnectMaxAttempts && !this.sessionExpired) {
                         this.socketReconnectedCount += 1;
                         ServerCom.reconnecting.active = true;
-                        ServerCom.reconnecting.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                         this.reconncetTimer = setTimeout(function () {
                             console.log("socket retry: ", this.socketReconnectedCount);
                             socketIO.socket.disconnect();

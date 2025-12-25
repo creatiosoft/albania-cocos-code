@@ -651,7 +651,6 @@ cc.Class({
                 if (diff > 1000 * 30) {
                     console.log("cc.game.EVENT_SHOW8");
                     LoginScreen.preLogin.active = true;
-                    LoginScreen.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                     if (GameManager.user && GameManager.user.playerId) {
                         ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
                             playerId: GameManager.user.playerId,
@@ -670,7 +669,6 @@ cc.Class({
 
                 console.log("cc.game.EVENT_SHOW9");
                 LoginScreen.preLogin.active = true;
-                LoginScreen.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
 
                 console.log("cc.game.EVENT_SHOW10");
                 if (this.gameModel.activePokerModels.length > 0) {
@@ -701,7 +699,6 @@ cc.Class({
                     GameManager.popUpManager.hide(PopUpType.DisconnectDialog, function () { });
                     console.log('@@@@@@ LoginScreen.clientInit(true);');
                     LoginScreen.preLogin.active = true;
-                    LoginScreen.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                     GameManager.isForceDisconnection = true;
                     // LoginScreen.clientInit(true);
 
@@ -840,7 +837,6 @@ cc.Class({
                 // Show loading indicator
                 if (LoginScreen && LoginScreen.preLogin) {
                     LoginScreen.preLogin.active = true;
-                    LoginScreen.preLogin.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
                 }
 
                 // Force disconnect first to clear stale connection, then reconnect

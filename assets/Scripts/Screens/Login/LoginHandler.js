@@ -89,7 +89,6 @@ cc.Class({
         // pomelo int
         console.log("!!!!!!!!!! START POMELO LOGIN HANDLER", host, port);
         ServerCom.loading.active = true;
-        ServerCom.loading.getChildByName("Label3").getComponent(cc.Label).string = GameManager.randomPick();
         this.isLoading = true;
         ServerCom.loading.active = false;
         this.isLoading = false;
