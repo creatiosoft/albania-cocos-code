@@ -428,7 +428,6 @@ cc.Class({
             cc.find("LobbyHandlerNew", cc.Canvas.instance.node).scale = 0.65;
             cc.find("Popups/Johnny", cc.Canvas.instance.node).scale = 0.8;
             cc.find("Launch", cc.Canvas.instance.node).scale = 0.6;
-            cc.find("NewVersionPopup", cc.Canvas.instance.node).scale = 0.8;
             cc.find("Loading", cc.Canvas.instance.node).scale = 0.6;
             cc.find("Reconnecting_Johnny", cc.Canvas.instance.node).scale = 0.6;
             cc.find("LoginPre", cc.Canvas.instance.node).scale = 0.6;

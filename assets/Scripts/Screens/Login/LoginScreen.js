@@ -521,7 +521,7 @@ cc.Class({
      */
     onShow: function(init) {
 
-        this.loadFlags();
+        // this.loadFlags();
 
         if (cc.sys.localStorage.getItem('vpUserName')) {
             this.vpUserName.string = cc.sys.localStorage.getItem('vpUserName');
@@ -645,22 +645,22 @@ cc.Class({
         } else {
             // if (this.rememberMeMob.isChecked) {
             // console.log("ELSE IN SHOW")
-            if (userName && password && rememberPrefs) {
+            // if (userName && password && rememberPrefs) {
 
-                this.userName.string = userName;
-                this.password.string = password;
-                // console.log("CHECK BOX REMREMBER ME ", rememberPrefs);
-                // this.rememberMeMob.node.getComponent('cc.Toggle').isChecked = rememberPrefs;
-                this.rememberMeMob.isChecked = rememberPrefs;
-                // this.rememberMeCheckBox.checkMark.active = rememberPrefs;
-            } else {
-                // if (this.loginDataFromInsta.userName != null && this.loginDataFromInsta.password != null) {
-                //     // if we have logged in from Insta Play then don't clear it will be used in retry
-                // } else {
-                this.userName.string = "";
-                this.password.string = "";
-                // }
-            }
+            //     this.userName.string = userName;
+            //     this.password.string = password;
+            //     // console.log("CHECK BOX REMREMBER ME ", rememberPrefs);
+            //     // this.rememberMeMob.node.getComponent('cc.Toggle').isChecked = rememberPrefs;
+            //     this.rememberMeMob.isChecked = rememberPrefs;
+            //     // this.rememberMeCheckBox.checkMark.active = rememberPrefs;
+            // } else {
+            //     // if (this.loginDataFromInsta.userName != null && this.loginDataFromInsta.password != null) {
+            //     //     // if we have logged in from Insta Play then don't clear it will be used in retry
+            //     // } else {
+            //     this.userName.string = "";
+            //     this.password.string = "";
+            //     // }
+            // }
         }
     },
 
@@ -1354,10 +1354,10 @@ cc.Class({
         //     // cc.sys.localStorage.setItem(K.SystemStorageKeys.password, "");
         // }
 
-        cc.sys.localStorage.setItem('countryCode', this.countryCode.string);
-        cc.sys.localStorage.setItem('phone', this.phone.string);
-        cc.sys.localStorage.setItem(K.SystemStorageKeys.userId, this.userName.string);
-        cc.sys.localStorage.setItem(K.SystemStorageKeys.password, this.password.string);
+        // cc.sys.localStorage.setItem('countryCode', this.countryCode.string);
+        // cc.sys.localStorage.setItem('phone', this.phone.string);
+        // cc.sys.localStorage.setItem(K.SystemStorageKeys.userId, this.userName.string);
+        // cc.sys.localStorage.setItem(K.SystemStorageKeys.password, this.password.string);
     },
 
     

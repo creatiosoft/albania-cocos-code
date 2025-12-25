@@ -692,8 +692,8 @@ cc.Class({
      * @memberof Popups.GamePreferencesPopup#
      */
     onLogOut: function () {
-        this.coloredCardToggle.onToggle();
-        this.dealerChat.onToggle();
+        // this.coloredCardToggle.onToggle();
+        // this.dealerChat.onToggle();
         GameManager.popUpManager.show(PopUpType.OnLogOutPopup, null, function () { });
         GameManager.playSound(K.Sounds.click);
     },
