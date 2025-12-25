@@ -907,6 +907,7 @@
     },
     "cardData": null,
     "model": null,
+    "isCommunityCard": false,
     "_id": ""
   },
   {

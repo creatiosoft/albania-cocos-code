@@ -377,25 +377,25 @@ var PlayerPresenter = cc.Class({
         this.isPlaying = false;
         this.displayDefaultTimer = this.resetBetTimer = 0;
 
-        this.winningNode.children[1].getComponent(cc.Animation).on('stop', (event) => {
-            // console.log("1st stop", event);
-            if (cc.isValid(this.winningNode)) {
-                this.winningNode.children[1].active = false;
-                // this.winningNode.children[2].getComponent(cc.Animation).play();
-                this.winningNode.children[3].active = true;
-                this.winningNode.children[3].getComponent(cc.Animation).play();
-            }
-        }, this);
+        // this.winningNode.children[1].getComponent(cc.Animation).on('stop', (event) => {
+        //     // console.log("1st stop", event);
+        //     if (cc.isValid(this.winningNode)) {
+        //         this.winningNode.children[1].active = false;
+        //         // this.winningNode.children[2].getComponent(cc.Animation).play();
+        //         this.winningNode.children[3].active = true;
+        //         this.winningNode.children[3].getComponent(cc.Animation).play();
+        //     }
+        // }, this);
 
-        this.winningNode.children[3].getComponent(cc.Animation).on('stop', (event) => {
-            // console.log("crown stop", event);
-            if (cc.isValid(this.winningNode)) {
-                this.winningNode.children[2].active = this.winningNode.children[4].active = true;
+        // this.winningNode.children[3].getComponent(cc.Animation).on('stop', (event) => {
+        //     // console.log("crown stop", event);
+        //     if (cc.isValid(this.winningNode)) {
+        //         this.winningNode.children[2].active = this.winningNode.children[4].active = true;
 
-                this.winningNode.children[2].getComponent(cc.Animation).play();
-                this.winningNode.children[4].getComponent(cc.Animation).play();
-            }
-        }, this);
+        //         this.winningNode.children[2].getComponent(cc.Animation).play();
+        //         this.winningNode.children[4].getComponent(cc.Animation).play();
+        //     }
+        // }, this);
 
 
         // if (GameManager.user.category == "GOLD") {
@@ -435,21 +435,21 @@ var PlayerPresenter = cc.Class({
             if (cc.isValid(this.node))
                 this.onMouse_Leave();
         }.bind(this), this);
-        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_ENTER, function(event) {
-            this.noteButton.children[0].active = true;
-        }.bind(this), this);
-        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_LEAVE, function(event) {
-            this.noteButton.children[0].active = false;
-        }.bind(this), this);
-        this.noteButton.children[2].on(cc.Node.EventType.MOUSE_UP, function(event) {
-            this.onClickAvatarBtn();
-        }.bind(this), this);
+        // this.noteButton.children[2].on(cc.Node.EventType.MOUSE_ENTER, function(event) {
+        //     this.noteButton.children[0].active = true;
+        // }.bind(this), this);
+        // this.noteButton.children[2].on(cc.Node.EventType.MOUSE_LEAVE, function(event) {
+        //     this.noteButton.children[0].active = false;
+        // }.bind(this), this);
+        // this.noteButton.children[2].on(cc.Node.EventType.MOUSE_UP, function(event) {
+        //     this.onClickAvatarBtn();
+        // }.bind(this), this);
 
-        if (cc.sys.isMobile) {
-            this.noteButton.children[2].on(cc.Node.EventType.TOUCH_END, function(event) {
-                this.onClickAvatarBtn();
-            }.bind(this), this);
-        }
+        // if (cc.sys.isMobile) {
+        //     this.noteButton.children[2].on(cc.Node.EventType.TOUCH_END, function(event) {
+        //         this.onClickAvatarBtn();
+        //     }.bind(this), this);
+        // }
 
     },
 
@@ -794,6 +794,7 @@ var PlayerPresenter = cc.Class({
      * @memberof Screens.Gameplay.Player.PlayerPresenter#
      */
     displayNote: function(playerId) {
+        return;
         console.log(!!this.playerData && !!this.playerData.noteColor, this.playerData)
         if (!!this.playerData && !!this.playerData.noteColor) {
             this.noteColorBase.active = true;
@@ -1017,8 +1018,8 @@ var PlayerPresenter = cc.Class({
         this.emptyPanel.active = false;
         this.seatState = K.SeatState.Free;
         this.noteColorBase.active = false;
-        this.noteButton.active = false;
-        this.noteButton.children[0].active = false;
+        // this.noteButton.active = false;
+        // this.noteButton.children[0].active = false;
         // this.emojiBtn.node.active = false;
         this.avatarBtn.node.active = false;
         console.log('RESEETTTT WWHEN LEAVEEEEEE disablePlayerView');
@@ -1048,8 +1049,8 @@ var PlayerPresenter = cc.Class({
         this.reservedPanel.active = false;
         this.seatState = K.SeatState.Hidden;
         this.noteColorBase.active = false;
-        this.noteButton.active = false;
-        this.noteButton.children[0].active = false;
+        // this.noteButton.active = false;
+        // this.noteButton.children[0].active = false;
         // this.emojiBtn.node.active = false;
         this.avatarBtn.node.active = false;
         this.setDealer(false);
@@ -1646,10 +1647,10 @@ var PlayerPresenter = cc.Class({
                     this.timeBank.children[1].getComponent(cc.Label).string = "0" + this.timeBank.children[1].getComponent(cc.Label).string;
                 }
 
-                if (K.PORTRAIT) {
-                    this.timeBankV.node.parent.children[1].children[0].getComponent(cc.Label).string = Math.abs(parseInt(elapsed));
-                    this.timeBankV.setSliderValue(time);
-                }
+                // if (K.PORTRAIT) {
+                //     this.timeBankV.node.parent.children[1].children[0].getComponent(cc.Label).string = Math.abs(parseInt(elapsed));
+                //     this.timeBankV.setSliderValue(time);
+                // }
             }
             this.timerSprite.fillRange = time;
             this.normalTimerLbl.node.parent.children[0].active = true;
@@ -1722,9 +1723,9 @@ var PlayerPresenter = cc.Class({
         //     this.timerPSprite.node.active = false;
         // }
         if (K.PORTRAIT) {
-            this.timeBankV.node.active = true;
-            this.timeBankV.node.parent.children[1].children[0].getComponent(cc.Label).string = "";
-            this.timeBankV.setSliderValue(1);
+            // this.timeBankV.node.active = true;
+            // this.timeBankV.node.parent.children[1].children[0].getComponent(cc.Label).string = "";
+            // this.timeBankV.setSliderValue(1);
         }
     },
 
@@ -2985,19 +2986,19 @@ var PlayerPresenter = cc.Class({
     showWinnerBanner: function() {
         // console.log("showingwinner")
         this.winningNode.active = true;
-        this.winningNode.children[1].active = true;
-        this.winningNode.children[1].getComponent(cc.Animation).play();
+        // this.winningNode.children[1].active = true;
+        // this.winningNode.children[1].getComponent(cc.Animation).play();
     },
 
     hideWinningAnim: function() {
         this.winningNode.active = false;
-        this.winningNode.children[1].active = this.winningNode.children[2].active = this.winningNode.children[3].active = this.winningNode.children[4].active = false;
-        this.winningNode.children[3].setScale(0, 0);
-        this.winningNode.children[4].opacity = 0;
-        this.winningNode.children[1].getComponent(cc.Animation).stop();
-        this.winningNode.children[2].getComponent(cc.Animation).stop();
-        this.winningNode.children[3].getComponent(cc.Animation).stop();
-        this.winningNode.children[4].getComponent(cc.Animation).stop();
+        // this.winningNode.children[1].active = this.winningNode.children[2].active = this.winningNode.children[3].active = this.winningNode.children[4].active = false;
+        // this.winningNode.children[3].setScale(0, 0);
+        // this.winningNode.children[4].opacity = 0;
+        // this.winningNode.children[1].getComponent(cc.Animation).stop();
+        // this.winningNode.children[2].getComponent(cc.Animation).stop();
+        // this.winningNode.children[3].getComponent(cc.Animation).stop();
+        // this.winningNode.children[4].getComponent(cc.Animation).stop();
     },
 
     showSelf: function() {

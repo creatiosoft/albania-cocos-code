@@ -4245,7 +4245,7 @@ cc.Class({
                                 let runItTwiceholder = inst.runItTwiceHolder.getComponentsInChildren('Card');
                                 let tmp = runItTwiceCards.concat(runItTwiceholder);
                                 if (myObj[o][j].set.length != 0) {
-                                    inst.highlightWinningCards(myObj[o][j].set, myObj[o][j].handCard, myObj[o][j].boardCard, visibleHoleCards.concat(tmp), playerHandCards);
+                                    inst.highlightWinningCards(myObj[o][j].set, myObj[o][j].handCard || [], myObj[o][j].boardCard || [], visibleHoleCards.concat(tmp), playerHandCards);
                                 }
                             }
                         }.bind(inst), o * inst.potDistributionTimerDelay * 1000));
