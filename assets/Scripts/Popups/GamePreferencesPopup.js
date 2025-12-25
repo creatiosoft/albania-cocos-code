@@ -729,9 +729,9 @@ cc.Class({
     onSettingsClose: function () {
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = false;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
+        // this.gift.active = false;
 
         this.popUpManager.hide(PopUpType.GamePreferencesPopup, function () { });
         GameManager.playSound(K.Sounds.click);
@@ -826,8 +826,8 @@ cc.Class({
     onDeposit: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = true;
-        this.editProfile.active = false;  
+        // this.deposit.active = true;
+        // this.editProfile.active = false;  
 
         this.loginHandler.vpWShop((data) => {
             console.log(data);
@@ -850,17 +850,17 @@ cc.Class({
     onWidthdrawl: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = true;
-        this.deposit.active = false;
-        this.editProfile.active = false;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
+        // this.gift.active = false;
     },
 
     onEditProfile: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = true;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = true;
+        // this.gift.active = false;
 
         this.vpEditProfileEmail.string = GameManager.user.emailId;
         this.vpEditProfilePhone.string = GameManager.user.mobileNumber.replace("+976", "");
@@ -871,8 +871,8 @@ cc.Class({
         this.vpEditProfileErrorMessage.string = "";
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
     },
 
     onEditProfileCheck: function() {
@@ -914,22 +914,22 @@ cc.Class({
     onDepositBack: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = false;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
+        // this.gift.active = false;
     },
 
     onWidthdrawlBack: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = false;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
+        // this.gift.active = false;
 
         this.vpWithdrawBank.string = "";
         this.vpWithdrawAccount.string = "";
         this.vpWithdrawAmount.string = "";
-        this.vpWithdrawName.string = "";
+        // this.vpWithdrawName.string = "";
         this.vpWithdrawPhone.string = "";
     },
 
@@ -988,9 +988,9 @@ cc.Class({
     onAvatars: function() {
         this.selectAvatar.active = true;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = false;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
+        // this.gift.active = false;
 
         this.avatars.forEach(function (element) {
             element.unSelectAvatar();
@@ -1006,9 +1006,9 @@ cc.Class({
     onAvatarsBack: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = false;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
+        // this.gift.active = false;
     },
 
     onAvatarsSubmit: function() {
@@ -1042,9 +1042,9 @@ cc.Class({
     onGiftBack: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = false;
-        this.deposit.active = false;
-        this.editProfile.active = false;
-        this.gift.active = false;
+        // this.deposit.active = false;
+        // this.editProfile.active = false;
+        // this.gift.active = false;
 
         this.vpGiftErrorMessage.string = "";
         this.vpGiftAmount.string = "";
