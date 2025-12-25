@@ -647,7 +647,25 @@ cc.Class({
                 }
                 console.log("cc.game.EVENT_SHOW7");
 
-                if (diff > 1000 * 30) {
+                // if (diff > 1000 * 30) {
+                //     console.log("cc.game.EVENT_SHOW8");
+                //     LoginScreen.preLogin.active = true;
+                //     if (GameManager.user && GameManager.user.playerId) {
+                //         ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
+                //             playerId: GameManager.user.playerId,
+                //             isLoggedIn: false
+                //         });
+                //         socketIO.socket.disconnect();
+                //         socketIO.socket.connect();
+                //         return;
+                //     }
+                //     else {
+                //         LoginScreen.preLogin.active = false;
+                //         return;
+                //     }
+                // }
+
+                if (!ServerCom.socketConnected) {
                     console.log("cc.game.EVENT_SHOW8");
                     LoginScreen.preLogin.active = true;
                     if (GameManager.user && GameManager.user.playerId) {
@@ -660,10 +678,11 @@ cc.Class({
                         return;
                     }
                     else {
-                        LoginScreen.preLogin.active = false;
+                        LoginScreen.checkForMultiClient();
                         return;
                     }
                 }
+                return;
 
 
                 console.log("cc.game.EVENT_SHOW9");

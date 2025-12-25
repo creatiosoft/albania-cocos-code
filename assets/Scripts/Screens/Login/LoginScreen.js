@@ -283,10 +283,8 @@ cc.Class({
             if (this.countryCode.string == window.CountryCodes[i].dial_code) {
                 cc.sys.localStorage.setItem('country', window.CountryCodes[i].code);
                 cc.sys.localStorage.setItem('countryCode', this.countryCode.string);
-                cc.resources.load("flags/" + window.CountryCodes[i].code.toLowerCase(), cc.SpriteFrame, function (err, tex) {
-                    if (err) {
-                    } 
-                    else {
+                cc.resources.load("flags/" + window.CountryCodes[i].code.toLowerCase(), cc.SpriteFrame, function(err, tex) {
+                    if (err) {} else {
                         inst.flagNode.getComponent(cc.Sprite).spriteFrame = tex;
                     }
                 });
@@ -294,10 +292,8 @@ cc.Class({
             }
         }
 
-        cc.resources.load("flags/" + window.CountryCodes[230].code.toLowerCase(), cc.SpriteFrame, function (err, tex) {
-            if (err) {
-            } 
-            else {
+        cc.resources.load("flags/" + window.CountryCodes[230].code.toLowerCase(), cc.SpriteFrame, function(err, tex) {
+            if (err) {} else {
                 inst.flagNode.getComponent(cc.Sprite).spriteFrame = tex;
             }
         });
@@ -325,10 +321,8 @@ cc.Class({
 
         cc.sys.localStorage.setItem('country', customEventData.code);
 
-        cc.resources.load("flags/" + customEventData.code.toLowerCase(), cc.SpriteFrame, function (err, tex) {
-            if (err) {
-            } 
-            else {
+        cc.resources.load("flags/" + customEventData.code.toLowerCase(), cc.SpriteFrame, function(err, tex) {
+            if (err) {} else {
                 inst.flagNode.getComponent(cc.Sprite).spriteFrame = tex;
             }
         });
@@ -344,13 +338,10 @@ cc.Class({
 
         if (cc.sys.localStorage.getItem('phone')) {
             this.countryCode.string = cc.sys.localStorage.getItem('countryCode');
-        }
-        else {
+        } else {
             cc.sys.localStorage.setItem('country', window.CountryCodes[230].code);
-            cc.resources.load("flags/" + window.CountryCodes[230].code.toLowerCase(), cc.SpriteFrame, function (err, tex) {
-                if (err) {
-                } 
-                else {
+            cc.resources.load("flags/" + window.CountryCodes[230].code.toLowerCase(), cc.SpriteFrame, function(err, tex) {
+                if (err) {} else {
                     inst.flagNode.getComponent(cc.Sprite).spriteFrame = tex;
                 }
             });
@@ -358,15 +349,13 @@ cc.Class({
         }
 
         for (var i = 0; i < window.CountryCodes.length; i++) {
-            const instance =  cc.instantiate(this.flagItem);
+            const instance = cc.instantiate(this.flagItem);
             instance.setPosition(0, 0);
             instance.active = true;
             instance.children[0].active = false;
             instance.children[2].getComponent(cc.Label).string = "+" + window.CountryCodes[i].dial_code;
-            cc.resources.load("flags/" + window.CountryCodes[i].code.toLowerCase(), cc.SpriteFrame, function (err, tex) {
-                if (err) {
-                } 
-                else {
+            cc.resources.load("flags/" + window.CountryCodes[i].code.toLowerCase(), cc.SpriteFrame, function(err, tex) {
+                if (err) {} else {
                     instance.children[1].getComponent(cc.Sprite).spriteFrame = tex;
                 }
             });
@@ -376,10 +365,8 @@ cc.Class({
 
             if (cc.sys.localStorage.getItem('country') == window.CountryCodes[i].code) {
                 instance.children[0].active = true;
-                cc.resources.load("flags/" + window.CountryCodes[i].code.toLowerCase(), cc.SpriteFrame, function (err, tex) {
-                    if (err) {
-                    } 
-                    else {
+                cc.resources.load("flags/" + window.CountryCodes[i].code.toLowerCase(), cc.SpriteFrame, function(err, tex) {
+                    if (err) {} else {
                         inst.flagNode.getComponent(cc.Sprite).spriteFrame = tex;
                     }
                 });
@@ -402,8 +389,8 @@ cc.Class({
         if (cc.sys.localStorage.getItem('vpPassword')) {
             this.vpPassword.string = cc.sys.localStorage.getItem('vpPassword');
         }
-        
-        
+
+
         GameManager.init();
         // console.log = function () { };
         // console.error = function () { };
@@ -525,14 +512,12 @@ cc.Class({
 
         if (cc.sys.localStorage.getItem('vpUserName')) {
             this.vpUserName.string = cc.sys.localStorage.getItem('vpUserName');
-        }
-        else {
+        } else {
             this.vpUserName.string = "";
         }
         if (cc.sys.localStorage.getItem('vpPassword')) {
             this.vpPassword.string = cc.sys.localStorage.getItem('vpPassword');
-        }
-        else {
+        } else {
             this.vpPassword.string = "";
         }
 
@@ -705,7 +690,7 @@ cc.Class({
             return;
         }
 
-         // && !GameManager.isForceDisconnection
+        // && !GameManager.isForceDisconnection
         // if (cc.sys.localStorage.getItem("auto_login_token") != null) {
         if (this.vpUserName.string != "" && this.vpPassword.string != "") {
 
@@ -733,7 +718,7 @@ cc.Class({
                 // inst.preLogin.active = false;
 
                 if (response.success) {
-                    
+
                     var result = response.result;
                     GameManager.serverStatus = result;
                     if (result.isUpdateRequired) {
@@ -773,8 +758,7 @@ cc.Class({
                             }
                         });
                     }
-                }
-                else {
+                } else {
                     inst.popupManager.show(PopUpType.NewVersionPopup, "Please update the game.", function() {});
                 }
             }, function(error) {
@@ -800,7 +784,7 @@ cc.Class({
                 inst.preLogin.active = false;
 
                 if (response.success) {
-                    
+
                     var result = response.result;
                     GameManager.serverStatus = result;
                     //     console.log("result is ");
@@ -825,8 +809,7 @@ cc.Class({
                             ScreenManager.showScreen(K.ScreenEnum.LoginScreen, 10, function() {}, false);
                         }
                     }
-                } 
-                else {
+                } else {
                     inst.popupManager.show(PopUpType.NewVersionPopup, "Please update the game.", function() {});
                 }
             }, function(error) {
@@ -834,7 +817,7 @@ cc.Class({
                 inst.preLogin.active = false;
                 inst.popupManager.show(PopUpType.NotificationPopup, "Please check your\nInternet Connection.", function() {});
                 // if (!inst.popupManager.checkIfPopupActive()) {
-                    
+
                 // }
                 // if (!GameManager.isConnected && ScreenManager.currentScreen != K.ScreenEnum.LoginScreen && ScreenManager.currentScreen != K.ScreenEnum.SignupScreen) {
                 //     inst.popupManager.show(PopUpType.DisconnectDialog, function() {});
@@ -924,8 +907,7 @@ cc.Class({
                         inst.onSuccessfullLogin(inst);
                     }, 100);
                 });
-            }
-            else {
+            } else {
                 inst.verfyOtpClickable = true;
                 cc.find("InvisibleWhenBuilt/Inputs/ErrorMessage1", inst.otpNode).active = true;
                 cc.find("InvisibleWhenBuilt/Inputs/ErrorMessage1", inst.otpNode).getComponent(cc.Label).string = response.messgae;
@@ -954,17 +936,9 @@ cc.Class({
             if (this.lobbySelectorNode) {
                 this.lobbySelectorNode.active = false;
             }
-
-            // ServerCom.loading.active = false;
-            // ServerCom.socketIOConnect(K.ServerAddress.gameServer, () => {
-            //     console.log("onSuccessfullLogin1");
-            //     if (!ServerCom.socketConnected) {
-            //         console.log("onSuccessfullLogin2");
-            //         return;
-            //     }
-            // ServerCom.loading.active = false;
             console.log("onSuccessfullLogin3");
             inst.loginHandler.checkForMultiClient(function(response) {
+                ServerCom.loadingLogin.active = false;
                 console.log("MULTI CLIENT RESPONSE ", response);
                 if (response.success) {
                     GameManager.isConnected = true;
@@ -1037,44 +1011,28 @@ cc.Class({
                                 (error) => {},
                                 "Enter table, please wait ......"
                             );
-
-                            // var joinCount = response.joinChannels.length;
-                            // response.joinChannels.forEach(function (element, index) {
-                            //     var newData = new JoinData(element);
-                            //     if (!!newData.channelId) {
-                            //         TableHandler.joinTableList.push(newData.channelId);
-                            //         newData.tableId = "";
-                            //         GameManager.join(newData.channelId, K.PomeloAPI.joinChannel, newData, null, null, index + 1, joinCount);
-                            //     } else {
-                            //         GameManager.join(newData.tableId, K.PomeloAPI.joinChannel, newData, null, null, index + 1, joinCount);
-                            //     }
-                            //     // GameManager.join(data.channelId, K.PomeloAPI.joinChannel, data);
-                            // }, this);
                         }.bind(this), 1);
                     } else {
                         if (this.preLogin.active) {
                             // if (!GameManager.isMobile) {
-                                // this.preLogin.active = false;
-                                if (!hit) {
-                                    this.preLogin.active = false;
-                                }
-                                
-                                if (!hit) {
-                                    this.launch.active = false;
-                                    if (ScreenManager.currentScreen == K.ScreenEnum.LobbyScreen) {
-                                        GameManager.emit("forceReloadTable");
-                                    }
-                                    else if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen || 
-                                             ScreenManager.currentScreen == K.ScreenEnum.SignupScreen) {
-                                        ScreenManager.showScreen(K.ScreenEnum.LobbyScreen, 10, function() {}, false);
-                                    }
-                                    else {
+                            // this.preLogin.active = false;
+                            if (!hit) {
+                                this.preLogin.active = false;
+                            }
 
-                                    }
+                            if (!hit) {
+                                this.launch.active = false;
+                                if (ScreenManager.currentScreen == K.ScreenEnum.LobbyScreen) {
+                                    GameManager.emit("forceReloadTable");
+                                } else if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen ||
+                                    ScreenManager.currentScreen == K.ScreenEnum.SignupScreen) {
+                                    ScreenManager.showScreen(K.ScreenEnum.LobbyScreen, 10, function() {}, false);
+                                } else {
+
                                 }
+                            }
                             // }
-                        }
-                        else {
+                        } else {
                             if (!hit) {
                                 this.preLogin.active = false;
                             }
@@ -1093,14 +1051,6 @@ cc.Class({
                     ScreenManager.showScreen(K.ScreenEnum.LoginScreen, 10, function() {}, false);
                 }
             }.bind(this));
-            // });
-            // })
-            // Handle BINGO
-            // mainLobbyComp.setOnClickCallback("BINGO", () => {
-            //     this.lobbySelectorNode.active = false;
-            //     GameManager.isPokerGame = false;
-            //     console.log("Successfully login into BINGO!");
-            // })
         }
     },
 
@@ -1147,7 +1097,7 @@ cc.Class({
      * @memberof Screens.Login.LoginScreen#
      */
     onLogin: function( /*data, custom, loginCredentials*/ ) {
-        
+
 
         var timeout;
         if (K.internetAvailable) {
@@ -1170,49 +1120,49 @@ cc.Class({
         // cc.sys.localStorage.setItem('countryCode', this.countryCode.string);
         // cc.sys.localStorage.setItem('phone', this.phone.string);
 
+        ServerCom.loadingLogin.active = true;
 
-            cc.find("InvisibleWhenBuilt/Inputs/ErrorMessage1", this.otpNode).active = false;
+        cc.find("InvisibleWhenBuilt/Inputs/ErrorMessage1", this.otpNode).active = false;
 
-            this.loginHandler.vpLogin(this.vpUserName.string, this.vpPassword.string, (data) => {
-                console.log("vpLogin", JSON.stringify(data));
+        this.loginHandler.vpLogin(this.vpUserName.string, this.vpPassword.string, (data) => {
+            console.log("vpLogin", JSON.stringify(data));
 
-                if (!data) {
-                    return;
-                }
+            if (!data) {
+                return;
+            }
 
-                inst.preLogin.active = false;
-                ServerCom.loading.active = false;
+            inst.preLogin.active = false;
+            ServerCom.loading.active = false;
 
-                if (data.success == true || data.status == "success") {
+            if (data.success == true || data.status == "success") {
 
-                    cc.sys.localStorage.setItem('vpUserName', inst.vpUserName.string);
-                    cc.sys.localStorage.setItem('vpPassword', inst.vpPassword.string);
+                cc.sys.localStorage.setItem('vpUserName', inst.vpUserName.string);
+                cc.sys.localStorage.setItem('vpPassword', inst.vpPassword.string);
 
-                    K.Token.access_token = data.access_token;
-                    K.Token.refresh_token = data.refresh_token;
-                    K.Token.access_token_expire_at = data.access_token_expire_at;
-                    K.Token.refresh_token_expire_at = data.refresh_token_expire_at;
+                K.Token.access_token = data.access_token;
+                K.Token.refresh_token = data.refresh_token;
+                K.Token.access_token_expire_at = data.access_token_expire_at;
+                K.Token.refresh_token_expire_at = data.refresh_token_expire_at;
 
-                    ServerCom.socketIOConnect(K.ServerAddress.gameServer + ":" + K.ServerAddress.gamePort, () => {
-                        if (!ServerCom.socketConnected) {
-                            return;
-                        }
-                        GameManager.setUserData(data.user);
-                        inst.saveLoginData();
-                        setTimeout(function() {
-                            inst.onSuccessfullLogin(inst);
-                        }, 100);
-                    });
+                ServerCom.socketIOConnect(K.ServerAddress.gameServer + ":" + K.ServerAddress.gamePort, () => {
+                    if (!ServerCom.socketConnected) {
+                        return;
+                    }
+                    GameManager.setUserData(data.user);
+                    inst.saveLoginData();
+                    setTimeout(function() {
+                        inst.onSuccessfullLogin(inst);
+                    }, 100);
+                });
+            } else {
+                inst.vpErrorMessage.node.active = true;
+                if (data.message) {
+                    inst.vpErrorMessage.string = data.message;
                 } else {
-                    inst.vpErrorMessage.node.active = true;
-                    if (data.message) {
-                        inst.vpErrorMessage.string = data.message;
-                    }
-                    else {
-                        inst.vpErrorMessage.string = data.error[0].message;
-                    }
+                    inst.vpErrorMessage.string = data.error[0].message;
                 }
-            });
+            }
+        });
         // });
 
         this.preLogin.active = true;
@@ -1360,7 +1310,7 @@ cc.Class({
         // cc.sys.localStorage.setItem(K.SystemStorageKeys.password, this.password.string);
     },
 
-    
+
     /**
      * @description Reset password button callback
      * @method onResetPassword
@@ -1478,8 +1428,7 @@ cc.Class({
                 this.capture.getComponent("capture_to_native").saveFile(picData);
                 // this.capture.getComponent("capture_to_native").camera.enabled = false;
             }, 1);
-        }
-        else {
+        } else {
             this.capture.getComponent("capture_to_web").init();
             this.capture.getComponent("capture_to_web").createCanvas();
             var img = this.capture.getComponent("capture_to_web").createImg();
@@ -1500,7 +1449,7 @@ cc.Class({
         this.loginUsingPasswordNode.active = false;
     },
 
-    onLoginWithPasword: function () {
+    onLoginWithPasword: function() {
         if (this.loginUsingPasswordUsername.string.trim() == '') {
             return;
         }
@@ -1511,7 +1460,7 @@ cc.Class({
         GameManager.getToken(
             this.loginUsingPasswordUsername.string,
             this.loginUsingPasswordPassword.string,
-            function (response) {
+            function(response) {
                 this.loginUsingPasswordUsername.string = "";
                 this.loginUsingPasswordPassword.string = "";
                 if (response.status == "success") {
@@ -1531,8 +1480,7 @@ cc.Class({
                     // this.loginHandler.loginGame(this.userName.string, "", this.password.string, "login", "normal", this.onLoginCallBack);
                     // this.preLogin.active = true;
                     // ServerCom.loading.active = false;
-                }
-                else {
+                } else {
                     this.preLogin.active = false;
                     ServerCom.loading.active = false;
                     inst.loginDebug[2].getComponent(cc.Label).string = "Invalid username or password please try again";
@@ -1542,38 +1490,33 @@ cc.Class({
         );
     },
 
-    onTogglePassword: function (target) {
+    onTogglePassword: function(target) {
         if (target.isChecked) {
             this.loginUsingPasswordPassword.inputFlag = cc.EditBox.InputFlag.DEFAULT;
-        }
-        else {
+        } else {
             this.loginUsingPasswordPassword.inputFlag = cc.EditBox.InputFlag.PASSWORD;
         }
     },
 
-    onToggleForgetPassword1: function (target) {
+    onToggleForgetPassword1: function(target) {
         if (target.isChecked) {
             this.forgetPasswordNewPassword1.inputFlag = cc.EditBox.InputFlag.DEFAULT;
-        }
-        else {
+        } else {
             this.forgetPasswordNewPassword1.inputFlag = cc.EditBox.InputFlag.PASSWORD;
         }
     },
 
-    onToggleForgetPassword2: function (target) {
+    onToggleForgetPassword2: function(target) {
         if (target.isChecked) {
             this.forgetPasswordNewPassword2.inputFlag = cc.EditBox.InputFlag.DEFAULT;
-        }
-        else {
+        } else {
             this.forgetPasswordNewPassword2.inputFlag = cc.EditBox.InputFlag.PASSWORD;
         }
     },
 
-    onUpdateNewPassword: function () {
-    },
+    onUpdateNewPassword: function() {},
 
-    onPasswordVerifyOtp: function () {
-    },
+    onPasswordVerifyOtp: function() {},
 
     onShowTC: function(event, url) {
         this.tc.active = true;
@@ -1589,7 +1532,7 @@ cc.Class({
 
     onHideTC: function() {
         this.tc.getChildByName("Cover").getChildByName("WebView").getComponent(cc.WebView).url = "";
-        this.tc.active = false;  
+        this.tc.active = false;
     },
 
     onConfirmCustom: function() {
@@ -1654,7 +1597,7 @@ cc.Class({
 
     onForgetPasswordStep3Check: function() {
         this.vpForgetPasswordSubmitUpdate.interactable = false;
-        if (this.vpForgetPasswordNew.string === "" || 
+        if (this.vpForgetPasswordNew.string === "" ||
             this.vpForgetPasswordNewConfirm.string === "") {
             return;
         }
@@ -1766,16 +1709,14 @@ cc.Class({
                 this.vpForgetPasswordSubmit.interactable = false;
                 this.vpForgetPasswordSubmitOTP.interactable = false;
                 this.vpForgetPasswordSubmitUpdate.interactable = false;
-            }
-            else {
+            } else {
                 this.vpForgetPasswordErrorMessage1.node.active = true;
                 this.vpForgetPasswordErrorMessage2.node.active = true;
 
                 if (data.message) {
                     this.vpForgetPasswordErrorMessage1.string = data.message;
                     this.vpForgetPasswordErrorMessage2.string = data.message;
-                }
-                else {
+                } else {
                     this.vpForgetPasswordErrorMessage1.string = data.error[0].message;
                     this.vpForgetPasswordErrorMessage2.string = data.error[0].message;
                 }
@@ -1809,13 +1750,11 @@ cc.Class({
                 this.vpForgetPasswordSubmit.interactable = false;
                 this.vpForgetPasswordSubmitOTP.interactable = false;
                 this.vpForgetPasswordSubmitUpdate.interactable = false;
-            }
-            else {
+            } else {
                 this.vpForgetPasswordErrorMessage2.node.active = true;
                 if (data.message) {
                     this.vpForgetPasswordErrorMessage2.string = data.message;
-                }
-                else {
+                } else {
                     this.vpForgetPasswordErrorMessage2.string = data.error[0].message;
                 }
             }
@@ -1847,14 +1786,12 @@ cc.Class({
 
                 this.vpForgetPasswordSuccessPopup.active = true;
 
-            }
-            else {
+            } else {
                 this.vpForgetPasswordErrorMessage3.node.active = true;
 
                 if (data.message) {
                     this.vpForgetPasswordErrorMessage3.string = data.message;
-                }
-                else {
+                } else {
                     this.vpForgetPasswordErrorMessage3.string = data.error[0].message;
                 }
             }
@@ -1868,6 +1805,123 @@ cc.Class({
         this.forgetPasswordNode.getChildByName("Step3").active = false;
         this.vpForgetPasswordSuccessPopup.active = false;
     },
+
+    checkForMultiClient: function() {
+        inst.loginHandler.checkForMultiClient(function(response) {
+            ServerCom.loadingLogin.active = false;
+            console.log("MULTI CLIENT RESPONSE ", response);
+            if (response.success) {
+                GameManager.isConnected = true;
+
+                console.log("Active tables:", GameManager.activeTableCount);
+                // this.preLogin.active = false;
+                let currentActiveIds = [];
+                let currentActiveTableIds = [];
+                let prevSelection = GameScreen ? GameScreen.prevSelection : 0;
+                let hit = false;
+                GameManager.gameModel.activePokerModels.forEach(function(element, index) {
+                    // console.log(element.gameData.channelId);
+                    // console.log(element.gameData.raw.tournamentId);
+                    if (element.gameData.raw.tournamentId) {
+                        currentActiveIds.push(element.gameData.raw.tournamentId);
+                        currentActiveTableIds.push(element.gameData.channelId);
+                    }
+
+                    if (currentActiveTableIds.length == 1) {
+                        this.tourData = element.gameData.raw.tourData;
+                    }
+                }, this);
+
+                console.log("currentActiveIds", currentActiveIds);
+
+                // Clear previous session data before joining new tables
+                // GameManager.reset();
+
+                if (GameManager.activeTableCount > 0 && response.joinChannels.length == 0) {
+                    GameManager.reset();
+                }
+
+                // AutoJoin last logged in tables
+                // cc.eventManager.removeListener(inst.enterListener);
+                if (!!response.joinChannels && response.joinChannels.length > 0) {
+                    hit = true;
+                    this.preLogin.active = true;
+                    GameManager.scheduleOnce(function() {
+                        var joinCount = response.joinChannels.length;
+                        response.joinChannels.forEach(function(element, index) {
+                            var newData = new JoinData(element);
+                            if (!!newData.channelId) {
+                                TableHandler.joinTableList.push(newData.channelId);
+                                newData.tableId = "";
+                                GameManager.join(newData.channelId, K.PomeloAPI.joinChannel, newData, null, null, index + 1, joinCount, true);
+                            } else {
+                                GameManager.join(newData.tableId, K.PomeloAPI.joinChannel, newData, null, null, index + 1, joinCount, true);
+                            }
+                            // GameManager.join(data.channelId, K.PomeloAPI.joinChannel, data);
+                        }, this);
+                    }, 0.1);
+                }
+                if (currentActiveIds.length > 0) {
+                    hit = true;
+                    this.preLogin.active = true;
+                    GameManager.scheduleOnce(function() {
+
+                        if (!GameManager.isSocketIOConnected) {
+                            this.preLogin.active = false;
+                            return;
+                        }
+
+                        console.log("GameScreen.prevSelection", prevSelection);
+
+                        ServerCom.socketIOBroadcast(currentActiveTableIds[0] + ":" + GameManager.user.playerId, this.onTournamentTableUserBroadcast.bind(this));
+                        window.TournamentLobbyHandler.requestTournamentEnterTable({
+                                tournamentId: currentActiveIds[0]
+                            },
+                            (data) => {},
+                            (error) => {},
+                            "Enter table, please wait ......"
+                        );
+                    }.bind(this), 1);
+                } else {
+                    if (this.preLogin.active) {
+                        // if (!GameManager.isMobile) {
+                        // this.preLogin.active = false;
+                        if (!hit) {
+                            this.preLogin.active = false;
+                        }
+
+                        if (!hit) {
+                            this.launch.active = false;
+                            if (ScreenManager.currentScreen == K.ScreenEnum.LobbyScreen) {
+                                GameManager.emit("forceReloadTable");
+                            } else if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen ||
+                                ScreenManager.currentScreen == K.ScreenEnum.SignupScreen) {
+                                ScreenManager.showScreen(K.ScreenEnum.LobbyScreen, 10, function() {}, false);
+                            } else {
+
+                            }
+                        }
+                        // }
+                    } else {
+                        if (!hit) {
+                            this.preLogin.active = false;
+                        }
+                        if (!hit) {
+                            this.launch.active = false;
+                            ScreenManager.showScreen(K.ScreenEnum.LobbyScreen, 10, function() {}, false);
+                        }
+                    }
+                }
+            } else {
+                this.verfyOtpClickable = true;
+                K.disconnectRequestedByPlayer = true;
+                this.preLogin.active = false;
+                this.launch.active = false;
+                // pomelo.disconnect();
+                ScreenManager.showScreen(K.ScreenEnum.LoginScreen, 10, function() {}, false);
+            }
+        }.bind(this));
+    }
 });
 
 //home/codes/localrepo/website

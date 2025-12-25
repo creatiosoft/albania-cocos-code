@@ -26,6 +26,10 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+        loadingLogin: {
+            default: null,
+            type: cc.Node,
+        },
         reconnecting: {
             default: null,
             type: cc.Node,
