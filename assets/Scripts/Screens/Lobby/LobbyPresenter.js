@@ -260,7 +260,7 @@ cc.Class({
         this.refreshDetails();
         this.refreshPlayerChips();
         this.displayOnlinePlayers();
-        this.megaStarsUpdateInView();
+        // this.megaStarsUpdateInView();
         this.playerImg.spriteFrame = GameManager.user.urlImg;
     },
 
