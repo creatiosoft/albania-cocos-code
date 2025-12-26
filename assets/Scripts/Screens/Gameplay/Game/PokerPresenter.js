@@ -2692,6 +2692,9 @@ cc.Class({
      * */
 
     animateHoleCards: function (nodesToAnimate, animationType, initialPosition, positionOffset = this.CardsPositionOffset, finalNodeDestination, runTwiceInitPosArr) {
+        
+        // console.trace("animateHoleCards", nodesToAnimate);
+
         if (animationType == "SLIDE_TO_OPEN") {
 
             if (nodesToAnimate.length == 5) {
@@ -2720,10 +2723,10 @@ cc.Class({
                     else if (i == 3) {
                         this.timersToKill.push(setTimeout(function () {
                         // setTimeout(function () {
-                            var moveAction = cc.moveTo(.55, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
+                            var moveAction = cc.moveTo(.9, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
                             element.active = true;
                             element.runAction(moveAction);
-                        }.bind(this), 1000));
+                        }.bind(this), 2000));
 
                         this.timersToKill.push(setTimeout(function () {
                         // setTimeout(function () {
@@ -2738,10 +2741,10 @@ cc.Class({
                     else if (i == 4) {
                         this.timersToKill.push(setTimeout(function () {
                         // setTimeout(function () {
-                            var moveAction = cc.moveTo(.55, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
+                            var moveAction = cc.moveTo(.9, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
                             element.active = true;
                             element.runAction(moveAction);
-                        }.bind(this), 1500));
+                        }.bind(this), 4000));
 
                         this.timersToKill.push(setTimeout(function () {
                         // setTimeout(function () {
@@ -2751,7 +2754,7 @@ cc.Class({
                                     element.setPosition(cc.v2(posX, 0));
                                 }
                             }
-                        }.bind(this), 2500));
+                        }.bind(this), 2200));
                     }
                 }, this);
             }
@@ -4014,12 +4017,18 @@ cc.Class({
         // }
 
         // if (data.endingType == K.GameEndType.GameCompleted) {
-            playerIndex.forEach(function (element) {
-                //  setTimeout(() => {
-                this.playerHand[this.getRotatedSeatIndex(element)].winningRevealCards(data.endingType == K.GameEndType.EverybodyPacked);
-                //  }, 0);
-            }, this);
 
+        var time = 0;
+        var zero = this.node.parent.getComponent("PokerModel").number0;
+        var one = this.node.parent.getComponent("PokerModel").number1;
+        if ((zero == 5) && ((one == 0) || (one == 5))) {
+            time = 2000;
+        }
+
+        setTimeout(() => {
+            playerIndex.forEach(function (element) {
+                this.playerHand[this.getRotatedSeatIndex(element)].winningRevealCards(data.endingType == K.GameEndType.EverybodyPacked);
+            }, this);
 
             this.model.gameData.tableDetails.players.forEach(function (element) {
                 if (!playerIndex.includes(element.seatIndex) &&
@@ -4027,17 +4036,8 @@ cc.Class({
                     this.playerHand[this.getRotatedSeatIndex(element.seatIndex)].winningRevealCards(data.endingType == K.GameEndType.EverybodyPacked);
                 }
             }, this);
-        // }
-        var time = 0;
+        }, time);
 
-        var zero = this.node.parent.getComponent("PokerModel").number0;
-
-        var one = this.node.parent.getComponent("PokerModel").number1;
-        if ((zero == 5) && ((one == 0) || (one == 5))) {
-
-            time = 2200;
-
-        }
 
         // console.log("time ", time);
         setTimeout(() => {
@@ -5378,7 +5378,6 @@ cc.Class({
     },
 
     disableShowFoldBtn: function() {
-        console.trace("disableShowFoldBtn");
         this.showFoldBtn.node.parent.parent.active = false;
         this.showFoldBtn.node.parent.getChildByName("tick").active = false;
     },

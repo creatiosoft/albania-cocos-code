@@ -342,7 +342,7 @@ cc.Class({
         let count = 0;
         if (this.tableImageSelectedId != 0) {
             count += 1;
-            ServerCom.pomeloRequest(this.pokerPresenter.getComponent("PokerPresenter").isTournament() ? "connector.entryHandler.playerChangeTourTableTheme" : "connector.entryHandler.playerChangeTableTheme", {
+            ServerCom.pomeloRequest("connector.entryHandler.playerChangeTableTheme", {
                 "playerId": GameManager.user.playerId,
                 "themeId": this.tableImageSelectedId
             }, function (response) {

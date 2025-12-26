@@ -214,7 +214,7 @@ var Table = cc.Class({
      * @description Lifecycle callback, Used to Register some broadcast as tableUpdate, Perform some alignmetn of widget!
      * @memberof Screens.Lobby.Table.Table#
      */
-    onLoad: function () {
+    onLoad: function() {
         // this.variation = K.Variation.TexasHoldem;
         // console.log("onload strt");
         this.lobbyData = [];
@@ -223,7 +223,7 @@ var Table = cc.Class({
         this.createRowsCallBack = this.createRows.bind(this);
         GameManager.on("forceReloadTable", this.onForceReloadTable.bind(this));
         GameManager.on("AdvancefilterUpdated", this.onAdvancefilterUpdated.bind(this));
-        GameManager.on(K.GameEvents.onReset, function () {
+        GameManager.on(K.GameEvents.onReset, function() {
             this.tempSelection = null;
             this.lobbyData = [];
         }.bind(this));
@@ -234,7 +234,7 @@ var Table = cc.Class({
         ServerCom.pomeloBroadcast(K.LobbyBroadcastRoute.removeTable, this.removeTable.bind(this));
         ServerCom.pomeloBroadcast(K.LobbyBroadcastRoute.addTable, this.addTable.bind(this));
         cc.systemEvent.on("leaveLobby", this.leaveLobby, this);
-        cc.systemEvent.on( LocalizedManager.LanguageDidChangeEvent, this.onTableUpdateWithLang, this );                 
+        cc.systemEvent.on(LocalizedManager.LanguageDidChangeEvent, this.onTableUpdateWithLang, this);
         this.isSortedByStakes = true;
         this.stakeReverse = true;
         if (!GameManager.isMobile) {
@@ -258,7 +258,7 @@ var Table = cc.Class({
 
         // console.log("onload end");
     },
-    registerUPandDOWN: function () {
+    registerUPandDOWN: function() {
         return
         var enterKeyRef = this;
         this.upDownListener = cc.EventListener.create({
@@ -274,10 +274,9 @@ var Table = cc.Class({
         cc.eventManager.addListener(this.upDownListener, this.node);
     },
 
-    leaveLobby: function () {
-    },
+    leaveLobby: function() {},
 
-    scroll: function (val) {
+    scroll: function(val) {
         if (val == cc.KEY.enter) {
             TableContent.prevSelection.dblClk = true;
             TableContent.prevSelection.node.emit('touchstart');
@@ -318,7 +317,7 @@ var Table = cc.Class({
         } else {
 
             // inst.clearContents();
-            this.handler.getTableData(true, "All", "All", function (response) {
+            this.handler.getTableData(true, "All", "All", function(response) {
                 // console.log("TABLE DATA IS ", JSON.parse(JSON.stringify(response)));
 
                 // inst.clearContents();
@@ -344,7 +343,7 @@ var Table = cc.Class({
      * @param {object} data - Data to be set in dropdown!
      * @memberof Screens.Lobby.Table.Table#
      */
-    initDropDowns: function (data) {
+    initDropDowns: function(data) {
         // this.gameTypeDropdown.setContent();
         // this.stakesDropdown.setContent(data.);
         //this.maxPlayerDropdown.setContent();
@@ -363,7 +362,7 @@ var Table = cc.Class({
      * @description Used to  set/reset favourite table.
      * @memberof Screens.Lobby.Table.Table#
      */
-    setFavTable: function () {
+    setFavTable: function() {
         GameManager.playSound(K.Sounds.click);
         if (GameManager.isMobile) {
             return;
@@ -373,7 +372,7 @@ var Table = cc.Class({
         var inst = this;
         if (!!TableContent.prevSelection) {
             if (selection && !favourite) {
-                this.handler.setFavTable(GameManager.user.playerId, TableContent.prevSelection.channelData._id, TableContent.prevSelection.channelData.channelType, function (response) {
+                this.handler.setFavTable(GameManager.user.playerId, TableContent.prevSelection.channelData._id, TableContent.prevSelection.channelData.channelType, function(response) {
                     if (response.success) {
                         TableContent.prevSelection.channelData.favourite = true;
                         inst.updateFavKeys();
@@ -383,8 +382,8 @@ var Table = cc.Class({
                         inst.favTableCB.isChecked = (!selection);
                     }
                 });
-            } else if(!selection && favourite){
-                this.handler.removeFavTable(GameManager.user.playerId, TableContent.prevSelection.channelData._id, function (response) {
+            } else if (!selection && favourite) {
+                this.handler.removeFavTable(GameManager.user.playerId, TableContent.prevSelection.channelData._id, function(response) {
                     if (response.success) {
                         TableContent.prevSelection.channelData.favourite = false;
                         inst.updateFavKeys();
@@ -405,15 +404,15 @@ var Table = cc.Class({
     },
 
 
-    updateFavKeys : function() {
+    updateFavKeys: function() {
         let channelData = TableContent.prevSelection.channelData;
         var data = {
-            _id : channelData._id,
-            event : "TABLENEWVALUES",
-            route : "tableUpdate",
-            updated : {
-                favourite : channelData.favourite
-            } 
+            _id: channelData._id,
+            event: "TABLENEWVALUES",
+            route: "tableUpdate",
+            updated: {
+                favourite: channelData.favourite
+            }
         };
         this.onTableUpdate(data);
     },
@@ -425,15 +424,14 @@ var Table = cc.Class({
         this.onGetTableData();
     },
 
-    onRoomUpdate: function (eventData) {
-    },
+    onRoomUpdate: function(eventData) {},
     /**
      * @method onTableUpdate
      * @description Broadcast if player joins or leaves any table!
      * @param {object} eventData - Data which will be updated in table
      * @memberof Screens.Lobby.Table.Table#
      */
-    onTableUpdate: function (eventData) {
+    onTableUpdate: function(eventData) {
         for (var key in this.lobbyData) {
             for (var index = 0; index < this.lobbyData[key].length; index++) {
                 if (this.lobbyData[key][index]._id == eventData._id) {
@@ -446,7 +444,7 @@ var Table = cc.Class({
             }
         }
         // this.scheduleOnce(function () {
-            this.applyFilter(true);
+        this.applyFilter(true);
         // }, 0.2);
     },
 
@@ -454,7 +452,7 @@ var Table = cc.Class({
      * @method onSideTableUpdate
      * @memberof  Screens.Lobby.Table.Table#
      */
-    onSideTableUpdate: function (eventData) { },
+    onSideTableUpdate: function(eventData) {},
 
 
     /**
@@ -463,9 +461,9 @@ var Table = cc.Class({
      * @param {Object} data -Data to be updated in view
      * @memberof  Screens.Lobby.Table.Table#
      */
-    addTable: function (data) {
+    addTable: function(data) {
         this.onGetTableData();
-        
+
         // // data.updated.channelVariation = K.Variation.All;
         // data.updated._id = data._id;
         // var key = data.updated.isRealMoney + "" + this.variation;//data.updated.channelVariation;
@@ -498,7 +496,7 @@ var Table = cc.Class({
      * @param {object} data -data having id of content to be removed!
      * @memberof Screens.Lobby.Table.Table#
      */
-    removeTable: function (data) {
+    removeTable: function(data) {
         // for (var key in this.lobbyData) {
         //     for (var index = 0; index < this.lobbyData[key].length; index++) {
         //         if (this.lobbyData[key][index]._id == data._id) {
@@ -533,7 +531,7 @@ var Table = cc.Class({
      * @description LifeCycle callback, called when the node is disabled deRigster favourite button callback;
      * @memberof Screens.Lobby.Table.Table#
      */
-    onDisable: function () {
+    onDisable: function() {
 
         // if (this.favPrimaryCB) {
         //     this.favPrimaryCB.deregisterCallback(this.applyFilterCB);
@@ -547,19 +545,19 @@ var Table = cc.Class({
      * @description Functionalities - register fav button callback, set Player Filter, get TableData!
      * @memberof Screens.Lobby.Table.Table#
      */
-    onEnable: function () {
+    onEnable: function() {
         TableContent.prevSelection = null;
         TableContent.callback = this.tableContentClick.bind(this);
         // if (!this.roomId) s
-        
+
         // var sch = function () {
-            this.onGetTableData();
+        this.onGetTableData();
         // };
         // cc.director.getScheduler().unschedule(sch, this);
         // this.scheduleOnce(sch.bind(this));
     },
 
-    onEnable2: function (data) {
+    onEnable2: function(data) {
         TableContent.prevSelection = null;
         var inst = this;
         inst.clearContents();
@@ -581,7 +579,7 @@ var Table = cc.Class({
      * @param {String} channelType -Type of Channel
      * @memberof Screens.Lobby.Table.Table#
      */
-    onGetTableData: function (channelType = null) {
+    onGetTableData: function(channelType = null) {
         TableContent.prevSelection = null;
         var inst = this;
         // console.log(inst)
@@ -601,7 +599,7 @@ var Table = cc.Class({
         } else {
 
             inst.clearContents();
-            this.handler.getTableData(true, "All", "All", function (response) {
+            this.handler.getTableData(true, "All", "All", function(response) {
                 // console.log("TABLE DATA IS ", JSON.parse(JSON.stringify(response)));
 
                 // inst.clearContents();
@@ -630,7 +628,7 @@ var Table = cc.Class({
      * @param {boolean} checkSitNGo -specify if tournament type is sitnGo or normal
      * @memberof Screens.Lobby.Table.Table#
      */
-    filterByTournamentType: function (content, pass = true, checkSitNGo = true) {
+    filterByTournamentType: function(content, pass = true, checkSitNGo = true) {
         if (pass)
             return content;
         var filteredContent = [];
@@ -651,14 +649,14 @@ var Table = cc.Class({
      * @param {callback} callback -callback to be executed if response is success!
      * @memberof Screens.Lobby.Table.Table#
      */
-    startPomelo: function (address, callback) {
+    startPomelo: function(address, callback) {
         // pomelo int
         pomelo.init({
             //  encrypt: true,
             host: address.gameServer,
             port: address.gamePort,
             log: true
-        }, function () {
+        }, function() {
             if (callback !== null && callback !== undefined) {
                 callback();
             }
@@ -670,7 +668,7 @@ var Table = cc.Class({
      * @description initialize game filter statically! and register callback!
      * @memberof Screens.Lobby.Table.Table#
      */
-    initGameTypeFilter: function () {
+    initGameTypeFilter: function() {
 
         //list for game type dropdown
 
@@ -695,7 +693,7 @@ var Table = cc.Class({
      * @description Method to handle players dropdown for ofc variation and others
      * @memberof Table#
      */
-    setPlayerFilters: function () {
+    setPlayerFilters: function() {
         if (this.variation == K.Variation.OpenFaceChinesePoker) {
             var maxPlayersContent = ["All", 2, 3];
         } else {
@@ -710,7 +708,7 @@ var Table = cc.Class({
      * @param {object} data -data to show in table content!
      * @memberof Screens.Lobby.Table.Table#
      */
-    populateTable: function (data) {
+    populateTable: function(data) {
 
         // this.unschedule(this.tempCallback);
         var instance = null;
@@ -754,7 +752,7 @@ var Table = cc.Class({
      * @param {Object} data -data to be updated
      * @memberof Screens.Lobby.Table.Table#
      */
-    updateTable: function (data, lastIndex = null) {
+    updateTable: function(data, lastIndex = null) {
         this.currentData = data;
         lastIndex = (!!lastIndex) ? lastIndex : this.contentPool.length;
         var content = null;
@@ -775,13 +773,13 @@ var Table = cc.Class({
             if (content.joinEffect) {
                 if (this.handler.joinTableList.indexOf(content.channelData._id) !== -1) {
                     content.joinEffect.active = true;
-                    content.textFields.forEach(function (element) {
+                    content.textFields.forEach(function(element) {
                         // element.node.color = cc.Color.WHITE;
                     }, this);
                 } else {
                     content.joinEffect.active = false;
                     if (TableContent.prevSelection != content) {
-                        content.textFields.forEach(function (element) {
+                        content.textFields.forEach(function(element) {
                             // element.node.color = cc.Color.BLACK;
                         }, this);
                     }
@@ -800,12 +798,43 @@ var Table = cc.Class({
             if (content.channelData.channelVariation == K.Variation.TexasHoldem) {
                 cc.find("l/vari", content.node).active = true;
                 cc.find("l/vari2", content.node).active = false;
-            }
-            else if (content.channelData.channelVariation == K.Variation.Omaha) {
+            } else if (content.channelData.channelVariation == K.Variation.Omaha) {
                 cc.find("l/vari", content.node).active = false;
                 cc.find("l/vari2", content.node).active = true;
             }
 
+            if (content.channelData.roomImage) {
+
+                let cachedRoomImageTexture = GameManager.cachedRoomImages[content.channelData.roomImage];
+                if (cachedRoomImageTexture) {
+                    cc.find('icon', content.node).roomImage = content.channelData.roomImage;
+                    cc.find('icon', content.node).getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cachedRoomImageTexture);
+                } else {
+                    (function(roomImage, instance) {
+                        if (cc.find('icon', instance).getComponent(cc.Sprite).spriteFrame) {
+                            if (roomImage == cc.find('icon', instance).roomImage) {
+
+                            } else {
+                                cc.loader.load(K.ServerAddress.assets_server_s + roomImage, function(err, tex) {
+                                    if (err) {} else {
+                                        cc.find('icon', instance).roomImage = roomImage;
+                                        cc.find('icon', instance).getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(tex);
+                                        GameManager.cachedRoomImages[roomImage] = tex;
+                                    }
+                                });
+                            }
+                        } else {
+                            cc.find('icon', instance).roomImage = roomImage;
+                            cc.loader.load(K.ServerAddress.assets_server_s + roomImage, function(err, tex) {
+                                if (err) {} else {
+                                    cc.find('icon', instance).getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(tex);
+                                    GameManager.cachedRoomImages[roomImage] = tex;
+                                }
+                            });
+                        }
+                    })(content.channelData.roomImage, content.node);
+                }
+            }
         }
         this.showSelection();
     },
@@ -817,7 +846,7 @@ var Table = cc.Class({
      * @param {boolean} stop - Prevent from creating new rows (not being used now)
      * @memberof Screens.Lobby.Table.Table#
      */
-    createRows: function (data, stop = false) {
+    createRows: function(data, stop = false) {
         // data = this.handler.sortByJoined(data);
         var lastIndex = stop ? 0 : data.length;
         if (this.contentPool.length < lastIndex) {
@@ -838,7 +867,7 @@ var Table = cc.Class({
      * @param {callback} callback - callback having createRows method!
      * @memberof Screens.Lobby.Table.Table#
      */
-    createRow: function (entry, i, data, callback) {
+    createRow: function(entry, i, data, callback) {
         // console.log("create row", entry, i, data);
         var instance = null;
         var tableContent = null;
@@ -874,12 +903,12 @@ var Table = cc.Class({
         if (tableContent.joinEffect) {
             if (this.handler.joinTableList.indexOf(entry._id) !== -1) {
                 tableContent.joinEffect.active = true;
-                tableContent.textFields.forEach(function (element) {
+                tableContent.textFields.forEach(function(element) {
                     // element.node.color = cc.Color.WHITE;
                 }, this);
             } else {
                 tableContent.joinEffect.active = false;
-                tableContent.textFields.forEach(function (element) {
+                tableContent.textFields.forEach(function(element) {
                     // element.node.color = cc.Color.BLACK;
                 }, this);
             }
@@ -912,7 +941,7 @@ var Table = cc.Class({
      * @param {object} data -data is used by callback
      * @memberof Screens.Lobby.Table.Table#
      */
-    destroyRows: function (startIndex, callback = null, data = null) {
+    destroyRows: function(startIndex, callback = null, data = null) {
         if (this.contentPool.length > startIndex) {
             this.contentPool[startIndex].destroy();
             this.contentPool.splice(startIndex, 1);
@@ -929,7 +958,7 @@ var Table = cc.Class({
      * @description Clear existing table row elements
      * @memberof Screens.Lobby.Table.Table#
      */
-    clearContents: function () {
+    clearContents: function() {
         // this.unschedule(this.tempCallback);
         for (var index = 0; index < this.contentPool.length; index++) {
             this.contentPool[index].active = false;
@@ -946,7 +975,7 @@ var Table = cc.Class({
      * @param {boolean} downloadAgain - Request server for side table data if true!
      * @memberof Screens.Lobby.Table.Table#
      */
-    refreshSideTable: function (downloadAgain = true) {
+    refreshSideTable: function(downloadAgain = true) {
 
         this.selectedTableDetails.active = true;
         this.selectedTableDetailsTour.active = false;
@@ -960,14 +989,14 @@ var Table = cc.Class({
         if (!GameManager.isMobile && TableContent.prevSelection.channelData.favourite) {
             this.favTableCB.isChecked = (true);
         } else {
-            (GameManager.isMobile) ? true : this.favTableCB.isChecked = (false);
+            (GameManager.isMobile) ? true: this.favTableCB.isChecked = (false);
         }
         if (downloadAgain) {
             this.currentSideTableData = null;
-            this.handler.refreshSideTable(TableContent.prevSelection.channelData, function (response) {
+            this.handler.refreshSideTable(TableContent.prevSelection.channelData, function(response) {
                 // console.log(response)
                 this.setSideTableData(response);
-            }.bind(this), function (response) { });
+            }.bind(this), function(response) {});
         } else {
             // console.log(this.currentSideTableData)
             this.setSideTableData(this.currentSideTableData);
@@ -982,7 +1011,7 @@ var Table = cc.Class({
      * @description Get currently displayed content according to filters selected
      * @memberof Screens.Lobby.Table.Table#
      */
-    getFilteredContent: function () {
+    getFilteredContent: function() {
         var content = [];
         for (var i = 0; i < this.contentPool.length; i++) {
             content.push(this.contentPool[i].getComponent('TableContent').channelData);
@@ -996,13 +1025,13 @@ var Table = cc.Class({
      * @description Sort by name button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByName: function () {
+    onSortByName: function() {
         this.nameReverse = !this.nameReverse;
         this.removeAllSorting();
         this.isSortedByName = true;
         this.applyFilter();
     },
-    onSortByNameSound: function () {
+    onSortByNameSound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByName();
 
@@ -1013,13 +1042,13 @@ var Table = cc.Class({
      * @description Sort by stakes button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByStakes: function () {
+    onSortByStakes: function() {
         this.stakeReverse = !this.stakeReverse;
         this.removeAllSorting();
         this.isSortedByStakes = true;
         this.applyFilter();
     },
-    onSortByStakesSound: function () {
+    onSortByStakesSound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByStakes();
     },
@@ -1029,13 +1058,13 @@ var Table = cc.Class({
      * @description Sort by variation button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByVariation: function () {
+    onSortByVariation: function() {
         this.variationReverse = !this.variationReverse;
         this.removeAllSorting();
         this.isSortedByVariation = true;
         this.applyFilter();
     },
-    onSortByVariationSound: function () {
+    onSortByVariationSound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByVariation();
     },
@@ -1046,7 +1075,7 @@ var Table = cc.Class({
      * @description Sort by game type button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByType: function () {
+    onSortByType: function() {
         this.typeReverse = !this.typeReverse;
         this.removeAllSorting();
         this.isSortedByType = true;
@@ -1058,13 +1087,13 @@ var Table = cc.Class({
      * @description Sort by min buy amount button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByMinBuy: function () {
+    onSortByMinBuy: function() {
         this.minBuyReverse = !this.minBuyReverse;
         this.removeAllSorting();
         this.isSortedByMinBuy = true;
         this.applyFilter();
     },
-    onSortByMinBuySound: function () {
+    onSortByMinBuySound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByMinBuy();
     },
@@ -1074,13 +1103,13 @@ var Table = cc.Class({
      * @description Sort by max buy amount button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByMaxBuy: function () {
+    onSortByMaxBuy: function() {
         this.maxBuyReverse = !this.maxBuyReverse;
         this.removeAllSorting();
         this.isSortedByMaxBuy = true;
         this.applyFilter();
     },
-    onSortByMaxBuySound: function () {
+    onSortByMaxBuySound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByMaxBuy();
     },
@@ -1091,13 +1120,13 @@ var Table = cc.Class({
      * @description Sort by players button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByPlayers: function () {
+    onSortByPlayers: function() {
         this.maxPlayersReverse = !this.maxPlayersReverse;
         this.removeAllSorting();
         this.isSortedByMaxPlayers = true;
         this.applyFilter();
     },
-    onSortByPlayersSound: function () {
+    onSortByPlayersSound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByPlayers();
     },
@@ -1108,13 +1137,13 @@ var Table = cc.Class({
      * @description Sort by Flops button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByFlops: function () {
+    onSortByFlops: function() {
         this.flopReverse = !this.flopReverse;
         this.removeAllSorting();
         this.isSortedByFlops = true;
         this.applyFilter();
     },
-    onSortByFlopsSound: function () {
+    onSortByFlopsSound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByFlops();
     },
@@ -1124,7 +1153,7 @@ var Table = cc.Class({
      * @description Sort by Pots button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByPots: function () {
+    onSortByPots: function() {
         this.potReverse = !this.potReverse;
         this.removeAllSorting();
         this.isSortedByPots = true;
@@ -1132,7 +1161,7 @@ var Table = cc.Class({
     },
 
 
-    onSortByWaitingSound: function () {
+    onSortByWaitingSound: function() {
         GameManager.playSound(K.Sounds.click);
         this.onSortByWaitingPlayers();
     },
@@ -1142,7 +1171,7 @@ var Table = cc.Class({
      * @description Sort by WaitingPlayers button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByWaitingPlayers: function () {
+    onSortByWaitingPlayers: function() {
         this.waitingReverse = !this.waitingReverse;
         this.removeAllSorting();
         this.isSortedByWaiting = true;
@@ -1156,7 +1185,7 @@ var Table = cc.Class({
      * @description Sort by min players
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByMinPlayers: function () {
+    onSortByMinPlayers: function() {
         //  this.minPlayersReverse = !this.minPlayersReverse;
         this.removeAllSorting();
         this.isSortedByMinPlayers = true;
@@ -1169,7 +1198,7 @@ var Table = cc.Class({
      * @description Sort by max players
      * @memberof Screens.Lobby.Table.Table#
      */
-    onSortByMaxPlayers: function () {
+    onSortByMaxPlayers: function() {
         //  this.flopReverse = !this.flopReverse;
         this.removeAllSorting();
         this.isSortedByMaxPlayers = true;
@@ -1182,7 +1211,7 @@ var Table = cc.Class({
      * @description Sort by name button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByName: function () {
+    sortByName: function() {
         //  this.isSortedByName = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1197,7 +1226,7 @@ var Table = cc.Class({
      * @description Sort by stakes button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByStakes: function () {
+    sortByStakes: function() {
         //  this.isSortedByStakes = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1212,7 +1241,7 @@ var Table = cc.Class({
      * @description Sort by variation button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByVariation: function () {
+    sortByVariation: function() {
         // this.isSortedByVariation = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1228,7 +1257,7 @@ var Table = cc.Class({
      * @description Sort by game type button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByType: function () {
+    sortByType: function() {
         // this.isSortedByType = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1244,7 +1273,7 @@ var Table = cc.Class({
      * @description Sort by min buy amount button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByMinBuy: function () {
+    sortByMinBuy: function() {
         // this.isSortedByMinBuy = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1260,7 +1289,7 @@ var Table = cc.Class({
      * @description Sort by max buy amount button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByMaxBuy: function () {
+    sortByMaxBuy: function() {
         //  this.isSortedByMaxBuy = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1276,7 +1305,7 @@ var Table = cc.Class({
      * @description Sort by players button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByPlayers: function () {
+    sortByPlayers: function() {
         this.sortByMaxPlayers();
     },
 
@@ -1286,7 +1315,7 @@ var Table = cc.Class({
      * @description Sort by Flops button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByFlops: function () {
+    sortByFlops: function() {
         this.isSortedByFlops = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1300,7 +1329,7 @@ var Table = cc.Class({
      * @description Sort by Pots button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByPots: function () {
+    sortByPots: function() {
         this.isSortedByPots = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1314,7 +1343,7 @@ var Table = cc.Class({
      * @description Sort by playing players by default on first table listing untill user clicks on other sorting.
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByPlayingPlayers: function () {
+    sortByPlayingPlayers: function() {
         let newContent = [];
         newContent = this.getFilteredContent();
         newContent = this.handler.sortByNumber(newContent, true, "playingPlayers");
@@ -1327,7 +1356,7 @@ var Table = cc.Class({
      * @description Sort by WaitingPlayers button click handler
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByWaitingPlayers: function () {
+    sortByWaitingPlayers: function() {
         this.isSortedByWaiting = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1341,7 +1370,7 @@ var Table = cc.Class({
      * @description Sort by min players
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByMinPlayers: function () {
+    sortByMinPlayers: function() {
         this.isSortedByMinPlayers = true;
         var newContent = [];
         newContent = this.getFilteredContent();
@@ -1356,7 +1385,7 @@ var Table = cc.Class({
      * @description Sort by max players
      * @memberof Screens.Lobby.Table.Table#
      */
-    sortByMaxPlayers: function () {
+    sortByMaxPlayers: function() {
         this.isSortedByMaxPlayers = true;
         newContent = [];
         var newContent = this.getFilteredContent();
@@ -1367,7 +1396,7 @@ var Table = cc.Class({
     },
 
 
-    sortByJoined: function () {
+    sortByJoined: function() {
         // console.trace("called...");
         this.isSortByJoined = true;
         // this.removeAllSorting();
@@ -1385,7 +1414,7 @@ var Table = cc.Class({
      * @description Reset bools used for button click handlers - reverse
      * @memberof Screens.Lobby.Table.Table#
      */
-    resetAllBools: function () {
+    resetAllBools: function() {
         this.nameReverse = false;
         this.stakeReverse = false
         this.variationReverse = false;
@@ -1404,7 +1433,7 @@ var Table = cc.Class({
      * @description Clears all sorting
      * @memberof Screens.Lobby.Table.Table#
      */
-    removeAllSorting: function () {
+    removeAllSorting: function() {
         this.isSortedByName = false;
         this.isSortedByStakes = false;
         this.isSortedByFlops = false;
@@ -1425,11 +1454,11 @@ var Table = cc.Class({
      * @description apply sorting if applicable
      * @memberof Screens.Lobby.Table.Table#
      */
-    applySorting: function () {
+    applySorting: function() {
         //only true for initial case of starting screen as long as user doesn't click on any sorting criteria.After that it never is true.
         if (this.isSortedByPlayingPlayers) {
             this.sortByPlayingPlayers();
-            this.scheduleOnce(function () {
+            this.scheduleOnce(function() {
                 this.isSortedByPlayingPlayers = false; //so that it only runs one time at startuo.               
             }.bind(this), 1);
         }
@@ -1497,7 +1526,7 @@ var Table = cc.Class({
      * @param {boolean} isRequested
      * @memberof Screens.Lobby.Table.Table#
      */
-    applyFilter: function (isRequested = false) {
+    applyFilter: function(isRequested = false) {
         // console.error("GET WHAT")
 
         console.log("CashRoom.isShowHoldem", CashRoom.isShowHoldem);
@@ -1559,7 +1588,7 @@ var Table = cc.Class({
                 //check maxplayers
                 flag = flag && this.isValidByMaxPlayers(maxPl, content.maxPlayers);
 
-                if (Table.low || 
+                if (Table.low ||
                     Table.mid ||
                     Table.high) {
 
@@ -1589,16 +1618,13 @@ var Table = cc.Class({
                 if (CashRoom.isShowHoldem) {
                     if (content.channelVariation == "Texas Hold’em" && content.isAllInAndFold != true) {
 
-                    }
-                    else {
+                    } else {
                         flag = false;
                     }
-                }
-                else if (CashRoom.isShowPLO) {
+                } else if (CashRoom.isShowPLO) {
                     if (content.channelVariation == "Omaha" && content.isAllInAndFold != true) {
 
-                    }
-                    else {
+                    } else {
                         flag = false;
                     }
                 }
@@ -1606,8 +1632,7 @@ var Table = cc.Class({
                 if (CashRoom.isShowAllIn) {
                     if (content.isAllInAndFold == true) {
 
-                    }
-                    else {
+                    } else {
                         flag = false;
                     }
                 }
@@ -1649,11 +1674,9 @@ var Table = cc.Class({
                                 content.minBuyIn <= Number(Advancefilter.config.stakes["max"])) {
                                 adHit = true;
                             }
-                        }
-                        else if (Advancefilter.config.stakes["max"] != "" && content.minBuyIn <= Number(Advancefilter.config.stakes["max"])) {
+                        } else if (Advancefilter.config.stakes["max"] != "" && content.minBuyIn <= Number(Advancefilter.config.stakes["max"])) {
                             adHit = true;
-                        }
-                        else if (Advancefilter.config.stakes["min"] != "" && content.minBuyIn >= Number(Advancefilter.config.stakes["min"])) {
+                        } else if (Advancefilter.config.stakes["min"] != "" && content.minBuyIn >= Number(Advancefilter.config.stakes["min"])) {
                             adHit = true;
                         }
 
@@ -1679,7 +1702,7 @@ var Table = cc.Class({
 
         } else {
             this.clearContents();
-            isRequested = typeof (isRequested) == typeof (true) ? isRequested : false;
+            isRequested = typeof(isRequested) == typeof(true) ? isRequested : false;
 
             // coming soon message check in OFC for Hold'Em Game
             // if (this.clearContents()) { // please put code to check if OFC main Tab is selected and test it.
@@ -1700,7 +1723,7 @@ var Table = cc.Class({
      * @description show one selection after everytime tables are refreshed or created
      * @memberof Screens.Lobby.Table.Table#
      */
-    showSelection: function () {
+    showSelection: function() {
         // console.log("show selection called...")
         var inst = this;
         if (inst.contentPool.length > 0) {
@@ -1726,7 +1749,7 @@ var Table = cc.Class({
      * @param {callBack} callback -Callback to execute
      * @memberof Screens.Lobby.Table.Table#
      */
-    getFavourites: function (initContent, callback) {
+    getFavourites: function(initContent, callback) {
         // console.trace("called");
         if (this.favPrimaryCB && this.favPrimaryCB.isChecked) {
             var contents = [];
@@ -1754,7 +1777,7 @@ var Table = cc.Class({
      * @param {callback} callback -Callback to execute
      * @memberof Screens.Lobby.Table.Table#
      */
-    filterByGameType: function (gameType, initContent, callback) {
+    filterByGameType: function(gameType, initContent, callback) {
         var contents = [];
         for (var index = 0; index < initContent.length; index++) {
             if (this.isValidByGameType(gameType, initContent[index].turnTime)) {
@@ -1771,7 +1794,7 @@ var Table = cc.Class({
      * @param {Number} val - Turn time in number
      * @memberof Screens.Lobby.Table.Table#
      */
-    isValidByGameType: function (gameType, val) {
+    isValidByGameType: function(gameType, val) {
 
         var returnVal = false;
         switch (gameType) {
@@ -1790,7 +1813,7 @@ var Table = cc.Class({
         return (returnVal);
     },
 
-    onTableUpdateWithLang: function () {
+    onTableUpdateWithLang: function() {
         console.log("onTableUpdateWithLang", this.currentData);
         if (!this.currentData) {
             return;
@@ -1807,7 +1830,7 @@ var Table = cc.Class({
      * @param {callback} callback -Callback to execute
      * @memberof Screens.Lobby.Table.Table#
      */
-    filterByMaxPlayers: function (maxPlayers, prevContents, callback) {
+    filterByMaxPlayers: function(maxPlayers, prevContents, callback) {
         var contents = [];
         for (var index = 0; index < prevContents.length; index++) {
             if (this.isValidByMaxPlayers(maxPlayers, prevContents[index].maxPlayers)) {
@@ -1824,7 +1847,7 @@ var Table = cc.Class({
      * @param {Number} val -Number of players on table
      * @memberof Screens.Lobby.Table.Table#
      */
-    isValidByMaxPlayers: function (maxPlayers, val) {
+    isValidByMaxPlayers: function(maxPlayers, val) {
         // console.log("max " + maxPlayers);
         if (maxPlayers == 'All')
             return true;
@@ -1854,7 +1877,7 @@ var Table = cc.Class({
      * @param {String} stakes -Low/Medium/High
      * @memberof Screens.Lobby.Table.Table#
      */
-    filterByStakes: function (stakes, prevContents, callback) {
+    filterByStakes: function(stakes, prevContents, callback) {
         var contents = [];
         if (this.variation == K.Variation.OpenFaceChinesePoker) {
             for (var index = 0; index < prevContents.length; index++) {
@@ -1882,7 +1905,7 @@ var Table = cc.Class({
      * @param {string} stakes -Low/Medium/High
      * @memberof Screens.Lobby.Table.Table#
      */
-    isValidByStakes: function (value, stakes) {
+    isValidByStakes: function(value, stakes) {
         if (stakes == "All") {
             return true;
         }
@@ -1904,7 +1927,7 @@ var Table = cc.Class({
      * @param {string} stakes -Low/Medium/High
      * @memberof Screens.Lobby.Table.Table#
      */
-    isValidByStakesOFC: function (value, stakes) {
+    isValidByStakesOFC: function(value, stakes) {
         if (stakes == "All") {
             return true;
         }
@@ -1925,7 +1948,7 @@ var Table = cc.Class({
      * @param {calback} callback -Callback to execute
      * @memberof Screens.Lobby.Table.Table#
      */
-    hideFullTables: function (callback) {
+    hideFullTables: function(callback) {
         console.log("hide full tables called")
         var val = this.hideFullTablesCB.isChecked;
         var contents = [];
@@ -1952,7 +1975,7 @@ var Table = cc.Class({
      * @param {boolean} showMsg -Show messge if true else don't show
      * @memberof Screens.Lobby.Table.Table#
      */
-    disableSideTable: function (val = true, noFav = false, showMsg = true) {
+    disableSideTable: function(val = true, noFav = false, showMsg = true) {
         return;
         noFav = (GameManager.isMobile) ? false : this.favPrimaryCB ? this.favPrimaryCB.isChecked : false;
         if (!GameManager.isMobile || true) {
@@ -1976,8 +1999,8 @@ var Table = cc.Class({
      * @description method to show instruction to mark table as favourite popup
      * @memberof Screens.Lobby.Table.Table#
      */
-    showFavInstructions: function () {
-        GameManager.popUpManager.show(PopUpType.InstructionPopup, null, function () { });
+    showFavInstructions: function() {
+        GameManager.popUpManager.show(PopUpType.InstructionPopup, null, function() {});
     },
 
     /**
@@ -1985,12 +2008,12 @@ var Table = cc.Class({
      * @description method to capitalize first letter of a string
      * @memberof Screens.Lobby.Table.Table#
      */
-    capitalizeFirstLetter: function (inp) {
+    capitalizeFirstLetter: function(inp) {
         inp = inp.toLowerCase();
         return inp.replace(/^.{1}/g, inp[0].toUpperCase());
     },
 
-    updateTableVal: function (data) {
+    updateTableVal: function(data) {
 
     },
 
@@ -1999,7 +2022,7 @@ var Table = cc.Class({
      * @description show table joined by player
      * @memberof DataFormats.ResponseTypes#
      */
-    highlightJoinTable: function () {
+    highlightJoinTable: function() {
 
     },
 
@@ -2007,8 +2030,7 @@ var Table = cc.Class({
         if (Table.low) {
             this.setInActiveButton(this.tabButtons[0], this.tabButtons[0]);
             Table.low = false;
-        }
-        else {
+        } else {
             this.setActiveButton(this.tabButtons[0], this.tabButtons[0]);
             Table.low = true;
         }
@@ -2019,8 +2041,7 @@ var Table = cc.Class({
         if (Table.mid) {
             this.setInActiveButton(this.tabButtons[1], this.tabButtons[1]);
             Table.mid = false;
-        }
-        else {
+        } else {
             this.setActiveButton(this.tabButtons[1], this.tabButtons[1]);
             Table.mid = true;
         }
@@ -2031,21 +2052,20 @@ var Table = cc.Class({
         if (Table.high) {
             this.setInActiveButton(this.tabButtons[2], this.tabButtons[2]);
             Table.high = false;
-        }
-        else {
+        } else {
             this.setActiveButton(this.tabButtons[2], this.tabButtons[2]);
             Table.high = true;
         }
         this.applyFilter();
     },
 
-    setActiveButton: function (currBtn) {
+    setActiveButton: function(currBtn) {
         if (currBtn.node.getChildByName("pressed")) {
             currBtn.node.getChildByName("pressed").active = true;
         }
     },
 
-    setInActiveButton: function (currBtn) {
+    setInActiveButton: function(currBtn) {
         if (currBtn.node.getChildByName("pressed")) {
             currBtn.node.getChildByName("pressed").active = false;
         }
@@ -2054,15 +2074,10 @@ var Table = cc.Class({
     onAdvancefilterUpdated: function() {
         if (Advancefilter.config.enabled) {
             this.filter.color = new cc.color(255, 166, 39);
-        }
-        else {
+        } else {
             this.filter.color = new cc.color(255, 255, 255);
         }
         this.applyFilter();
     }
 
 });
-
-
-
-

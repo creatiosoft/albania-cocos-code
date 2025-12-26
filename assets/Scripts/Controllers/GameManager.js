@@ -410,10 +410,11 @@ cc.Class({
 
         GameManager.openedWindow = {};
         GameManager.openedWindow2 = {};
+        GameManager.cachedRoomImages = {};
 
-        if (this.isMobile) {
-            ServerCom.reconnectMaxAttempts = 3;
-        }
+        // if (this.isMobile) {
+        //     ServerCom.reconnectMaxAttempts = 3;
+        // }
 
         if (K.PORTRAIT) {
             cc.view.on('canvas-resize', () => {
@@ -2148,6 +2149,10 @@ cc.Class({
             }
         }
 
+        if (ScreenManager.currentScreen != K.ScreenEnum.LobbyScreen) {
+            ScreenManager.showScreen(K.ScreenEnum.LobbyScreen, 10, function() {}, false);
+        }
+
         this.updateActiveTables();
     },
 
@@ -2400,7 +2405,7 @@ cc.Class({
             this.activeTables.active = false;
         }
         else {
-            this.activeTables.children[1].getComponent(cc.Label).string = (children > 1 ? children + " Active Tables" : "1 Active Table");
+            // this.activeTables.children[1].getComponent(cc.Label).string = (children > 1 ? children + " Active Tables" : "1 Active Table");
             this.activeTables.active = true;
 
         }
@@ -2920,7 +2925,3 @@ cc.Class({
         return num.toFixed(2);
     },
 });
-
-
-
-

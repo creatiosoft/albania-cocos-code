@@ -54,7 +54,7 @@ cc.Class({
         pomeloReconnected: false,
         reconncetTimer: null,
         reconnectionDelay: 1000,
-        reconnectMaxAttempts: 3,
+        reconnectMaxAttempts: 8,
     },
 
     // use this for initialization

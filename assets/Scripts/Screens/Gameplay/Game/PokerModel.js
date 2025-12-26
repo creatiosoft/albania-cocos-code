@@ -1022,7 +1022,16 @@ var PokerModel = cc.Class({
         }
 
         if (data.gameOverBestHands) {
-            this.onBestHandsGameOver(data.gameOverBestHands, data.winners);
+
+            var time = 0;
+            var zero = this.number0;
+            var one = this.number1;
+            if ((zero == 5) && ((one == 0) || (one == 5))) {
+                time = 2000;
+            }
+            setTimeout(() => {
+                this.onBestHandsGameOver(data.gameOverBestHands, data.winners);
+            }, time);
         }
 
         this.clearTotalRoundBet();

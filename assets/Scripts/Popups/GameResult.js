@@ -78,6 +78,12 @@ cc.Class({
                 //     cc.find('w', this.contentParent.children[i]).color = new cc.Color().fromHEX("#FF0000");
                 // }
 
+                if (d.playerName == GameManager.user.userName) {
+                    cc.find('name', this.contentParent.children[i]).color = new cc.Color().fromHEX("#E6C888");
+                    cc.find('buy', this.contentParent.children[i]).color = new cc.Color().fromHEX("#E6C888");
+                    cc.find('w', this.contentParent.children[i]).color = new cc.Color().fromHEX("#E6C888");
+                }
+
                 i += 1;
             }
         }

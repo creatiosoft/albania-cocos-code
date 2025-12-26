@@ -755,6 +755,12 @@ cc.Class({
                                 });
                             } else {
                                 inst.launch.active = false;
+                                if (data.message) {
+                                    inst.vpErrorMessage.string = data.message;
+                                }
+                                else {
+                                    inst.vpErrorMessage.string = data.error[0].message;
+                                }
                             }
                         });
                     }
@@ -1155,6 +1161,8 @@ cc.Class({
                     }, 100);
                 });
             } else {
+                inst.launch.active = false;
+                ServerCom.loadingLogin.active = false;
                 inst.vpErrorMessage.node.active = true;
                 if (data.message) {
                     inst.vpErrorMessage.string = data.message;
