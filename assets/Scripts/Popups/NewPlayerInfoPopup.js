@@ -69,19 +69,19 @@ cc.Class({
 
     onLoad: function () {
         // stickerTemp
-        this.stickers.removeAllChildren();
-        for (var i = 0; i < GameManager.stickerImages.length; i++) {
-            let stickerImages = GameManager.stickerImages[i];
-            let poolObject = cc.instantiate(this.stickerTemp);
-            poolObject.active = true;
-            poolObject.y = 0;
-            poolObject.parent = this.stickers;
+        // this.stickers.removeAllChildren();
+        // for (var i = 0; i < GameManager.stickerImages.length; i++) {
+        //     let stickerImages = GameManager.stickerImages[i];
+        //     let poolObject = cc.instantiate(this.stickerTemp);
+        //     poolObject.active = true;
+        //     poolObject.y = 0;
+        //     poolObject.parent = this.stickers;
 
-            poolObject.getComponent('StickerBase').stickerId = (i + 1);
-            poolObject.getComponent(cc.Button).clickEvents[0].customEventData = (i + 1);
-            // poolObject.getComponent(cc.Button).clickEvents[0].customEventData = stickerImages.___id;
-            poolObject.children[0].getComponent(cc.Sprite).spriteFrame = stickerImages;
-        }
+        //     poolObject.getComponent('StickerBase').stickerId = (i + 1);
+        //     poolObject.getComponent(cc.Button).clickEvents[0].customEventData = (i + 1);
+        //     // poolObject.getComponent(cc.Button).clickEvents[0].customEventData = stickerImages.___id;
+        //     poolObject.children[0].getComponent(cc.Sprite).spriteFrame = stickerImages;
+        // }
     },
 
     onShow: function (data, gameData, resData) {
