@@ -560,7 +560,7 @@ var Table = cc.Class({
     onEnable2: function(data) {
         TableContent.prevSelection = null;
         var inst = this;
-        inst.clearContents();
+        // inst.clearContents();
         inst.handler.contents = inst.filterByTournamentType(data);
         var isReal = true;
         // var isReal = false;
@@ -598,7 +598,7 @@ var Table = cc.Class({
             }
         } else {
 
-            inst.clearContents();
+            // inst.clearContents();
             this.handler.getTableData(true, "All", "All", function(response) {
                 // console.log("TABLE DATA IS ", JSON.parse(JSON.stringify(response)));
 

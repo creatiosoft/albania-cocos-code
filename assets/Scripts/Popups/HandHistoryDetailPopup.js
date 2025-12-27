@@ -72,6 +72,8 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        this.data = [];
+        this.dataIndex = 0;
         this.pokerGame = this.pokerModel.getComponent('PokerModel');
         this.index = 0;
         // var onHandTab = this.onNewTab.bind(this);
@@ -82,8 +84,8 @@ cc.Class({
 
     start() {
         this.historyTextOpened = false;
-        this.data = [];
-        this.dataIndex = 0;
+        // this.data = [];
+        // this.dataIndex = 0;
     },
 
     updateHistory() {
@@ -303,7 +305,7 @@ cc.Class({
 
         GameManager.emit("disablePageView");
 
-        this.sound = data.playSound;
+        // this.sound = data.playSound;
         // this.populateRows();
 
         cc.find('Center', this.node).active = false;
@@ -311,12 +313,12 @@ cc.Class({
         cc.find('foot', this.node).active = false;
 
         var inst = this;
-        ServerCom.pomeloRequest("room.channelHandler.getHandHistory", {
-            channelId: this.pokerGame.gameData.channelId,
-            access_token: K.Token.access_token,
-        }, function (response) {
-            console.log("getHandHistory", response);
-            inst.data = response.data;
+        // ServerCom.pomeloRequest("room.channelHandler.getHandHistory", {
+        //     channelId: this.pokerGame.gameData.channelId,
+        //     access_token: K.Token.access_token,
+        // }, function (response) {
+        //     console.log("getHandHistory", response);
+            inst.data = data;
             inst.dataIndex = 0;
 
             if (inst.data.length > 0) {
@@ -329,9 +331,8 @@ cc.Class({
                 cc.find('empty', inst.node).active = true;   
                 cc.find('foot', inst.node).active = false;
             }
-
             inst.updateHistory();
-        }, null, 5000, false);
+        // }, null, 5000, false);
     },
     /**
      * @description Handles new hand

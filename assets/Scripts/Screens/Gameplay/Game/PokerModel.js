@@ -804,7 +804,29 @@ var PokerModel = cc.Class({
     },
 
     showHandHistoryDetail: function () {
-        this.popUpManager.show(PopUpType.HandHistoryDetailPopup, {}, function () { });
+        var inst = this;
+        ServerCom.pomeloRequest("room.channelHandler.getHandHistory", {
+            channelId: this.gameData.channelId,
+            access_token: K.Token.access_token,
+        }, function (response) {
+            // console.log("getHandHistory", response);
+            // inst.data = response.data;
+            // inst.dataIndex = 0;
+
+            // if (inst.data.length > 0) {
+            //     cc.find('Center', inst.node).active = true;
+            //     cc.find('empty', inst.node).active = false;
+            //     cc.find('foot', inst.node).active = true;
+            // }
+            // else {
+            //     cc.find('Center', inst.node).active = false;
+            //     cc.find('empty', inst.node).active = true;   
+            //     cc.find('foot', inst.node).active = false;
+            // }
+            // inst.updateHistory();
+            inst.popUpManager.show(PopUpType.HandHistoryDetailPopup, response.data, function () { });
+
+        }, null, 5000, false);
     },
     /**
      * Tournament
@@ -1439,29 +1461,23 @@ var PokerModel = cc.Class({
      */
     onLeft: function (data) {
         // update data
-        console.log("onLeft1");
         if (this.alreadyKickingOut) {
             return;
         }
-        console.log("onLeft2");
         //currently not using this if condition as it is not requried for the broadcast
         //  if (this.gameData.tableDetails.state !== K.GameState.GameOver || this.gameData.channelType == K.ChannelType.Tournament) {
         var player = null;
         var index = this.getPlayerById(data.playerId);
         // remove data
-        console.log("onLeft3");
         if (index !== -1) {
-            console.log("onLeft4");
             player = this.gameData.tableDetails.players.splice(index, 1);
         } else {
             //player is not sitting
-            console.log("onLeft5");
-            if (this.isMe(data.playerId)) {
-                console.log("onLeft6");
+            if (this.isMe(data.playerId) && !data.isStandup) {
                 this.kickPlayerOutOfTheGame(this);
             }
         }
-        console.log("onLeft7");
+        player[0].isStandup = data.isStandup;
         this.emit(K.PokerEvents.OnLeave, player);
         //}
     },

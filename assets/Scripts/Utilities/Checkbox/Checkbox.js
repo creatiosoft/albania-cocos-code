@@ -141,9 +141,6 @@ var Checkbox = cc.Class({
      * @memberof Utilities.Checkbox#
     */
     setSelection: function (value) {
-
-        console.trace("setSelection", value);
-
         this.valForced = true;
         this.isSelected = !!value;
         this.tickNode.active = !!value;

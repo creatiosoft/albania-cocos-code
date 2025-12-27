@@ -285,6 +285,7 @@ cc.Class({
      * @memberof Controllers.GameManager#
      */
     playSound: function (index) {
+        console.trace("playSound", index);
         // if (!index)//return temporarily for not playing user turn sound
         //     return;
         // console.log(index, "sound", (!!GameManager.user && !GameManager.user.muteGameSound && ScreenManager.currentScreen != K.ScreenEnum.LoginScreen))
@@ -604,42 +605,42 @@ cc.Class({
                 }
 
 
-                if (diff > 1000 * 60 * 30) {
-                    console.log("cc.game.EVENT_SHOW4");
-                    cc.sys.localStorage.setItem("auto_login_token", null);
-                    cc.sys.localStorage.setItem("auto_login_refresh_token", null);
-                    cc.sys.localStorage.setItem("auto_login_access_token_expire_at", null);
-                    cc.sys.localStorage.setItem("auto_login_refresh_token_expire_at", null);
-                    cc.sys.localStorage.setItem("auto_login_username", null);
-                    GameManager.isConnected = false;
-                    GameManager.popUpManager.hideAllPopUps();
-                    var param = {
-                        code: K.Error.SessionError,
-                        response: "Session expired, please login again."
-                    };
-                    GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
-                    return;
-                }
+                // if (diff > 1000 * 60 * 30) {
+                //     console.log("cc.game.EVENT_SHOW4");
+                //     cc.sys.localStorage.setItem("auto_login_token", null);
+                //     cc.sys.localStorage.setItem("auto_login_refresh_token", null);
+                //     cc.sys.localStorage.setItem("auto_login_access_token_expire_at", null);
+                //     cc.sys.localStorage.setItem("auto_login_refresh_token_expire_at", null);
+                //     cc.sys.localStorage.setItem("auto_login_username", null);
+                //     GameManager.isConnected = false;
+                //     GameManager.popUpManager.hideAllPopUps();
+                //     var param = {
+                //         code: K.Error.SessionError,
+                //         response: "Session expired, please login again."
+                //     };
+                //     GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
+                //     return;
+                // }
 
-                if (cc.sys.localStorage.getItem("auto_login_token") != null) {
-                    let diff2 = Number(cc.sys.localStorage.getItem("auto_login_access_token_expire_at") - Date.now() / 1000);
-                    console.log("cc.game.EVENT_SHOW5", diff2);
-                    if (diff2 < 60) {
-                        cc.sys.localStorage.setItem("auto_login_token", null);
-                        cc.sys.localStorage.setItem("auto_login_refresh_token", null);
-                        cc.sys.localStorage.setItem("auto_login_access_token_expire_at", null);
-                        cc.sys.localStorage.setItem("auto_login_refresh_token_expire_at", null);
-                        cc.sys.localStorage.setItem("auto_login_username", null);
-                        GameManager.isConnected = false;
-                        GameManager.popUpManager.hideAllPopUps();
-                        var param = {
-                            code: K.Error.SessionError,
-                            response: "Session expired, please login again."
-                        };
-                        GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
-                        return;
-                    }
-                }
+                // if (cc.sys.localStorage.getItem("auto_login_token") != null) {
+                //     let diff2 = Number(cc.sys.localStorage.getItem("auto_login_access_token_expire_at") - Date.now() / 1000);
+                //     console.log("cc.game.EVENT_SHOW5", diff2);
+                //     if (diff2 < 60) {
+                //         cc.sys.localStorage.setItem("auto_login_token", null);
+                //         cc.sys.localStorage.setItem("auto_login_refresh_token", null);
+                //         cc.sys.localStorage.setItem("auto_login_access_token_expire_at", null);
+                //         cc.sys.localStorage.setItem("auto_login_refresh_token_expire_at", null);
+                //         cc.sys.localStorage.setItem("auto_login_username", null);
+                //         GameManager.isConnected = false;
+                //         GameManager.popUpManager.hideAllPopUps();
+                //         var param = {
+                //             code: K.Error.SessionError,
+                //             response: "Session expired, please login again."
+                //         };
+                //         GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
+                //         return;
+                //     }
+                // }
 
                 console.log("cc.game.EVENT_SHOW6");
                 if (!ServerCom.inGame) {
@@ -648,23 +649,23 @@ cc.Class({
                 }
                 console.log("cc.game.EVENT_SHOW7");
 
-                // if (diff > 1000 * 30) {
-                //     console.log("cc.game.EVENT_SHOW8");
-                //     LoginScreen.preLogin.active = true;
-                //     if (GameManager.user && GameManager.user.playerId) {
-                //         ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
-                //             playerId: GameManager.user.playerId,
-                //             isLoggedIn: false
-                //         });
-                //         socketIO.socket.disconnect();
-                //         socketIO.socket.connect();
-                //         return;
-                //     }
-                //     else {
-                //         LoginScreen.preLogin.active = false;
-                //         return;
-                //     }
-                // }
+                if (diff > 1000 * 30) {
+                    console.log("cc.game.EVENT_SHOW8");
+                    LoginScreen.preLogin.active = true;
+                    if (GameManager.user && GameManager.user.playerId) {
+                        ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
+                            playerId: GameManager.user.playerId,
+                            isLoggedIn: false
+                        });
+                        socketIO.socket.disconnect();
+                        socketIO.socket.connect();
+                        return;
+                    }
+                    else {
+                        LoginScreen.preLogin.active = false;
+                        return;
+                    }
+                }
 
                 if (!ServerCom.socketConnected) {
                     console.log("cc.game.EVENT_SHOW8");
@@ -682,6 +683,9 @@ cc.Class({
                         LoginScreen.checkForMultiClient();
                         return;
                     }
+                }
+                else {
+                    LoginScreen.checkForMultiClient();
                 }
                 return;
 
@@ -2174,6 +2178,9 @@ cc.Class({
 
                 cc.systemEvent.emit("leaveLobby");
 
+                let lobbyPresenter = ScreenManager.screens[ScreenManager.currentScreen];
+                lobbyPresenter.cashierTable.getComponent("Table").clearContents();
+
                 GameManager.isLoaded = false;
 
                 cc.sys.localStorage.setItem("auto_login_token", null);
@@ -2239,6 +2246,9 @@ cc.Class({
         this.popUpManager.hideAllPopUps();
 
         cc.systemEvent.emit("leaveLobby");
+
+        let lobbyPresenter = ScreenManager.screens[ScreenManager.currentScreen];
+        lobbyPresenter.cashierTable.getComponent("Table").clearContents();
 
         GameManager.isLoaded = false;
 
