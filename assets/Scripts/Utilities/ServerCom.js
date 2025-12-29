@@ -747,13 +747,13 @@ cc.Class({
             cc.sys.localStorage.setItem("auto_login_username", null);
             
             if (error.message == "jwt expired" || error.message == "Invalid Session") {
-                // this.sessionExpired = true;
-                // GameManager.popUpManager.hideAllPopUps();
-                // var param = {
-                //     code: K.Error.SessionError,
-                //     response: "Session error, please reload the game."
-                // };
-                // GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
+                this.sessionExpired = true;
+                GameManager.popUpManager.hideAllPopUps();
+                var param = {
+                    code: K.Error.SessionError,
+                    response: "Session error, please reload the game."
+                };
+                GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
             }
             else {
                 if (LoginHandler.isLoading) {

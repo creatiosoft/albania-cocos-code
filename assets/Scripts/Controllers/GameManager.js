@@ -653,10 +653,10 @@ cc.Class({
                     console.log("cc.game.EVENT_SHOW8");
                     LoginScreen.preLogin.active = true;
                     if (GameManager.user && GameManager.user.playerId) {
-                        ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
-                            playerId: GameManager.user.playerId,
-                            isLoggedIn: false
-                        });
+                        // ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
+                        //     playerId: GameManager.user.playerId,
+                        //     isLoggedIn: false
+                        // });
                         socketIO.socket.disconnect();
                         socketIO.socket.connect();
                         return;
@@ -671,10 +671,10 @@ cc.Class({
                     console.log("cc.game.EVENT_SHOW8");
                     LoginScreen.preLogin.active = true;
                     if (GameManager.user && GameManager.user.playerId) {
-                        ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
-                            playerId: GameManager.user.playerId,
-                            isLoggedIn: false
-                        });
+                        // ServerCom.pomeloRequest("connector.entryHandler.disconnectfrombe", {
+                        //     playerId: GameManager.user.playerId,
+                        //     isLoggedIn: false
+                        // });
                         socketIO.socket.disconnect();
                         socketIO.socket.connect();
                         return;

@@ -4751,7 +4751,7 @@ cc.Class({
         // this.roomNameLbl2.string = this.model.roomConfig.channelName;
         // console.log(this.model)
         // if (this.tiledView.active || GameManager.isMobile) {
-        let stakes = GameManager.convertChips(this.model.gameData.tableDetails.smallBlind) + "/" + GameManager.convertChips(this.model.gameData.tableDetails.bigBlind);
+        let stakes = (this.model.gameData.tableDetails.smallBlind) + "/" + (this.model.gameData.tableDetails.bigBlind);
         // this.roomNameLbl.string += "  " + stakes; // " | " +
         this.roomNameLbl2.string = "Blinds: " + stakes; // " | " +
 
