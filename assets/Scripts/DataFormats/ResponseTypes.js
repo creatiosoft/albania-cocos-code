@@ -184,6 +184,7 @@ function gameData(data) {
  * @memberof DataFormats.ResponseTypes#
  */
 function player(data) {
+    console.trace("?????? player", data);
     this.playerId = data.playerId;
     this.channelId = data.channelId;
     this.playerName = data.playerName;
@@ -208,7 +209,15 @@ function player(data) {
     changeAvatar(this.imageAvtar, this);
     var Cards = data.cards || null;
     this.cards = Cards || [];
-    this.moves = data.moves || {};
+    // this.moves = data.moves || {};
+    if (data.moves) {
+        console.log("?????? 111111player");
+        this.moves = data.moves;
+    }
+    else {
+        console.log("?????? 222222player");
+        this.moves = [];
+    }
     this.state = data.state || K.PlayerState.Waiting;
     this.lastBet = data.lastBet || 0;
     this.lastMove = data.lastMove || "";

@@ -195,7 +195,7 @@ cc.Class({
         needResetUser: false,
 
         lastClickTime: 0,
-        clickInterval: 1000,
+        clickInterval: 500,
 
         hideTime: 0,
         tableStartTime: 0,
@@ -2179,7 +2179,9 @@ cc.Class({
                 cc.systemEvent.emit("leaveLobby");
 
                 let lobbyPresenter = ScreenManager.screens[ScreenManager.currentScreen];
-                lobbyPresenter.cashierTable.getComponent("Table").clearContents();
+                if (lobbyPresenter.cashierTable) {
+                    lobbyPresenter.cashierTable.getComponent("Table").clearContents();
+                }
 
                 GameManager.isLoaded = false;
 
@@ -2248,7 +2250,9 @@ cc.Class({
         cc.systemEvent.emit("leaveLobby");
 
         let lobbyPresenter = ScreenManager.screens[ScreenManager.currentScreen];
-        lobbyPresenter.cashierTable.getComponent("Table").clearContents();
+        if (lobbyPresenter.cashierTable) {
+            lobbyPresenter.cashierTable.getComponent("Table").clearContents();
+        }
 
         GameManager.isLoaded = false;
 
@@ -2259,6 +2263,7 @@ cc.Class({
         cc.sys.localStorage.setItem("auto_login_username", null);
 
         GameManager.needResetUser = true;
+        ServerCom.clearConnectCB();
 
         ScreenManager.showScreen(K.ScreenEnum.LoginScreen, false, function () {
             if (((!(cc.sys.os === cc.sys.OS_WINDOWS)) || cc.sys.isBrowser) && !!self) {

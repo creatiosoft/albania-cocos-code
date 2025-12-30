@@ -195,6 +195,7 @@ cc.Class({
      */
     onShow: function (data) {
         this.node.opacity = 255;
+        ServerCom.loadingLogin.active = false;
         
         this.onUpdateTableBgImage();
 

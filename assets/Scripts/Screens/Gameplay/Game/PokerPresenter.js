@@ -1626,9 +1626,10 @@ cc.Class({
         this.handleRunItTwice(true, true, this.model.gameData.isRunItTwice);
         if (this.model.gameData.bestHands !== "") {
             if (this.getMyPlayer() !== null) {
-                this.getMyPlayer().bestHand = this.model.gameData.bestHands;
+                // this.getMyPlayer().bestHand = this.model.gameData.bestHands;
+                console.log(this.getMyPlayer());
+                this.playerHand[this.getRotatedSeatIndex(this.getMyPlayer().seatIndex)].onBestHand(this.model.gameData.bestHands);
             }
-            // this.onBestHand();
         }
         this.showMuckHand();
         // if (this.model.gameData.settings.isMuckHand)

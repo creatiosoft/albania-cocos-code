@@ -254,6 +254,7 @@ cc.Class({
      * @memberof Screens.Lobby.LobbyPresenter#
      */
     onShow: function (data) {
+        ServerCom.loadingLogin.active = false;
         this.onBackLobby(null, null, false);
         if (GameManager.isConnected)
             this.popUpManager.hideAllPopUps();
@@ -271,6 +272,7 @@ cc.Class({
      * @memberof Screens.Lobby.LobbyPresenter#
      */
     refreshPlayerChips: function () {
+        console.log("refreshPlayerChips");
         // if (GameManager.isMobile || this.realMoneyCheck.isSelected) {
         //     this.balance.string = parseInt(GameManager.user.realChips);
         // } else {
@@ -466,6 +468,7 @@ cc.Class({
     onLoad: function () {
         let self = this;
         ServerCom.inGame = true;
+        ServerCom.loadingLogin.active = false;
         this.imageLoadedRef = this.imageLoaded.bind(this);
         // GameManager.on("onDashboardAddCash", this.onDashboardAddCash.bind(this));
         GameManager.on("image-loaded", this.imageLoadedRef);

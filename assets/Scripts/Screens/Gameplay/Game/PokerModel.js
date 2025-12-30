@@ -1477,7 +1477,9 @@ var PokerModel = cc.Class({
                 this.kickPlayerOutOfTheGame(this);
             }
         }
-        player[0].isStandup = data.isStandup;
+        if (player && player[0]) {
+            player[0].isStandup = data.isStandup;
+        }
         this.emit(K.PokerEvents.OnLeave, player);
         //}
     },

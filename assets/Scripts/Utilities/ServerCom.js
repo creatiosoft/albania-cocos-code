@@ -18,6 +18,10 @@ cc.Class({
         tracker: {
             default: {},
         },
+        preLogin: {
+            default: null,
+            type: cc.Node,
+        },
         launch: {
             default: null,
             type: cc.Node,

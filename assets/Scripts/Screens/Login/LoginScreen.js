@@ -944,10 +944,18 @@ cc.Class({
             }
             console.log("onSuccessfullLogin3");
             inst.loginHandler.checkForMultiClient(function(response) {
-                ServerCom.loadingLogin.active = false;
+                // ServerCom.loadingLogin.active = false;
                 console.log("MULTI CLIENT RESPONSE ", response);
                 if (response.success) {
                     GameManager.isConnected = true;
+
+                    if (response.chips && GameManager.user) {
+                        console.log("!!!!!!!!!!!!!!refreshPlayerChips");
+                        GameManager.user.freeChips = response.chips.freeChips;
+                        GameManager.user.realChips = response.chips.realChips;
+                        GameManager.emit("refreshPlayerChips");
+                    }
+                    
 
                     console.log("Active tables:", GameManager.activeTableCount);
                     // this.preLogin.active = false;
@@ -1844,6 +1852,13 @@ cc.Class({
 
                 // Clear previous session data before joining new tables
                 // GameManager.reset();
+
+                if (response.chips && GameManager.user) {
+                    console.log("!!!!!!!!!!!!!!refreshPlayerChips");
+                    GameManager.user.freeChips = response.chips.freeChips;
+                    GameManager.user.realChips = response.chips.realChips;
+                    GameManager.emit("refreshPlayerChips");
+                }
 
                 if (GameManager.activeTableCount > 0 && response.joinChannels.length == 0) {
                     GameManager.reset();
