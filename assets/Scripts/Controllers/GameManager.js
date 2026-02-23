@@ -396,6 +396,9 @@ cc.Class({
     },
 
     onLoad : function() {
+
+        this.notification = null;
+
         if(cc.sys.os === cc.sys.OS_WINDOWS && !cc.sys.isBrowser){
             this.isWindows = true;
         }
@@ -469,6 +472,8 @@ cc.Class({
         // cc.systemEvent.on(K.PomeloAPI.joinChannel, this.onJoinSuccess, this);
         // ServerCom.pomeloBroadcast('room.channelHandler.joinChannelByInvitecode', this.onJoinSuccess.bind(this));
 
+        ServerCom.pomeloBroadcast("maintenanceUpdate", this.onMaintenanceUpdate.bind(this));
+        ServerCom.pomeloBroadcast("maintenance-notification", this.onMaintenanceNotification.bind(this));
         GameManager.on("enablePageView", this.onEnablePageView.bind(this));
         GameManager.on("disablePageView", this.onDisablePageView.bind(this));
         cc.systemEvent.on("forcedisconnect", this.onForcedisconnect.bind(this));
@@ -1199,6 +1204,8 @@ cc.Class({
 
     loadTableBg:function(avatarUrl, cb, index, data) {
         let self = this;
+
+        console.log(">>>>>>>", avatarUrl);
         cc.loader.load(avatarUrl + "", function (err, tex) {
             if (!!err) {
                 self.tableBgImages[index] = self.tableBgDefault;
@@ -2212,11 +2219,17 @@ cc.Class({
                 });
             }.bind(this));
         } else {
+
+            if (ScreenManager.currentScreen == K.ScreenEnum.LoginScreen) {
+                this.popUpManager.hideAllPopUps();
+                return;
+            }
+
             this.scheduleOnce(function () {
                 // cc.director.loadScene("Login");
                 this.popUpManager.hideAllPopUps();
 
-                cc.systemEvent.emit( "leaveLobby");
+                cc.systemEvent.emit("leaveLobby");
 
                 // Clear all active tables and game data
                 GameManager.reset();
@@ -2939,4 +2952,43 @@ cc.Class({
         num = Number(num);
         return num.toFixed(2);
     },
+
+    onMaintenanceUpdate: function (response) {
+        console.log("onMaintenanceUpdate GameManager: ", response);
+
+        GameManager.popUpManager.show(PopUpType.ServerMaintenancePopup, response);
+    },
+
+    onMaintenanceNotification: function (response) {
+        console.log("onMaintenanceNotification GameManager: ", response);
+
+        // {
+        //     "action": "created",
+        //     "message": "Server is scheduled for maintenance on 28th Nov 2:20 PM IST",
+        //     "timestamp": 1764314987653,
+        //     "taskId": "69294f6b9b6f8fffe7f0a330",
+        //     "serverDownTime": "2025-11-28T08:50:06.000Z",
+        //     "route": "maintenance-notification"
+        // }
+
+        GameManager.popUpManager.show(PopUpType.ServerMaintenancePopup, response);
+    },
+
+    api_notification_dismiss: function (taskId, cb) {
+        ServerCom.httpPostRequest(K.Token.auth_server + "/api/notifications/dismiss",
+            {
+                "taskId": taskId
+            },
+            function (response) {
+            }
+        );
+    },
+
+    processLoginNotification() {
+        if (GameManager.notification) {
+            GameManager.notification.data.showDismiss = true;
+            GameManager.popUpManager.show(PopUpType.ServerMaintenancePopup, GameManager.notification.data);
+            GameManager.notification = null;
+        }
+    }
 });

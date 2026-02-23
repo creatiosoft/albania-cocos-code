@@ -125,6 +125,16 @@ cc.Class({
                 GameManager.popUpManager.show(PopUpType.DisconnectDialog, param, function () {});
                 return;
             }
+            if (xhr.status == 503) {
+                if (xhr.response) {
+                    GameManager.popUpManager.hideAllPopUps();
+                    if (error !== null && error !== undefined) {
+                        var data = JSON.parse(xhr.response);
+                        error(data);
+                    }
+                    return;
+                }
+            }
             if (xhr.status == 400 || xhr.status == 401 || xhr.status == 429) {
                 if (callback !== null && callback !== undefined && xhr.responseText) {
                     callback(JSON.parse(xhr.responseText));
@@ -658,6 +668,7 @@ cc.Class({
                 reconnection: false,
                 pingTimeout: 500, 
                 pingInterval: 100,
+                transports: ["websocket", "polling"],
                 auth: {
                     access_token: K.Token.access_token,
                 }

@@ -49,6 +49,7 @@ var PopUpType = new cc.Enum({
     RemoveDataDialog: 40,
     NewVersionPopup: 41,
     AdminNoticePopup: 42,
+    ServerMaintenancePopup: 43,
     None: 100
 });
 
@@ -198,7 +199,12 @@ var PopUpManager = cc.Class({
     hideAllPopUps: function () {
         if (this.currentOverLayedPopUps.length !== 0) {
             // console.error("hidden popup");
-            this.hide(this.currentOverLayedPopUps[this.currentOverLayedPopUps.length - 1], this.hideAllPopUps.bind(this));
+            if (this.currentOverLayedPopUps[this.currentOverLayedPopUps.length - 1] == 43) {
+
+            }
+            else {
+                this.hide(this.currentOverLayedPopUps[this.currentOverLayedPopUps.length - 1], this.hideAllPopUps.bind(this));
+            }
         }
     },
 

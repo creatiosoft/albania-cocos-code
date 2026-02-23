@@ -8,9 +8,15 @@
   "design-resolution-height": 1704,
   "design-resolution-width": 786,
   "excluded-modules": [
+    "Collider",
+    "DragonBones",
+    "MotionStreak",
     "Physics",
+    "Spine Skeleton",
     "StudioComponent",
     "TiledMap",
+    "VideoPlayer",
+    "WebView",
     "3D",
     "3D Primitive",
     "3D Physics/cannon.js",
@@ -32,7 +38,7 @@
   "group-list": [
     "default"
   ],
-  "last-module-event-record-time": 1766470180526,
+  "last-module-event-record-time": 1771328072710,
   "simulator-orientation": false,
   "simulator-resolution": {
     "width": 960,
@@ -44,6 +50,5 @@
     "cloud-function"
   ],
   "preview-port": 7456,
-  "clear-simulator-cache": true,
-  "start-scene": "1a66ec11-2c03-4145-abf0-8dff829d4c73"
+  "clear-simulator-cache": true
 }

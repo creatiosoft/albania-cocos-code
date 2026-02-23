@@ -114,6 +114,8 @@ cc.Class({
      * @memberof Screens.Gameplay.GameScreen#
      */
     onLoad: function () {
+        GameManager.processLoginNotification();
+        
         ServerCom.inGame = true;
         this.checkForWindowScene = false;
         if (cc.sys.os === cc.sys.OS_WINDOWS && !cc.sys.isBrowser) {
@@ -1379,7 +1381,18 @@ cc.Class({
         for (var z = 0; z < this.gameModel.activePokerModels.length; z++) {
             if (z == this.prevSelection) {
                 var presenter = this.gameModel.activePokerModels[z].node.children[0].getComponent('PokerPresenter');
-                {
+                if (presenter.isTournament2) {
+                    for (var i = 0; i < GameManager.tableBgImagesTour.length; i++) {
+                        let stickerImages = GameManager.tableBgImagesTour[i];
+                        if (GameManager.user.defaultTourGameBackground != "" && GameManager.user.defaultTourGameBackground._id) {
+                            console.log("!!!!!! onUpdateTableBgImage", GameManager.user.defaultTourGameBackground._id);
+                            if (stickerImages.___data._id == GameManager.user.defaultTourGameBackground._id) {
+                                this.node.getChildByName('Bg').getComponent(cc.Sprite).spriteFrame = GameManager.tableBgImagesTour[i];
+                            };
+                        }
+                    }
+                }
+                else {
                     for (var i = 0; i < GameManager.tableBgImages.length; i++) {
                         let stickerImages = GameManager.tableBgImages[i];
                         if (GameManager.user.defaultGameBackground != "" && GameManager.user.defaultGameBackground._id) {
@@ -1392,17 +1405,6 @@ cc.Class({
                 }
             }
         }
-
-
-        // for (var i = 0; i < GameManager.tableBgImages.length; i++) {
-        //     let stickerImages = GameManager.tableBgImages[i];
-        //     if (GameManager.user.defaultGameBackground != "" && GameManager.user.defaultGameBackground._id) {
-        //         console.log("!!!!!! onUpdateTableBgImage", GameManager.user.defaultGameBackground._id);
-        //         if (stickerImages.___data._id == GameManager.user.defaultGameBackground._id) {
-        //             this.node.getChildByName('Bg').getComponent(cc.Sprite).spriteFrame = GameManager.tableBgImages[i];
-        //         };
-        //     }
-        // }
     },
 
 

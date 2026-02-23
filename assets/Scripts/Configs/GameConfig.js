@@ -13,8 +13,8 @@
  * @memberof Configs.GameConfig#
  */
 var root = window;
-// console.log = function () {};
-// cc.log = function () {};
+console.log = function () {};
+cc.log = function () {};
 
 root.K = {};
 
@@ -406,23 +406,23 @@ root.K.Suit = cc.Enum({
 root.useAnalytics = !true;
 root.K.ServerAddress = {
 
-    ipAddress: "https://connector-albaniapoker.creatiosoft.dev",
-    gameServer: "https://connector-albaniapoker.creatiosoft.dev",
+    ipAddress: "https://connector.alb.poker",
+    gameServer: "https://connector.alb.poker",
     gamePort: 443,
-    maintainanceIP: "https://maintenance-dashboard-api-albaniapoker.creatiosoft.dev",
+    maintainanceIP: "https://maintenance-dashboard-api.alb.poker",
     maintainancePort: 443,
     port: 443,
     wss: true,
     clientVer: "1.0",
     pokerVer: "0.0",
-    assets_server: "https://auth-api-albaniapoker.creatiosoft.dev/api/wpoker",
-    assets_server_s: "https://albaniapoker-assets.s3.us-east-1.amazonaws.com",
+    assets_server: "https://auth-api.alb.poker/api/wpoker",
+    assets_server_s: "https://albaniapoker-prod-assets.s3.us-east-1.amazonaws.com",
     otp_server: "",
     ads_server: ""
 };
 
 root.K.Token = {
-    auth_server: "https://auth-api-albaniapoker.creatiosoft.dev",
+    auth_server: "https://auth-api.alb.poker",
     auth_refresh_server: "",
     access_token: "",
     refresh_token: "",

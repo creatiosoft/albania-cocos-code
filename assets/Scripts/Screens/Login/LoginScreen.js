@@ -725,7 +725,11 @@ cc.Class({
                         // console.error("UPDATE REQUIRED POPUP",response);
                         inst.popupManager.show(PopUpType.NewVersionPopup, "Please update the game.", function() {});
                     } else if (result.isInMaintainance) {
-                        inst.popupManager.show(PopUpType.MaintenancePopup, "Server is under maintenance\n Please come back later.", function() {});
+                        // inst.popupManager.show(PopUpType.MaintenancePopup, "Server is under maintenance\n Please come back later.", function() {});
+                        inst.popupManager.show(PopUpType.ServerMaintenancePopup, {
+                            message: "Server is under maintenance\n Please come back later.",
+                            action: "checkServerStatus"
+                        });
                     } else {
                         inst.loginHandler.vpLogin(inst.vpUserName.string, inst.vpPassword.string, (data) => {
                             console.log("vpLogin", data);
@@ -748,6 +752,9 @@ cc.Class({
                                         return;
                                     }
                                     GameManager.setUserData(data.user);
+                                    if (data.notification) {
+                                        GameManager.notification = data.notification;
+                                    }
                                     inst.saveLoginData();
                                     setTimeout(function() {
                                         inst.onSuccessfullLogin(inst);
@@ -757,11 +764,15 @@ cc.Class({
                                 inst.launch.active = false;
                                 if (data.message) {
                                     inst.vpErrorMessage.string = data.message;
-                                }
-                                else {
+                                } else {
                                     inst.vpErrorMessage.string = data.error[0].message;
                                 }
                             }
+                        }, (error) => {
+                            inst.popupManager.show(PopUpType.ServerMaintenancePopup, {
+                                message: error.message,
+                                action: "checkServerStatus"
+                            });
                         });
                     }
                 } else {
@@ -955,7 +966,7 @@ cc.Class({
                         GameManager.user.realChips = response.chips.realChips;
                         GameManager.emit("refreshPlayerChips");
                     }
-                    
+
 
                     console.log("Active tables:", GameManager.activeTableCount);
                     // this.preLogin.active = false;
@@ -1178,6 +1189,20 @@ cc.Class({
                     inst.vpErrorMessage.string = data.error[0].message;
                 }
             }
+        }, (error) => {
+            inst.preLogin.active = false;
+            ServerCom.loading.active = false;
+            ServerCom.loadingLogin.active = false;
+
+            if (error.code == 444) {
+                GameManager.popUpManager.show(PopUpType.NotificationPopup, "Please check your\n Internet Connection.", function () {});
+            }
+            else {
+                inst.popupManager.show(PopUpType.ServerMaintenancePopup, {
+                    message: error.message,
+                    action: "checkServerStatus"
+                });
+            }
         });
         // });
 
@@ -1244,6 +1269,9 @@ cc.Class({
             inst.saveLoginData(data);
             // console.log("2",JSON.parse(JSON.stringify(data.user)));
             GameManager.setUserData(data.user);
+            if (data.notification) {
+                GameManager.notification = data.notification;
+            }
 
             // ServerCom.pomeloRequest("connector.entryHandler.getListPlayerTableTheme", {
             //     "playerId": GameManager.user.playerId

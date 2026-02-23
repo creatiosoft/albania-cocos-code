@@ -1118,7 +1118,7 @@ cc.Class({
         this.winnerBannerDeactivateTimerDelay = 1.3; // delay in hiding winner banner
         this.potDistributionTimerDelay = 1; // delay in processing one pot, untill next pot called
         this.potSplitterMoveActionDelay = 0.6; // delay in staring chips to move to subsicuent winners in relation with above delay.
-        this.runItTwiceLowerCardDelay = 0.5; //delay in showing lower Table cards when run it twice called with aal in at first move.
+        this.runItTwiceLowerCardDelay = 1.2; //delay in showing lower Table cards when run it twice called with aal in at first move.
         this.runItTwiceSlideToOpenDelay = .3; // delay in Slide to Open animation between each cards when run it twice selected
 
 
@@ -2568,7 +2568,7 @@ cc.Class({
                                 var moveAction = cc.moveTo(.85, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
                                 element.active = true;
                                 element.runAction(moveAction);
-                            }.bind(this), 500);
+                            }.bind(this), 1000);
 
                             this.timersToKill.push(setTimeout(function() {
                                 // setTimeout(function () {
@@ -2578,14 +2578,14 @@ cc.Class({
                                         element.setPosition(cc.v2(posX, 0));
                                     }
                                 }
-                            }.bind(this), 1350));
+                            }.bind(this), 1850));
                         } else if (i == 1) {
                             this.timersToKill.push(setTimeout(function() {
                                 // setTimeout(function () {
                                 var moveAction = cc.moveTo(.95, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
                                 element.active = true;
                                 element.runAction(moveAction);
-                            }.bind(this), 1000));
+                            }.bind(this), 2000));
 
                             this.timersToKill.push(setTimeout(function() {
                                 // setTimeout(function () {
@@ -2595,7 +2595,7 @@ cc.Class({
                                         element.setPosition(cc.v2(posX, 0));
                                     }
                                 }
-                            }.bind(this), 2200));
+                            }.bind(this), 2700));
                         }
                     }, this);
 
@@ -4407,6 +4407,9 @@ cc.Class({
         this.isStraddleAllowed(); // ||true;
         this.enableJoinBtn();
 
+        if (data[0].playerId == GameManager.user.playerId) {
+            this.postBigBlindCheckBox.node.parent.active = false;
+        }
 
         if (data[0].playerId == GameManager.user.playerId && !data[0].isStandup) {
             this.onTableCloseLeave();

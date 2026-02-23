@@ -476,7 +476,8 @@ cc.Class({
         );
     },
 
-    vpLogin: function(userName, password, callback) {
+    vpLogin: function(userName, password, callback, error) {
+        GameManager.notification = null;
 
         ServerCom.httpPostRequest(
             K.Token.auth_server + "/api/auth/login", 
@@ -484,7 +485,7 @@ cc.Class({
                 "userName": userName,
                 "password": password,
             }, 
-            callback
+            callback, error
         );
     },
 

@@ -466,6 +466,8 @@ cc.Class({
      * @memberof Screens.Lobby.LobbyPresenter#
      */
     onLoad: function () {
+        GameManager.processLoginNotification();
+        
         let self = this;
         ServerCom.inGame = true;
         ServerCom.loadingLogin.active = false;
