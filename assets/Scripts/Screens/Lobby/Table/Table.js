@@ -1347,6 +1347,8 @@ var Table = cc.Class({
         let newContent = [];
         newContent = this.getFilteredContent();
         newContent = this.handler.sortByNumber(newContent, true, "playingPlayers");
+
+        console.log("applySorting playingPlayers", newContent);
         // this.updateTable(this.handler.contents);
         this.updateTable(newContent);
     },
@@ -1455,61 +1457,62 @@ var Table = cc.Class({
      * @memberof Screens.Lobby.Table.Table#
      */
     applySorting: function() {
+        console.trace("applySorting");
         //only true for initial case of starting screen as long as user doesn't click on any sorting criteria.After that it never is true.
-        if (this.isSortedByPlayingPlayers) {
+        // if (this.isSortedByPlayingPlayers) {
             this.sortByPlayingPlayers();
-            this.scheduleOnce(function() {
-                this.isSortedByPlayingPlayers = false; //so that it only runs one time at startuo.               
-            }.bind(this), 1);
-        }
-        if (this.isSortedByName) {
-            this.nameReverse = !this.nameReverse;
-            this.sortByName();
-        }
-        if (this.isSortedByStakes) {
-            this.stakeReverse = !this.stakeReverse;
-            this.sortByStakes();
-        }
-        if (this.isSortedByFlops) {
-            this.flopReverse = !this.flopReverse;
-            this.sortByFlops();
-        }
-        if (this.isSortedByWaiting) {
-            this.waitingReverse = !this.waitingReverse;
-            this.sortByWaitingPlayers();
-        }
-        if (this.isSortedByVariation) {
-            this.variationReverse = !this.variationReverse;
-            this.sortByVariation();
-        }
-        if (this.isSortedByType) {
-            this.typeReverse = !this.typeReverse;
-            this.sortByType();
-        }
-        if (this.isSortedByMinBuy) {
-            this.minBuyReverse = !this.minBuyReverse;
-            this.sortByMinBuy();
-        }
-        if (this.isSortedByMaxBuy) {
-            this.maxBuyReverse = !this.maxBuyReverse;
-            this.sortByMaxBuy();
-        }
-        if (this.isSortedByMinPlayers) {
-            this.minPlayersReverse = !this.minPlayersReverse;
-            this.sortByMinPlayers();
-        }
-        if (this.isSortedByMaxPlayers) {
-            this.maxPlayersReverse = !this.maxPlayersReverse;
-            this.sortByMaxPlayers();
-        }
-        if (this.isSortedByPots) {
-            this.potReverse = !this.potReverse;
-            this.sortByPots();
-        }
-        if (this.isSortByJoined) {
-            this.tableJoined = !this.tableJoined;
-            this.sortByJoined();
-        }
+            // this.scheduleOnce(function() {
+            //     this.isSortedByPlayingPlayers = false; //so that it only runs one time at startuo.               
+            // }.bind(this), 1);
+        // }
+        // if (this.isSortedByName) {
+        //     this.nameReverse = !this.nameReverse;
+        //     this.sortByName();
+        // }
+        // if (this.isSortedByStakes) {
+        //     this.stakeReverse = !this.stakeReverse;
+        //     this.sortByStakes();
+        // }
+        // if (this.isSortedByFlops) {
+        //     this.flopReverse = !this.flopReverse;
+        //     this.sortByFlops();
+        // }
+        // if (this.isSortedByWaiting) {
+        //     this.waitingReverse = !this.waitingReverse;
+        //     this.sortByWaitingPlayers();
+        // }
+        // if (this.isSortedByVariation) {
+        //     this.variationReverse = !this.variationReverse;
+        //     this.sortByVariation();
+        // }
+        // if (this.isSortedByType) {
+        //     this.typeReverse = !this.typeReverse;
+        //     this.sortByType();
+        // }
+        // if (this.isSortedByMinBuy) {
+        //     this.minBuyReverse = !this.minBuyReverse;
+        //     this.sortByMinBuy();
+        // }
+        // if (this.isSortedByMaxBuy) {
+        //     this.maxBuyReverse = !this.maxBuyReverse;
+        //     this.sortByMaxBuy();
+        // }
+        // if (this.isSortedByMinPlayers) {
+        //     this.minPlayersReverse = !this.minPlayersReverse;
+        //     this.sortByMinPlayers();
+        // }
+        // if (this.isSortedByMaxPlayers) {
+        //     this.maxPlayersReverse = !this.maxPlayersReverse;
+        //     this.sortByMaxPlayers();
+        // }
+        // if (this.isSortedByPots) {
+        //     this.potReverse = !this.potReverse;
+        //     this.sortByPots();
+        // }
+        // if (this.isSortByJoined) {
+        //     this.tableJoined = !this.tableJoined;
+        //     this.sortByJoined();
+        // }
 
     },
 
