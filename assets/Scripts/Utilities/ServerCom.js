@@ -868,7 +868,12 @@ cc.Class({
             // }
 
             if (event == "commonEventResponse" && args[0].eventOrigin) {
-                cc.systemEvent.emit(args[0].eventOrigin, args[0].data);
+                if (args[0].eventName == "revealCards") {
+                    cc.systemEvent.emit("revealCards", args[0].data);
+                }
+                else {
+                    cc.systemEvent.emit(args[0].eventOrigin, args[0].data);
+                }
 
                 // console.log(ServerCom.getFormattedTime(), "Network [onAny] Socket", args[0].eventOrigin, args[0].data);
             }

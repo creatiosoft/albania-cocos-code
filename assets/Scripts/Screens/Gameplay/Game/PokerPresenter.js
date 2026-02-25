@@ -1162,6 +1162,7 @@ cc.Class({
         this.model.on('rebuyActivated', this.onRebuyActivated.bind(this));
         this.model.on('rebuyDeactivated', this.onRebuyDeactivated.bind(this));
         this.model.on(K.PokerEvents.onChannelEvent, this.showWinnerCards.bind(this));
+        this.model.on("revealAllInCards", this.showAllInCards.bind(this));
         this.model.on(K.PokerEvents.OnBankrupt, function(data) {
             this.onAddChips(this.model.roomConfig.minBuyIn);
         }.bind(this));
@@ -4360,6 +4361,57 @@ cc.Class({
         else {
             // console.error("Winner not found !!");
         }
+    },
+
+    showAllInCards: function(data) {
+        // if (this.getRotatedSeatIndex(seatIndex) && this.playerHand[this.getRotatedSeatIndex(seatIndex)])
+        //     this.playerHand[this.getRotatedSeatIndex(seatIndex)].winningRevealCards2();
+        // else {
+        //     // console.error("Winner not found !!");
+        // }
+
+        // [
+        //     {
+        //         "playerId": "21778590",
+        //         "cards": [
+        //             {
+        //                 "type": "club",
+        //                 "rank": 6,
+        //                 "name": "6",
+        //                 "priority": 6
+        //             },
+        //             {
+        //                 "type": "diamond",
+        //                 "rank": 5,
+        //                 "name": "5",
+        //                 "priority": 5
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         "playerId": "44436143",
+        //         "cards": [
+        //             {
+        //                 "type": "heart",
+        //                 "rank": 1,
+        //                 "name": "A",
+        //                 "priority": 14
+        //             },
+        //             {
+        //                 "type": "diamond",
+        //                 "rank": 10,
+        //                 "name": "10",
+        //                 "priority": 10
+        //             }
+        //         ]
+        //     }
+        // ]
+
+        for (var i = 0; i < data.length; i++) {
+            var index = this.model.getPlayerById(data[i].playerId);
+            this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.players[index].seatIndex)].showAllInCards(data[i].cards);
+        }
+
     },
 
     /**

@@ -938,6 +938,8 @@ var PokerModel = cc.Class({
      * @memberof Screens.Gameplay.Game.PokerModel#
      */
     registerBroadcasts: function () {
+        cc.systemEvent.on("revealCards", this.onRevealCards.bind(this));
+        // this.gameModel.registerBroadcastCallbacks(this.gameData.channelId, "revealCards", this.onRevealCards.bind(this));
         this.gameModel.registerBroadcastCallbacks(this.gameData.channelId, this.K.BroadcastRoute.sit, this.onSit.bind(this));
         this.gameModel.registerBroadcastCallbacks(this.gameData.channelId, this.K.BroadcastRoute.blindDeduction, this.onBlindDeducted.bind(this));
         this.gameModel.registerBroadcastCallbacks(this.gameData.channelId, this.K.BroadcastRoute.bankrupt, this.onBankrupt.bind(this));
@@ -1822,6 +1824,18 @@ var PokerModel = cc.Class({
         var index = this.getPlayerById(data.playerId);
         this.gameData.tableDetails.players[index].chips = data.amount;
         this.emit(K.PokerEvents.onPlayerCoins, this.gameData.tableDetails.players[index]);
+    },
+
+    onRevealCards: function (data) {
+        if (data.channelId != this.gameData.channelId) {
+            return;
+        }
+        console.log("onRevealCards", data);
+        // var index = this.getPlayerById(data.playerId);
+        // this.gameData.tableDetails.players[index].chips = data.amount;
+        // this.emit(K.PokerEvents.onPlayerCoins, this.gameData.tableDetails.players[index]);
+
+        this.emit("revealAllInCards", data.revealCards);
     },
 
     /**

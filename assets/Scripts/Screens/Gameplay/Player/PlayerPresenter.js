@@ -2205,6 +2205,54 @@ var PlayerPresenter = cc.Class({
         // this.onStateChange();
     },
 
+    showAllInCards: function(card) {
+        if (card === null || card.length === 0) {
+            return;
+        }
+
+        this.cardHolder.children.forEach(function(e) {
+            e.active = false;
+        })
+        if (K.PORTRAIT && this.cardHolderMy) {
+            this.cardHolderMy.children.forEach(function(e) {
+                e.active = false;
+            })
+        }
+
+        this.cardHolderShow.children.forEach(function(e) {
+            e.active = false;
+        })
+        if (K.PORTRAIT && this.cardHolderMyShow) {
+            this.cardHolderMyShow.children.forEach(function(e) {
+                e.active = false;
+            })
+        }
+
+        card.forEach(function(element, i) {
+            //  var instance = cc.instantiate(this.pokerPresenter.cardPrefab);
+            var instance = CardPool.generateCard(this.pokerPresenter.cardPrefab.name, function() {});
+            var cardComponent = instance.getComponent('Card');
+            element.point = element.rank;
+            element.pointName = element.name;
+            element.suit = this.pokerPresenter.model.getSuit(element.type);
+            cardComponent.init(element, this.pokerPresenter.model, true);
+            cardComponent.reveal(true);
+
+            if (K.PORTRAIT) {
+                instance.setPosition(0, 0);
+                instance.parent = this.cardHolderMyShow;
+
+                if (!this.isSelf() && this.pokerPresenter.model.roomConfig.channelVariation == "Omaha") {
+                    instance.scale = 0.82;
+                    this.cardHolderMyShow.getComponent(cc.Layout).spacingX = -55;
+                } else {
+                    instance.scale = 1;
+                    this.cardHolderMyShow.getComponent(cc.Layout).spacingX = -50;
+                }
+            }
+        }, this);
+    },
+
     winningRevealCards2: function() {
 
         // console.error("Reveal Cards");
