@@ -2949,8 +2949,15 @@ cc.Class({
     },
 
     convertChips: function (num) {
-        num = Number(num);
-        return num.toFixed(2);
+        const number = parseFloat(num);
+        if (isNaN(number)) return num;
+
+        if (Number.isInteger(number)) {
+            return number;
+        }
+
+        const fixed = number.toFixed(2);
+        return parseFloat(fixed);
     },
 
     onMaintenanceUpdate: function (response) {

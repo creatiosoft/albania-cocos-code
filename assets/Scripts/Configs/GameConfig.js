@@ -13,11 +13,11 @@
  * @memberof Configs.GameConfig#
  */
 var root = window;
-// console.log = function () {};
-// console.trace = function () {};
-// console.warn = function () {};
-// console.error = function () {};
-// cc.log = function () {};
+console.log = function () {};
+console.trace = function () {};
+console.warn = function () {};
+console.error = function () {};
+cc.log = function () {};
 
 root.K = {};
 

@@ -348,8 +348,8 @@ cc.Class({
                 cc.find('Container/header/r1/vari', this.node).getComponent(cc.Label).string = data.config.channelName;
                 cc.find('Container/header/r2/blind', this.node).getComponent(cc.Label).string = (data.config.smallBlind) + "/" + (data.config.bigBlind);
             }
-            cc.find('Container/min/realMoney', this.node).getComponent(cc.Label).string = (data.minValue);
-            cc.find('Container/max/realMoney', this.node).getComponent(cc.Label).string = (data.maxValue);
+            cc.find('Container/min/realMoney', this.node).getComponent(cc.Label).string = GameManager.convertChips(data.minValue);
+            cc.find('Container/max/realMoney', this.node).getComponent(cc.Label).string = GameManager.convertChips(data.maxValue);
 
             this.sound = data.playSound;
             // this.dialogHeadingText.string = data.dialogHeadingText;

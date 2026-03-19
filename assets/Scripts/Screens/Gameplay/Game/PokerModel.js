@@ -362,6 +362,10 @@ var PokerModel = cc.Class({
      * @returns {number} playerIndex - player index 
      */
     getPlayerById: function (playerId) {
+
+        console.log("debug getPlayerById", playerId);
+        console.log("debug getPlayerById", this.gameData.tableDetails.players);
+
         var playerIndex = -1;
         for (var index = 0; index < this.gameData.tableDetails.players.length; index++) {
             if (this.gameData.tableDetails.players[index].playerId === playerId) {
@@ -918,7 +922,7 @@ var PokerModel = cc.Class({
      * @method fireMuckHandEvent
      * @memberof Screens.Gameplay.Game.PokerModel#
      */
-    fireMuckHandEvent: function () {
+    fireMuckHandEvent: function (cb) {
         var input = {};
         input.channelId = this.gameData.channelId;
         input.data = {
@@ -926,8 +930,8 @@ var PokerModel = cc.Class({
         };
         input.route = this.K.BroadcastRoute.onFireEvent;
         ServerCom.pomeloRequest(this.K.PomeloAPI.fireChannelEvent, input, function (response) {
-            if (response.success) {
-
+            if (cb) {
+                cb();
             }
         }.bind(this), null, 5000, false, true);
     },

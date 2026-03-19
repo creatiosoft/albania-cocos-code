@@ -175,8 +175,8 @@ cc.Class({
             if (this.optionGrid[index][i].name == "Call" && (callVal > 0)) {
                 if ((callVal > 0)) {
                     this.callVal = callVal;
-                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL') + " " + Math.floor(callVal);
-                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).__string = Math.floor(callVal);
+                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal);
+                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).__string = GameManager.convertChips(callVal);
                 } else {
                     this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL');
                 }
@@ -206,7 +206,7 @@ cc.Class({
         if (callVal == 0 || callVal == "0" || callVal == "-0") {
             this.callLbl.string = LocalizedManager.t('TXT_CALL');
         } else {
-            this.callLbl.string = LocalizedManager.t('TXT_CALL') + " " + Math.floor(callVal);
+            this.callLbl.string = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal);
         }
 
     },

@@ -26,6 +26,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        handidLabel: {
+            default: null,
+            type: cc.Label,
+        },
         addChipsButton: {
             default: null,
             type: cc.Node,
@@ -964,33 +968,6 @@ cc.Class({
         if (this.model.gameData.tableDetails.players.length > 1) {
 
             this.timersToKill.push(setTimeout(function() {
-                // var ante = this.model.gameData.raw.tourData.raw.currentBlindLevel.ante;
-                // var totalAnte = ante * this.model.gameData.tableDetails.players.length;
-                // var players = this.model.gameData.tableDetails.players;
-                // for (var index = 0; index < players.length; index++) {
-                //     var presenter = this.playerHand[this.getRotatedSeatIndex(players[index].seatIndex)];
-                //     if (ante > 0) {
-                //         // presenter.playerData.chips -= ante;
-                //         presenter.displayBlind(ante);
-                //         presenter.activatePlayerBet(false, true);
-                //     }
-                // }
-
-                // if (totalAnte > 0) {
-                //     this.timersToKill.push(setTimeout(function () {
-                //         if (!this.totalPotLbl) {
-                //             return;
-                //         }
-                //         this.totalPotLbl.node.parent.active = true;
-                //         // this.totalPotLbl.string = totalAnte;
-                //         this.totalPotLbl.string = GameManager.convertChips(totalAnte);
-                //         this.totalPotLbl.__string = totalAnte;
-                //         this.potAmount[0].getComponent(cc.Label).string = GameManager.convertChips(totalAnte);
-                //         this.potAmount[0].getComponent(cc.Label).__string = totalAnte;
-                //         this.potAmount[0].parent.active = true;
-                //         this.potAmount[0].children[0].getComponent('PokerChipsView').generateChips(totalAnte);
-                //     }.bind(this), 600));
-                // }
             }.bind(this), 1));
         }
 
@@ -1018,6 +995,7 @@ cc.Class({
         this.handleSitOutBtns(true);
         this.resetView();
         this.muckHandNode.active = false;
+        this.enableTempPlayerInput(false);
 
         console.log("this.playerHand", this.playerHand);
 
@@ -1785,6 +1763,7 @@ cc.Class({
             // if game in progress allocate 
             // console.log("roomconfig", this.model.roomConfig, this.model.roomConfig.isRunItTwice);
             this.roomNameLbl.string = this.model.roomConfig.channelName;
+            this.handidLabel.string = "ID: " + (this.model.gameData.tableDetails.roundId ? this.model.gameData.tableDetails.roundNumber : "N/A");
             // this.roomNameLbl2.string = this.model.roomConfig.channelName;
 
             // if (this.tiledView.active || GameManager.isMobile) {
@@ -3314,20 +3293,6 @@ cc.Class({
             }
         } else {
             if (this.model.gameData.tableDetails.players.length > 1) {
-                // var ante = this.model.gameData.raw.tourData.raw.currentBlindLevel.ante;
-                // var totalAnte = ante * this.model.gameData.tableDetails.players.length;
-                // if (totalAnte > 0) {
-                //     if (!this.totalPotLbl) {
-                //         return;
-                //     }
-                //     this.totalPotLbl.node.parent.active = true;
-                //     this.totalPotLbl.string = GameManager.convertChips(totalAnte);
-                //     this.totalPotLbl.__string = totalAnte;
-                //     this.potAmount[0].getComponent(cc.Label).string = GameManager.convertChips(totalAnte);
-                //     this.potAmount[0].getComponent(cc.Label).__string = totalAnte;
-                //     this.potAmount[0].parent.active = true;
-                //     this.potAmount[0].children[0].getComponent('PokerChipsView').generateChips(totalAnte);
-                // }
             }
         }
         // }, 1
@@ -4364,54 +4329,13 @@ cc.Class({
     },
 
     showAllInCards: function(data) {
-        // if (this.getRotatedSeatIndex(seatIndex) && this.playerHand[this.getRotatedSeatIndex(seatIndex)])
-        //     this.playerHand[this.getRotatedSeatIndex(seatIndex)].winningRevealCards2();
-        // else {
-        //     // console.error("Winner not found !!");
-        // }
-
-        // [
-        //     {
-        //         "playerId": "21778590",
-        //         "cards": [
-        //             {
-        //                 "type": "club",
-        //                 "rank": 6,
-        //                 "name": "6",
-        //                 "priority": 6
-        //             },
-        //             {
-        //                 "type": "diamond",
-        //                 "rank": 5,
-        //                 "name": "5",
-        //                 "priority": 5
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         "playerId": "44436143",
-        //         "cards": [
-        //             {
-        //                 "type": "heart",
-        //                 "rank": 1,
-        //                 "name": "A",
-        //                 "priority": 14
-        //             },
-        //             {
-        //                 "type": "diamond",
-        //                 "rank": 10,
-        //                 "name": "10",
-        //                 "priority": 10
-        //             }
-        //         ]
-        //     }
-        // ]
-
         for (var i = 0; i < data.length; i++) {
             var index = this.model.getPlayerById(data[i].playerId);
+            if (index == -1) {
+                continue;
+            }
             this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.players[index].seatIndex)].showAllInCards(data[i].cards);
         }
-
     },
 
     /**
@@ -4745,7 +4669,19 @@ cc.Class({
         this.playAudio(K.Sounds.click);
         this.muckHandNode.active = false;
         if (flag == "true") {
-            this.model.fireMuckHandEvent();
+            this.model.fireMuckHandEvent(() => {
+                ServerCom.pomeloRequest('room.channelHandler.showWinnerHiddenCards', {
+                    "channelId": this.model.gameData.channelId,
+                    "playerId": this.model.gameData.playerId,
+                    "roundId": this.model.gameData.tableDetails.roundId,
+                    "isRequested": true
+                }, function (response) {
+                  console.log("room.channelHandler.showWinnerHiddenCards", response);
+                }.bind(this), null, 5000, false);
+            });
+        }
+        else {
+            
         }
     },
     addOnBtnCallBack: function() {
@@ -4804,6 +4740,7 @@ cc.Class({
         // console.log("gamedata", this.model.gameData);
         // console.log("tableDetails", this.model.gameData.tableDetails)
         this.roomNameLbl.string = this.model.roomConfig.channelName;
+        this.handidLabel.string = "ID: " + this.model.gameData.tableDetails.roundNumber;
         // this.roomNameLbl2.string = this.model.roomConfig.channelName;
         // console.log(this.model)
         // if (this.tiledView.active || GameManager.isMobile) {
@@ -5381,30 +5318,30 @@ cc.Class({
     },
 
     enableShowFoldBtn: function() {
-        this.showFoldBtn.node.parent.parent.active = true;
-        this.showFoldBtn.node.parent.getChildByName("tick").active = this.model.gameData.settings.isShowCard;
+        // this.showFoldBtn.node.parent.parent.active = true;
+        // this.showFoldBtn.node.parent.getChildByName("tick").active = this.model.gameData.settings.isShowCard;
     },
 
     disableShowFoldBtn: function() {
-        this.showFoldBtn.node.parent.parent.active = false;
-        this.showFoldBtn.node.parent.getChildByName("tick").active = false;
+        // this.showFoldBtn.node.parent.parent.active = false;
+        // this.showFoldBtn.node.parent.getChildByName("tick").active = false;
     },
 
     onShowFoldCardsBtnClick: function() {
-        this.playAudio(K.Sounds.click);
-        var flag = this.showFoldBtn.node.parent.getChildByName("tick").active;
+        // this.playAudio(K.Sounds.click);
+        // var flag = this.showFoldBtn.node.parent.getChildByName("tick").active;
 
-        var data = {};
-        data.channelId = this.model.gameData.channelId;
-        data.playerId = GameManager.user.playerId;
-        data.key = 'isShowCard';
-        data.value = !flag;
-        ServerCom.pomeloRequest(K.PomeloAPI.updateTableSettings, data, function(response) {
-            if (response.success) {
-                this.showFoldBtn.node.parent.getChildByName("tick").active = data.value;
-                this.model.gameData.settings.isShowCard = !this.model.gameData.settings.isShowCard;
-            }
-        }.bind(this), null, 5000, false);
+        // var data = {};
+        // data.channelId = this.model.gameData.channelId;
+        // data.playerId = GameManager.user.playerId;
+        // data.key = 'isShowCard';
+        // data.value = !flag;
+        // ServerCom.pomeloRequest(K.PomeloAPI.updateTableSettings, data, function(response) {
+        //     if (response.success) {
+        //         this.showFoldBtn.node.parent.getChildByName("tick").active = data.value;
+        //         this.model.gameData.settings.isShowCard = !this.model.gameData.settings.isShowCard;
+        //     }
+        // }.bind(this), null, 5000, false);
 
 
         // TableHandler.joinWaitingList(!flag, this.model.gameData.channelId, function (response) {
