@@ -1596,7 +1596,7 @@ var PlayerPresenter = cc.Class({
         this.reservedPanel.active = true;
         // this.emojiBtn.node.active = false;
         console.log('set EMOJIN ENABLE  OFF enableReservedView')
-        this.addFriendBtn.node.active = false;
+        // this.addFriendBtn.node.active = false;
     },
 
     /**

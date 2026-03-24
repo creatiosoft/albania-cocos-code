@@ -33,6 +33,14 @@ cc.Class({
             default: null,
             type: cc.Sprite,
         },
+        cardSetNode1: {
+            default: null,
+            type: cc.Node,
+        },
+        cardSetNode2: {
+            default: null,
+            type: cc.Node,
+        },
         cardPreview: {
             default: null,
             type: cc.Sprite,
@@ -54,6 +62,10 @@ cc.Class({
             type: cc.Node,
         },
         cardBackTab: {
+            default: null,
+            type: cc.Node,
+        },
+        setContent: {
             default: null,
             type: cc.Node,
         },
@@ -84,6 +96,8 @@ cc.Class({
         tableImageSelectedId: 0,
         tableBgImageSelectedId: 0,
         cardBackImageSelectedId: 0,
+
+        cardSelectedSet: 0,
     },
 
     /**
@@ -91,11 +105,16 @@ cc.Class({
      * @method onLoad
      * @memberof Popups.GamePreferencesPopup#
      */
-    onLoad: function () {
+    onLoad: function() {
         this.isTournament = false;
 
         // this.tableLayout.active = !GameScreen.isMobile;
-        this.onTableTab();
+        // this.onTableTab();
+
+        this.cardSelectedSet = GameManager.user.settings.cardFront;
+        this.updateSelectedCardSet();
+
+        this.onCardTab();
         // this.tablePreview.spriteFrame = GameManager.tableImages[0];
         this.tablePreview.spriteFrame = (this.isTournament ? GameManager.tableImagesTour : GameManager.tableImages)[this.tableImageSelected];
 
@@ -108,8 +127,7 @@ cc.Class({
                         this.cardBackImageSelected = i;
                         this.cardBackImageSelectedId = stickerImages.___data._id;
                     };
-                }
-                else {
+                } else {
                     if (i == 0) {
                         this.cardBackImageSelected = i;
                         this.cardBackImageSelectedId = stickerImages.___data._id;
@@ -129,8 +147,7 @@ cc.Class({
                         this.tableBgImageSelected = i;
                         this.tableBgImageSelectedId = stickerImages.___data._id;
                     };
-                }
-                else {
+                } else {
                     if (i == 0) {
                         this.tableBgImageSelected = i;
                         this.tableBgImageSelectedId = stickerImages.___data._id;
@@ -155,6 +172,8 @@ cc.Class({
         // this.cardTab.children[1].color = color.fromHEX("#000000");
         // this.cardBackTab.children[1].color = color.fromHEX("#000000");
 
+        this.setContent.active = false;
+        this.content.active = true;
         this.content.removeAllChildren(true);
 
         for (var i = 0; i < (this.isTournament ? GameManager.tableImagesTour : GameManager.tableImages).length; i++) {
@@ -174,8 +193,7 @@ cc.Class({
                         this.tableImageSelected = i;
                         this.tableImageSelectedId = stickerImages.___data._id;
                     };
-                }
-                else {
+                } else {
                     if (i == 0) {
                         poolObject.children[2].active = true;
                         this.tableImageSelected = i;
@@ -199,6 +217,8 @@ cc.Class({
         // this.cardTab.children[1].color = color.fromHEX("#000000");
         // this.cardBackTab.children[1].color = color.fromHEX("#000000");
 
+        this.setContent.active = false;
+        this.content.active = true;
         this.content.removeAllChildren(true);
 
         for (var i = 0; i < (this.isTournament ? GameManager.tableBgImagesTour : GameManager.tableBgImages).length; i++) {
@@ -218,8 +238,7 @@ cc.Class({
                         this.tableBgImageSelected = i;
                         this.tableBgImageSelectedId = stickerImages.___data._id;
                     };
-                }
-                else {
+                } else {
                     if (i == 0) {
                         poolObject.children[2].active = true;
                         this.tableBgImageSelected = i;
@@ -233,15 +252,36 @@ cc.Class({
     onCardTab: function() {
         var color = cc.Color.BLACK;
 
-        this.tableTab.children[0].active = false;
         this.cardTab.children[0].active = true;
+        this.tableTab.children[0].active = false;
         this.tableBgTab.children[0].active = false;
         this.cardBackTab.children[0].active = false;
+
+        this.setContent.active = true;
+        this.content.active = false;
 
         // this.tableTab.children[1].color = color.fromHEX("#000000");
         // this.tableBgTab.children[1].color = color.fromHEX("#000000");
         // this.cardTab.children[1].color = color.fromHEX("#ffffff");
         // this.cardBackTab.children[1].color = color.fromHEX("#000000");
+    },
+
+    updateSelectedCardSet: function() {
+        if (this.cardSelectedSet == 0) {
+            cc.find("contents/set1", this.setContent).active = true;
+            cc.find("contents/set2", this.setContent).active = false;
+            cc.find("setName/Label", this.setContent).getComponent(cc.Label).string = "Set 1";
+
+            this.cardSetNode1.active = true;
+            this.cardSetNode2.active = false;
+        } else {
+            cc.find("contents/set1", this.setContent).active = false;
+            cc.find("contents/set2", this.setContent).active = true;
+            cc.find("setName/Label", this.setContent).getComponent(cc.Label).string = "Set 2";
+
+            this.cardSetNode1.active = false;
+            this.cardSetNode2.active = true;
+        }
     },
 
     onCardBackTab: function() {
@@ -257,6 +297,8 @@ cc.Class({
         // this.cardTab.children[1].color = color.fromHEX("#000000");
         // this.cardBackTab.children[1].color = color.fromHEX("#ffffff");
 
+        this.setContent.active = false;
+        this.content.active = true;
         this.content.removeAllChildren(true);
 
         for (var i = 0; i < (this.isTournament ? GameManager.cardBackImagesTour : GameManager.cardBackImages).length; i++) {
@@ -276,8 +318,7 @@ cc.Class({
                         this.cardBackImageSelected = i;
                         this.cardBackImageSelectedId = stickerImages.___data._id;
                     };
-                }
-                else {
+                } else {
                     if (i == 0) {
                         poolObject.children[2].active = true;
                         this.cardBackImageSelected = i;
@@ -292,8 +333,7 @@ cc.Class({
         this.content.children.forEach((elem) => {
             if (elem == event.target) {
                 elem.children[2].active = true;
-            }
-            else {
+            } else {
                 elem.children[2].active = false;
             }
         }, this);
@@ -307,8 +347,7 @@ cc.Class({
         this.content.children.forEach((elem) => {
             if (elem == event.target) {
                 elem.children[2].active = true;
-            }
-            else {
+            } else {
                 elem.children[2].active = false;
             }
         }, this);
@@ -326,8 +365,7 @@ cc.Class({
         this.content.children.forEach((elem) => {
             if (elem == event.target) {
                 elem.children[2].active = true;
-            }
-            else {
+            } else {
                 elem.children[2].active = false;
             }
         }, this);
@@ -345,7 +383,7 @@ cc.Class({
             ServerCom.pomeloRequest("connector.entryHandler.playerChangeTableTheme", {
                 "playerId": GameManager.user.playerId,
                 "themeId": this.tableImageSelectedId
-            }, function (response) {
+            }, function(response) {
                 console.log("playerChangeTableTheme", response);
 
                 {
@@ -358,7 +396,7 @@ cc.Class({
                 count -= 1;
                 if (count == 0) {
                     self.onClose();
-                } 
+                }
             });
         }
 
@@ -367,12 +405,12 @@ cc.Class({
             ServerCom.pomeloRequest(this.isTournament ? "connector.entryHandler.playerChangeTourGameBackground" : "connector.entryHandler.playerChangeGameBackground", {
                 "playerId": GameManager.user.playerId,
                 "gameBGId": this.tableBgImageSelectedId
-            }, function (response) {
+            }, function(response) {
                 console.log("playerChangeGameBackground", response);
 
                 {
                     GameManager.user.defaultGameBackground = response.result;
-                    GameManager.tableBgImage = self.tableBgImageSelected;   
+                    GameManager.tableBgImage = self.tableBgImageSelected;
                 }
 
                 GameManager.emit("updateTableBgImage");
@@ -383,21 +421,44 @@ cc.Class({
                 }
             });
         }
-        
+
         if (self.cardBackImageSelectedId != 0) {
             count += 1;
             ServerCom.pomeloRequest(this.isTournament ? "connector.entryHandler.playerChangeTourCard" : "connector.entryHandler.playerChangeCard", {
                 "playerId": GameManager.user.playerId,
                 "cardId": self.cardBackImageSelectedId
-            }, function (response) {
+            }, function(response) {
                 console.log("playerChangeCard", response);
 
                 {
                     GameManager.user.defaultCard = response.result;
-                    GameManager.cardBackImage = self.cardBackImageSelected;   
+                    GameManager.cardBackImage = self.cardBackImageSelected;
                 }
 
                 GameManager.emit("updateCardBackImage");
+
+                count -= 1;
+                if (count == 0) {
+                    self.onClose();
+                }
+            });
+        }
+
+        if (self.cardSelectedSet != GameManager.user.settings.cardFront) {
+            count += 1;
+            ServerCom.pomeloRequest("connector.entryHandler.playerChangeCardFront", {
+                "query": {
+                    "playerId": GameManager.user.playerId
+                },
+                "updateKeys": {
+                    "cardFront": self.cardSelectedSet
+                }
+            }, function(response) {
+                console.log("playerChangeCard", response); {
+                    GameManager.user.settings.cardFront = self.cardSelectedSet;
+                }
+
+                GameManager.emit("updateCardFront");
 
                 count -= 1;
                 if (count == 0) {
@@ -420,15 +481,31 @@ cc.Class({
      * @memberof Popups.GamePreferencesPopup#   
      */
 
-    onShow: function (data) {
+    onShow: function(data) {
         GameManager.emit("disablePageView");
     },
 
-    onClose: function (data) {
+    onClose: function(data) {
         setTimeout(() => {
             GameManager.emit("showJoinSimlar");
         }, 100);
         GameManager.emit("enablePageView");
         this.node.active = false;
+    },
+
+    onPreSet: function() {
+        this.cardSelectedSet -= 1;
+        if (this.cardSelectedSet < 0) {
+            this.cardSelectedSet = 1;
+        }
+        this.updateSelectedCardSet();
+    },
+
+    onNextSet: function() {
+        this.cardSelectedSet += 1;
+        if (this.cardSelectedSet > 1) {
+            this.cardSelectedSet = 0;
+        }
+        this.updateSelectedCardSet();
     },
 });

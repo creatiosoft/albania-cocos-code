@@ -4233,7 +4233,23 @@ cc.Class({
                 if (element.cardRank == handCard[i].rank && element.suit == c) {
                     element.node.getChildByName("CardGlow").active = true;
                     element.node.y = (10);
-                    element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+                    if (GameManager.user.settings.cardFront == 0) {
+                        element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+                    }
+                    else {
+                        if (element.suit === K.Suit.Heart) {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#A22021");
+                        }
+                        else if (element.suit === K.Suit.Spade) {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#2B2B2B");
+                        }
+                        else if (element.suit === K.Suit.Club) {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#196B19");
+                        }
+                        else if (element.suit === K.Suit.Diamond)  {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#155493");
+                        }
+                    }
                 }
             }, this);
         }
@@ -4259,7 +4275,25 @@ cc.Class({
                 if (element.cardRank == boardCard[i].rank && element.suit == c) {
                     element.node.getChildByName("CardGlow").active = true;
                     element.node.y = (10);
-                    element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+                    // element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+
+                    if (GameManager.user.settings.cardFront == 0) {
+                        element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+                    }
+                    else {
+                        if (element.suit === K.Suit.Heart) {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#A22021");
+                        }
+                        else if (element.suit === K.Suit.Spade) {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#2B2B2B");
+                        }
+                        else if (element.suit === K.Suit.Club) {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#196B19");
+                        }
+                        else if (element.suit === K.Suit.Diamond)  {
+                            element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#155493");
+                        }
+                    }
                 }
             }, this);
         }
@@ -4306,10 +4340,31 @@ cc.Class({
         cardsToReset.forEach((e) => {
             var element = e.node;
             element.y = (0);
-            element.getChildByName("FrontFace").color = new cc.Color(170, 161, 161);
+            if (GameManager.user.settings.cardFront == 0) {
+                element.getChildByName("FrontFace").color = new cc.Color(170, 161, 161);
+            }
+            else {
+                element.getChildByName("FrontFace").color = new cc.Color(170, 161, 161);
+            }
             element.getChildByName("CardGlow").active = false;
             if (unDull) {
-                element.getChildByName("FrontFace").color = cc.Color.WHITE;
+                if (GameManager.user.settings.cardFront == 0) {
+                    element.getChildByName("FrontFace").color = cc.Color.WHITE;
+                }
+                else {
+                    if (e.suit === K.Suit.Heart) {
+                        element.getChildByName("FrontFace").color = new cc.Color().fromHEX("#A22021");
+                    }
+                    else if (e.suit === K.Suit.Spade) {
+                        element.getChildByName("FrontFace").color = new cc.Color().fromHEX("#2B2B2B");
+                    }
+                    else if (e.suit === K.Suit.Club) {
+                        element.getChildByName("FrontFace").color = new cc.Color().fromHEX("#196B19");
+                    }
+                    else if (e.suit === K.Suit.Diamond)  {
+                        element.getChildByName("FrontFace").color = new cc.Color().fromHEX("#155493");
+                    }
+                }
             }
         });
     },

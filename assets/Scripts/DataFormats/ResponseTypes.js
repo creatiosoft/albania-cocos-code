@@ -82,6 +82,7 @@ function user(data) {
     this.dealerChat = (data.settings.dealerChat !== undefined && data.settings.dealerChat != null) ? data.settings.dealerChat : true;
     this.playerChat = (data.settings.playerChat !== undefined && data.settings.playerChat != null) ? data.settings.playerChat : true;
     this.tableColor = (data.settings.tableColor !== undefined && data.settings.tableColor !== null && data.settings.tableColor !== "") ? data.settings.tableColor : 3;
+    this.cardFront =  (data.settings.cardFront !== undefined && data.settings.cardFront !== null && data.settings.cardFront !== "") ? data.settings.cardFront : 0;
     this.tableLayout = data.tableLayout;
     this.autoBuyIn = data.autoBuyIn;
     this.autoBuyInAmountInPercent = data.autoBuyInAmountInPercent;

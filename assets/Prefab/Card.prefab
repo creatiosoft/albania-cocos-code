@@ -353,7 +353,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        3.381999999999991,
         0,
         0,
         0,
@@ -939,8 +939,8 @@
     "_alignFlags": 45,
     "_left": 0,
     "_right": 0,
-    "_top": 1.1102230246251565e-15,
-    "_bottom": -1.1102230246251565e-15,
+    "_top": -3.381999999999996,
+    "_bottom": 3.381999999999996,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1057,6 +1057,34 @@
       },
       {
         "__uuid__": "5f37a496-737f-49a6-8053-fb3d6823ad4c"
+      }
+    ],
+    "texSuitBigColorBlind": [
+      {
+        "__uuid__": "eff384e4-83a3-4956-92cc-71cc500e85ad"
+      },
+      {
+        "__uuid__": "317e1db6-1358-4935-bc45-9bb8e6fce58a"
+      },
+      {
+        "__uuid__": "59633016-956a-4cd0-904b-2f08e7ca3243"
+      },
+      {
+        "__uuid__": "766f737c-64cd-4cc6-b322-3666e18ea95f"
+      }
+    ],
+    "texSuitSmallColorBlind": [
+      {
+        "__uuid__": "eff384e4-83a3-4956-92cc-71cc500e85ad"
+      },
+      {
+        "__uuid__": "317e1db6-1358-4935-bc45-9bb8e6fce58a"
+      },
+      {
+        "__uuid__": "59633016-956a-4cd0-904b-2f08e7ca3243"
+      },
+      {
+        "__uuid__": "766f737c-64cd-4cc6-b322-3666e18ea95f"
       }
     ],
     "suit": null,

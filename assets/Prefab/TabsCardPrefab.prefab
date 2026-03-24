@@ -771,6 +771,34 @@
         "__uuid__": "5f37a496-737f-49a6-8053-fb3d6823ad4c"
       }
     ],
+    "texSuitBigColorBlind": [
+      {
+        "__uuid__": "eff384e4-83a3-4956-92cc-71cc500e85ad"
+      },
+      {
+        "__uuid__": "317e1db6-1358-4935-bc45-9bb8e6fce58a"
+      },
+      {
+        "__uuid__": "59633016-956a-4cd0-904b-2f08e7ca3243"
+      },
+      {
+        "__uuid__": "766f737c-64cd-4cc6-b322-3666e18ea95f"
+      }
+    ],
+    "texSuitSmallColorBlind": [
+      {
+        "__uuid__": "eff384e4-83a3-4956-92cc-71cc500e85ad"
+      },
+      {
+        "__uuid__": "317e1db6-1358-4935-bc45-9bb8e6fce58a"
+      },
+      {
+        "__uuid__": "59633016-956a-4cd0-904b-2f08e7ca3243"
+      },
+      {
+        "__uuid__": "766f737c-64cd-4cc6-b322-3666e18ea95f"
+      }
+    ],
     "suit": null,
     "isFaceCard": false,
     "cardColorChangeCb": null,

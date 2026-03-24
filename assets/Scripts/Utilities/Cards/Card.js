@@ -70,6 +70,16 @@ cc.Class({
             type: cc.SpriteFrame
         },
 
+        texSuitBigColorBlind: {
+            default: [],
+            type: cc.SpriteFrame
+        },
+
+        texSuitSmallColorBlind: {
+            default: [],
+            type: cc.SpriteFrame
+        },
+
         suit: {
             default: null,
         },
@@ -104,7 +114,8 @@ cc.Class({
         if (this.model)
             this.model.off(K.GameEvents.onCardColorChange, this.cardColorChangeCb);
 
-        GameManager.off("updateCardBackImage", this.onUpdateCardBackImage.bind(this));
+        GameManager.off("updateCardBackImage", this._onUpdateCardBackImage);
+        GameManager.off("updateCardFront", this._onUpdateCardFront);
     },
 
     /**
@@ -162,24 +173,11 @@ cc.Class({
             }
         } else {
             this.bigSuit.spriteFrame = this.texSuitBig[card.suit - 1];
-            // if (this.suit === K.Suit.Heart || this.suit === K.Suit.Diamond)
-            //     this.bigSuit.spriteFrame = this.texRedFaces[card.point - 10 - 1];
-            // else {
-            //     this.bigSuit.spriteFrame = this.texFaces[card.point - 10 - 1];
-            // }
-            // this.bigSuit.node.width = 71.5;
-            // this.bigSuit.node.height = 75.4;
-
-            if (K.PORTRAIT && 0) {
-                this.bigSuit.node.scale = 0.7;
-            }
-            else {
-                this.bigSuit.node.setPosition(10.8, -23.5);
-                this.bigSuit.node.getComponent(cc.Widget).left = 0.2530;
-                this.bigSuit.node.getComponent(cc.Widget).right = 0.0391;
-                this.bigSuit.node.getComponent(cc.Widget).top = 0.3962;
-                this.bigSuit.node.getComponent(cc.Widget).bottom = 0.0531;
-            }
+            this.bigSuit.node.setPosition(10.8, -23.5);
+            this.bigSuit.node.getComponent(cc.Widget).left = 0.2530;
+            this.bigSuit.node.getComponent(cc.Widget).right = 0.0391;
+            this.bigSuit.node.getComponent(cc.Widget).top = 0.3962;
+            this.bigSuit.node.getComponent(cc.Widget).bottom = 0.0531;
 
         }
         this.point.string = card.pointName;
@@ -190,8 +188,14 @@ cc.Class({
             this.setCardColor(K.CardColoring.TwoCardColor);
         }
 
-        GameManager.off("updateCardBackImage", this.onUpdateCardBackImage.bind(this));
-        GameManager.on("updateCardBackImage", this.onUpdateCardBackImage.bind(this));
+        this._onUpdateCardBackImage = this.onUpdateCardBackImage.bind(this);
+        this._onUpdateCardFront = this.onUpdateCardFront.bind(this);
+
+        GameManager.off("updateCardBackImage", this.onUpdateCardBackImage);
+        GameManager.on("updateCardBackImage", this._onUpdateCardBackImage);
+
+        GameManager.off("updateCardFront", this.onUpdateCardFront);
+        GameManager.on("updateCardFront", this._onUpdateCardFront);
         this.onUpdateCardBackImage();
 
         if (this.isCommunityCard) {
@@ -202,6 +206,8 @@ cc.Class({
             this.smallSuit.node.active = true;
             this.bigSuit.node.y = -30;
         }
+
+        this.onUpdateCardFront();
     },
 
     /**
@@ -242,9 +248,9 @@ cc.Class({
             // if card is not JQK set color of big texure
             if (!this.isFaceCard || this.toBePlayerCards) {
                 if (this.suit === K.Suit.Heart || this.suit === K.Suit.Diamond) {
-                    this.bigSuit.node.color = this.redTextColor;
+                    // this.bigSuit.node.color = this.redTextColor;
                 } else {
-                    this.bigSuit.node.color = this.blackTextColor;
+                    // this.bigSuit.node.color = this.blackTextColor;
                 }
             } else {
                 if (this.suit === K.Suit.Heart || this.suit === K.Suit.Diamond) {
@@ -254,23 +260,23 @@ cc.Class({
                 }
             }
             if (this.suit === K.Suit.Heart || this.suit === K.Suit.Diamond) {
-                this.point.node.color = this.redTextColor;
-                this.smallSuit.node.color = this.redTextColor;
+                // this.point.node.color = this.redTextColor;
+                // this.smallSuit.node.color = this.redTextColor;
             } else {
-                this.point.node.color = this.blackTextColor;
-                this.smallSuit.node.color = this.blackTextColor;
+                // this.point.node.color = this.blackTextColor;
+                // this.smallSuit.node.color = this.blackTextColor;
             }
         } else //if(deckSettings === K.CardColoring.FourCardColor)
         {
             if (!this.isFaceCard || this.toBePlayerCards) {
                 if (this.suit === K.Suit.Heart) {
-                    this.bigSuit.node.color = this.redTextColor;
+                    // this.bigSuit.node.color = this.redTextColor;
                 } else if (this.suit === K.Suit.Diamond) {
-                    this.bigSuit.node.color = this.blueTextColor;
+                    // this.bigSuit.node.color = this.blueTextColor;
                 } else if (this.suit === K.Suit.Spade) {
-                    this.bigSuit.node.color = this.blackTextColor;
+                    // this.bigSuit.node.color = this.blackTextColor;
                 } else {
-                    this.bigSuit.node.color = this.greenTextColor;
+                    // this.bigSuit.node.color = this.greenTextColor;
                 }
             } else {
                 if (this.suit === K.Suit.Heart) {
@@ -285,17 +291,16 @@ cc.Class({
             }
             if (this.suit === K.Suit.Heart) {
                 this.point.node.color = this.redTextColor;
-                this.smallSuit.node.color = this.redTextColor;
+                // this.smallSuit.node.color = this.redTextColor;
             } else if (this.suit === K.Suit.Diamond) {
-                this.point.node.color = this.blueTextColor;
-                this.smallSuit.node.color = this.blueTextColor;
+                this.point.node.color = this.redTextColor;
+                // this.smallSuit.node.color = this.blueTextColor;
             } else if (this.suit === K.Suit.Spade) {
                 this.point.node.color = this.blackTextColor;
-                this.smallSuit.node.color = this.blackTextColor;
+                // this.smallSuit.node.color = this.blackTextColor;
             } else {
-                this.point.node.color = this.greenTextColor;
-                this.smallSuit.node.color = this.greenTextColor;
-
+                this.point.node.color = this.blackTextColor;
+                // this.smallSuit.node.color = this.greenTextColor;
             }
         }
     },
@@ -358,6 +363,46 @@ cc.Class({
         }
     },
 
+    onUpdateCardFront: function() {
+        if (GameManager.user.settings.cardFront == 0) {
+            this.bigSuit.spriteFrame = this.texSuitBig[this.suit - 1];
+            this.smallSuit.spriteFrame = this.texSuitSmall[this.suit - 1];
+            this.point.node.color = new cc.Color().fromHEX("#000000");
+            if (this.suit === K.Suit.Heart) {
+                this.point.node.color = this.redTextColor;
+                // this.smallSuit.node.color = this.redTextColor;
+            } else if (this.suit === K.Suit.Diamond) {
+                this.point.node.color = this.redTextColor;
+                // this.smallSuit.node.color = this.blueTextColor;
+            } else if (this.suit === K.Suit.Spade) {
+                this.point.node.color = this.blackTextColor;
+                // this.smallSuit.node.color = this.blackTextColor;
+            } else {
+                this.point.node.color = this.blackTextColor;
+                // this.smallSuit.node.color = this.greenTextColor;
+            }
+            this.frontFace.node.color = new cc.Color().fromHEX("#ffffff");
+        }
+        else {
+            this.bigSuit.spriteFrame = this.texSuitBigColorBlind[this.suit - 1];
+            this.smallSuit.spriteFrame = this.texSuitSmallColorBlind[this.suit - 1];
+            this.point.node.color = new cc.Color().fromHEX("#ffffff");
+
+            if (this.suit === K.Suit.Heart) {
+                this.frontFace.node.color = new cc.Color().fromHEX("#A22021");
+            }
+            else if (this.suit === K.Suit.Spade) {
+                this.frontFace.node.color = new cc.Color().fromHEX("#2B2B2B");
+            }
+            else if (this.suit === K.Suit.Club) {
+                this.frontFace.node.color = new cc.Color().fromHEX("#196B19");
+            }
+            else if (this.suit === K.Suit.Diamond)  {
+                this.frontFace.node.color = new cc.Color().fromHEX("#155493");
+            }
+        }
+    },
+
     gray: function() {
         this.point.setMaterial(0, cc.Material.getBuiltinMaterial('2d-gray-sprite'));
         this.bigSuit.setMaterial(0, cc.Material.getBuiltinMaterial('2d-gray-sprite'));
@@ -371,7 +416,40 @@ cc.Class({
         this.bigSuit.setMaterial(0, cc.Material.getBuiltinMaterial('2d-sprite'));
         this.smallSuit.setMaterial(0, cc.Material.getBuiltinMaterial('2d-sprite'));
         this.backFace.setMaterial(0, cc.Material.getBuiltinMaterial('2d-sprite'));
-        this.frontFace.node.color = new cc.Color().fromHEX("#FFFFFF");
+
+        if (GameManager.user.settings.cardFront == 0) {
+            this.bigSuit.spriteFrame = this.texSuitBig[this.suit - 1];
+            this.smallSuit.spriteFrame = this.texSuitSmall[this.suit - 1];
+            this.frontFace.node.color = new cc.Color().fromHEX("#ffffff");
+
+            if (this.suit === K.Suit.Heart) {
+                this.point.node.color = this.redTextColor;
+                // this.smallSuit.node.color = this.redTextColor;
+            } else if (this.suit === K.Suit.Diamond) {
+                this.point.node.color = this.blueTextColor;
+                // this.smallSuit.node.color = this.blueTextColor;
+            } else if (this.suit === K.Suit.Spade) {
+                this.point.node.color = this.blackTextColor;
+                // this.smallSuit.node.color = this.blackTextColor;
+            } else {
+                this.point.node.color = this.greenTextColor;
+                // this.smallSuit.node.color = this.greenTextColor;
+            }
+        }
+        else {
+            if (this.suit === K.Suit.Heart) {
+                this.frontFace.node.color = new cc.Color().fromHEX("#A22021");
+            }
+            else if (this.suit === K.Suit.Spade) {
+                this.frontFace.node.color = new cc.Color().fromHEX("#2B2B2B");
+            }
+            else if (this.suit === K.Suit.Club) {
+                this.frontFace.node.color = new cc.Color().fromHEX("#196B19");
+            }
+            else if (this.suit === K.Suit.Diamond)  {
+                this.frontFace.node.color = new cc.Color().fromHEX("#155493");
+            }
+        }
     },
 
 });
