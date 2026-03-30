@@ -429,7 +429,7 @@
     "_prefab": {
       "__id__": 28
     },
-    "_opacity": 255,
+    "_opacity": 0,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -451,15 +451,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -249,
+        -10999,
         -783.622,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        0,
+        0,
         1
       ]
     },
@@ -1072,7 +1072,7 @@
     "node": {
       "__id__": 7
     },
-    "_enabled": true,
+    "_enabled": false,
     "_normalMaterial": null,
     "_grayMaterial": null,
     "duration": 0.1,
