@@ -57241,7 +57241,7 @@
         "__id__": 1581
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 1588
@@ -57285,8 +57285,8 @@
         0,
         0,
         1,
-        1.2,
-        1.2,
+        0,
+        0,
         1
       ]
     },
@@ -57594,7 +57594,7 @@
     "node": {
       "__id__": 1580
     },
-    "_enabled": true,
+    "_enabled": false,
     "_normalMaterial": null,
     "_grayMaterial": null,
     "duration": 0.1,
