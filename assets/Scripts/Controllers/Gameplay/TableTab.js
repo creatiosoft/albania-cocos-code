@@ -252,10 +252,21 @@ cc.Class({
      */
     showAlert: function (val) {
 
-        this.turnAlert.active = val;
-        if (val)
+        // this.turnAlert.active = val;
+        // if (val)
+        //     this.playAudio(K.Sounds.turnSoundTopBar);
+        // // console.log("alert sound working")
+
+        if (this.turnAlert)
+            this.turnAlert.active = val;
+        if (val) {
+            this.turnAlert.runAction(cc.repeatForever(cc.blink(1, 1)));
             this.playAudio(K.Sounds.turnSoundTopBar);
-        // console.log("alert sound working")
+        }
+        else {
+            if (this.turnAlert)
+                this.turnAlert.stopAllActions();
+        }
     },
 
     /**
