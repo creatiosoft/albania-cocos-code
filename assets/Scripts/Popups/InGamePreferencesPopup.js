@@ -691,4 +691,13 @@ cc.Class({
 
 
     },
+
+    handleSmartFocus(event){
+        if (!event) return;
+        console.log("smart focus __ ",event.isChecked);
+        K.SmartFocus = event.isChecked;
+        if (!this.activeModel.gameData.settings.muteGameSound) {
+            GameManager.playSound(K.Sounds.click);
+        }
+    }
 });

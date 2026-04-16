@@ -779,6 +779,7 @@ root.K.SystemStorageKeys = {
 root.K.GoToTable = false;
 
 root.K.PPC = true;
+root.K.SmartFocus = true;
 
 module.exports = {
     K: K,

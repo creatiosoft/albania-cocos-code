@@ -390,7 +390,9 @@ cc.Class({
                     if (GameManager.isMobile) {
                         // GameScreen.gridParent.getComponent(cc.PageView).scrollToPage(pokerModelIndex, 0);
                         if (pokerModelIndex != this.prevSelection) {
-                            GameScreen.onTabSelection(pokerModelIndex);
+                            if (K.SmartFocus) {
+                                GameScreen.onTabSelection(pokerModelIndex);
+                            }
                         }
                     }
                 }
