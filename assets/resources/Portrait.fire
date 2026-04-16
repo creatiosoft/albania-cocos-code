@@ -96973,7 +96973,11 @@
     "isMobile": true,
     "isWindows": false,
     "preferences": null,
+    "pageView": {
+      "__id__": 2156
+    },
     "gridRefreshing": false,
+    "tableTurnArray": [],
     "_id": "64srXFqzxJnriKTXhE1hwr"
   },
   {

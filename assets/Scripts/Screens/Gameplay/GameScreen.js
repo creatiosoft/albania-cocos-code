@@ -106,7 +106,12 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
-        gridRefreshing: false,
+        pageView: {
+            default: null,
+            type: cc.PageView,
+        },
+        gridRefreshing: false,        
+        tableTurnArray: [],
     },
     /**
      * @method onLoad
@@ -390,15 +395,22 @@ cc.Class({
                     if (GameManager.isMobile) {
                         // GameScreen.gridParent.getComponent(cc.PageView).scrollToPage(pokerModelIndex, 0);
                         if (pokerModelIndex != this.prevSelection) {
-                            if (K.SmartFocus) {
-                                GameScreen.onTabSelection(pokerModelIndex);
-                            }
+                            // GameScreen.onTabSelection(pokerModelIndex);
                         }
                     }
                 }
                 else if (!selfTurn && this.gameModel.activePokerModels.length >= 1) {
                     this.tableTabs[pokerModelIndex].getComponent(tableTab).showAlert(selfTurn);
                 }
+
+                let totalTables = this.gameModel?.activePokerModels?.length || 0;
+
+                if (totalTables >= 1) {
+                    this.addOrUpdateTableTurn(pokerModelIndex, selfTurn);
+                }
+                if (totalTables > 1) {
+                    this.handleSmartFocus();
+                }      
             }
         } else {
             if (selfTurn && this.gameModel.activePokerModels.length > 1) {
@@ -412,6 +424,67 @@ cc.Class({
             }
         }
 
+    },
+
+        handleSmartFocus() {
+        console.log("SmartFocus __active __",K.SmartFocus);
+        if (K.SmartFocus) {
+            let currentIndex = this.pageView.getCurrentPageIndex();
+            let currentPageNode = this.pageView.content.children[currentIndex];
+
+            if (!currentPageNode) return;
+
+            let roomConfig = currentPageNode.getComponent("PokerModel").roomConfig;
+            let currentTableId = roomConfig._id;
+
+            let currentItem = this.tableTurnArray.find(item => item.key === currentTableId);
+            let isCurrentTableTurn = currentItem ? currentItem.value : false;
+
+            if (isCurrentTableTurn) {
+                // console.log("Turn on Current table");
+                return;
+            }
+
+            for (let i = 0; i < this.gameModel.activePokerModels.length; i++) {
+                let roomConfig = this.gameModel.activePokerModels[i].roomConfig;
+
+                if (roomConfig._id !== currentTableId) {
+                    let tableItem = this.tableTurnArray.find(item => item.key === roomConfig._id);
+                    let hasTurn = tableItem ? tableItem.value : false;
+
+                    if (hasTurn) {
+                        let ind = currentIndex == 0 ? 1 : 0;
+                        this.pageView.scrollToPage(ind, 0.3);
+                        break;
+                    }
+                }
+            }
+        }
+    },
+
+    addOrUpdateTableTurn(index, value) {
+        // Get current active table ids
+        let activeTableIds = this.gameModel.activePokerModels.map(
+            model => model.roomConfig._id
+        );
+
+        // Remove old inactive tables
+        this.tableTurnArray = this.tableTurnArray.filter(item =>
+            activeTableIds.includes(item.key)
+        );
+        for (var i = 0; i < this.gameModel.activePokerModels.length; i++) {
+            let tab = this.tableTabs[index].getComponent(tableTab);
+            let roomConfig = this.gameModel.activePokerModels[i].roomConfig;
+            if (roomConfig._id == tab.model.gameData.raw.roomConfig._id) {
+                let gameModelKey = roomConfig._id;
+                let ind = this.tableTurnArray.findIndex(item => item.key === gameModelKey);
+                if (ind !== -1) {
+                    this.tableTurnArray[ind].value = value;
+                } else {
+                    this.tableTurnArray.push({ key: gameModelKey, value });
+                }
+            }
+        }
     },
 
     /**
