@@ -321,6 +321,10 @@ cc.Class({
             default: [],
             type: AvatarSelection,
         },
+        transactionHistory: {
+            default: null,
+            type: cc.Node,
+        },
         selectedAvatarID: 0,
     },
 
@@ -1295,6 +1299,14 @@ cc.Class({
 
     onWidthdrawlHistoryBack: function() {
         this.widthdrawlHistory.active = false;
+    },
+
+    showTransactionHistory(){
+        this.transactionHistory.active = true;
+    },
+
+    hideTransactionHistory(){
+        this.transactionHistory.active = false;
     },
 
 });
