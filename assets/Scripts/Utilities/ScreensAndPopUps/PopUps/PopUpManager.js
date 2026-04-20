@@ -50,6 +50,7 @@ var PopUpType = new cc.Enum({
     NewVersionPopup: 41,
     AdminNoticePopup: 42,
     ServerMaintenancePopup: 43,
+    RakebackPopup: 44,
     None: 100
 });
 

@@ -426,8 +426,8 @@ cc.Class({
 
     },
 
-        handleSmartFocus() {
-        console.log("SmartFocus __active __",K.SmartFocus);
+    handleSmartFocus() {
+        console.log("SmartFocus __active __", K.SmartFocus);
         if (K.SmartFocus) {
             let currentIndex = this.pageView.getCurrentPageIndex();
             let currentPageNode = this.pageView.content.children[currentIndex];

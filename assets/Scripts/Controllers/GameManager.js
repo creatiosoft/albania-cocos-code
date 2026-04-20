@@ -569,6 +569,11 @@ cc.Class({
         //     this.maxTableCounts = K.MaxTableCount;
 
         // this.maxTableCounts = 2;
+            
+        ServerCom.pomeloBroadcast("rakebackCredit", function (response) {
+            setTimeout(() => {
+            GameManager.popUpManager.show(PopUpType.RakebackPopup, response, function () { });},2000);
+        });
 
         this.playerRequestedToLeaveTable = {};
 
