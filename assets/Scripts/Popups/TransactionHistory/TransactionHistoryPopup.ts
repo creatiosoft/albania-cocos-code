@@ -72,9 +72,13 @@ export default class TransactionHistoryPopup extends cc.Component {
                 if (response && response.success) {
 
                     this.fetchingData = false;
+                    if (this.currentPage == 1) {
+                        this.contentNode.removeAllChildren();
+                    }
 
                     if (response.data.length === 0) {
                         this.noRecordLabel.node.active = this.currentPage == 1;
+
                         this.currentPage = this.currentPage > 1 ? this.currentPage - 1 : 1;
                     }
 
