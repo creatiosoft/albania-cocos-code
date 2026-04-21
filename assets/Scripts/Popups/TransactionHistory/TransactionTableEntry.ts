@@ -48,7 +48,7 @@ export default class TransactionTableEntry extends cc.Component {
         this.buyOutClosingAmount.string = this.formatAmount(data.closingBalanceAtBuyOut);
         this.buyOutTime.string = this.formatTime(data.seatLeaveAt);
 
-        this.closingAmount.string = this.formatAmount(data.closingBalance);
+        this.closingAmount.string = this.formatAmount(data.netWinnings);
     }
 
 

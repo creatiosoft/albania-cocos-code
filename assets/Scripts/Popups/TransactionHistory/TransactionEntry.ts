@@ -33,6 +33,10 @@ export default class TransactionEntry extends cc.Component {
         this.amountLabel.string = amountBalance.toFixed(4);
         
         let closingBalance = data.closingBalance;
-        this.closingBalanceLabel.string = closingBalance.toFixed(4);
+        this.closingBalanceLabel.string = this.formatAmount(closingBalance);
+    }
+    private formatAmount(value: number): string {
+        if (value === undefined || value === null) return "-";
+        return value.toFixed(2);
     }
 }
