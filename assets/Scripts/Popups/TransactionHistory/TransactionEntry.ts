@@ -29,7 +29,10 @@ export default class TransactionEntry extends cc.Component {
             this.transactionStatusLabel.string = "";
             this.dateLabel.string = date;
         }
-        this.amountLabel.string = data.amount.toString();
-        this.closingBalanceLabel.string = data.closingBalance == null ? "null" : data.closingBalance.toString();
+        let amountBalance = data.amount;
+        this.amountLabel.string = amountBalance.toFixed(4);
+        
+        let closingBalance = data.closingBalance;
+        this.closingBalanceLabel.string = closingBalance.toFixed(4);
     }
 }

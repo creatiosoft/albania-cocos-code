@@ -125,6 +125,10 @@ cc.Class({
             default: null,
             type: Toggle,
         },
+        SmartFocusToggle: {
+            default: null,
+            type: cc.Toggle,
+        },
     },
 
     onContent1: function() {
@@ -233,7 +237,7 @@ cc.Class({
         if (GameManager.user.settings.stackInBB !== this.BBToggle.state) {
             this.BBToggle.onToggle();
         }
-
+        this.SmartFocusToggle.isChecked = K.SmartFocus;
         // if (GameManager.user.settings.handStrength !== this.handSToggle.state) {
         //     this.handSToggle.onToggle();
         // }
@@ -694,8 +698,28 @@ cc.Class({
 
     handleSmartFocus(event){
         if (!event) return;
-        console.log("smart focus __ ",event.isChecked);
-        K.SmartFocus = event.isChecked;
+        console.log("smart focus __ ", event.isChecked);
+        
+        let data = {
+            playerId: GameManager.user.playerId,
+            smartFocus: event.isChecked,
+            access_token: K.Token.access_token
+        };
+
+        ServerCom.pomeloRequest(
+            "connector.entryHandler.changeSmartFocus", // ✅ event name here
+            data,                                      // ✅ only data
+            function (response) {
+                console.log("changeSmartFocus response", response);
+
+                if (response && response.success) {
+                    K.SmartFocus = response.settings.smartFocus
+                }
+            },
+            null,
+            5000,
+            false
+        );
         if (!this.activeModel.gameData.settings.muteGameSound) {
             GameManager.playSound(K.Sounds.click);
         }

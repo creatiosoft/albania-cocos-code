@@ -746,7 +746,7 @@ cc.Class({
                                 K.Token.refresh_token = data.refresh_token;
                                 K.Token.access_token_expire_at = data.access_token_expire_at;
                                 K.Token.refresh_token_expire_at = data.refresh_token_expire_at;
-
+                                K.SmartFocus = data.user.settings.smartFocus;
                                 ServerCom.socketIOConnect(K.ServerAddress.gameServer + ":" + K.ServerAddress.gamePort, () => {
                                     if (!ServerCom.socketConnected) {
                                         return;
@@ -1168,7 +1168,7 @@ cc.Class({
                 K.Token.refresh_token = data.refresh_token;
                 K.Token.access_token_expire_at = data.access_token_expire_at;
                 K.Token.refresh_token_expire_at = data.refresh_token_expire_at;
-
+                K.SmartFocus = data.user.settings.smartFocus;
                 ServerCom.socketIOConnect(K.ServerAddress.gameServer + ":" + K.ServerAddress.gamePort, () => {
                     if (!ServerCom.socketConnected) {
                         return;

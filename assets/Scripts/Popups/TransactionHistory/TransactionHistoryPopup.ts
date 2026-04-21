@@ -163,6 +163,7 @@ export default class TransactionHistoryPopup extends cc.Component {
         this.currentPage = 1;
         this.contentNode.removeAllChildren();
         this.fetchTransactionHistory();
+        this.scrollView.scrollToOffset(cc.v2(0, 0));
     }
 
     onDestroy() {

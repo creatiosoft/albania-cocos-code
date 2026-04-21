@@ -4212,6 +4212,41 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
     highlightWinningCards: function(winnerSet, handCard, boardCard, cardsOnTable, playerHandCards) {
+        var array = cardsOnTable.concat(playerHandCards);
+        this.dullAllCards(array);
+        // var array = playerHandCards;
+        console.log("highlightWinningCards cards", array);
+        console.log("highlightWinningCards winnerSet", winnerSet);
+        // this.dullAllCards(array);
+        var temp = winnerSet;
+        for (var i = 0; i < temp.length; i++) {
+            var c = 0;
+            switch (temp[i].type) {
+                case "spade":
+                    c = 1;
+                    break;
+                case "heart":
+                    c = 2;
+                    break;
+                case "club":
+                    c = 3;
+                    break;
+                case "diamond":
+                    c = 4;
+                    break;
+            }
+            array.forEach(function (element) {
+                if (element.cardRank == temp[i].rank && element.suit == c) {
+                    if (!element.node.getChildByName("CardGlow").active) {
+                        element.node.getChildByName("CardGlow").active = true;
+                        element.node.__y = element.node.y;
+                        element.node.y = (element.node.y + 10);
+                        element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+                    }
+                }
+            }, this);
+        }
+        return;
         this.dullAllCards(playerHandCards);
         for (var i = 0; i < handCard.length; i++) {
             var c = 0;
