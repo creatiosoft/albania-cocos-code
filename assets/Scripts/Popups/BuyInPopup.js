@@ -355,12 +355,21 @@ cc.Class({
             // this.dialogHeadingText.string = data.dialogHeadingText;
             // this.scheduleOnce(function () {
             this.topHeadingLbl.string = data.topHeading;
-            var info = data.maxValue <= 0 ? "" : LocalizedManager.t('TXT_FUNDS_INSUFFICIENT');
             if (data.minValue <= 0) {
                 data.minValue = 1;
             }
             if (data.maxValue > 0) {
                 data.maxValue = data.maxValue < data.totalChips ? data.maxValue : data.totalChips;
+            }
+            var info;
+            if (data.maxValue <= 0) {
+                info = "";
+            } else if (data.maxValue < data.minValue) {
+                info = (data.totalChips >= data.minValue)
+                    ? LocalizedManager.t('TXT_CANNOT_LESS_CHIPS')
+                    : LocalizedManager.t('TXT_FUNDS_INSUFFICIENT');
+            } else {
+                info = "";
             }
             this.disableView((data.maxValue < data.minValue), info, data.maxValue <= 0 && !data.quickSeat);
             if (data.maxValue < data.minValue) {

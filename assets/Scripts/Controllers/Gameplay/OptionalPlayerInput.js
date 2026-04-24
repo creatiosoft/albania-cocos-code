@@ -64,6 +64,7 @@ cc.Class({
      */
     onLoad: function() {
         this.callVal = 0;
+        this.tempCallValue = 0;
         // this.enableTempPlayerInput(false);
         this.optionGrid = [this.set1, this.set2, this.set3];
         this.enableTempPlayerInput(false, 0);
@@ -89,7 +90,7 @@ cc.Class({
     enableTempPlayerInput: function(enable, set, callVal = -1, selectedPreCheckValue, calledFromResponse) {
         // console.log(" linkin park precheck called -with enable= ", enable, "calledFromResponse ", calledFromResponse)
         // this.selectedValue = enable ? this.selectedValue : null;
-
+        this.tempCallValue = (callVal > 0) ? callVal : 0;
         this.pokerPresenterInstance = this.node.parent.getChildByName("PokerPresenter").getComponent('PokerPresenter');
         if (this.pokerPresenterInstance &&
             this.pokerPresenterInstance.model &&
@@ -173,13 +174,16 @@ cc.Class({
             // this.selectedValue = null;
             // console.log()
             if (this.optionGrid[index][i].name == "Call" && (callVal > 0)) {
-                if ((callVal > 0)) {
-                    this.callVal = callVal;
-                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal);
-                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).__string = GameManager.convertChips(callVal);
+                this.callVal = callVal;
+                let displayStr;
+                if (GameManager.isBB && GameManager.user.settings.stackInBB) {
+                    let bb = this.node.parent.getComponent('PokerModel').gameData.tableDetails.bigBlind;
+                    displayStr = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal / bb) + " BB";
                 } else {
-                    this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = LocalizedManager.t('TXT_CALL');
+                    displayStr = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal);
                 }
+                this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).string = displayStr;
+                this.optionGrid[index][i].getChildByName('Label').getComponent(cc.Label).__string = GameManager.convertChips(callVal);
             }
 
             if (this.optionGrid[index][i].name == selectedPreCheckValue) {
@@ -201,14 +205,18 @@ cc.Class({
         console.log(">>>>>> tempTestFunction");
         console.log("callVal", callVal);
 
-        // console.log("TEMP Test function", callVal)
-        // LocalizedManager.t('TXT_CALL') + " "+ callVal
         if (callVal == 0 || callVal == "0" || callVal == "-0") {
+            this.tempCallValue = 0;
             this.callLbl.string = LocalizedManager.t('TXT_CALL');
         } else {
-            this.callLbl.string = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal);
+            this.tempCallValue = callVal;
+            if (GameManager.isBB && GameManager.user.settings.stackInBB && this.pokerPresenter && this.pokerPresenter.model) {
+                let bb = this.pokerPresenter.model.gameData.tableDetails.bigBlind;
+                this.callLbl.string = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal / bb) + " BB";
+            } else {
+                this.callLbl.string = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(callVal);
+            }
         }
-
     },
 
     /**
@@ -249,21 +257,9 @@ cc.Class({
 
         let set = i + 1;
 
-        // let callValue = -1;
-        // if (this.optionGrid[i][j].name == "Call") {
-        //     console.error('call value', this.optionGrid[i][j].getChildByName('Label').getComponent(cc.Label).string);
-        //     callValue = Number(this.optionGrid[i][j].getChildByName('Label').getComponent(cc.Label).string);
-        // }
-        // Who is the kalaakaar?
         let callValue = -1;
         if (this.optionGrid[i][j].name == "Call") {
-            let tmp = this.optionGrid[i][j].getChildByName('Label').getComponent(cc.Label).string;
-            callValue = tmp.match(/\d+/g); //.map(Number);
-            if (callValue.length > 1) {
-                callValue = Number(callValue[0] + "." + callValue[1]);
-            } else {
-                callValue = Number(callValue[0]);
-            }
+            callValue = this.tempCallValue > 0 ? this.tempCallValue : -1;
         }
         // if (this.selectedValue != null) {
         this.togglePreCheckOnServer(selectedValue, set, callValue);
@@ -325,9 +321,26 @@ cc.Class({
             return;
         }
 
-        this.callBBLbl.string = LocalizedManager.t('TXT_CALL') + " " + (Number(this.callLbl.__string) / this.pokerPresenter.model.gameData.tableDetails.bigBlind).toFixed(1) + 'BB';
+        let isBBMode = GameManager.isBB && GameManager.user.settings.stackInBB;
 
-        if (GameManager.isBB && GameManager.user.settings.stackInBB) {
+        if (this.tempCallValue > 0) {
+            let bb = this.pokerPresenter.model.gameData.tableDetails.bigBlind;
+            this.callBBLbl.string = LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(this.tempCallValue / bb) + " BB";
+
+            let displayStr = isBBMode
+                ? LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(this.tempCallValue / bb) + " BB"
+                : LocalizedManager.t('TXT_CALL') + " " + GameManager.convertChips(this.tempCallValue);
+
+            for (let k = 0; k < this.optionGrid.length; k++) {
+                for (let l = 0; l < this.optionGrid[k].length; l++) {
+                    if (this.optionGrid[k][l].active && this.optionGrid[k][l].name === "Call") {
+                        this.optionGrid[k][l].getChildByName('Label').getComponent(cc.Label).string = displayStr;
+                    }
+                }
+            }
+        }
+
+        if (isBBMode) {
             this.callLbl.node.active = false;
             this.callBBLbl.node.active = true;
         } else {

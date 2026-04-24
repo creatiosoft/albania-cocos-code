@@ -551,7 +551,7 @@ cc.Class({
     /**
      * If Mobile view then disabling chat pannel when user switches tabs.
      */
-    onEnable: function() {},
+    onEnable: function () { },
 
     /**
      * @method setTiledView
@@ -559,7 +559,7 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      * @description Adjust view when in tiled mode 
      */
-    setTiledView: function(flag) {
+    setTiledView: function (flag) {
         // if (!GameManager.isMobile) {
         this.setChatPanel(flag);
         // }
@@ -589,9 +589,9 @@ cc.Class({
      * @return {Number} -Number of Player
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    getNumPlayerInTable: function() {
+    getNumPlayerInTable: function () {
         var count = 0;
-        this.model.gameData.tableDetails.players.forEach(function(element) {
+        this.model.gameData.tableDetails.players.forEach(function (element) {
             if (element.state == K.PlayerState.Playing)
                 count++;
         }, this);
@@ -604,7 +604,7 @@ cc.Class({
      * @param {Object} 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    manageBtns: function(val) {
+    manageBtns: function (val) {
         //this.sitOutNextBBCheckBox.node.parent.active = val;
         this.sitOutNextHandCheckBox.node.parent.active = val;
 
@@ -654,7 +654,7 @@ cc.Class({
      * @method loadSeats
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    loadSeats: function() {
+    loadSeats: function () {
         // if (K.PORTRAIT) {
 
         if (this.model.roomConfig.maxPlayers == 2) {
@@ -686,7 +686,7 @@ cc.Class({
      * @return {boolean}
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    isSeatAllowed: function(seatIdx, maxSeats, maxSeatsInView) {
+    isSeatAllowed: function (seatIdx, maxSeats, maxSeatsInView) {
         // return true;
         if (seatIdx > 0 && maxSeatsInView == 10) {
             var allowedSeats = [];
@@ -730,7 +730,7 @@ cc.Class({
      * @return {Number}
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    getSelfSeatIdx: function(maxSeats) {
+    getSelfSeatIdx: function (maxSeats) {
         switch (maxSeats) {
             case 2:
                 return 1;
@@ -760,7 +760,7 @@ cc.Class({
      * @param {Object} presenter
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    instantiateSeats: function(selfSeatIndex, maxSeatIndex, placeHolder, prefab, presenter) {
+    instantiateSeats: function (selfSeatIndex, maxSeatIndex, placeHolder, prefab, presenter) {
         // this.selfSeatIndex = selfSeatIndex;
         this.placeHolder = placeHolder;
         this.selfSeatIndex = this.getSelfSeatIdx(maxSeatIndex);
@@ -812,18 +812,18 @@ cc.Class({
                             if (i == 7) {
                                 betPos.setPosition(betPos.x - 190, betPos.y + 150);
                             } else
-                            if (i == 3) {
-                                betPos.setPosition(betPos.x + 190, betPos.y + 150);
-                            }
+                                if (i == 3) {
+                                    betPos.setPosition(betPos.x + 190, betPos.y + 150);
+                                }
                         }
 
                         if (GameManager.isMobile && maxSeatIndex > 3) {
                             if (i == 4) {
                                 betPos.setPosition(betPos.x, betPos.y + 20);
                             } else
-                            if (i == 6) {
-                                betPos.setPosition(betPos.x, betPos.y + 20);
-                            }
+                                if (i == 6) {
+                                    betPos.setPosition(betPos.x, betPos.y + 20);
+                                }
                         }
 
                         if (i == 3 && maxSeatIndex > 8) {
@@ -908,7 +908,7 @@ cc.Class({
         }
 
         this.playerHand = placeHolder.getComponentsInChildren(PlayerPresenterType);
-        this.playerHand.forEach(function(element) {
+        this.playerHand.forEach(function (element) {
             element.pokerPresenter = this;
         }, this);
         if (!!this.betBtnSlider)
@@ -939,7 +939,7 @@ cc.Class({
             // ninePos = [new cc.Vec2(268, 384), new cc.Vec2(460.9, 294.1), new cc.Vec2(700, 129.9), new cc.Vec2(706.3, -86.4), new cc.Vec2(406, -283), new cc.Vec2(4.4, -287), new cc.Vec2(-361.2, -274.3), new cc.Vec2(-679.5, -76.1), new cc.Vec2(-674.4, 140.3), new cc.Vec2(-440.9, 309.1)];
             // roomWiseSeatPositions.push(null, null, twoPos, threePos, fourPos, fivePos, sixPos, sevenPos, eightPos, ninePos);
         } else {
-            this.playerHand.forEach(function(element, i) {
+            this.playerHand.forEach(function (element, i) {
                 element.node.parent.setPosition(roomWiseSeatPositions[maxSeatIndex][i]);
             }, this);
         }
@@ -951,12 +951,12 @@ cc.Class({
      * @description Resets Game
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    resetGame: function() {
+    resetGame: function () {
         if (this.node.getChildByName("winnerBannerBg")) {
             this.node.getChildByName("winnerBannerBg").active = false;
         }
         this.clearBreakTimer();
-        this.popUpManager.hide(2, function() {});
+        this.popUpManager.hide(2, function () { });
         this.checkInBetweenBlinds();
         this.hideMoves();
         this.muckHandNode.active = false;
@@ -967,7 +967,7 @@ cc.Class({
         this.manageBtns(!this.model.isPlayerStandUp() && this.getMyPlayer().state == K.PlayerState.Playing);
         if (this.model.gameData.tableDetails.players.length > 1) {
 
-            this.timersToKill.push(setTimeout(function() {
+            this.timersToKill.push(setTimeout(function () {
             }.bind(this), 1));
         }
 
@@ -976,7 +976,7 @@ cc.Class({
         }
     },
 
-    resetGameForReshuffle: function(isRejoin = false) {
+    resetGameForReshuffle: function (isRejoin = false) {
         if (isRejoin) {
             cc.director.getActionManager().removeAllActions();
             this.model.gameModel.removeBroadcastCallbacks(this.model.gameData.channelId);
@@ -988,7 +988,7 @@ cc.Class({
             this.node.getChildByName("winnerBannerBg").active = false;
         }
         this.clearBreakTimer();
-        this.popUpManager.hide(2, function() {});
+        this.popUpManager.hide(2, function () { });
         this.checkInBetweenBlinds();
         this.hideMoves();
         this.clearHoleCards();
@@ -1016,7 +1016,7 @@ cc.Class({
         }
     },
 
-    setPostBigBlind: function(override = false, flag = true) {},
+    setPostBigBlind: function (override = false, flag = true) { },
 
     /**
      * @method setChatPanel
@@ -1024,7 +1024,7 @@ cc.Class({
      * @param {boolea} val
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    setChatPanel: function(val) {
+    setChatPanel: function (val) {
         // this.chatPanel.active = !val;
         // console.log(this.chatEditBox,this.chatEditBox.stayOnTop)
         if (!GameScreen.isMobile) {
@@ -1036,7 +1036,7 @@ cc.Class({
 
     //need to remove this
 
-    getParent: function(box) {
+    getParent: function (box) {
         return this.box.node.parent;
     },
 
@@ -1045,7 +1045,7 @@ cc.Class({
      * @description BroadCasts are registered in this method which are emitted from PokerModel
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onLoad: function() {
+    onLoad: function () {
 
         // ServerCom.pomeloRequest("connector.entryHandler.getCurrentJackpotPool", {
         //     "playerId": GameManager.user.playerId
@@ -1141,15 +1141,15 @@ cc.Class({
         this.model.on('rebuyDeactivated', this.onRebuyDeactivated.bind(this));
         this.model.on(K.PokerEvents.onChannelEvent, this.showWinnerCards.bind(this));
         this.model.on("revealAllInCards", this.showAllInCards.bind(this));
-        this.model.on(K.PokerEvents.OnBankrupt, function(data) {
+        this.model.on(K.PokerEvents.OnBankrupt, function (data) {
             this.onAddChips(this.model.roomConfig.minBuyIn);
         }.bind(this));
-        this.model.on("ReservedState", function(data) {
+        this.model.on("ReservedState", function (data) {
             // console.error(1)
             let arg = (data.extraAntiBankCase) ? "extraAntiBankCase" : this.model.roomConfig.minBuyIn;
             this.onAddChips(arg, undefined, data.extraAntiBankCase);
         }.bind(this));
-        this.model.on("clearTimers", function(data) {
+        this.model.on("clearTimers", function (data) {
             this.killTimers();
         }.bind(this));
         this.colorChangeCb = this.changeTableColor.bind(this);
@@ -1157,7 +1157,7 @@ cc.Class({
         GameManager.on(K.GameEvents.OnTableColorChange, this.colorChangeCb);
         // this.openAddChipsCB = this.onAddChips.bind(this);
 
-        GameManager.on("openBuyInPopup", function(data) {
+        GameManager.on("openBuyInPopup", function (data) {
             // console.log(!!this.model && data == this.model.gameData.channelId)
             if (!!this.model && data == this.model.gameData.channelId) {
                 let arg = (this.model.roomConfig.extraAntiBankCase) ? "extraAntiBankCase" : this.model.roomConfig.minBuyIn;
@@ -1165,7 +1165,7 @@ cc.Class({
             }
         }.bind(this));
 
-        GameManager.on("waiting_List_Event", function(channelId, flag) {
+        GameManager.on("waiting_List_Event", function (channelId, flag) {
             if (!!this.model && this.model.gameData.channelId == channelId) {
                 this.model.gameData.isJoinWaiting = flag;
                 this.enableJoinBtn();
@@ -1190,15 +1190,15 @@ cc.Class({
         this.playerName.string = GameManager.user.userName;
         // this.playerTribeName.string = GameManager.user.tribeName || "N/A";
         // 
-        cc.game.pause = function() {
+        cc.game.pause = function () {
             isPaused = true;
             wasPaused = true;
 
         };
-        cc.game.resume = function() {
+        cc.game.resume = function () {
             isPaused = false;
         };
-        GameManager.on(K.GameEvents.onReset, function() {
+        GameManager.on(K.GameEvents.onReset, function () {
             if (this.playerHand) {
                 for (var index = 0; index < this.playerHand.length; index++) {
                     this.playerHand[index].clearPlayerCards();
@@ -1209,7 +1209,7 @@ cc.Class({
         }.bind(this));
 
         this.singleTime = false;
-        GameManager.on("connectionAcknowledged", function(data) {
+        GameManager.on("connectionAcknowledged", function (data) {
             if (!!this.model && data == this.model.gameData.channelId) {
                 this.hideMoves();
             }
@@ -1248,7 +1248,7 @@ cc.Class({
             }
         }
         if (this.potAmount) {
-            this.potAmount.forEach(function(element) {
+            this.potAmount.forEach(function (element) {
                 if (GameManager.user.category == "GOLD") {
                     // element.parent.getChildByName("gold").active = true;
                     // element.parent.getChildByName("diamond").active = false;
@@ -1261,24 +1261,24 @@ cc.Class({
     },
 
 
-    imageLoaded: function(user) {
+    imageLoaded: function (user) {
         if (this.model.gameData.playerId == user.playerId) {
             // this.image.spriteFrame = user.urlImg;
         }
     },
 
-    getWorldPos: function(node) {
+    getWorldPos: function (node) {
         return node.convertToWorldSpaceAR(cc.v2(0, 0));
     },
 
-    setWorldPos: function(node, posWS) {
+    setWorldPos: function (node, posWS) {
         node.setPosition(node.parent.convertToNodeSpaceAR(posWS));
     },
 
 
-    displayStickers: function(event) {},
+    displayStickers: function (event) { },
 
-    setTileUntileToggle: function() {
+    setTileUntileToggle: function () {
         // console.log("called A");
         if (GameScreen.viewType == LayoutType.UnTiled) {
             // console.log("called B");
@@ -1291,7 +1291,7 @@ cc.Class({
         }
     },
 
-    changeToTiled: function() {
+    changeToTiled: function () {
         // console.log("hehe"));
         GameScreen.setTiledView();
         for (var model in GameScreen.activePokerModels) {
@@ -1299,7 +1299,7 @@ cc.Class({
             model.presenter.setTileUntileToggle();
         }
     },
-    changeToUntiled: function() {
+    changeToUntiled: function () {
         // console.log("haha");
         GameScreen.setUnTiledView();
         for (var model in GameScreen.activePokerModels) {
@@ -1332,7 +1332,7 @@ cc.Class({
         }
     },
 
-    checkNotification: function() {
+    checkNotification: function () {
         if (!!(this.playerInput) && this.unTiledView.active && ((this.playerInput[0].active) && GameManager.activeTableCount >= 1)) {
             this.model.emit(K.PokerEvents.onTurnInOtherRoom, this.model, true);
         }
@@ -1348,7 +1348,7 @@ cc.Class({
      * @description It's enable/disable TimeBank
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onTimeBank: function(data) {
+    onTimeBank: function (data) {
         var playerPresenter = this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.currentMoveIndex)];
         if (!!data && !!this.selfLastMoveData && data.playerId === this.model.gameData.playerId) {
             this.enableSelfTurn(playerPresenter, this.selfLastMoveData);
@@ -1360,7 +1360,7 @@ cc.Class({
      * @description Set Table Color accordingly.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    setTableColor: function() {
+    setTableColor: function () {
         this.model.emit(K.GameEvents.OnTableColorChange);
         var col = this.model.gameData.settings.tableColor + "";
         if (col !== undefined || col !== null) {
@@ -1372,9 +1372,9 @@ cc.Class({
         }
     },
 
-    tempOnLoad: function() {},
-    onDestroy: function() {
-        this.cardTimers.forEach(function(element) {
+    tempOnLoad: function () { },
+    onDestroy: function () {
+        this.cardTimers.forEach(function (element) {
             clearTimeout(element);
         }, this);
         this.cardTimers = [];
@@ -1393,7 +1393,7 @@ cc.Class({
      * @param {Number} desiredIndex -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    setIndexOffset: function(desiredIndex) {
+    setIndexOffset: function (desiredIndex) {
         this.indexOffset = desiredIndex - this.selfSeatIndex;
     },
 
@@ -1403,7 +1403,7 @@ cc.Class({
      * @returns: rotatedSeatIndex
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    getRotatedSeatIndex: function(seatIndex) {
+    getRotatedSeatIndex: function (seatIndex) {
         var index = 0;
         index = seatIndex - this.indexOffset;
         if (index < 1) {
@@ -1421,7 +1421,7 @@ cc.Class({
      * @method enableCurrentPlayerTurn
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    enableCurrentPlayerTurn: function() {
+    enableCurrentPlayerTurn: function () {
         if (this.model.gameData.tableDetails.currentMoveIndex !== -1) {
             this.displayPots();
             var playerPresenter = this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.currentMoveIndex)];
@@ -1440,9 +1440,9 @@ cc.Class({
      * @description set Dealer position
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    setDealer: function() {
+    setDealer: function () {
         console.log("setDealer1");
-        this.playerHand.forEach(function(element) {
+        this.playerHand.forEach(function (element) {
             console.log("setDealer2");
             element.setDealer(false);
         }, this);
@@ -1457,7 +1457,7 @@ cc.Class({
      * @description place the dummy card in specified position
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    placeDummyCards: function(id = null) {
+    placeDummyCards: function (id = null) {
         // set dealer btn
         for (var index = 0; index < this.playerHand.length; index++) {
             this.playerHand[index].displayDummyCards(this.model.dummyCardsCount, id);
@@ -1469,7 +1469,7 @@ cc.Class({
      * @param {array} playerData
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    allocateSeat: function() {
+    allocateSeat: function () {
         // seat players based on seat index 
         for (var index = 0; index < this.model.gameData.tableDetails.players.length; index++) {
             this.getPlayerByIdx(index).playerData = this.model.gameData.tableDetails.players[index];
@@ -1484,7 +1484,7 @@ cc.Class({
             this.enablePrecheckAfterRetry();
         }
     },
-    enablePrecheckAfterRetry: function() {
+    enablePrecheckAfterRetry: function () {
         // console.log("shishir init precheck")
         if (this.model.gameData.tableDetails.currentMoveIndex !== -1) {
             var playerPresenter = this.getMyPlayer();
@@ -1521,7 +1521,7 @@ cc.Class({
      * @return {Number}
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    getPlayerByIdx: function(idx) {
+    getPlayerByIdx: function (idx) {
         return this.getPlayerBySeat(this.model.gameData.tableDetails.players[idx].seatIndex);
     },
 
@@ -1530,7 +1530,7 @@ cc.Class({
      * @param {Number} 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    getPlayerBySeat: function(seatIdx) {
+    getPlayerBySeat: function (seatIdx) {
         console.log("getPlayerBySeat", seatIdx);
         for (var index = 0; index < this.playerHand.length; index++) {
             console.log("index", index);
@@ -1539,11 +1539,11 @@ cc.Class({
         return this.playerHand[this.getRotatedSeatIndex(seatIdx)];
     },
 
-    isObserver: function() {
+    isObserver: function () {
         return false;
     },
 
-    isObserver2: function() {
+    isObserver2: function () {
         for (var index = 0; index < this.model.gameData.tableDetails.players.length; index++) {
             if (this.model.gameData.tableDetails.players[index].playerId === GameManager.user.playerId) {
                 return false;
@@ -1558,7 +1558,7 @@ cc.Class({
      * @param {Object} tableData
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onJoinSuccess: function(data) {
+    onJoinSuccess: function (data) {
         this.preCheckCounter = 0;
         if (this.muckHandNode) {
             this.muckHandNode.active = false;
@@ -1631,26 +1631,18 @@ cc.Class({
         }
 
 
-        // let players = this.model.gameData.tableDetails.players;
-        // for (var index = 0; index < players.length; index++) {
-        //     var presenter = this.playerHand[this.getRotatedSeatIndex(players[index].seatIndex)];
-        //     presenter.node.getChildByName("BB").active = false;
-        //     presenter.node.getChildByName("SB").active = false;
-        //     presenter.node.getChildByName("BB2").active = false;
-        //     presenter.node.getChildByName("SB2").active = false;
+        let players = this.model.gameData.tableDetails.players;
+        for (var index = 0; index < players.length; index++) {
+            var presenter = this.playerHand[this.getRotatedSeatIndex(players[index].seatIndex)];
+            presenter.node.getChildByName("BB").active = false;
+            presenter.node.getChildByName("SB").active = false;
 
-        //     if (players[index].seatIndex == this.model.gameData.tableDetails.bigBlindIndex) {
-        //         presenter.node.getChildByName("BB").active = true;
-        //     }
-        //     else if (players[index].seatIndex == this.model.gameData.tableDetails.smallBlindIndex) {
-        //         presenter.node.getChildByName("SB").active = true;
-        //     }
-
-        //     // if (presenter.playerData.ante > 0) {
-        //     //     presenter.displayBlind(presenter.playerData.ante);
-        //     //     presenter.activatePlayerBet(false, true);
-        //     // }
-        // }
+            if (players[index].seatIndex == this.model.gameData.tableDetails.bigBlindIndex) {
+                presenter.node.getChildByName("BB").active = true;
+            } else if (players[index].seatIndex == this.model.gameData.tableDetails.smallBlindIndex) {
+                presenter.node.getChildByName("SB").active = true;
+            }
+        }
 
         // if (GameScreen.isMobile ) {
         //     this.dealerNode.getComponent("JohnyChat").pokerGame = this.model;
@@ -1704,14 +1696,14 @@ cc.Class({
     },
 
 
-    tempOnJoinSuccess: function() {},
+    tempOnJoinSuccess: function () { },
 
     /**
      * @method enableJoinBtn
      * @description enable/disable / set string value on join button accordingly.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    enableJoinBtn: function() {
+    enableJoinBtn: function () {
         // var isTour = this.model.gameData.channelType == K.ChannelType.Tournament;
         var isTour = false;
         this.joinBtn.node.parent.parent.active = !isTour && this.getMyPlayer() == null && this.model.gameData.tableDetails.players.length == this.model.roomConfig.maxPlayers;
@@ -1742,23 +1734,23 @@ cc.Class({
      * @description Change the string value of Join Button.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onJoinWaitingListBtnClick: function() {
+    onJoinWaitingListBtnClick: function () {
         this.playAudio(K.Sounds.click);
         var flag = this.joinBtn.node.parent.getChildByName("tick").active;
-        TableHandler.joinWaitingList(!flag, this.model.gameData.channelId, function(response) {
+        TableHandler.joinWaitingList(!flag, this.model.gameData.channelId, function (response) {
             if (response.success) {
                 // this.model.gameData.isJoinWaiting = !flag;
                 // this.enableJoinBtn();
                 GameManager.emit("waiting_List_Event", response.channelId, !flag);
             }
-        }.bind(this), function(error) {});
+        }.bind(this), function (error) { });
     },
     /**
      * @method onJoinExtras
      * @description 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onJoinExtras: function() {
+    onJoinExtras: function () {
         if (this.roomNameLbl) {
             // if game in progress allocate 
             // console.log("roomconfig", this.model.roomConfig, this.model.roomConfig.isRunItTwice);
@@ -1792,7 +1784,7 @@ cc.Class({
      * @param {Number} index -Index of seat
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onSitHere: function(index) {
+    onSitHere: function (index) {
         var data = {};
         data.minValue = this.model.roomConfig.minBuyIn;
         data.maxValue = this.model.roomConfig.maxBuyIn;
@@ -1824,7 +1816,7 @@ cc.Class({
         if (data.autoConfirm) {
             this.onBuyInConfirm(data.index, data.minValue.toString());
         } else {
-            this.popUpManager.show(PopUpType.BuyInPopup, data, function() {});
+            this.popUpManager.show(PopUpType.BuyInPopup, data, function () { });
         }
         // }.bind(this), null, 5000, false);
     },
@@ -1835,13 +1827,13 @@ cc.Class({
      * @param {Number} amount - BuyIn Amount
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onBuyInConfirm: function(index, amount) {
+    onBuyInConfirm: function (index, amount) {
 
-        this.model.sitHere(index, amount, function() {}.bind(this));
+        this.model.sitHere(index, amount, function () { }.bind(this));
     },
 
-    onLeaveNextHand: function() {
-        this.model.leaveNextHand(function(response) {
+    onLeaveNextHand: function () {
+        this.model.leaveNextHand(function (response) {
             console.log("onLeaveNextHand", response);
         }.bind(this));
     },
@@ -1850,16 +1842,16 @@ cc.Class({
      * @description called when sitOutNextHand is selected.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onSitOutNextHand: function() {
+    onSitOutNextHand: function () {
         if (this.model.sitOutValue == SitOutMode.None) {
-            this.model.sitOutNextHand(function(response) {
+            this.model.sitOutNextHand(function (response) {
                 this.handleSitoutResponse(response);
             }.bind(this));
 
         } else if (this.model.sitOutValue == SitOutMode.SitOueNextBB) {
-            this.onResetSitout(function(callback) {
+            this.onResetSitout(function (callback) {
                 if (callback) {
-                    this.model.sitOutNextHand(function(response) {
+                    this.model.sitOutNextHand(function (response) {
                         this.handleSitoutResponse(response);
                     }.bind(this));
                 }
@@ -1868,7 +1860,7 @@ cc.Class({
             if (this.getMyPlayer() != null && this.getMyPlayer().state == K.PlayerState.OnBreak) {
                 this.onResume();
             } else {
-                this.onResetSitout(function() {}.bind(this));
+                this.onResetSitout(function () { }.bind(this));
             }
         }
         this.handleRunItTwice();
@@ -1879,7 +1871,7 @@ cc.Class({
      * @param {Object} response -Data Received from Server
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    handleSitoutResponse: function(response) {
+    handleSitoutResponse: function (response) {
         if (response.success) {
             // this.sitOutNextBBCheckBox.node.parent.active = false;
             this.sitOutNextHandCheckBox.setSelection(true);
@@ -1892,10 +1884,10 @@ cc.Class({
      * @description called when sitOutNextBigBlind is selected
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onSitOutNextBB: function() {
+    onSitOutNextBB: function () {
         if (this.model.sitOutValue == SitOutMode.None) {
 
-            this.model.sitOutNextBB(function(response) {
+            this.model.sitOutNextBB(function (response) {
                 this.handleSitoutBBResponse(response);
             }.bind(this));
         } else if (this.model.sitOutValue == SitOutMode.SitOueNextBB) {
@@ -1903,7 +1895,7 @@ cc.Class({
             if (this.getMyPlayer() != null && this.getMyPlayer().state == K.PlayerState.OnBreak) {
                 this.onResume();
             } else {
-                this.onResetSitout(function() {}.bind(this));
+                this.onResetSitout(function () { }.bind(this));
             }
         }
         this.handleRunItTwice();
@@ -1914,7 +1906,7 @@ cc.Class({
      * @description local level status of sitout btns 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    checkSitoutStatus: function() {
+    checkSitoutStatus: function () {
         if (this.model.gameData.channelType == K.ChannelType.Tournament || this.model.isPlayerStandUp()) {
             // this.sitOutNextBBCheckBox.node.parent.active = false;
             if (this.model.sitOutValue == SitOutMode.SitOutNextHand && !this.model.isPlayerStandUp()) {
@@ -1954,8 +1946,8 @@ cc.Class({
      * @param {Function} callback
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onResetSitout: function(callback) {
-        this.model.resetSitout(function(response) {
+    onResetSitout: function (callback) {
+        this.model.resetSitout(function (response) {
             if (callback != null) {
                 callback(response.success);
                 if (response.success) {
@@ -1972,8 +1964,8 @@ cc.Class({
      * @param {Number} amount - BuyIn Amout
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onAddChipsConfirm: function(index, amount) {
-        this.model.addChips(amount, function() {});
+    onAddChipsConfirm: function (index, amount) {
+        this.model.addChips(amount, function () { });
 
     },
     /**
@@ -1981,11 +1973,11 @@ cc.Class({
      * @description called when a player in sitOut mode and then select to sit in on the table.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onResume: function() {
+    onResume: function () {
         this.playAudio(K.Sounds.click)
         this.resumeBtn.active = false;
         // this.mobGameOptions.node.active = false;
-        this.model.resume(function() {
+        this.model.resume(function () {
             // this.resumeBtn.active = false;
             this.handleSitOutBtns(true);
             var playerPresenter = this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.currentMoveIndex)];
@@ -2005,12 +1997,12 @@ cc.Class({
      * @description called when sitall button is selected
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onResumeAll: function() {
+    onResumeAll: function () {
         this.playAudio(K.Sounds.click)
         GameScreen.resumeAll();
     },
 
-    onDisable: function() {
+    onDisable: function () {
 
     },
     /**
@@ -2018,7 +2010,7 @@ cc.Class({
      * @description CallBack for straddle button
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onStraddle: function() {
+    onStraddle: function () {
         var selection = this.straddleCheckBox.getSelection();
         this.model.setStraddleSelection(selection);
     },
@@ -2027,7 +2019,7 @@ cc.Class({
      * @description callBack for onPostBigBlind checkBox
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onPostBigBlind: function() {
+    onPostBigBlind: function () {
         var selection = this.postBigBlindCheckBox.getSelection();
         this.model.setPostBigBlind(selection);
 
@@ -2042,9 +2034,9 @@ cc.Class({
      * @description callback for runItTwice checkBox
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onRunItTwice: function() {
+    onRunItTwice: function () {
         var selection = this.runItTwiceCB.getSelection();
-        this.model.setRunItTwice(selection, function(response) {
+        this.model.setRunItTwice(selection, function (response) {
             if (!response.success) {
                 this.runItTwiceCB.setSelection(!selection);
             }
@@ -2055,7 +2047,7 @@ cc.Class({
      * @description Handles run it twice checkbox
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    handleRunItTwice: function(forceVal = true, forceSelection = false, showSelection = false) {
+    handleRunItTwice: function (forceVal = true, forceSelection = false, showSelection = false) {
         var val = !!this.getMyPlayer() && this.getMyPlayer().state == K.PlayerState.Playing && this.getMyPlayer().lastMove !== K.PlayerMove.AllIn;
         val = val && !(this.model.gameData.channelType == K.ChannelType.Tournament);
 
@@ -2075,7 +2067,7 @@ cc.Class({
      * @param {Number} minVal - minimum value that must be added in order to add chips.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onAddChips: function(minVal, joinWaitingCase = false, extraAntiBankCase) {
+    onAddChips: function (minVal, joinWaitingCase = false, extraAntiBankCase) {
         // console.error(2, minVal)
         if (!this.model.isPlayerStandUp() || joinWaitingCase) {
             var data = {};
@@ -2150,7 +2142,7 @@ cc.Class({
                 this.onAddChipsConfirm(data.index, (this.model.roomConfig.minBuyIn - playerChips).toString());
                 // console.log("EXTRA ANTI BANK CASE DATA ", data)
             } else {
-                this.popUpManager.show(PopUpType.BuyInPopup, data, function() {});
+                this.popUpManager.show(PopUpType.BuyInPopup, data, function () { });
             }
         }
         this.playAudio(K.Sounds.click);
@@ -2160,7 +2152,7 @@ cc.Class({
      * @description cancel button callback
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onCancelBuyIn: function() {
+    onCancelBuyIn: function () {
         if ((!!this.model.getMyPlayer()) && this.model.getMyPlayer().state == K.PlayerState.Reserved) {
             // GameManager.playerRequestedToLeaveTable = false;
             GameManager.playerRequestedToLeaveTable[this.model.gameData.channelId] = false;
@@ -2177,7 +2169,7 @@ cc.Class({
      * @description Send user action - allin to server
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onAllIn: function() {
+    onAllIn: function () {
         // console.log("ALL IN CLICKED");
         // no need for amount
         this.hideAllSBBB();
@@ -2191,7 +2183,7 @@ cc.Class({
      * @description  Send user action - check to server
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onCheck: function(data, custom) {
+    onCheck: function (data, custom) {
         // no need for amount
         this.hideAllSBBB();
         this.model.makeMove("0", K.PlayerMove.Check);
@@ -2210,7 +2202,7 @@ cc.Class({
      * @param {Number} action - 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onBet: function(amount, action) {
+    onBet: function (amount, action) {
         // console.log("BET CLICKED");
         //implement bet slider and get amount
         this.hideAllSBBB();
@@ -2223,7 +2215,7 @@ cc.Class({
      * @description Fold Button Callback
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onFold: function(data, custom) {
+    onFold: function (data, custom) {
         // no need for amount
         if (this.sureToFold && custom != "confirmAction") {
             this.sureToFoldNode.active = true;
@@ -2242,7 +2234,7 @@ cc.Class({
      * @description Close Button Callback
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onCloseSureToFold: function() {
+    onCloseSureToFold: function () {
         this.sureToFoldNode.active = false;
     },
 
@@ -2251,7 +2243,7 @@ cc.Class({
      * @description  callBtn callBack
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onCall: function() {
+    onCall: function () {
         // no need for amount
         this.hideAllSBBB();
         this.model.makeMove("0", K.PlayerMove.Call);
@@ -2264,7 +2256,7 @@ cc.Class({
      * @description leaveButton callBack
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    leaveTable: function(data, c) {
+    leaveTable: function (data, c) {
         this.playAudio(K.Sounds.click);
         if (this.sureToLeaveNode && this.sureToLeaveNode.active) {
             this.sureToLeaveNode.active = false;
@@ -2275,7 +2267,7 @@ cc.Class({
         }
 
         // this.unscheduleAllCallbacks();
-        let cb = function() {
+        let cb = function () {
             for (var index = 0; index < this.playerHand.length; index++) {
                 this.playerHand[index].clearPlayerCards();
             }
@@ -2291,10 +2283,10 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
 
-    onLeaveTableClicked: function(data) {
+    onLeaveTableClicked: function (data) {
         // console.log("ON LEAVE CLICKED ");
         if (this.leaveNextHandTag.active) {
-            GameManager.popUpManager.show(PopUpType.NotificationPopup, "You will leave the game after this hand.", function() {});
+            GameManager.popUpManager.show(PopUpType.NotificationPopup, "You will leave the game after this hand.", function () { });
             return;
         }
         // if (this.sureToLeaveNode && !this.sureToLeaveNode.active && this.getMyPlayer() != null && this.getMyPlayer().state == K.PlayerState.Playing) {
@@ -2313,21 +2305,21 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
 
-    onLeaveTableCancel: function(data) {
+    onLeaveTableCancel: function (data) {
         this.playAudio(K.Sounds.click);
         if (this.sureToLeaveNode && this.sureToLeaveNode.active) {
             this.sureToLeaveNode.active = false;
         }
     },
 
-    leaveTournament: function() {},
+    leaveTournament: function () { },
 
     /**
      * @method standUp
      * @description  Stand up from current seat
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    standUp: function() {
+    standUp: function () {
         this.model.leave(true);
     },
 
@@ -2336,9 +2328,9 @@ cc.Class({
      * @description Enable InGamePreferencesPopUp(Setting) popUp in game
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onSettingsBtn: function() {
+    onSettingsBtn: function () {
         // console.error("ON SETTING");
-        var inst = this.popUpManager.show(1, this.model, function() {
+        var inst = this.popUpManager.show(1, this.model, function () {
             // if (GameScreen.viewType == 2 && !GameManager.isMobile) {
             //     console.log("ISAVAILABLE and untiled view active", this.node.parent)
             //     // this.unTileViewSelection.isChecked = true;
@@ -2360,12 +2352,12 @@ cc.Class({
                 inst.tileViewSelection.isChecked = false;
                 // console.error("TANUJ1", inst.unTileViewSelection.isChecked);
             } else
-            if (GameScreen.viewType == 1 && !GameManager.isMobile && !GameManager.isWindows) {
-                // console.error("TANUJ2", inst.tileViewSelection.isChecked);
-                inst.unTileViewSelection.isChecked = false;
-                inst.tileViewSelection.isChecked = true;
-                // console.error("TANUJ1", inst.tileViewSelection.isChecked);
-            }
+                if (GameScreen.viewType == 1 && !GameManager.isMobile && !GameManager.isWindows) {
+                    // console.error("TANUJ2", inst.tileViewSelection.isChecked);
+                    inst.unTileViewSelection.isChecked = false;
+                    inst.tileViewSelection.isChecked = true;
+                    // console.error("TANUJ1", inst.tileViewSelection.isChecked);
+                }
             this.model.valueChange = true;
         }
         this.playAudio(K.Sounds.click);
@@ -2373,7 +2365,7 @@ cc.Class({
         this.mobileGamePlayOptions();
     },
 
-    onInfoBtn: function() {
+    onInfoBtn: function () {
         // console.log(this.model.roomConfig.info)
         this.mobileGamePlayOptions();
 
@@ -2381,7 +2373,7 @@ cc.Class({
         data.playSound = this.playAudio.bind(this);
         data.info = this.model.roomConfig.info
         // console.log("info close sound check")
-        this.popUpManager.show(PopUpType.GameInfoPopup, data, function() {});
+        this.popUpManager.show(PopUpType.GameInfoPopup, data, function () { });
         this.playAudio(K.Sounds.click);
     },
     /**
@@ -2389,8 +2381,8 @@ cc.Class({
      * @description Hides Prefereneces PopUp 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onSettingsBtnClose: function() {
-        this.popUpManager.hide(1, null, function() {});
+    onSettingsBtnClose: function () {
+        this.popUpManager.hide(1, null, function () { });
     },
 
     /**
@@ -2399,7 +2391,7 @@ cc.Class({
      * @param {Object} cardType - Array
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    addHoleCard: function(cardType, ifAnimateHoleCards) {
+    addHoleCard: function (cardType, ifAnimateHoleCards) {
         if (this.model.gameData.tableDetails.roundName == K.Round.Showdown && this.holeCardHolder.getComponentsInChildren('Card').length == 5) {
             return;
         }
@@ -2409,7 +2401,7 @@ cc.Class({
         var startIndex = a > b ? a : b;
         var endIndex = cardType[0].length;
 
-        this.runItTwiceCaseRunning = (cardType[1].length > 0 && cardType[1].some(function(el) {
+        this.runItTwiceCaseRunning = (cardType[1].length > 0 && cardType[1].some(function (el) {
             return el !== null;
         })) ? true : false; // if every element is null?
 
@@ -2427,7 +2419,7 @@ cc.Class({
             }
         }
 
-        this.cardTimers.forEach(function(element) {
+        this.cardTimers.forEach(function (element) {
             clearTimeout(element);
         }, this);
         this.cardTimers = [];
@@ -2473,12 +2465,12 @@ cc.Class({
      * @param {Object} Card -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    generateCard: function(i, j, runItTwiceIdx, delay, card, cardData, ifAnimateHoleCards, numberOfTimesItWillCalled) {
+    generateCard: function (i, j, runItTwiceIdx, delay, card, cardData, ifAnimateHoleCards, numberOfTimesItWillCalled) {
         delay = 0;
         var inst = this;
         // this.cardTimers.push(setTimeout(function () {
         //      var instance = cc.instantiate(inst.cardPrefab);
-        var instance = CardPool.generateCard(inst.cardPrefab.name, function() {});
+        var instance = CardPool.generateCard(inst.cardPrefab.name, function () { });
         instance.opacity = 255;
         var cardComponent = instance.getComponent('Card');
         cardComponent.init(card, inst.model);
@@ -2544,13 +2536,13 @@ cc.Class({
                         var posX = initialPosition.x + ((i + 3) * positionOffset);
                         element.setPosition(initialPosition);
                         if (i == 0) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 var moveAction = cc.moveTo(.85, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
                                 element.active = true;
                                 element.runAction(moveAction);
                             }.bind(this), 1000);
 
-                            this.timersToKill.push(setTimeout(function() {
+                            this.timersToKill.push(setTimeout(function () {
                                 // setTimeout(function () {
                                 if (cc.isValid(this.node)) {
                                     if (element.getNumberOfRunningActions() > 0) {
@@ -2560,14 +2552,14 @@ cc.Class({
                                 }
                             }.bind(this), 1850));
                         } else if (i == 1) {
-                            this.timersToKill.push(setTimeout(function() {
+                            this.timersToKill.push(setTimeout(function () {
                                 // setTimeout(function () {
                                 var moveAction = cc.moveTo(.95, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
                                 element.active = true;
                                 element.runAction(moveAction);
                             }.bind(this), 2000));
 
-                            this.timersToKill.push(setTimeout(function() {
+                            this.timersToKill.push(setTimeout(function () {
                                 // setTimeout(function () {
                                 if (cc.isValid(this.node)) {
                                     if (element.getNumberOfRunningActions() > 0) {
@@ -2592,17 +2584,17 @@ cc.Class({
             } else if ((cardData[0].length == 5 && cardData[1].length == 5 && this.runItTwiceUpperCardsFinalPosArray.length == 5 && (this.runItTwiceLowerCardsFinalPosArray.length == 0 || this.runItTwiceLowerCardsFinalPosArray.length == 5))) {
                 let convertedPosArr = [];
                 if (this.runItTwiceLowerCardsFinalPosArray.length == 5) {
-                    this.runItTwiceLowerCardsFinalPosArray.forEach(function(element) {
+                    this.runItTwiceLowerCardsFinalPosArray.forEach(function (element) {
                         var WPcord = this.runItTwiceHolder.convertToWorldSpaceAR(cc.v2(this.runItTwiceHolder.children[5].getPosition()));
                         convertedPosArr.push(element.parent.convertToNodeSpaceAR(WPcord));
                     }, this);
                     // this.scheduleOnce(function () {
-                    this.timersToKill.push(setTimeout(function() {
+                    this.timersToKill.push(setTimeout(function () {
                         this.animateHoleCards(this.runItTwiceLowerCardsFinalPosArray, "SLIDE_TO_OPEN", this.runItTwiceHolder.children[5].getPosition(), 102, null, convertedPosArr);
                     }.bind(this), 4.8 * 1000));
                     return;
                 }
-                this.runItTwiceUpperCardsFinalPosArray.forEach(function(element) {
+                this.runItTwiceUpperCardsFinalPosArray.forEach(function (element) {
                     var WPcord = this.runItTwiceHolder.convertToWorldSpaceAR(cc.v2(this.runItTwiceHolder.children[0].getPosition()));
                     convertedPosArr.push(element.parent.convertToNodeSpaceAR(WPcord));
                 }, this);
@@ -2619,7 +2611,7 @@ cc.Class({
                     var WPcord = this.runItTwiceHolder.convertToWorldSpaceAR(cc.v2(0, 250));
                     let init = (crd[0].parent.convertToNodeSpaceAR(WPcord));
                     // this.scheduleOnce(function () {
-                    this.timersToKill.push(setTimeout(function() {
+                    this.timersToKill.push(setTimeout(function () {
                         this.animateHoleCards(crd, "FLIP_TO_OPEN", init, this.CardsPositionOffset, cc.v2(0, 0));
                     }.bind(this), (this.runItTwiceLowerCardDelay * k) * 1000));
                 }
@@ -2648,7 +2640,7 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      * */
 
-    animateHoleCards: function(nodesToAnimate, animationType, initialPosition, positionOffset = this.CardsPositionOffset, finalNodeDestination, runTwiceInitPosArr) {
+    animateHoleCards: function (nodesToAnimate, animationType, initialPosition, positionOffset = this.CardsPositionOffset, finalNodeDestination, runTwiceInitPosArr) {
 
         // console.trace("animateHoleCards", nodesToAnimate);
 
@@ -2669,7 +2661,7 @@ cc.Class({
 
                         this.playAudio(K.Sounds.cardOpening);
 
-                        this.timersToKill.push(setTimeout(function() {
+                        this.timersToKill.push(setTimeout(function () {
                             // setTimeout(function () {
                             if (cc.isValid(this.node)) {
                                 if (element.getNumberOfRunningActions() > 0) {
@@ -2679,7 +2671,7 @@ cc.Class({
                             }
                         }.bind(this), 180 * i));
                     } else if (i == 3) {
-                        this.timersToKill.push(setTimeout(function() {
+                        this.timersToKill.push(setTimeout(function () {
                             this.playAudio(K.Sounds.cardOpening);
                             // setTimeout(function () {
                             var moveAction = cc.moveTo(.9, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
@@ -2687,7 +2679,7 @@ cc.Class({
                             element.runAction(moveAction);
                         }.bind(this), 1800));
 
-                        this.timersToKill.push(setTimeout(function() {
+                        this.timersToKill.push(setTimeout(function () {
                             // setTimeout(function () {
                             if (cc.isValid(this.node)) {
                                 if (element.getNumberOfRunningActions() > 0) {
@@ -2697,7 +2689,7 @@ cc.Class({
                             }
                         }.bind(this), 80));
                     } else if (i == 4) {
-                        this.timersToKill.push(setTimeout(function() {
+                        this.timersToKill.push(setTimeout(function () {
                             this.playAudio(K.Sounds.cardOpening);
                             // setTimeout(function () {
                             var moveAction = cc.moveTo(.9, cc.v2(posX, 0)).easing(cc.easeCubicActionOut());
@@ -2705,7 +2697,7 @@ cc.Class({
                             element.runAction(moveAction);
                         }.bind(this), 3600));
 
-                        this.timersToKill.push(setTimeout(function() {
+                        this.timersToKill.push(setTimeout(function () {
                             // setTimeout(function () {
                             if (cc.isValid(this.node)) {
                                 if (element.getNumberOfRunningActions() > 0) {
@@ -2729,7 +2721,7 @@ cc.Class({
                     element.runAction(moveAction);
                     this.playAudio(K.Sounds.cardOpening);
 
-                    this.timersToKill.push(setTimeout(function() {
+                    this.timersToKill.push(setTimeout(function () {
                         // setTimeout(function () {
                         if (cc.isValid(this.node)) {
                             if (element.getNumberOfRunningActions() > 0) {
@@ -2753,7 +2745,7 @@ cc.Class({
             })));
             this.playAudio(K.Sounds.cardOpening);
 
-            this.timersToKill.push(setTimeout(function() {
+            this.timersToKill.push(setTimeout(function () {
                 // setTimeout(function () {
                 // console.log("SHISHIR ", (nodesToAnimate[0].getNumberOfRunningActions() > 0))
                 // if (nodesToAnimate[0].getNumberOfRunningActions() > 0) {
@@ -2775,25 +2767,25 @@ cc.Class({
      * @description Clears the existing community cards on the table
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    clearHoleCards: function() {
+    clearHoleCards: function () {
         if (this.holeCardHolder === null) {
             return;
         }
         var children = this.holeCardHolder.children;
         while (children.length > 0) {
-            CardPool.destroyCard(children[0], function() {});
+            CardPool.destroyCard(children[0], function () { });
         }
 
         var children = this.runItTwiceHolder.children;
         for (var index = 0; index < children.length; index++) {
             while (children[index].children.length > 0) {
-                CardPool.destroyCard(children[index].children[0], function() {});
+                CardPool.destroyCard(children[index].children[0], function () { });
             }
         }
         var children = this.holeCardsWithTwiceHolder.children;
         for (var index = 0; index < children.length; index++) {
             while (children[index].children.length > 0) {
-                CardPool.destroyCard(children[index].children[0], function() {});
+                CardPool.destroyCard(children[index].children[0], function () { });
             }
         }
     },
@@ -2803,7 +2795,7 @@ cc.Class({
      * @description Clears the table
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    clearTable: function() {
+    clearTable: function () {
         this.node.stopAllActions();
         this.unscheduleAllCallbacks();
         this.clearHoleCards();
@@ -2820,7 +2812,7 @@ cc.Class({
      * @param {Number} playerIndex -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    sitSuccess: function(data, playerIndex) {
+    sitSuccess: function (data, playerIndex) {
         if (data.playerId === this.model.gameData.playerId) {
             for (var index = 0; index < this.playerHand.length; index++) {
                 if (this.playerHand[index].seatState === K.SeatState.Free) {
@@ -2852,7 +2844,7 @@ cc.Class({
      * @param {Number} playerIndex -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    checkInBetweenBlinds: function() {
+    checkInBetweenBlinds: function () {
         console.log("checkInBetweenBlinds 1");
 
         // if (this.model.gameData.channelType == K.ChannelType.Tournament) {
@@ -2880,7 +2872,7 @@ cc.Class({
                 // data.info = "You will be dealt, once the dealer button passes you.";
                 // data.disableTimer = true;
                 if (!this.singleTime) {
-                    this.popUpManager.show(2, data, function() {});
+                    this.popUpManager.show(2, data, function () { });
                     // GameManager.popUpManager.show(PopUpType.NotificationPopup, data.info, function () { });
                     this.singleTime = true;
                 }
@@ -2902,7 +2894,7 @@ cc.Class({
                 console.log("checkInBetweenBlinds 7");
                 this.postBigBlindCheckBox.node.parent.active = false;
             }
-            this.popUpManager.hide(2, function() {});
+            this.popUpManager.hide(2, function () { });
         }
 
 
@@ -2920,7 +2912,7 @@ cc.Class({
      * @param {Object} data -Data received from Broadcast
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    deductBlind: function(data) {
+    deductBlind: function (data) {
 
 
         // disabling leave button till animation runs
@@ -2957,7 +2949,7 @@ cc.Class({
 
         // this.clearPots();
 
-        this.timersToKill.push(setTimeout(function() {
+        this.timersToKill.push(setTimeout(function () {
             this.displayPots();
         }.bind(this), 1800));
 
@@ -3013,21 +3005,21 @@ cc.Class({
      * @param {Object} data -Data received from Broadcast
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    rotateView: function(data) {
+    rotateView: function (data) {
         this.setIndexOffset(data.seatIndex);
         for (var index = 0; index < this.playerHand.length; index++) {
             this.playerHand[index].resetSeat();
         }
 
         this.allocateSeat();
-        this.playerHand.forEach(function(element) {
+        this.playerHand.forEach(function (element) {
             if (element.seatState === K.SeatState.Free) {
                 element.disableView();
             }
         }, this);
     },
 
-    hideAllSBBB: function() {
+    hideAllSBBB: function () {
         var players = this.model.gameData.tableDetails.players;
         for (var index = 0; index < players.length; index++) {
             var presenter = this.playerHand[this.getRotatedSeatIndex(players[index].seatIndex)];
@@ -3041,7 +3033,7 @@ cc.Class({
      * @description  Reset seat view
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    resetView: function() {
+    resetView: function () {
         this.indexOffset = 0;
         for (var index = 0; index < this.playerHand.length; index++) {
             this.playerHand[index].resetSeat();
@@ -3049,7 +3041,7 @@ cc.Class({
         // reallocate seat
         this.allocateSeat();
 
-        this.playerHand.forEach(function(element) {
+        this.playerHand.forEach(function (element) {
             if (element.seatState !== K.SeatState.Occupied) {
                 element.disablePlayerView();
             }
@@ -3062,7 +3054,7 @@ cc.Class({
      * @param {Object} data -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    playerStateChange: function(data) {
+    playerStateChange: function (data) {
         // manage sit out, disconnection, etc.
         // event for each active players
         if (this.gameOverLabel !== null) {
@@ -3100,12 +3092,13 @@ cc.Class({
      * @param {boolean} val - Value 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    handleSitOutBtns: function(val) {
+    handleSitOutBtns: function (val) {
+        console.trace("handleSitOutBtns", this.model.roomConfig.channelName);
         this.resumeBtn.active = !val;
         this.handleSitAllBtn();
         //this.sitOutNextBBCheckBox.setSelection(false);
         this.sitOutNextHandCheckBox.node.parent.active = val;
-        this.sitOutNextHandCheckBox.setSelection(!val);
+        this.sitOutNextHandCheckBox.setSelection(false);
         // this.sitOutNextBBCheckBox.node.parent.active = val && this.model.gameData.channelType == K.ChannelType.Normal && !this.model.isPlayerStandUp();
     },
     /**
@@ -3114,7 +3107,7 @@ cc.Class({
      * @param {boolean} val - Value 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    handleSitAllBtn: function() {
+    handleSitAllBtn: function () {
         var count = 0;
         for (var index = 0; index < GameScreen.gameModel.activePokerModels.length; index++) {
             var presenter = GameScreen.gameModel.activePokerModels[index].node.children[0].getComponent('PokerPresenter');
@@ -3134,7 +3127,7 @@ cc.Class({
      * @param {boolean} val - Value 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    dealerChat: function(data) {
+    dealerChat: function (data) {
 
     },
     /**
@@ -3143,7 +3136,7 @@ cc.Class({
      * @param {Object} val - Data/Message received from server 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    chat: function(data) {
+    chat: function (data) {
         var index = this.model.getPlayerById(data.playerId);
         // this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.players[index].seatIndex)].showChat(data.orgMsg);
         this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.players[index].seatIndex)].showChat(data.message);
@@ -3153,12 +3146,12 @@ cc.Class({
      * @description Shows the best matches of a player/user hand card with against community card
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onBestHand: function() {
+    onBestHand: function () {
         return;
         let str = ""; // "<color=#FFA755>Hand Strength \n</color><color=#ECE5BB>";
         if (this.getMyPlayer() != null && this.getMyPlayer().state === K.PlayerState.Playing && !!this.getMyPlayer().bestHand && this.model.gameData.tableDetails.state !== K.GameState.GameOver) {
             // this.scheduleOnce(function () {
-            this.timersToKill.push(setTimeout(function() {
+            this.timersToKill.push(setTimeout(function () {
                 if (this.bestHand) {
                     this.bestHand.node.parent.active = true;
                     this.bestHand.string = this.getMyPlayer().bestHand; // + "</color>";
@@ -3173,7 +3166,7 @@ cc.Class({
         }
     },
 
-    onReBuyInConfirm: function() {
+    onReBuyInConfirm: function () {
         this.model.rebuy(
             this.model.gameData.channelId,
             GameManager.user.playerId,
@@ -3187,11 +3180,11 @@ cc.Class({
         );
     },
 
-    onRebuyDeactivated: function(data) {
-        this.popUpManager.hide(PopUpType.BuyInPopup, function() {});
+    onRebuyDeactivated: function (data) {
+        this.popUpManager.hide(PopUpType.BuyInPopup, function () { });
     },
 
-    onRebuyActivated: function(data) {
+    onRebuyActivated: function (data) {
         console.log('onRebuyActivated', data);
         const text_chips = LocalizedManager.t('TXT_AVAILABLE_CHIPS') + ':';
         if (GameManager.user.category == "DIAMOND") {
@@ -3216,7 +3209,7 @@ cc.Class({
         data.confirm = this.onReBuyInConfirm.bind(this);
         data.channelId = this.model.gameData.channelId;
         data.playSound = this.playAudio.bind(this);
-        this.popUpManager.show(PopUpType.BuyInPopup, data, function() {});
+        this.popUpManager.show(PopUpType.BuyInPopup, data, function () { });
     },
 
     /**
@@ -3225,7 +3218,7 @@ cc.Class({
      * @param {Number} playerId -playerId of the player whose current turn it is.  
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    checkForSelfTurn: function(playerId) {
+    checkForSelfTurn: function (playerId) {
         if (this.model && this.model.gameData.playerId === playerId) {
             return true;
         } else {
@@ -3239,7 +3232,7 @@ cc.Class({
      * @param {boolean} val - Value 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    getMyPlayer: function() {
+    getMyPlayer: function () {
         // console.log("20feb", this.model)
         var index = this.model.getPlayerById(this.model.gameData.playerId);
         var myPlayer = this.model.gameData.tableDetails.players[index];
@@ -3251,12 +3244,12 @@ cc.Class({
      * @description Disables all table pots 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    clearPots: function() {
+    clearPots: function () {
         if (this.totalPotLbl) {
             this.totalPotLbl.node.parent.active = false;
         }
         if (this.potAmount) {
-            this.potAmount.forEach(function(element) {
+            this.potAmount.forEach(function (element) {
                 element.children[0].getComponent('PokerChipsView').destroyChips();
                 element.parent.active = false;
             }, this);
@@ -3268,7 +3261,7 @@ cc.Class({
      * @description  Show pot amounts on view
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    displayPots: function() {
+    displayPots: function () {
         if (!this.totalPotLbl) {
             return;
         }
@@ -3306,8 +3299,8 @@ cc.Class({
      * @param {Object} data -Data received from server
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    startGame: function(data) {
-        this.popUpManager.hide(PopUpType.SitNGoResultPopup, function() {}); //Bug No 0001709
+    startGame: function (data) {
+        this.popUpManager.hide(PopUpType.SitNGoResultPopup, function () { }); //Bug No 0001709
         var moves = data.moves;
         this.playerInput[0].active = false;
         if ( /*this.isMobileInputAvailable &&*/ !GameManager.isWindows && !GameManager.isMobile && GameScreen.viewType == 1) {
@@ -3329,7 +3322,7 @@ cc.Class({
             //     presenter.displayBlind(presenter.playerData.totalRoundBet);
             // }
         }
-        this.timersToKill.push(setTimeout(function() {
+        this.timersToKill.push(setTimeout(function () {
             var players = this.model.gameData.tableDetails.players;
             for (var index = 0; index < players.length; index++) {
                 // console.log("start game chips", players[index].chips);
@@ -3375,7 +3368,7 @@ cc.Class({
      * @param {Array} players - Array having players refrence or data 
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    cardAnimation: function(players) {
+    cardAnimation: function (players) {
         // generate data for all active players
         // call distribute cards
         var params = [];
@@ -3400,7 +3393,7 @@ cc.Class({
      * @description  onStandUp pokerModel event callback
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onStandUp: function() {
+    onStandUp: function () {
         this.hideMoves();
         this.enableTempPlayerInput(false);
         this.handleSitOutBtns(true);
@@ -3415,7 +3408,7 @@ cc.Class({
      * @param {Number} previousIndex -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    nextTurn: function(data, previousIndex) {
+    nextTurn: function (data, previousIndex) {
 
         this.onHideRaisePanel();
 
@@ -3486,7 +3479,7 @@ cc.Class({
 
                 this.enableTempPlayerInput(false);
 
-                this.timersToKill.push(setTimeout(function() {
+                this.timersToKill.push(setTimeout(function () {
                     this.selfLastMoveData = moves;
                     if (data.currentMoveIndex == this.model.gameData.tableDetails.currentMoveIndex) {
                         this.optionalPlayerInput.selectedValue = null;
@@ -3543,7 +3536,7 @@ cc.Class({
      * @param {index} sound -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    playAudio: function(sound) {
+    playAudio: function (sound) {
         // return;
         // console.error("KAPIL", this.model.gameData.settings.muteGameSound);
         if (ScreenManager.currentScreen != K.ScreenEnum.GamePlayScreen) {
@@ -3553,7 +3546,7 @@ cc.Class({
             GameManager.playSound(sound);
     },
 
-    onSecondEventClickSoud: function() {
+    onSecondEventClickSoud: function () {
         this.playAudio(K.Sounds.click);
     },
 
@@ -3564,12 +3557,12 @@ cc.Class({
      * @param {Number} previousIndex - current player index
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    enableSelfTurn: function(playerPresenter, moves) {
+    enableSelfTurn: function (playerPresenter, moves) {
         // console.log("CHECKING SELF TURN ", playerPresenter)
 
         if (playerPresenter.playerData.state == K.PlayerState.Playing || playerPresenter.playerData.state == K.PlayerState.Disconnected) {
             this.playAudio(K.Sounds.userTurn);
-            GameManager.popUpManager.hide(PopUpType.GamePreferencesPopup, function() {});
+            GameManager.popUpManager.hide(PopUpType.GamePreferencesPopup, function () { });
             // if (this.isMobile && this.mobChatPanel.getComponent('ChatPanel').isVisible)
             //     this.mobChatPanel.getComponent('ChatPanel').onHide();
 
@@ -3659,7 +3652,7 @@ cc.Class({
      * @param {Number} playerIndex -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    displayMoves: function(moves, playerIndex) {
+    displayMoves: function (moves, playerIndex) {
         // console.log("linkin park DISPLAY MOVES  ", this.optionalPlayerInput.selectedValue);
 
         var selectedValue;
@@ -3698,7 +3691,7 @@ cc.Class({
      * @param {Number} previousIndex -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    enableInputs: function(moves, playerIndex, input = this.playerInput) {
+    enableInputs: function (moves, playerIndex, input = this.playerInput) {
         // console.log("AKSHAY chaal inputs show",moves)
         // console.trace("enable inputs", moves, playerIndex);
         var sceneName = cc.director.getScene().name;
@@ -3714,7 +3707,7 @@ cc.Class({
 
         this.realBetBtn.active = false;
         this.realRaiseBtn.active = false;
-        moves.forEach(function(element) {
+        moves.forEach(function (element) {
             input[element].active = true; //true;
             // console.error("Player input name   ",this.playerInput[element]._name)
             if (element === 3 || element === 4) {
@@ -3754,12 +3747,12 @@ cc.Class({
         }, this);
     },
 
-    enableInputsForTileAndUntiled: function(moves, playerIndex) {
+    enableInputsForTileAndUntiled: function (moves, playerIndex) {
 
         var input1 = this.mobilePlayerInput;
         var input2 = this.playerInput;
 
-        moves.forEach(function(element) {
+        moves.forEach(function (element) {
             input1[element].active = true; //true;
             input2[element].active = true;
             // console.error("Player input name   ",this.playerInput[element]._name)
@@ -3790,8 +3783,8 @@ cc.Class({
      * @param {Number} previousIndex -
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    makePredefinedMove: function(move, movesAllowed, playerIndex) {
-        setTimeout(function() {
+    makePredefinedMove: function (move, movesAllowed, playerIndex) {
+        setTimeout(function () {
             if (cc.isValid(this.node)) {
                 switch (move) {
                     case "Call":
@@ -3874,18 +3867,18 @@ cc.Class({
      * @description Hide all inputs
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    hideMoves: function() {
+    hideMoves: function () {
         // console.error("AKSAHY hide moves chaal")
         // if (GameManager.gameModel.activePokerModels.length >= 2 && !GameManager.isMobile && !GameManager.isWindows && GameScreen.viewType == 1) {
         //     this.mobilePlayerInput.forEach(function (element) {
         //         element.active = false;
         //     }, this);
         // }
-        this.mobilePlayerInput.forEach(function(element) {
+        this.mobilePlayerInput.forEach(function (element) {
             element.active = false;
         }, this);
         // else {
-        this.playerInput.forEach(function(element) {
+        this.playerInput.forEach(function (element) {
             element.active = false;
         }, this);
         // }
@@ -3907,7 +3900,7 @@ cc.Class({
      * @description roundOver pokerModel event callback;
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    roundOver: function(data) {
+    roundOver: function (data) {
 
         // console.log("this.node.parent.number",this.node.parent.getComponent("PokerModel").number),
         // console.error("Round Over", data);
@@ -3929,7 +3922,7 @@ cc.Class({
         // this.scheduleOnce(function () {
         //     this.displayPots();
         // }.bind(this), 0.7);
-        this.timersToKill.push(setTimeout(function() {
+        this.timersToKill.push(setTimeout(function () {
             this.displayPots();
         }.bind(this), 700));
         //   this.enableTempPlayerInput(false);
@@ -3947,7 +3940,7 @@ cc.Class({
      * @description callBack called on gameOver
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    gameOver: function(data, playerIndex) {
+    gameOver: function (data, playerIndex) {
         console.log("GAME OVER", data);
         // reveal cards of every player
 
@@ -3966,11 +3959,11 @@ cc.Class({
         }
 
         setTimeout(() => {
-            playerIndex.forEach(function(element) {
+            playerIndex.forEach(function (element) {
                 this.playerHand[this.getRotatedSeatIndex(element)].winningRevealCards(data.endingType == K.GameEndType.EverybodyPacked);
             }, this);
 
-            this.model.gameData.tableDetails.players.forEach(function(element) {
+            this.model.gameData.tableDetails.players.forEach(function (element) {
                 if (!playerIndex.includes(element.seatIndex) &&
                     this.playerHand[this.getRotatedSeatIndex(element.seatIndex)]) {
                     this.playerHand[this.getRotatedSeatIndex(element.seatIndex)].winningRevealCards(data.endingType == K.GameEndType.EverybodyPacked);
@@ -4061,17 +4054,17 @@ cc.Class({
                 // for each winner in subsiquent pot run animation.(highlight cards + move chips)
                 var tmpPlayerCardRef = null;
                 for (let m = 0; m < myObj.length; m++) {
-                    (function(o, inst) {
+                    (function (o, inst) {
 
 
                         // inst.scheduleOnce(function () {
-                        inst.timersToKill.push(setTimeout(function() {
+                        inst.timersToKill.push(setTimeout(function () {
                             var potInstance = null;
-                            (count[myObj[o][0].potIndex] > 1) ? count[myObj[o][0].potIndex] = count[myObj[o][0].potIndex] - 1: potInstance = inst.potAmount[myObj[o][0].potIndex];
+                            (count[myObj[o][0].potIndex] > 1) ? count[myObj[o][0].potIndex] = count[myObj[o][0].potIndex] - 1 : potInstance = inst.potAmount[myObj[o][0].potIndex];
                             // let addedDelayForFirstTime=o==0?
 
                             // inst.scheduleOnce(function () {
-                            inst.timersToKill.push(setTimeout(function() {
+                            inst.timersToKill.push(setTimeout(function () {
 
                                 if (!potInstance) {
                                     let sumAmount = 0;
@@ -4089,7 +4082,7 @@ cc.Class({
                                 }
                                 inst.playAudio(K.Sounds.chipDistribution); //29aug
 
-                                inst.potAnimator.runPotSplitter(myObj[o], potInstance, function() {});
+                                inst.potAnimator.runPotSplitter(myObj[o], potInstance, function () { });
                             }.bind(inst), inst.potSplitterMoveActionDelay * 1000));
 
                             if (myObj[o][0].type != "Every Body Else Folded" && myObj[o][0].type != "REFUND") {
@@ -4133,7 +4126,7 @@ cc.Class({
                                     //     }
                                     // ]
 
-                                    tmp.getChildByName("Rectangle 3289").getChildByName("layout1").children.forEach(function(element) {
+                                    tmp.getChildByName("Rectangle 3289").getChildByName("layout1").children.forEach(function (element) {
                                         element.active = false;
                                     }, this);
                                     tmp.getChildByName("Rectangle 3289").getChildByName("layout1").active = true;
@@ -4159,7 +4152,7 @@ cc.Class({
                                     }
 
                                     // inst.scheduleOnce(function () {
-                                    inst.timersToKill.push(setTimeout(function() {
+                                    inst.timersToKill.push(setTimeout(function () {
                                         tmp.active = false;
                                     }, 3000));
                                     // cc.director.getScheduler().schedule((dt) => { tmp.active = false; }, inst, inst.winnerBannerDeactivateTimerDelay);
@@ -4191,7 +4184,7 @@ cc.Class({
 
 
 
-                this.model.gameData.tableDetails.players.forEach(function(element) {
+                this.model.gameData.tableDetails.players.forEach(function (element) {
                     this.playerHand[this.getRotatedSeatIndex(element.seatIndex)].gameOver();
                 }, this);
                 // this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.dealerIndex)].setDealer(false);
@@ -4211,7 +4204,7 @@ cc.Class({
      * @description Method to highlight players cards who won.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    highlightWinningCards: function(winnerSet, handCard, boardCard, cardsOnTable, playerHandCards) {
+    highlightWinningCards: function (winnerSet, handCard, boardCard, cardsOnTable, playerHandCards) {
         var array = cardsOnTable.concat(playerHandCards);
         this.dullAllCards(array);
         // var array = playerHandCards;
@@ -4241,7 +4234,23 @@ cc.Class({
                         element.node.getChildByName("CardGlow").active = true;
                         element.node.__y = element.node.y;
                         element.node.y = (element.node.y + 10);
-                        element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+                        if (GameManager.user.settings.cardFront == 0) {
+                            element.node.getChildByName("FrontFace").color = cc.Color.WHITE;
+                        }
+                        else {
+                            if (element.suit === K.Suit.Heart) {
+                                element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#A22021");
+                            }
+                            else if (element.suit === K.Suit.Spade) {
+                                element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#2B2B2B");
+                            }
+                            else if (element.suit === K.Suit.Club) {
+                                element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#196B19");
+                            }
+                            else if (element.suit === K.Suit.Diamond) {
+                                element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#155493");
+                            }
+                        }
                     }
                 }
             }, this);
@@ -4264,7 +4273,7 @@ cc.Class({
                     c = 4;
                     break;
             }
-            playerHandCards.forEach(function(element) {
+            playerHandCards.forEach(function (element) {
                 if (element.cardRank == handCard[i].rank && element.suit == c) {
                     element.node.getChildByName("CardGlow").active = true;
                     element.node.y = (10);
@@ -4281,7 +4290,7 @@ cc.Class({
                         else if (element.suit === K.Suit.Club) {
                             element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#196B19");
                         }
-                        else if (element.suit === K.Suit.Diamond)  {
+                        else if (element.suit === K.Suit.Diamond) {
                             element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#155493");
                         }
                     }
@@ -4306,7 +4315,7 @@ cc.Class({
                     c = 4;
                     break;
             }
-            cardsOnTable.forEach(function(element) {
+            cardsOnTable.forEach(function (element) {
                 if (element.cardRank == boardCard[i].rank && element.suit == c) {
                     element.node.getChildByName("CardGlow").active = true;
                     element.node.y = (10);
@@ -4325,7 +4334,7 @@ cc.Class({
                         else if (element.suit === K.Suit.Club) {
                             element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#196B19");
                         }
-                        else if (element.suit === K.Suit.Diamond)  {
+                        else if (element.suit === K.Suit.Diamond) {
                             element.node.getChildByName("FrontFace").color = new cc.Color().fromHEX("#155493");
                         }
                     }
@@ -4371,7 +4380,7 @@ cc.Class({
      * @description Method to reset highlight players cards who won.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    dullAllCards: function(cardsToReset, unDull) {
+    dullAllCards: function (cardsToReset, unDull) {
         cardsToReset.forEach((e) => {
             var element = e.node;
             element.y = (0);
@@ -4396,7 +4405,7 @@ cc.Class({
                     else if (e.suit === K.Suit.Club) {
                         element.getChildByName("FrontFace").color = new cc.Color().fromHEX("#196B19");
                     }
-                    else if (e.suit === K.Suit.Diamond)  {
+                    else if (e.suit === K.Suit.Diamond) {
                         element.getChildByName("FrontFace").color = new cc.Color().fromHEX("#155493");
                     }
                 }
@@ -4410,7 +4419,7 @@ cc.Class({
      * @description Method to reveal winers hand card
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    showWinnerCards: function(seatIndex) {
+    showWinnerCards: function (seatIndex) {
         if (this.getRotatedSeatIndex(seatIndex) && this.playerHand[this.getRotatedSeatIndex(seatIndex)])
             this.playerHand[this.getRotatedSeatIndex(seatIndex)].winningRevealCards2();
         else {
@@ -4418,7 +4427,7 @@ cc.Class({
         }
     },
 
-    showAllInCards: function(data) {
+    showAllInCards: function (data) {
         for (var i = 0; i < data.length; i++) {
             var index = this.model.getPlayerById(data[i].playerId);
             if (index == -1) {
@@ -4434,7 +4443,7 @@ cc.Class({
      * @description  leave pokerModel event callback
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    playerLeft: function(data) {
+    playerLeft: function (data) {
         console.log('playerLeft ', data);
         // reset seat view for the player
         if (data === null) {
@@ -4451,8 +4460,8 @@ cc.Class({
                 this.handleSitOutBtns(true);
                 this.resetView();
                 this.manageBtns(false);
-                this.popUpManager.hide(2, function() {});
-                this.popUpManager.hide(PopUpType.BuyInPopup, function() {});
+                this.popUpManager.hide(2, function () { });
+                this.popUpManager.hide(PopUpType.BuyInPopup, function () { });
                 this.showMuckHand();
                 this.handleRunItTwice(true, true);
                 this.singleTime = false;
@@ -4493,7 +4502,7 @@ cc.Class({
      * @description will be used later
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    isAutoAddOnAllowed: function() {
+    isAutoAddOnAllowed: function () {
         var val = (this.model.gameData.channelType == K.ChannelType.Tournament);
         val = val && !(!!this.getMyPlayer()) && (!this.model.roomConfig.isAutoAddOnEnable) && (this.getMyPlayer().state == K.PlayerState.Playing);
         //  this.autoAddOnCheckBox.node.parent.active = val;
@@ -4501,7 +4510,7 @@ cc.Class({
 
 
     },
-    isAutoRebuyAllowed: function() {
+    isAutoRebuyAllowed: function () {
         var val = (this.model.gameData.channelType == K.ChannelType.Tournament);
 
         return val;
@@ -4511,7 +4520,7 @@ cc.Class({
      * @description straddle checkBox callback
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    isStraddleAllowed: function() {
+    isStraddleAllowed: function () {
         var val = !(this.model.gameData.channelType == K.ChannelType.Tournament);
         val = val && (!!this.getMyPlayer()) && (!this.model.roomConfig.isStraddleEnable) && (this.getMyPlayer().state == K.PlayerState.Playing) && (this.getNumPlayerInTable() > 3);
         this.straddleCheckBox.node.parent.active = val;
@@ -4543,12 +4552,12 @@ cc.Class({
     //         this.playerHand[this.getRotatedSeatIndex(seatIndex)].addPlayerCards(data);
     //     }.bind(this), delay * 1000));
     // },
-    playerCards: function(data, seatIndex) {
+    playerCards: function (data, seatIndex) {
         this.forceAddPlayercardsData = data;
         this.forceAddPlayercardsSeatIndex = seatIndex;
     },
 
-    forceAddPlayerCards: function() {
+    forceAddPlayerCards: function () {
         if (cc.isValid(this.node)) {
             if (!!this.forceAddPlayercardsData)
                 this.playerHand[this.getRotatedSeatIndex(this.forceAddPlayercardsSeatIndex)].addPlayerCards(this.forceAddPlayercardsData);
@@ -4565,7 +4574,7 @@ cc.Class({
      * @description It Enable specified prechecks accordingly.
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onPreCheck: function(data) {
+    onPreCheck: function (data) {
         // console.error("on precheck broadcast ", data)
         // if (this.getMyPlayer().seatIndex == this.model.gameData.tableDetails.currentMoveIndex) {
         //     console.error("ONPRECHECK RETURN ");
@@ -4578,7 +4587,7 @@ cc.Class({
         this.enableTempPlayerInput(true, data.set, value, data.precheckValue);
 
         this.scheduleOnce(
-            function() {
+            function () {
                 var value = (this.model.gameData.tableDetails.roundMaxBet - this.model.gameData.tableDetails.players[this.model.getPlayerById(GameManager.user.playerId)].totalRoundBet).roundOff(2);
                 this.optionalPlayerInput.tempTestFunction(value);
 
@@ -4591,7 +4600,7 @@ cc.Class({
      * @description Update players coin!
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onPlayerCoins: function(player) {
+    onPlayerCoins: function (player) {
         this.playerHand[this.getRotatedSeatIndex(player.seatIndex)].updateCoins();
     },
 
@@ -4603,7 +4612,7 @@ cc.Class({
      * @description  handles input checkboxes to preselect the move player wants
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    enableTempPlayerInput: function(enable, set, val, selectedPreCheckValue = 'NONE') {
+    enableTempPlayerInput: function (enable, set, val, selectedPreCheckValue = 'NONE') {
         // console.error("PRECHECK VAL ", selectedPreCheckValue)
         this.optionalPlayerInput.enableTempPlayerInput(enable, set, val, selectedPreCheckValue); //uncomment when implemented with data
     },
@@ -4613,7 +4622,7 @@ cc.Class({
      * @description  handles input checkboxes to preselect the move player wants
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    changeTableColor: function(spriteFrame) {
+    changeTableColor: function (spriteFrame) {
         if (this.node.parent.active)
             this.table.spriteFrame = spriteFrame;
     },
@@ -4624,7 +4633,7 @@ cc.Class({
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
 
-    onPlayerNotes: function(playerId) {
+    onPlayerNotes: function (playerId) {
         var index = this.model.getPlayerById(playerId);
         this.playerHand[this.getRotatedSeatIndex(this.model.gameData.tableDetails.players[index].seatIndex)].displayNote();
     },
@@ -4634,7 +4643,7 @@ cc.Class({
      * @description  Method to highlight table based on highlight checkbox
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onValueChange: function() {
+    onValueChange: function () {
         //this.highlightBg.node.active = this.highLightCheckbox.getSelection();
 
         var val = false;
@@ -4661,7 +4670,7 @@ cc.Class({
                 this.table.spriteFrame = this.tableColors[ind];
         }
     },
-    toLobby: function() {
+    toLobby: function () {
         if (K.PORTRAIT) {
             if (this.mobileGamePlayOptionsVisible) {
                 this.mobileGamePlayOptions();
@@ -4683,7 +4692,7 @@ cc.Class({
      * @description  
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onRebuyTournament: function(amount) {
+    onRebuyTournament: function (amount) {
         var popUp = PopUpType.PlayerInfoPopup;
 
         if (amount) {
@@ -4694,14 +4703,14 @@ cc.Class({
             tournamentId: this.model.roomConfig.tableId,
             // gameVersionCount: this.model.roomConfig.gameVersionCount,
         };
-        TournamentHandler.rebuyInTournament(data, function(response) {
+        TournamentHandler.rebuyInTournament(data, function (response) {
             if (response.success) {
 
             } else {
                 var data = {};
                 data.info = response.info;
                 // data.disableTimer = true;
-                this.popUpManager.show(PopUpType.PlayerInfoPopup, data, function() {});
+                this.popUpManager.show(PopUpType.PlayerInfoPopup, data, function () { });
             }
         }.bind(this), null);
         this.playAudio(K.Sounds.click);
@@ -4712,7 +4721,7 @@ cc.Class({
      * @description clear / UnSchedule the timers.  
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    clearBreakTimer: function() {
+    clearBreakTimer: function () {
         clearTimeout(this.timerOffSchedule);
         clearInterval(this.timerSchedule);
     },
@@ -4721,7 +4730,7 @@ cc.Class({
      * @description Replay Button call back show a video Popup  
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onReplay: function(evntData, custom) {
+    onReplay: function (evntData, custom) {
         this.playAudio(K.Sounds.click);
         if (this.model.handTabs.length <= 0) {
             // console.error("NO VIDEO")
@@ -4737,7 +4746,7 @@ cc.Class({
             this.model.getHandHistory(this.model.handTabs[this.model.handTabs.length - 1].handHistoryId);
         } else {
             // console.log("Click for popup");
-            GameManager.popUpManager.show(PopUpType.VideoPlayerPopup, data, function() {});
+            GameManager.popUpManager.show(PopUpType.VideoPlayerPopup, data, function () { });
         }
     },
     /**
@@ -4745,7 +4754,7 @@ cc.Class({
      * @description enable/disable some specific option for mobile view
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onMobGameOptions: function() {
+    onMobGameOptions: function () {
         this.mobGameOptions.active = !this.mobGameOptions.active;
     },
     /**
@@ -4755,7 +4764,7 @@ cc.Class({
      * @description  handles input checkboxes to preselect the move player wants
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    showMuchHand: function(eventData, flag) {
+    showMuchHand: function (eventData, flag) {
         this.playAudio(K.Sounds.click);
         this.muckHandNode.active = false;
         if (flag == "true") {
@@ -4766,15 +4775,15 @@ cc.Class({
                     "roundId": this.model.gameData.tableDetails.roundId,
                     "isRequested": true
                 }, function (response) {
-                  console.log("room.channelHandler.showWinnerHiddenCards", response);
+                    console.log("room.channelHandler.showWinnerHiddenCards", response);
                 }.bind(this), null, 5000, false);
             });
         }
         else {
-            
+
         }
     },
-    addOnBtnCallBack: function() {
+    addOnBtnCallBack: function () {
 
     },
     /**
@@ -4782,17 +4791,17 @@ cc.Class({
      * @description  
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    activeDeactiveReBuyInBtn: function(value) {
+    activeDeactiveReBuyInBtn: function (value) {
         this.reBuyBtn2.active = value;
     },
-    onReBuyBtn2: function() {
+    onReBuyBtn2: function () {
         this.model.onReBuyCall();
     },
 
-    reBuyBtnCallBack: function() {
+    reBuyBtnCallBack: function () {
 
     },
-    showMuckHand: function() {
+    showMuckHand: function () {
         // this.playAudio(K.Sounds.click);
         this.muckHandCheckbox.node.parent.active = (!!this.getMyPlayer() && (this.getMyPlayer().state == K.PlayerState.Playing));
 
@@ -4802,9 +4811,9 @@ cc.Class({
      * @description callback for muck hand checkBox
      * @memberof Screens.Gameplay.Game.PokerPresenter#
      */
-    onMuckHand: function() {
+    onMuckHand: function () {
         var selection = this.muckHandCheckbox.getSelection();
-        this.model.setMuckHand(selection, function(response) {
+        this.model.setMuckHand(selection, function (response) {
             if (response.success) {
                 this.muckHandCheckbox.setSelection(selection);
             } else {
@@ -4813,19 +4822,19 @@ cc.Class({
         }.bind(this));
     },
 
-    killTimers: function() {
+    killTimers: function () {
         // console.log("shishir kick presenter done");
 
-        this.timersToKill.forEach(function(element) {
+        this.timersToKill.forEach(function (element) {
             clearTimeout(element);
         }, this);
         this.timersToKill = [];
-        this.playerHand.forEach(function(element) {
+        this.playerHand.forEach(function (element) {
             element.clearTimers();
         }, this);
     },
 
-    displayRoundNumber: function() {
+    displayRoundNumber: function () {
         // console.log("roomconfig", this.model.roomConfig);
         // console.log("gamedata", this.model.gameData);
         // console.log("tableDetails", this.model.gameData.tableDetails)
@@ -4844,7 +4853,7 @@ cc.Class({
         // }
     },
 
-    onLobby: function() {
+    onLobby: function () {
         if (K.PORTRAIT) {
             if (this.mobileGamePlayOptionsVisible) {
                 this.mobileGamePlayOptions();
@@ -4857,7 +4866,7 @@ cc.Class({
         }
         this.playAudio(K.Sounds.click);
     },
-    OnLeaveJohny: function() {
+    OnLeaveJohny: function () {
         if (K.PORTRAIT) {
             if (this.mobileGamePlayOptionsVisible) {
                 this.mobileGamePlayOptions();
@@ -4866,7 +4875,7 @@ cc.Class({
         GameScreen.leaveCurrent();
         this.playAudio(K.Sounds.click);
     },
-    mobileGamePlayOptions: function() {
+    mobileGamePlayOptions: function () {
 
         let pos = this.node.parent.getChildByName("DummGameplayOpt").getPosition();
 
@@ -4909,7 +4918,7 @@ cc.Class({
         this.mobileGamePlayOptionsVisible = !this.mobileGamePlayOptionsVisible;
     },
 
-    mobileChatOptions: function() {
+    mobileChatOptions: function () {
 
         if (!this.mobileSliderChatSection.active) {
 
@@ -4939,7 +4948,7 @@ cc.Class({
 
     },
 
-    onClose: function() {
+    onClose: function () {
         // console.log("Onclose ", this.closeBtn.active);
 
 
@@ -4968,25 +4977,25 @@ cc.Class({
         // }
     },
 
-    onLeaderboard: function() {
+    onLeaderboard: function () {
         this.leaderboardInitPosition = this.leaderboardSection.getPosition();
         this.leaderboardSection.x = this.leaderboardDummySection.x;
 
         GameManager.emit("hideJoinSimlar");
     },
 
-    onCloseLeaderboard: function() {
+    onCloseLeaderboard: function () {
         this.leaderboardSection.x = this.leaderboardInitPosition.x;
 
         GameManager.emit("showJoinSimlar");
     },
 
-    onMobilDealerClick: function() {
+    onMobilDealerClick: function () {
         this.dealerNode.active = true;
         this.playAudio(K.Sounds.click);
     },
 
-    onMobileHistoryClick: function() {
+    onMobileHistoryClick: function () {
         GameManager.emit("hideJoinSimlar");
         this.model.showHandHistoryDetail();
         this.playAudio(K.Sounds.click);
@@ -5054,7 +5063,7 @@ cc.Class({
         ServerCom.pomeloRequest("room.channelHandler.getCurrentGameResult", {
             channelId: this.model.gameData.channelId,
             access_token: K.Token.access_token,
-        }, function(response) {
+        }, function (response) {
             console.log("getCurrentGameResult", response);
 
             inst.gameResult.active = true;
@@ -5074,7 +5083,7 @@ cc.Class({
         //     return;
         // }
 
-        this.potAmount.forEach(function(element) {
+        this.potAmount.forEach(function (element) {
             element.parent.getChildByName("bb").getComponent(cc.Label).string = (Number(element.getComponent(cc.Label).__string) / this.model.gameData.tableDetails.bigBlind).toFixed(1) + 'BB';
         }, this);
 
@@ -5083,7 +5092,7 @@ cc.Class({
         this.callAmountLabel.node.parent.getChildByName("bb").getComponent(cc.Label).string = (Number(this.callAmountLabel.string) / this.model.gameData.tableDetails.bigBlind).toFixed(1) + 'BB';
 
         if (GameManager.isBB && GameManager.user.settings.stackInBB) {
-            this.potAmount.forEach(function(element) {
+            this.potAmount.forEach(function (element) {
                 element.opacity = 0;
                 element.parent.getChildByName("bb").opacity = 255;
             }, this);
@@ -5094,7 +5103,7 @@ cc.Class({
             this.callAmountLabel.node.scale = 0;
             this.callAmountLabel.node.parent.getChildByName("bb").scale = 0.5;
         } else {
-            this.potAmount.forEach(function(element) {
+            this.potAmount.forEach(function (element) {
                 element.opacity = 255;
                 element.parent.getChildByName("bb").opacity = 0;
             }, this);
@@ -5121,7 +5130,7 @@ cc.Class({
         this.updateBB();
     },
 
-    onToggleBB: function() {
+    onToggleBB: function () {
 
         var data = {};
         // data.channelId = this.activeModel.gameData.channelId;
@@ -5130,7 +5139,7 @@ cc.Class({
         data.stackInBB = this.BBToggle.state;
         data.access_token = K.Token.access_token;
         data.isLoggedIn = true;
-        ServerCom.pomeloRequest('connector.entryHandler.changeStackInBB', data, function(response) {
+        ServerCom.pomeloRequest('connector.entryHandler.changeStackInBB', data, function (response) {
             if (response.success) {
                 GameManager.user.settings.stackInBB = !GameManager.user.settings.stackInBB;
                 GameManager.isBB = GameManager.user.settings.stackInBB;
@@ -5142,11 +5151,11 @@ cc.Class({
         // GameManager.playSound(K.Sounds.click);
     },
 
-    onleaveNextHand: function() {
+    onleaveNextHand: function () {
         this.leaveNextHandTag.active = true;
     },
 
-    onRemoveTable: function(data) {
+    onRemoveTable: function (data) {
         console.log("onRemoveTable", data);
         // {
         //     "channelId": "668511801f4de16ba5b6b72c",
@@ -5157,13 +5166,13 @@ cc.Class({
         }
     },
 
-    onTableCloseLeave: function() {
+    onTableCloseLeave: function () {
         if (GameManager.playerRequestedToLeaveTable[this.model.gameData.channelId] === false) {
             GameManager.playerRequestedToLeaveTable[this.model.gameData.channelId] = true;
         }
 
         // this.unscheduleAllCallbacks();
-        let cb = function() {
+        let cb = function () {
             for (var index = 0; index < this.playerHand.length; index++) {
                 this.playerHand[index].clearPlayerCards();
             }
@@ -5173,7 +5182,7 @@ cc.Class({
         this.model.leaveClosedTable();
     },
 
-    onTogglePlayerChat: function() {
+    onTogglePlayerChat: function () {
         // var data = {};
         // data.query = {};
         // data.updateKeys = {};
@@ -5194,7 +5203,7 @@ cc.Class({
         data.playerId = GameManager.user.playerId;
         data.key = 'playerChat';
         data.value = this.ChatToggle.state;
-        ServerCom.pomeloRequest(K.PomeloAPI.updateTableSettings, data, function(response) {
+        ServerCom.pomeloRequest(K.PomeloAPI.updateTableSettings, data, function (response) {
             if (response.success) {
                 this.model.gameData.settings.playerChat = !this.model.gameData.settings.playerChat;
             } else {
@@ -5203,7 +5212,7 @@ cc.Class({
         }.bind(this), null, 5000, false);
     },
 
-    onToggleDealerChat: function() {
+    onToggleDealerChat: function () {
         // var data = {};
         // data.query = {};
         // data.updateKeys = {};
@@ -5224,7 +5233,7 @@ cc.Class({
         data.playerId = GameManager.user.playerId;
         data.key = 'dealerChat';
         data.value = this.dealerChatToggle.state;
-        ServerCom.pomeloRequest(K.PomeloAPI.updateTableSettings, data, function(response) {
+        ServerCom.pomeloRequest(K.PomeloAPI.updateTableSettings, data, function (response) {
             if (response.success) {
                 this.model.gameData.settings.dealerChat = !this.model.gameData.settings.dealerChat;
             } else {
@@ -5233,7 +5242,7 @@ cc.Class({
         }.bind(this), null, 5000, false);
     },
 
-    onUpdateTableImage: function() {
+    onUpdateTableImage: function () {
 
         // console.log("!!!!!!!!!! 1GameManager.tableImages[i]", GameManager.tableImages);
         // console.log("!!!!!!!!!! 2GameManager.tableImages[i]", GameManager.user.defaultTheme);
@@ -5256,9 +5265,9 @@ cc.Class({
         }
     },
 
-    onReport: function() {
+    onReport: function () {
         let inst = this;
-        ServerCom.pomeloRequest("connector.entryHandler.getReportIssues", {}, function(response) {
+        ServerCom.pomeloRequest("connector.entryHandler.getReportIssues", {}, function (response) {
             console.log("getReportIssues", response);
 
             inst.mobileGamePlayOptions();
@@ -5268,13 +5277,13 @@ cc.Class({
             inst.reportBug.opacity = 0;
             var anim = inst.reportBug.getComponent('AnimBase');
             if (anim !== null) {
-                anim.play("showPopUp", function() {});
+                anim.play("showPopUp", function () { });
             }
 
         }, null, 5000, false);
     },
 
-    updateRebuyChips: function(data) {
+    updateRebuyChips: function (data) {
         console.log("updateRebuyChips", data);
 
         var playerIndex = this.model.getPlayerById(data.playerId);
@@ -5286,44 +5295,44 @@ cc.Class({
         }
     },
 
-    onDebug: function() {
+    onDebug: function () {
         console.log("onDebugxxx");
     },
 
-    onChangeTheme: function() {
+    onChangeTheme: function () {
         this.tableTheme.active = true;
         GameManager.emit("enablePageView");
-        this.popUpManager.hide(1, function() {});
+        this.popUpManager.hide(1, function () { });
         this.mobileGamePlayOptions();
         GameManager.emit("showJoinSimlar");
     },
 
-    onDashboardAddCash: function(event, msg) {
+    onDashboardAddCash: function (event, msg) {
         // GameManager.emit("onDashboardAddCash");
 
         GameManager.onDashboardAddCash();
     },
 
-    onBuyInConfirmQuick: function(index, amount) {
+    onBuyInConfirmQuick: function (index, amount) {
         let self = this;
         ServerCom.pomeloRequest(
             'room.channelHandler.quickSeat', {
-                roomId: this.model.gameData.raw.tableDetails.roomId,
-                isLoggedIn: true,
-                access_token: K.Token.access_token,
-                imageAvtar: '',
-                chips: Number(amount),
-                playerId: GameManager.user.playerId,
-                playerName: GameManager.user.userName,
-                isRequested: true,
-                // channelVariation: "All",
-                // minBuyIn: room.minBuyIn,
-                // maxPlayers: room.maxPlayers
+            roomId: this.model.gameData.raw.tableDetails.roomId,
+            isLoggedIn: true,
+            access_token: K.Token.access_token,
+            imageAvtar: '',
+            chips: Number(amount),
+            playerId: GameManager.user.playerId,
+            playerName: GameManager.user.userName,
+            isRequested: true,
+            // channelVariation: "All",
+            // minBuyIn: room.minBuyIn,
+            // maxPlayers: room.maxPlayers
 
-            },
-            function(response, data) {
+        },
+            function (response, data) {
                 if (!response) {
-                    GameManager.popUpManager.show(PopUpType.NotificationPopup, data.err.info, function() {});
+                    GameManager.popUpManager.show(PopUpType.NotificationPopup, data.err.info, function () { });
                     return;
                 }
                 console.log(response);
@@ -5345,7 +5354,7 @@ cc.Class({
         );
     },
 
-    quickSeat: function() {
+    quickSeat: function () {
 
         if (GameManager.isMobile) {
             GameManager.activeTableCount = GameScreen.gridParent.getComponent(cc.PageView).getPages().length;
@@ -5354,7 +5363,7 @@ cc.Class({
         }
 
         if (GameManager.activeTableCount >= GameManager.maxTableCounts) {
-            GameManager.popUpManager.show(PopUpType.MaxTablesJoinedPopup, null, function() {});
+            GameManager.popUpManager.show(PopUpType.MaxTablesJoinedPopup, null, function () { });
             return;
         }
 
@@ -5379,45 +5388,45 @@ cc.Class({
         data.config = this.model.roomConfig;
         data.isAllInAndFold = this.model.roomConfig.isAllInAndFold;
         data.topHeading = LocalizedManager.t('TXT_BUY_IN');
-        GameManager.popUpManager.show(PopUpType.BuyInPopup, data, function() {});
+        GameManager.popUpManager.show(PopUpType.BuyInPopup, data, function () { });
 
     },
 
-    onDealerChatBtn: function() {
+    onDealerChatBtn: function () {
         this.dealerChatBtn.getChildByName("pressed").active = true;
         this.playreChatBtn.getChildByName("pressed").active = false;
         this.dealerNode.active = true;
         this.playerChatNode.active = false;
     },
-    onChatBtn: function() {
+    onChatBtn: function () {
         this.dealerChatBtn.getChildByName("pressed").active = false;
         this.playreChatBtn.getChildByName("pressed").active = true;
         this.dealerNode.active = false;
         this.playerChatNode.active = true;
     },
-    onShowInviteFriendList: function() {
+    onShowInviteFriendList: function () {
         this.inviteFirendsList.active = true;
         this.inviteFirendsList.getComponent('InvliteFriendsList').onShow(this);
     },
 
-    playAudioClick: function() {
+    playAudioClick: function () {
         if (navigator.vibrate) {
             navigator.vibrate(200);
         }
         this.playAudio(K.Sounds.click);
     },
 
-    enableShowFoldBtn: function() {
+    enableShowFoldBtn: function () {
         // this.showFoldBtn.node.parent.parent.active = true;
         // this.showFoldBtn.node.parent.getChildByName("tick").active = this.model.gameData.settings.isShowCard;
     },
 
-    disableShowFoldBtn: function() {
+    disableShowFoldBtn: function () {
         // this.showFoldBtn.node.parent.parent.active = false;
         // this.showFoldBtn.node.parent.getChildByName("tick").active = false;
     },
 
-    onShowFoldCardsBtnClick: function() {
+    onShowFoldCardsBtnClick: function () {
         // this.playAudio(K.Sounds.click);
         // var flag = this.showFoldBtn.node.parent.getChildByName("tick").active;
 

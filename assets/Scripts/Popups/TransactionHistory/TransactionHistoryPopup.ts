@@ -27,6 +27,7 @@ export default class TransactionHistoryPopup extends cc.Component {
     @property(cc.ScrollView) scrollView: cc.ScrollView = null!;
     currentPage: number = 1;
     fetchingData: boolean = false;
+    private requestGeneration: number = 0;
 
     onEnable() {
         this.currentPage = 1;
@@ -59,9 +60,14 @@ export default class TransactionHistoryPopup extends cc.Component {
             }
         });
 
-        console.log("Selected Index:", selectedIndex);
         const type = fillterArr[selectedIndex] || "All";
         const page = this.currentPage;
+        const generation = ++this.requestGeneration;
+
+        this.fetchingData = true;
+        if (page === 1) {
+            this.setFilterInteractable(false);
+        }
 
         const url = `${globalThis.K.Token.auth_server}/api/transactions/history?category=${type}&page=${page}&limit=10`;
 
@@ -69,17 +75,19 @@ export default class TransactionHistoryPopup extends cc.Component {
             url,
             null,
             (response: any) => {
-                if (response && response.success) {
+                if (generation !== this.requestGeneration) return;
 
-                    this.fetchingData = false;
-                    if (this.currentPage == 1) {
+                this.fetchingData = false;
+                if (page === 1) this.setFilterInteractable(true);
+
+                if (response && response.success) {
+                    if (page === 1) {
                         this.contentNode.removeAllChildren();
                     }
 
                     if (response.data.length === 0) {
-                        this.noRecordLabel.node.active = this.currentPage == 1;
-
-                        this.currentPage = this.currentPage > 1 ? this.currentPage - 1 : 1;
+                        this.noRecordLabel.node.active = page === 1;
+                        this.currentPage = page > 1 ? page - 1 : 1;
                     }
 
                     const groupedData = this.groupByDateArray(response.data);
@@ -92,9 +100,18 @@ export default class TransactionHistoryPopup extends cc.Component {
                 }
             },
             (error: any) => {
+                if (generation !== this.requestGeneration) return;
+                this.fetchingData = false;
+                if (page === 1) this.setFilterInteractable(true);
                 console.error("Network error:", error);
             }
         );
+    }
+
+    private setFilterInteractable(enabled: boolean) {
+        this.filterToggleContainer.toggleItems.forEach(toggle => {
+            toggle.interactable = enabled;
+        });
     }
 
     private groupByDateArray(transactions: Transaction[]): GroupedTransaction[] {

@@ -24,14 +24,14 @@ export default class TransactionEntry extends cc.Component {
             hour12: true
         });
 
-        this.dateLabel.string = dateStr+ " | " + data.transactionId.toString();
+        this.dateLabel.string = dateStr + " | " + "Txn ID: " + data.transactionId.toString();
         if (data.category == "Bonus") {
             this.transactionStatusLabel.string = "";
             this.dateLabel.string = date;
         }
         let amountBalance = data.amount;
         this.amountLabel.string = amountBalance.toFixed(4);
-        
+
         let closingBalance = data.closingBalance;
         this.closingBalanceLabel.string = this.formatAmount(closingBalance);
     }
