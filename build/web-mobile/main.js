@@ -1,3 +1,22 @@
+function onResize() {
+    if (cc.sys.isMobile && window.screenfull && window.screenfull.isEnabled) {
+        if (window.screenfull.isFullscreen) {
+            document.getElementById("swipeup").style.visibility = "hidden";
+            if (cc.director) cc.director.resume();
+        } else {
+            document.getElementById("swipeup").style.visibility = "visible";
+            document.getElementById('swipeup').onclick = function () {
+                if (window.screenfull && window.screenfull.isEnabled) {
+                    window.screenfull.request();
+                }
+            };
+            if (cc.director) cc.director.pause();
+        }
+    }
+}
+
+function myScroll() {}
+
 window.boot = function () {
     var settings = window._CCSettings;
     window._CCSettings = undefined;
@@ -17,7 +36,9 @@ window.boot = function () {
             }
         };
         splash.style.display = 'block';
-        progressBar.style.width = '0%';
+        if (progressBar) {
+            progressBar.style.width = '0%';
+        }
 
         cc.director.once(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () {
             splash.style.display = 'none';
@@ -39,16 +60,35 @@ window.boot = function () {
             }
             else if (settings.orientation === 'portrait') {
                 cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock('portrait').catch(function () {});
+                }
             }
-            cc.view.enableAutoFullScreen([
-                cc.sys.BROWSER_TYPE_BAIDU,
-                cc.sys.BROWSER_TYPE_BAIDU_APP,
-                cc.sys.BROWSER_TYPE_WECHAT,
-                cc.sys.BROWSER_TYPE_MOBILE_QQ,
-                cc.sys.BROWSER_TYPE_MIUI,
-                cc.sys.BROWSER_TYPE_HUAWEI,
-                cc.sys.BROWSER_TYPE_UC,
-            ].indexOf(cc.sys.browserType) < 0);
+            if (window.screenfull && window.screenfull.isEnabled) {
+                var swipeupEl = document.getElementById('swipeup');
+                window.screenfull.on('change', function () { onResize(); });
+                if (!window.screenfull.isFullscreen) {
+                    swipeupEl.style.visibility = 'visible';
+                    cc.director.pause();
+                }
+                swipeupEl.addEventListener('touchstart', function (e) {
+                    e.preventDefault();
+                    window.screenfull.request().catch(function () {});
+                });
+                swipeupEl.addEventListener('click', function () {
+                    window.screenfull.request().catch(function () {});
+                });
+            } else {
+                cc.view.enableAutoFullScreen([
+                    cc.sys.BROWSER_TYPE_BAIDU,
+                    cc.sys.BROWSER_TYPE_BAIDU_APP,
+                    cc.sys.BROWSER_TYPE_WECHAT,
+                    cc.sys.BROWSER_TYPE_MOBILE_QQ,
+                    cc.sys.BROWSER_TYPE_MIUI,
+                    cc.sys.BROWSER_TYPE_HUAWEI,
+                    cc.sys.BROWSER_TYPE_UC,
+                ].indexOf(cc.sys.browserType) < 0);
+            }
         }
 
         // Limit downloading max concurrent task to 2,
