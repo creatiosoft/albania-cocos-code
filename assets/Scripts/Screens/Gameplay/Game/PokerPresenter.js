@@ -3529,6 +3529,10 @@ cc.Class({
             this.optionalPlayerInput.selectedValue = null;
         }
 
+        if (data.isPrecheckAction) {
+            this.playerInput[0].active = false;
+        }
+
     },
     /**
      * @method playAudio
@@ -3659,23 +3663,12 @@ cc.Class({
         selectedValue = this.optionalPlayerInput.selectedValue;
         // console.error("linkin park ,pokerpresenter, Selected Value = ", selectedValue, (selectedValue != null));
         if (selectedValue != null) {
-            // console.log("inputs not shown because sel value = ", selectedValue)
-            // this.makePredefinedMove(selectedValue, moves, playerIndex);
-            // console.error("linkin park moves nahi dikhayi bcz sel value=", selectedValue)
-            // this.optionalPlayerInput.selectedValue = null;
-        } else {
-            // console.log("active tables in display moves", GameManager.gameModel.activePokerModels);
-            this.enableInputs(moves, playerIndex);
-            if (GameManager.gameModel.activePokerModels.length >= 2 && !GameManager.isMobile && !GameManager.isWindows && GameScreen.viewType == 1) {
-                console.log("display moves Tiled")
-                // this.enableDifferentInputs(moves, playerIndex, this.mobilePlayerInput);
-                // this.enableInputs(moves, playerIndex, this.mobilePlayerInput);
-                this.enableInputsForTileAndUntiled(moves, playerIndex);
-            } else {
-                console.log("display moves UnTiled")
-
-            }
+            // makePredefinedMove is disabled — clear stale selectedValue so buttons always appear.
+            // A late onPreCheck broadcast from precheck-spamming can leave selectedValue non-null
+            // even after the turn starts, which previously blocked enableInputs entirely.
+            this.optionalPlayerInput.selectedValue = null;
         }
+        this.enableInputs(moves, playerIndex);
 
         if (GameScreen.gameModel.activePokerModels[GameScreen.prevSelection] &&
             GameScreen.gameModel.activePokerModels[GameScreen.prevSelection] &&
