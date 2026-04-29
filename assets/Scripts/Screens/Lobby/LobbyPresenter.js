@@ -361,15 +361,16 @@ cc.Class({
         if (data.event == "REALCHIPSUPDATE") {
             let delta = Number(data.updated.realChips) - Number(GameManager.user.realChips);
             if (delta > 0) {
-                if (data?.updated?.rakeback === true) return;
-                GameManager.popUpManager.show(
-                    PopUpType.CommonDialog, 
-                    {
-                        "title": "Congratulations!",
-                        "content" : "You have received " + delta + " chips."
-                    }, 
-                    function () {}
-                );
+                if (data?.updated?.rakeback == undefined || !data?.updated?.rakeback) {
+                    GameManager.popUpManager.show(
+                        PopUpType.CommonDialog,
+                        {
+                            "title": "Congratulations!",
+                            "content": "You have received " + delta + " chips."
+                        },
+                        function () { }
+                    );
+                }               
             }
         }
         for (var key in data.updated) {
