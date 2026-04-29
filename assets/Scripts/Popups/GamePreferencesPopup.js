@@ -854,6 +854,7 @@ cc.Class({
     onWidthdrawl: function() {
         this.selectAvatar.active = false;
         this.widthdrawl.active = true;
+        this.onRealChipsUpdated();
         // this.deposit.active = false;
         // this.editProfile.active = false;
         // this.gift.active = false;
