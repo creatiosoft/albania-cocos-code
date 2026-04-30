@@ -49,22 +49,22 @@ export default class RakebackPopup extends cc.Component {
         let body = {
             notificationId: this.data.notificationId,
         };
-        const url = globalThis.K.Token.auth_server+"/api/notifications/dismiss-rakeback";
+        const url = globalThis.K.Token.auth_server + "/api/notifications/dismiss-rakeback";
 
         globalThis.ServerCom.httpPostRequest(
             url,
             body,
             (response: any) => {
                 if (response && response.success) {
-                    globalThis.GameManager.popUpManager.hide(PopUpType.RakebackPopup, function () {});
+                    // globalThis.GameManager.popUpManager.hide(PopUpType.RakebackPopup, function () { });
                 } else {
-                    globalThis.GameManager.popUpManager.hide(PopUpType.RakebackPopup, function () {});
+                    // globalThis.GameManager.popUpManager.hide(PopUpType.RakebackPopup, function () { });
                 }
             },
             (error: any) => {
-                    globalThis.GameManager.popUpManager.hide(PopUpType.RakebackPopup, function () {});
             }
         );
+        globalThis.GameManager.popUpManager.hide(PopUpType.RakebackPopup, function () { });
     }
 
     // update (dt) {}.  
