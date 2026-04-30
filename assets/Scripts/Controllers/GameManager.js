@@ -667,6 +667,7 @@ cc.Class({
                         //     playerId: GameManager.user.playerId,
                         //     isLoggedIn: false
                         // });
+                        globalThis.GameManager.popUpManager.hide(PopUpType.RakebackPopup, function () {});
                         socketIO.socket.disconnect();
                         socketIO.socket.connect();
                         return;
